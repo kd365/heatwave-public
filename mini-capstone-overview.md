@@ -118,3 +118,11 @@ If your firm is struggling to source high-fidelity data, consider searching for:
 Your Instructor / Cirriculum will specify the time you have to brainstorm with your pre-assigned group. You will then present a **2-minute elevator pitch** to the Lead Instructor for "Contract Approval."
 
 > ⚠️ **BE WARNED:** The DIL reserves the right to issue **"Market Volatility Alerts" (Wrenches)** throughout the week. Your architecture must be flexible enough to pivot on command.
+
+## IX. THE COMPANY
+
+Your company (group) is pre-selected (to. mimic the real world), you can find your company coworkers [here](groups.md).
+
+You will be required to have a 15-minute standup with your coworkers at the start of each class to ensure your group is up-to-date on the project;s current progress, and the objective for the day.
+
+Each company will work with one forked repo, each coworker must have their own commits for there companies repo.

@@ -2,6 +2,7 @@ Group 1:
 
 - Cam
 - George
+- Edison
 
 Group 2:
 
