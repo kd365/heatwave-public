@@ -1,0 +1,83 @@
+{
+  "project": "HEATWAVE",
+  "description": "Data validation set for the Autonomous Liaison Agent prototype — Track 1: Chaos Sector",
+  "scenario": "Dallas, TX heat wave — August 4-27, 2023",
+  "peak_temperature": "109.3F (Aug 18, 2023)",
+  "dil_compliance": {
+    "volume": "7 distinct documents/datasets (exceeds 5 minimum)",
+    "complexity": "CDC NIOSH 2016-106 (192 pages) and OSHA OTM Ch4 (dense technical)",
+    "signal_to_noise": "911 dispatch data contains 10 heat-related MO entries among 1035 total records; social media mixes genuine heat/outage reports with sarcasm and irrelevant posts",
+    "conflict_scenario": "NWS uses Heat Index thresholds (Danger at 103F) while OSHA/NIOSH uses WBGT thresholds — leads to conflicting risk assessments for the same conditions"
+  },
+  "datasets": [
+    {
+      "file": "data/raw/dallas_911_aug2023.json",
+      "type": "raw",
+      "source": "Dallas Open Data — Police Incidents (qv6i-rri7)",
+      "source_url": "https://www.dallasopendata.com/Public-Safety/Police-Incidents/qv6i-rri7",
+      "records": 1035,
+      "format": "JSON",
+      "description": "Real Dallas PD dispatch records from Aug 5-27, 2023 heat wave. Sampled evenly across 23 days. Contains incident number, signal code, nature of call, MO narrative, premise, address, beat, division, zip code, and geocoded lat/lon. Agent 1 must identify heat-related signals buried in noise (assaults, thefts, traffic).",
+      "key_fields": ["incidentnum", "signal", "offincident", "mo", "premise", "date1", "time1", "incident_address", "zip_code", "geocoded_column"],
+      "agent": "Agent 1 (Spatial Triage)"
+    },
+    {
+      "file": "data/raw/dallas_weather_aug2023.json",
+      "type": "raw",
+      "source": "Open-Meteo Archive API",
+      "source_url": "https://open-meteo.com/",
+      "records": 4608,
+      "format": "JSON",
+      "description": "Hourly weather data from 8 virtual stations across Dallas zip codes (75201, 75204, 75211, 75215, 75217, 75220, 75228, 75243). Aug 4-27, 2023. Includes temperature, apparent temperature, humidity, dewpoint, wind speed/direction, direct and diffuse solar radiation. Real data with real spatial variation across neighborhoods.",
+      "key_fields": ["station_id", "zip_code", "lat", "lon", "timestamp", "temp_f", "apparent_temp_f", "relative_humidity_pct", "dewpoint_f", "wind_speed_mph", "direct_solar_radiation_wm2"],
+      "agent": "Agent 1 (Spatial Triage)"
+    },
+    {
+      "file": "data/synthetic/social_media_posts.json",
+      "type": "synthetic",
+      "source": "Generated",
+      "records": 300,
+      "format": "JSON",
+      "description": "Simulated social media posts during the Dallas Aug 2023 heat wave. Mix of: ~40% genuine heat/outage signals, ~30% ambiguous/sarcasm, ~30% pure noise (ads, sports, food). Data friction applied: 41% of posts missing zip field (force geocoding from text), 26 malformed timestamps (AM/PM, missing T separator), deliberate misspellings of critical keywords (transfomer, outtage, amblance, colapsed, etc.).",
+      "key_fields": ["id", "timestamp", "text", "zip (optional)", "platform"],
+      "agent": "Agent 1 (Spatial Triage)"
+    },
+    {
+      "file": "data/reference/cdc_niosh_2016-106_heat_stress.pdf",
+      "type": "reference",
+      "source": "CDC/NIOSH",
+      "source_url": "https://www.cdc.gov/niosh/docs/2016-106/pdfs/2016-106.pdf",
+      "format": "PDF",
+      "pages": "192",
+      "description": "Criteria for a Recommended Standard: Occupational Exposure to Heat and Hot Environments. Dense technical document covering WBGT thresholds, physiological heat stress responses, recommended exposure limits, and heat illness prevention. Primary RAG corpus for Agent 2.",
+      "agent": "Agent 2 (Threat Assessment)"
+    },
+    {
+      "file": "data/reference/osha_otm_section3_chapter4_heat_hazards.md",
+      "type": "reference",
+      "source": "OSHA",
+      "source_url": "https://www.osha.gov/otm/section-3-health-hazards/chapter-4",
+      "format": "Markdown",
+      "description": "OSHA Technical Manual chapter on heat stress. Covers WBGT equations, heat illness types and symptoms, engineering/administrative controls, acclimatization. Includes real-world fatality case study. RAG corpus for Agent 2.",
+      "agent": "Agent 2 (Threat Assessment)"
+    },
+    {
+      "file": "data/reference/nws_heat_index_safety.md",
+      "type": "reference",
+      "source": "National Weather Service",
+      "source_url": "https://www.weather.gov/safety/heat-illness",
+      "format": "Markdown",
+      "description": "NWS heat index danger classifications and heat advisory criteria. Uses Heat Index (2-variable) rather than WBGT (4-variable). CONFLICT DOCUMENT: NWS thresholds can contradict OSHA/NIOSH WBGT-based thresholds for the same conditions. Agent 2 must reconcile.",
+      "agent": "Agent 2 (Threat Assessment)"
+    },
+    {
+      "file": "data/reference/fema_nims_doctrine_2017.pdf",
+      "type": "reference",
+      "source": "FEMA",
+      "source_url": "https://www.fema.gov/sites/default/files/2020-07/fema_nims_doctrine-2017.pdf",
+      "format": "PDF",
+      "description": "FEMA National Incident Management System doctrine. Covers resource typing, incident command system, operational coordination, and mutual aid. Used by Agent 3 to ground resource allocation decisions in official ICS doctrine.",
+      "agent": "Agent 3 (Dispatch Commander)"
+    }
+  ]
+}

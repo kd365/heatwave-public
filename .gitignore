@@ -151,14 +151,18 @@ logs/
 *.pid.lock
 
 # ---------------------------
-# Data (keep structure, ignore large raw files)
+# Data (keep curated datasets, ignore very large files)
 # ---------------------------
-data/raw/*.json
 data/raw/*.csv
 data/raw/*.parquet
-# Keep reference PDFs (they are the RAG corpus — small, intentional)
-# Untrack only auto-generated synthetic datasets if they get large
-data/synthetic/generated_*.json
+# Keep JSON datasets (911, weather) — curated for the project
+# Keep reference PDFs (they are the RAG corpus)
+# Keep synthetic datasets
+
+# ---------------------------
+# Claude Code
+# ---------------------------
+CLAUDE.md
 
 # ---------------------------
 # Misc
