@@ -22,7 +22,7 @@ Track 1: The "Chaos" Sector (Public Safety & Crisis)
 
 ### Repo & Scaffolding
 - [X] 🔴 Fork the class repo; add both partners as collaborators
-- [ ] 🔴 Define branch strategy (e.g., `main` protected, feature branches `feat/*`, `fix/*`)
+- [X] 🔴 Define branch strategy (e.g., `main` protected, feature branches `feat/*`, `fix/*`)
 - [X] 🔴 Create monorepo directory structure:
   ```
   /frontend     (React)
@@ -36,12 +36,11 @@ Track 1: The "Chaos" Sector (Public Safety & Crisis)
 - [ ] 🟡 Create root `README.md` with project description, setup instructions, and architecture diagram placeholder
 
 ### Local Dev Environment
-- [ ] 🔴 Python virtual environment (`python -m venv .venv`) + `requirements.txt`
-- [ ] 🔴 Node.js environment for React frontend (`npm init` or `create-react-app` / Vite)
+- [X] 🔴 Python virtual environment (`python -m venv .venv`) + `requirements.txt`
+- [x] 🔴 Node.js environment for React frontend (`npm init` or `create-react-app` / Vite)
 - [ ] 🟡 `Makefile` or `justfile` with common commands (`make dev`, `make test`, `make lint`)
-- [ ] 🟡 `docker-compose.yml` for local service orchestration (optional but helpful)
 - [ ] 🟡 Pre-commit hooks (Black, isort, ESLint)
-- [ ] 🔴 `.env.example` with all required environment variable keys (no values)
+- [x] 🔴 `.env.example` with all required environment variable keys (no values)
 
 ---
 
