@@ -1,0 +1,170 @@
+# ============================================================
+# HEATWAVE — .gitignore
+# Stack: Python · FastAPI · React · Terraform · GitHub Actions
+# ============================================================
+
+# ---------------------------
+# Python
+# ---------------------------
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+.eggs/
+.venv/
+venv/
+env/
+ENV/
+.env
+.env.*
+!.env.example
+pip-log.txt
+pip-delete-this-directory.txt
+.mypy_cache/
+.dmypy.json
+dmypy.json
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+*.cover
+coverage.xml
+nosetests.xml
+.tox/
+.nox/
+.hypothesis/
+
+# ---------------------------
+# Node / React / Frontend
+# ---------------------------
+node_modules/
+frontend/node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.pnpm-store/
+frontend/dist/
+frontend/build/
+.next/
+.nuxt/
+.output/
+.vercel/
+.netlify/
+*.tsbuildinfo
+
+# ---------------------------
+# Terraform
+# ---------------------------
+infra/.terraform/
+infra/.terraform.lock.hcl
+**/.terraform/
+**/.terraform.lock.hcl
+*.tfstate
+*.tfstate.*
+*.tfstate.backup
+crash.log
+crash.*.log
+*.tfvars
+!*.tfvars.example
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+.terraformrc
+terraform.rc
+
+# ---------------------------
+# AWS & Credentials
+# ---------------------------
+.aws/
+aws-credentials
+*.pem
+*.key
+*.p12
+*.pfx
+
+# ---------------------------
+# Secrets & Environment
+# ---------------------------
+.env
+.env.local
+.env.*.local
+.env.production
+.env.staging
+secrets.json
+*secrets*
+*credentials*
+!infra/iam/
+
+# ---------------------------
+# Docker (optional, kept if docker-compose used for local dev)
+# ---------------------------
+.dockerignore
+docker-compose.override.yml
+
+# ---------------------------
+# Lambda build artifacts
+# ---------------------------
+backend/package/
+backend/*.zip
+lambda-package/
+
+# ---------------------------
+# IDEs & Editors
+# ---------------------------
+.vscode/
+!.vscode/extensions.json
+!.vscode/launch.json
+!.vscode/tasks.json
+.idea/
+*.swp
+*.swo
+*~
+.project
+.classpath
+.settings/
+
+# ---------------------------
+# OS
+# ---------------------------
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V8
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# ---------------------------
+# Logs & Runtime
+# ---------------------------
+*.log
+logs/
+*.pid
+*.seed
+*.pid.lock
+
+# ---------------------------
+# Data (keep structure, ignore large raw files)
+# ---------------------------
+data/raw/*.json
+data/raw/*.csv
+data/raw/*.parquet
+# Keep reference PDFs (they are the RAG corpus — small, intentional)
+# Untrack only auto-generated synthetic datasets if they get large
+data/synthetic/generated_*.json
+
+# ---------------------------
+# Misc
+# ---------------------------
+.cache/
+.tmp/
+*.bak
+*.tmp
+*.orig
