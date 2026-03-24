@@ -1,0 +1,542 @@
+[
+  {
+    "station_num": "01",
+    "address": "1901 IRVING BLVD",
+    "zip_code": "75207",
+    "lat": 32.793992369193,
+    "lon": -96.827021869487,
+    "county": "DALLAS",
+    "source": "Dallas Open Data (aiuh-nfe2)"
+  },
+  {
+    "station_num": "02",
+    "address": "4211 NORTHAVEN RD",
+    "zip_code": "74229",
+    "lat": 32.90264534323,
+    "lon": -96.837775085784,
+    "county": "DALLAS",
+    "source": "Dallas Open Data (aiuh-nfe2)"
+  },
+  {
+    "station_num": "03",
+    "address": "500 N MALCOLM X BLVD",
+    "zip_code": "75226",
+    "lat": 32.787140773525,
+    "lon": -96.783333691809,
+    "county": "DALLAS",
+    "source": "Dallas Open Data (aiuh-nfe2)"
+  },
+  {
+    "station_num": "04",
+    "address": "816 S AKARD ST",
+    "zip_code": "75215",
+    "lat": 32.774250655922,
+    "lon": -96.796202759665,
+    "county": "DALLAS",
+    "source": "Dallas Open Data (aiuh-nfe2)"
+  },
+  {
+    "station_num": "05",
+    "address": "2039 N ST AUGUSTINE DR",
+    "zip_code": "75217",
+    "lat": 32.748346325351,
+    "lon": -96.657219815941,
+    "county": "DALLAS",
+    "source": "Dallas Open Data (aiuh-nfe2)"
+  },
+  {
+    "station_num": "06",
+    "address": "2301 PENNSYLVANIA AVE",
+    "zip_code": "75215",
+    "lat": 32.763648443082,
+    "lon": -96.771999816386,
+    "county": "DALLAS",
+    "source": "Dallas Open Data (aiuh-nfe2)"
+  },
+  {
+    "station_num": "07",
+    "address": "6010 DAVENPORT RD",
+    "zip_code": "75248",
+    "lat": 32.975844860291,
+    "lon": -96.803898674846,
+    "county": "DALLAS",
+    "source": "Dallas Open Data (aiuh-nfe2)"
+  },
+  {
+    "station_num": "08",
+    "address": "1904 N GARRETT AVE",
+    "zip_code": "75206",
+    "lat": 32.810238322969,
+    "lon": -96.776509404978,
+    "county": "DALLAS",
+    "source": "Dallas Open Data (aiuh-nfe2)"
+  },
+  {
+    "station_num": "09",
+    "address": "2002 COOL MIST LN",
+    "zip_code": "75253",
+    "lat": 32.678843134142,
+    "lon": -96.610108492714,
+    "county": "DALLAS",
+    "source": "Dallas Open Data (aiuh-nfe2)"
+  },
+  {
+    "station_num": "10",
+    "address": "4451 FRANKFORD RD",
+    "zip_code": "75287",
+    "lat": 32.998038740246,
+    "lon": -96.832283437438,
+    "county": "COLLIN",
+    "source": "Dallas Open Data (aiuh-nfe2)"
+  },
+  {
+    "station_num": "11",
+    "address": "3828 CEDAR SPRINGS RD",
+    "zip_code": "75204",
+    "lat": 32.810136913754,
+    "lon": -96.809693297603,
+    "county": "DALLAS",
+    "source": "Dallas Open Data (aiuh-nfe2)"
+  },
+  {
+    "station_num": "12",
+    "address": "7520 WHEATLAND RD",
+    "zip_code": "75249",
+    "lat": 32.642335713512,
+    "lon": -96.953094718375,
+    "county": "DALLAS",
+    "source": "Dallas Open Data (aiuh-nfe2)"
+  },
+  {
+    "station_num": "13",
+    "address": "6902 FRANKFORD RD",
+    "zip_code": "75252",
+    "lat": 32.997291004126,
+    "lon": -96.784165633744,
+    "county": "COLLIN",
+    "source": "Dallas Open Data (aiuh-nfe2)"
+  },
+  {
+    "station_num": "14",
+    "address": "1005 W 12TH ST",
+    "zip_code": "75208",
+    "lat": 32.741613150938,
+    "lon": -96.839726932283,
+    "county": "DALLAS",
+    "source": "Dallas Open Data (aiuh-nfe2)"
+  },
+  {
+    "station_num": "15",
+    "address": "111 E 8TH ST",
+    "zip_code": "75203",
+    "lat": 32.748552182027,
+    "lon": -96.822568893103,
+    "county": "DALLAS",
+    "source": "Dallas Open Data (aiuh-nfe2)"
+  },
+  {
+    "station_num": "16",
+    "address": "2616 CHALK HILL RD",
+    "zip_code": "75212",
+    "lat": 32.775520434283,
+    "lon": -96.904333389931,
+    "county": "DALLAS",
+    "source": "Dallas Open Data (aiuh-nfe2)"
+  },
+  {
+    "station_num": "17",
+    "address": "6045 BELMONT AVE",
+    "zip_code": "75206",
+    "lat": 32.817648429576,
+    "lon": -96.76199653404,
+    "county": "DALLAS",
+    "source": "Dallas Open Data (aiuh-nfe2)"
+  },
+  {
+    "station_num": "18",
+    "address": "660 N GRIFFIN BLVD",
+    "zip_code": "75146",
+    "lat": 32.783629572072,
+    "lon": -96.803754627985,
+    "county": "DALLAS",
+    "source": "Dallas Open Data (aiuh-nfe2)"
+  },
+  {
+    "station_num": "19",
+    "address": "5600 EAST GRAND AVE",
+    "zip_code": "75223",
+    "lat": 32.793925319103,
+    "lon": -96.746726339128,
+    "county": "DALLAS",
+    "source": "Dallas Open Data (aiuh-nfe2)"
+  },
+  {
+    "station_num": "20",
+    "address": "12727 MONTFORT DR",
+    "zip_code": "75240",
+    "lat": 32.922149491852,
+    "lon": -96.811662406645,
+    "county": "DALLAS",
+    "source": "Dallas Open Data (aiuh-nfe2)"
+  },
+  {
+    "station_num": "21",
+    "address": "3210 LOVE FIELD DR",
+    "zip_code": "75235",
+    "lat": 32.850869714537,
+    "lon": -96.859267843465,
+    "county": "DALLAS",
+    "source": "Dallas Open Data (aiuh-nfe2)"
+  },
+  {
+    "station_num": "22",
+    "address": "12200 COIT RD",
+    "zip_code": "75251",
+    "lat": 32.915167826235,
+    "lon": -96.768778268351,
+    "county": "DALLAS",
+    "source": "Dallas Open Data (aiuh-nfe2)"
+  },
+  {
+    "station_num": "23",
+    "address": "1660 S CORINTH ST RD",
+    "zip_code": "75203",
+    "lat": 32.725944764865,
+    "lon": -96.798875282469,
+    "county": "DALLAS",
+    "source": "Dallas Open Data (aiuh-nfe2)"
+  },
+  {
+    "station_num": "24",
+    "address": "2426 ELSIE FAYE HEGGINS ST",
+    "zip_code": "75210",
+    "lat": 32.752103530293,
+    "lon": -96.757204029349,
+    "county": "DALLAS",
+    "source": "Dallas Open Data (aiuh-nfe2)"
+  },
+  {
+    "station_num": "25",
+    "address": "2112 56TH ST",
+    "zip_code": "75241",
+    "lat": 32.684029936503,
+    "lon": -96.787493836866,
+    "county": "DALLAS",
+    "source": "Dallas Open Data (aiuh-nfe2)"
+  },
+  {
+    "station_num": "26",
+    "address": "3303 SHELDON AVE",
+    "zip_code": "75211",
+    "lat": 32.744479894743,
+    "lon": -96.874605060634,
+    "county": "DALLAS",
+    "source": "Dallas Open Data (aiuh-nfe2)"
+  },
+  {
+    "station_num": "27",
+    "address": "8401 DOUGLAS AVE",
+    "zip_code": "75225",
+    "lat": 32.865238310125,
+    "lon": -96.80884293099,
+    "county": "DALLAS",
+    "source": "Dallas Open Data (aiuh-nfe2)"
+  },
+  {
+    "station_num": "28",
+    "address": "8701 GREENVILLE AVE",
+    "zip_code": "75243",
+    "lat": 32.895599608605,
+    "lon": -96.752257289643,
+    "county": "DALLAS",
+    "source": "Dallas Open Data (aiuh-nfe2)"
+  },
+  {
+    "station_num": "29",
+    "address": "9830 SHADOW WAY",
+    "zip_code": "75243",
+    "lat": 32.916348212217,
+    "lon": -96.717016136445,
+    "county": "DALLAS",
+    "source": "Dallas Open Data (aiuh-nfe2)"
+  },
+  {
+    "station_num": "30",
+    "address": "11381 ZODIAC LN",
+    "zip_code": "75229",
+    "lat": 32.894715787061,
+    "lon": -96.883292407701,
+    "county": "DALLAS",
+    "source": "Dallas Open Data (aiuh-nfe2)"
+  },
+  {
+    "station_num": "31",
+    "address": "9365 GARLAND RD",
+    "zip_code": "75218",
+    "lat": 32.832643221622,
+    "lon": -96.704296530211,
+    "county": "DALLAS",
+    "source": "Dallas Open Data (aiuh-nfe2)"
+  },
+  {
+    "station_num": "32",
+    "address": "4262 N JIM MILLER RD",
+    "zip_code": "75228",
+    "lat": 32.774374377032,
+    "lon": -96.699772414195,
+    "county": "DALLAS",
+    "source": "Dallas Open Data (aiuh-nfe2)"
+  },
+  {
+    "station_num": "33",
+    "address": "2540 S VERNON AVE",
+    "zip_code": "75211",
+    "lat": 32.719692318725,
+    "lon": -96.836593505043,
+    "county": "DALLAS",
+    "source": "Dallas Open Data (aiuh-nfe2)"
+  },
+  {
+    "station_num": "34",
+    "address": "1234 CARBONA DR",
+    "zip_code": "75217",
+    "lat": 32.733721592578,
+    "lon": -96.691274951143,
+    "county": "DALLAS",
+    "source": "Dallas Open Data (aiuh-nfe2)"
+  },
+  {
+    "station_num": "35",
+    "address": "3839 WALNUT HILL LN",
+    "zip_code": "75229",
+    "lat": 32.880839796452,
+    "lon": -96.851733863325,
+    "county": "DALLAS",
+    "source": "Dallas Open Data (aiuh-nfe2)"
+  },
+  {
+    "station_num": "36",
+    "address": "3241 N HAMPTON RD",
+    "zip_code": "75212",
+    "lat": 32.781905300861,
+    "lon": -96.856927787328,
+    "county": "DALLAS",
+    "source": "Dallas Open Data (aiuh-nfe2)"
+  },
+  {
+    "station_num": "37",
+    "address": "6780 GREENVILLE AVE",
+    "zip_code": "75221",
+    "lat": 32.868346117304,
+    "lon": -96.76616430842,
+    "county": "DALLAS",
+    "source": "Dallas Open Data (aiuh-nfe2)"
+  },
+  {
+    "station_num": "38",
+    "address": "2839 WILHURT AVE",
+    "zip_code": "75216",
+    "lat": 32.708195360426,
+    "lon": -96.77556374633,
+    "county": "DALLAS",
+    "source": "Dallas Open Data (aiuh-nfe2)"
+  },
+  {
+    "station_num": "39",
+    "address": "2850 RUIDOSA  AVE",
+    "zip_code": "75228",
+    "lat": 32.845188767885,
+    "lon": -96.666865187272,
+    "county": "DALLAS",
+    "source": "Dallas Open Data (aiuh-nfe2)"
+  },
+  {
+    "station_num": "40",
+    "address": "2440 KIRNWOOD DR",
+    "zip_code": "75237",
+    "lat": 32.654595383594,
+    "lon": -96.857731647707,
+    "county": "DALLAS",
+    "source": "Dallas Open Data (aiuh-nfe2)"
+  },
+  {
+    "station_num": "41",
+    "address": "5920 ROYAL LN",
+    "zip_code": "75230",
+    "lat": 32.894474491386,
+    "lon": -96.806449470156,
+    "county": "DALLAS",
+    "source": "Dallas Open Data (aiuh-nfe2)"
+  },
+  {
+    "station_num": "42",
+    "address": "3333 W MOCKINGBIRD LN",
+    "zip_code": "75235",
+    "lat": 32.835703243323,
+    "lon": -96.83586607036,
+    "county": "DALLAS",
+    "source": "Dallas Open Data (aiuh-nfe2)"
+  },
+  {
+    "station_num": "43",
+    "address": "2844 LOMBARDY LN",
+    "zip_code": "75220",
+    "lat": 32.866040235742,
+    "lon": -96.877717123964,
+    "county": "DALLAS",
+    "source": "Dallas Open Data (aiuh-nfe2)"
+  },
+  {
+    "station_num": "44",
+    "address": "2025 LAGOW ST",
+    "zip_code": "75223",
+    "lat": 32.775935885486,
+    "lon": -96.751793425504,
+    "county": "DALLAS",
+    "source": "Dallas Open Data (aiuh-nfe2)"
+  },
+  {
+    "station_num": "45",
+    "address": "716 W COMMERCE ST",
+    "zip_code": "75208",
+    "lat": 32.772721624517,
+    "lon": -96.835076698342,
+    "county": "DALLAS",
+    "source": "Dallas Open Data (aiuh-nfe2)"
+  },
+  {
+    "station_num": "46",
+    "address": "331 E CAMP WISDOM RD",
+    "zip_code": "75232",
+    "lat": 32.662613087859,
+    "lon": -96.818351778782,
+    "county": "DALLAS",
+    "source": "Dallas Open Data (aiuh-nfe2)"
+  },
+  {
+    "station_num": "47",
+    "address": "7161 ENVOY CT",
+    "zip_code": "75247",
+    "lat": 32.814918647725,
+    "lon": -96.870469221971,
+    "county": "DALLAS",
+    "source": "Dallas Open Data (aiuh-nfe2)"
+  },
+  {
+    "station_num": "48",
+    "address": "10480 E NORTHWEST HWY",
+    "zip_code": "75218",
+    "lat": 32.863978722657,
+    "lon": -96.704160023291,
+    "county": "DALLAS",
+    "source": "Dallas Open Data (aiuh-nfe2)"
+  },
+  {
+    "station_num": "49",
+    "address": "4901 S HAMPTON RD",
+    "zip_code": "75232",
+    "lat": 32.684856722648,
+    "lon": -96.857392107067,
+    "county": "DALLAS",
+    "source": "Dallas Open Data (aiuh-nfe2)"
+  },
+  {
+    "station_num": "50",
+    "address": "841 S WALTON WALKER BLVD",
+    "zip_code": "75256",
+    "lat": 32.737268107737,
+    "lon": -96.9208065322,
+    "county": "DALLAS",
+    "source": "Dallas Open Data (aiuh-nfe2)"
+  },
+  {
+    "station_num": "51",
+    "address": "200 S ST AUGUSTINE DR",
+    "zip_code": "75227",
+    "lat": 32.710510417378,
+    "lon": -96.656730408732,
+    "county": "DALLAS",
+    "source": "Dallas Open Data (aiuh-nfe2)"
+  },
+  {
+    "station_num": "52",
+    "address": "2504 COCKRELL HILL RD",
+    "zip_code": "75211",
+    "lat": 32.718096414314,
+    "lon": -96.891020328182,
+    "county": "DALLAS",
+    "source": "Dallas Open Data (aiuh-nfe2)"
+  },
+  {
+    "station_num": "53",
+    "address": "1407 JOHN WEST RD",
+    "zip_code": "75228",
+    "lat": 32.807474006381,
+    "lon": -96.693569221975,
+    "county": "DALLAS",
+    "source": "Dallas Open Data (aiuh-nfe2)"
+  },
+  {
+    "station_num": "54",
+    "address": "6238 BONNIE VIEW RD",
+    "zip_code": "75241",
+    "lat": 32.669857393059,
+    "lon": -96.760506720045,
+    "county": "DALLAS",
+    "source": "Dallas Open Data (aiuh-nfe2)"
+  },
+  {
+    "station_num": "55",
+    "address": "6600 TRAMMEL DR",
+    "zip_code": "75214",
+    "lat": 32.84556646153,
+    "lon": -96.746516476285,
+    "county": "DALLAS",
+    "source": "Dallas Open Data (aiuh-nfe2)"
+  },
+  {
+    "station_num": "56",
+    "address": "7040 BELT LINE RD",
+    "zip_code": "75254",
+    "lat": 32.949630570598,
+    "lon": -96.782260858705,
+    "county": "DALLAS",
+    "source": "Dallas Open Data (aiuh-nfe2)"
+  },
+  {
+    "station_num": "57",
+    "address": "10801 AUDELIA RD",
+    "zip_code": "75238",
+    "lat": 32.896650070212,
+    "lon": -96.718271680121,
+    "county": "DALLAS",
+    "source": "Dallas Open Data (aiuh-nfe2)"
+  },
+  {
+    "station_num": "58",
+    "address": "3015 CHAPEL OAKS DR",
+    "zip_code": "75019",
+    "lat": 32.930855103558,
+    "lon": -96.984597534822,
+    "county": "DALLAS",
+    "source": "Dallas Open Data (aiuh-nfe2)"
+  },
+  {
+    "station_num": "59",
+    "address": "7097 S JIM MILLER RD",
+    "zip_code": "75217",
+    "lat": 32.714609153037,
+    "lon": -96.700299347012,
+    "county": "DALLAS",
+    "source": "Dallas Open Data (aiuh-nfe2)"
+  },
+  {
+    "station_num": "TR",
+    "address": "5000 DOLPHIN RD",
+    "zip_code": "75223",
+    "lat": 32.785776822239,
+    "lon": -96.734689605667,
+    "county": "DALLAS",
+    "source": "Dallas Open Data (aiuh-nfe2)"
+  }
+]

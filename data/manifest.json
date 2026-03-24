@@ -4,8 +4,8 @@
   "scenario": "Dallas, TX heat wave — August 4-27, 2023",
   "peak_temperature": "109.3F (Aug 18, 2023)",
   "dil_compliance": {
-    "volume": "7 distinct documents/datasets (exceeds 5 minimum)",
-    "complexity": "CDC NIOSH 2016-106 (192 pages) and OSHA OTM Ch4 (dense technical)",
+    "volume": "12 distinct documents/datasets (exceeds 5 minimum)",
+    "complexity": "CDC NIOSH 2016-106 (192 pages), Dallas UHI Study (83 pages), DFR EMS Annual Report (27 pages), and OSHA OTM Ch4 (dense technical)",
     "signal_to_noise": "911 dispatch data contains 10 heat-related MO entries among 1035 total records; social media mixes genuine heat/outage reports with sarcasm and irrelevant posts",
     "conflict_scenario": "NWS uses Heat Index thresholds (Danger at 103F) while OSHA/NIOSH uses WBGT thresholds — leads to conflicting risk assessments for the same conditions"
   },
@@ -78,6 +78,58 @@
       "format": "PDF",
       "description": "FEMA National Incident Management System doctrine. Covers resource typing, incident command system, operational coordination, and mutual aid. Used by Agent 3 to ground resource allocation decisions in official ICS doctrine.",
       "agent": "Agent 3 (Dispatch Commander)"
+    },
+    {
+      "file": "data/raw/dallas_fire_stations.json",
+      "type": "raw",
+      "source": "Dallas Open Data — Fire Stations (aiuh-nfe2)",
+      "source_url": "https://www.dallasopendata.com/resource/aiuh-nfe2.json",
+      "records": 60,
+      "format": "JSON",
+      "description": "All 60 Dallas Fire-Rescue stations with coordinates, addresses, and zip codes. Used as home locations for asset inventory. Real data from Dallas Open Data GIS layer.",
+      "key_fields": ["station_num", "address", "zip_code", "lat", "lon"],
+      "agent": "Agent 3 (Dispatch Commander)"
+    },
+    {
+      "file": "data/raw/dallas_311_aug2023.json",
+      "type": "raw",
+      "source": "Dallas Open Data — 311 Service Requests (d7e7-envw)",
+      "source_url": "https://www.dallasopendata.com/resource/d7e7-envw.json",
+      "records": 4482,
+      "format": "JSON",
+      "description": "Heat-relevant 311 service requests from Aug 2023. Filtered to: Homeless Encampment, Dead Animal Pick Up, Animal Lack of Care, and Water/Wastewater requests. Complements 911 data — 311 captures slower-burn community heat stress that precedes emergencies. Real data with lat/lon coordinates.",
+      "key_fields": ["service_request_number", "service_request_type", "address", "created_date", "lat", "lon"],
+      "agent": "Agent 1 (Spatial Triage)"
+    },
+    {
+      "file": "data/synthetic/dallas_asset_inventory.json",
+      "type": "synthetic",
+      "source": "Generated from DFR EMS Annual Report 2023 fleet data + real station locations",
+      "records": 56,
+      "format": "JSON",
+      "description": "Typed asset inventory for Agent 3 dispatch optimization. 47 front-line ALS ambulances, 8 peak-demand single-function rescues, and 1 MODSS outreach team. Each asset has NIMS-style typing (category, kind, type), home station coordinates, coverage radius, capacity, and shift constraints. Asset counts match real DFR fleet; station assignments are synthetic but geographically realistic.",
+      "key_fields": ["id", "asset_type", "nims_category", "nims_kind", "nims_type", "station_num", "home_lat", "home_lon", "coverage_radius", "capacity", "shift"],
+      "agent": "Agent 3 (Dispatch Commander)"
+    },
+    {
+      "file": "data/reference/dfr_ems_annual_report_2023.pdf",
+      "type": "reference",
+      "source": "Dallas Fire-Rescue",
+      "source_url": "https://samuelkordik.com/wp-content/uploads/2024/08/2023-DFR-EMS-ANNUAL-REPORT-final.pdf",
+      "format": "PDF",
+      "pages": "27",
+      "description": "Dallas Fire-Rescue EMS 2023 Annual Report. Documents the exact fleet: 47 front-line ambulances, 8 single-function peak-demand rescues, 883 paramedics, MODSS outreach team, special events division. Agent 3 uses this via RAG to understand fleet constraints and staffing models.",
+      "agent": "Agent 3 (Dispatch Commander)"
+    },
+    {
+      "file": "data/reference/dallas_uhi_study_2017.pdf",
+      "type": "reference",
+      "source": "Texas Trees Foundation / Georgia Tech Urban Climate Lab",
+      "source_url": "https://www.texastrees.org/wp-content/uploads/2019/06/Urban-Heat-Island-Study-August-2017.pdf",
+      "format": "PDF",
+      "pages": "83",
+      "description": "Dallas Urban Heat Island Management Study (2017). Comprehensive assessment with 4,000+ data points on neighborhood-level heat vulnerability, tree canopy coverage, impervious surface ratios, and public health impacts. Dallas is heating faster than almost any other major US city. Agent 2 uses this via RAG to justify threat scoring for specific Dallas neighborhoods.",
+      "agent": "Agent 2 (Threat Assessment)"
     }
   ]
 }
