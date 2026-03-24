@@ -74,9 +74,9 @@ Track 1: The "Chaos" Sector (Public Safety & Crisis)
 *Goal: All cloud resources defined as code; no manual console clicks.*
 
 ### Terraform Setup
-- [ ] 🔴 Initialize Terraform project in `/infra/` with S3 remote state + DynamoDB lock table
-- [ ] 🔴 Define `variables.tf`, `outputs.tf`, `main.tf`, and environment-specific `terraform.tfvars` (do NOT commit real values)
-- [ ] 🔴 Configure AWS provider + target region
+- [X] 🔴 Initialize Terraform project in `/infra/` with S3 remote state + DynamoDB lock table
+- [X] 🔴 Define `variables.tf`, `outputs.tf`, `main.tf`, and environment-specific `terraform.tfvars` (do NOT commit real values)
+- [X] 🔴 Configure AWS provider + target region
 
 ### Core Infrastructure
 - [ ] 🔴 **S3 Buckets**: raw data, processed results, Bedrock Knowledge Base source docs
