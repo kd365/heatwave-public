@@ -1,102 +1,1979 @@
 [
-  {"id": "tw-001", "timestamp": "2023-08-10T14:22:00", "text": "Power just went out on Elm St downtown. 107 degrees and no AC. This is not okay. #Dallas #heatwave", "zip": "75201", "platform": "twitter"},
-  {"id": "tw-002", "timestamp": "2023-08-10T14:35:00", "text": "my AC died 2 hours ago and oncor says 4-6 hour wait for repairs. i have a 2 year old. someone help", "zip": "75217", "platform": "twitter"},
-  {"id": "tw-003", "timestamp": "2023-08-10T14:41:00", "text": "lol dallas in august is basically living on the surface of the sun", "zip": "75204", "platform": "twitter"},
-  {"id": "tw-004", "timestamp": "2023-08-10T15:02:00", "text": "Just saw a guy passed out on the sidewalk near Fair Park. Called 911 but they said long wait times", "zip": "75215", "platform": "twitter"},
-  {"id": "tw-005", "timestamp": "2023-08-10T15:18:00", "text": "transformer blew on our block. sparks everywhere. whole street is dark. 75217 if anyone else affected", "zip": "75217", "platform": "twitter"},
-  {"id": "tw-006", "timestamp": "2023-08-10T15:30:00", "text": "Heading to Northpark Mall just to sit in the AC for free lmao #surviving", "zip": "75243", "platform": "twitter"},
-  {"id": "tw-007", "timestamp": "2023-08-10T15:45:00", "text": "NEW LISTING: Beautiful 3BR/2BA in Lakewood! Open house this Saturday! #DallasRealEstate #OpenHouse", "zip": "75228", "platform": "twitter"},
-  {"id": "tw-008", "timestamp": "2023-08-10T16:10:00", "text": "oncor outage map is LIT UP red across south dallas. this is dangerous for elderly residents who cant leave", "zip": "75215", "platform": "twitter"},
-  {"id": "tw-009", "timestamp": "2023-08-10T16:22:00", "text": "oh wow soooo hot today 🙄 its literally 72 degrees in san francisco rn. miss home", "zip": "75204", "platform": "twitter"},
-  {"id": "tw-010", "timestamp": "2023-08-10T16:55:00", "text": "My neighbor just collapsed in her yard. Shes 78. EMTs took forever to get here. This heat is KILLING people", "zip": "75211", "platform": "twitter"},
-  {"id": "tw-011", "timestamp": "2023-08-11T10:15:00", "text": "Day 2 no power in 75217. Oncor still showing estimated restore 'TBD'. We slept in the car last night with it running for AC", "zip": "75217", "platform": "twitter"},
-  {"id": "tw-012", "timestamp": "2023-08-11T11:30:00", "text": "anyone know if the cooling center at MLK rec center is open today? google says closed but the city website says open", "zip": "75215", "platform": "twitter"},
-  {"id": "tw-013", "timestamp": "2023-08-11T12:00:00", "text": "Great brunch at The Rustic today! Mango mimosas are perfection 🥂 #DallasFoodie #WeekendVibes", "zip": "75201", "platform": "twitter"},
-  {"id": "tw-014", "timestamp": "2023-08-11T13:22:00", "text": "3 ambulances on MLK Blvd in the last hour. something is very wrong in south dallas today", "zip": "75215", "platform": "twitter"},
-  {"id": "tw-015", "timestamp": "2023-08-11T14:00:00", "text": "ICYMI: Cowboys preseason opener this weekend! Who's going?? #CowboysNation #NFL", "zip": "75220", "platform": "twitter"},
-  {"id": "tw-016", "timestamp": "2023-08-11T14:45:00", "text": "lights flickering at work again. if this office loses power im going home. 3rd time this week", "zip": "75243", "platform": "twitter"},
-  {"id": "tw-017", "timestamp": "2023-08-11T15:30:00", "text": "Elderly man found dead in apartment on Hatcher St. No AC. This is the 3rd one this week per my neighbor who works EMS", "zip": "75215", "platform": "twitter"},
-  {"id": "tw-018", "timestamp": "2023-08-11T16:00:00", "text": "just drove past 3 fire trucks on Commerce. hope everyone is ok", "zip": "75201", "platform": "twitter"},
-  {"id": "tw-019", "timestamp": "2023-08-12T09:00:00", "text": "its 98 degrees at 9AM. today is going to be brutal. stay inside if you can dallas", "zip": "75211", "platform": "twitter"},
-  {"id": "tw-020", "timestamp": "2023-08-12T11:45:00", "text": "Power outage spreading to Oak Cliff now. Oncor crews everywhere but it keeps going out in new areas", "zip": "75211", "platform": "twitter"},
-  {"id": "tw-021", "timestamp": "2023-08-12T12:30:00", "text": "my dog wont even go outside to pee. smart dog tbh", "zip": "75228", "platform": "twitter"},
-  {"id": "tw-022", "timestamp": "2023-08-12T13:15:00", "text": "Just watched a construction worker stumble and sit down on Ross Ave. His coworkers poured water on him. This heat is no joke @ABOREOSHA", "zip": "75204", "platform": "twitter"},
-  {"id": "tw-023", "timestamp": "2023-08-12T14:00:00", "text": "ERCOT asking texans to conserve energy. Maybe if yall built actual infrastructure this wouldn't happen every summer #TexasGrid", "zip": "75220", "platform": "twitter"},
-  {"id": "tw-024", "timestamp": "2023-08-12T14:30:00", "text": "water main break at Lamar and Commerce. no water pressure in downtown. on top of the heat this is insane", "zip": "75201", "platform": "twitter"},
-  {"id": "tw-025", "timestamp": "2023-08-12T15:00:00", "text": "Just got my electricity bill. $487 for july. FOUR HUNDRED AND EIGHTY SEVEN DOLLARS. for a 1BR apartment.", "zip": "75204", "platform": "twitter"},
-  {"id": "tw-026", "timestamp": "2023-08-12T15:45:00", "text": "Check out this amazing sunset from last night! #DallasSkyline #Photography #Beautiful", "zip": "75201", "platform": "twitter"},
-  {"id": "tw-027", "timestamp": "2023-08-12T16:30:00", "text": "power flickering in and out at pleasant grove. fridge is gonna go bad. already lost food once this summer", "zip": "75217", "platform": "twitter"},
-  {"id": "tw-028", "timestamp": "2023-08-12T17:00:00", "text": "UPDATE: Oncor confirms 12,000+ customers without power in SE Dallas. Crews working but no ETA.", "zip": "75217", "platform": "twitter"},
-  {"id": "tw-029", "timestamp": "2023-08-13T08:30:00", "text": "woke up drenched in sweat. power went out sometime overnight. its already 94 in my apartment", "zip": "75215", "platform": "twitter"},
-  {"id": "tw-030", "timestamp": "2023-08-13T10:00:00", "text": "The homeless encampment under I-30 has no shade structures. Saw someone from OHS handing out water bottles but thats not enough when its 107", "zip": "75215", "platform": "twitter"},
-  {"id": "tw-031", "timestamp": "2023-08-13T11:30:00", "text": "If you think THIS is hot you should try Phoenix 😂 Dallas heat is nothing", "zip": "75220", "platform": "twitter"},
-  {"id": "tw-032", "timestamp": "2023-08-13T12:15:00", "text": "Oncor just came and fixed our street! Power back after 3 days! THANK YOU 🙏", "zip": "75217", "platform": "twitter"},
-  {"id": "tw-033", "timestamp": "2023-08-13T13:00:00", "text": "two more ambulances on MLK. my ring doorbell caught them. this is the south dallas heat crisis nobody is talking about", "zip": "75215", "platform": "twitter"},
-  {"id": "tw-034", "timestamp": "2023-08-13T14:30:00", "text": "PSA: The Salvation Army on Harry Hines is open as a cooling center until 8pm. They have water and snacks. Spread the word", "zip": "75220", "platform": "twitter"},
-  {"id": "tw-035", "timestamp": "2023-08-17T12:00:00", "text": "109 degrees at DFW airport. This might be the hottest day of my life and ive lived here 40 years", "zip": "75220", "platform": "twitter"},
-  {"id": "tw-036", "timestamp": "2023-08-17T13:30:00", "text": "So thankful for WFH today. My car thermometer said 115 in the parking lot", "zip": "75243", "platform": "twitter"},
-  {"id": "tw-037", "timestamp": "2023-08-17T14:00:00", "text": "OUTAGE ALERT: Lost power at Buckner and Military. Whole intersection traffic lights are out too. Be careful driving", "zip": "75217", "platform": "twitter"},
-  {"id": "tw-038", "timestamp": "2023-08-17T14:30:00", "text": "Fire at an apartment complex on Illinois Ave. 4 trucks responding. Hope everyone got out ok", "zip": "75211", "platform": "twitter"},
-  {"id": "tw-039", "timestamp": "2023-08-17T15:00:00", "text": "Just a reminder that hot cars kill. Please check your back seats. Please check on elderly neighbors. Please take this seriously.", "zip": "75204", "platform": "twitter"},
-  {"id": "tw-040", "timestamp": "2023-08-17T15:45:00", "text": "pavement is literally melting on Ross Ave. watched a girls flip flop get stuck lol sorry not funny but also kinda funny", "zip": "75204", "platform": "twitter"},
-  {"id": "tw-041", "timestamp": "2023-08-18T10:00:00", "text": "110 DEGREES TODAY????? No. Absolutely not. I refuse.", "zip": "75201", "platform": "twitter"},
-  {"id": "tw-042", "timestamp": "2023-08-18T11:30:00", "text": "Grid is struggling again. Brownout in oak cliff — lights dimming every few minutes. Here we go again", "zip": "75211", "platform": "twitter"},
-  {"id": "tw-043", "timestamp": "2023-08-18T12:45:00", "text": "Adopting this sweet boy today! Meet Duke 🐕 #AdoptDontShop #DallasDogs #RescueDog", "zip": "75228", "platform": "twitter"},
-  {"id": "tw-044", "timestamp": "2023-08-18T13:15:00", "text": "work sent us home early. they said the AC cant keep up and its 89 degrees INSIDE the warehouse. OSHA violation??", "zip": "75217", "platform": "twitter"},
-  {"id": "tw-045", "timestamp": "2023-08-18T14:00:00", "text": "Another outage in Pleasant Grove. This is the same grid section that went down last week. @oncaborenergy FIX THIS", "zip": "75217", "platform": "twitter"},
-  {"id": "tw-046", "timestamp": "2023-08-18T14:30:00", "text": "saw city trucks setting up what looks like a water station at Pike Park. good.", "zip": "75204", "platform": "twitter"},
-  {"id": "tw-047", "timestamp": "2023-08-18T15:00:00", "text": "grandma says she fine but her apartment is 96 degrees and she wont leave. can someone tell me how to get the city to do a welfare check", "zip": "75215", "platform": "twitter"},
-  {"id": "tw-048", "timestamp": "2023-08-18T15:30:00", "text": "BIG SALE THIS WEEKEND! 50% off all summer inventory! Come see us at our Greenville location! #DallasDeals #Shopping", "zip": "75243", "platform": "twitter"},
-  {"id": "tw-049", "timestamp": "2023-08-18T16:00:00", "text": "my outdoor thermometer says 117. i know its in the sun but STILL", "zip": "75211", "platform": "twitter"},
-  {"id": "tw-050", "timestamp": "2023-08-18T16:30:00", "text": "friend who works at Parkland ER says they've had 14 heat-related admissions today. Fourteen. And its not even 5pm", "zip": "75215", "platform": "twitter"},
-  {"id": "tw-051", "timestamp": "2023-08-19T09:00:00", "text": "3rd straight day over 105. When does this end", "zip": "75228", "platform": "twitter"},
-  {"id": "tw-052", "timestamp": "2023-08-19T10:30:00", "text": "Saw a mail carrier looking really rough on Gaston. Red face, stumbling. I brought him water and he sat on my porch for 20 min", "zip": "75228", "platform": "twitter"},
-  {"id": "tw-053", "timestamp": "2023-08-19T11:00:00", "text": "if ONE MORE PERSON from california tells me dallas heat is dry heat im going to lose it. ITS NOT. ITS HUMID AND AWFUL", "zip": "75204", "platform": "twitter"},
-  {"id": "tw-054", "timestamp": "2023-08-19T12:00:00", "text": "power holding steady today in pleasant grove 🤞 oncor must have fixed something", "zip": "75217", "platform": "twitter"},
-  {"id": "tw-055", "timestamp": "2023-08-19T13:00:00", "text": "Anyone else notice more sirens than usual this week? South Dallas has been nonstop ambulances", "zip": "75215", "platform": "twitter"},
-  {"id": "tw-056", "timestamp": "2023-08-19T14:00:00", "text": "Happy Friday Dallas! Whos ready for the weekend? Cant wait for the Farmers Market tomorrow morning! #FridayVibes", "zip": "75201", "platform": "twitter"},
-  {"id": "tw-057", "timestamp": "2023-08-20T11:00:00", "text": "cooling center at Moorland YMCA is PACKED. standing room only. they need to open more of these", "zip": "75211", "platform": "twitter"},
-  {"id": "tw-058", "timestamp": "2023-08-20T12:30:00", "text": "just seen them put a body bag in an ambulance on Hatcher. im sick of this. RIP whoever that was", "zip": "75215", "platform": "twitter"},
-  {"id": "tw-059", "timestamp": "2023-08-20T13:00:00", "text": "NWS says excessive heat warning extended through Wednesday. Dallas hasnt been below 100 in 2 weeks.", "zip": "75220", "platform": "twitter"},
-  {"id": "tw-060", "timestamp": "2023-08-20T14:00:00", "text": "Okay genuine question — at what point does the city declare this an emergency? How many people have to die?", "zip": "75204", "platform": "twitter"},
-  {"id": "tw-061", "timestamp": "2023-08-20T15:00:00", "text": "yo dallas people - whos going to deep ellum tonight? new DJ at It'll Do! 🎶 #DeepEllum #DallasNightlife", "zip": "75204", "platform": "twitter"},
-  {"id": "tw-062", "timestamp": "2023-08-21T10:00:00", "text": "Only 104 today. feels like a cold front compared to last week 😅", "zip": "75243", "platform": "twitter"},
-  {"id": "tw-063", "timestamp": "2023-08-21T11:30:00", "text": "oncor reporting another 3,000 customers out in south dallas and oak cliff areas", "zip": "75211", "platform": "twitter"},
-  {"id": "tw-064", "timestamp": "2023-08-21T13:00:00", "text": "Mom tried to call 311 about a welfare check for her neighbor. On hold for 45 minutes then disconnected. System is broken", "zip": "75215", "platform": "twitter"},
-  {"id": "tw-065", "timestamp": "2023-08-22T14:00:00", "text": "Person just collapsed at the bus stop on Ervay. People helping but no shade at that stop. The city needs to add shelters to these stops", "zip": "75215", "platform": "twitter"},
-  {"id": "tw-066", "timestamp": "2023-08-22T15:30:00", "text": "the irony of getting a $300 electric bill while also having no electricity for 3 days is not lost on me @oncaborenergy", "zip": "75217", "platform": "twitter"},
-  {"id": "tw-067", "timestamp": "2023-08-22T16:00:00", "text": "Just finished a great run on the Katy Trail! 🏃‍♀️ Only 5 miles but felt good! #RunDallas #FitnessJourney", "zip": "75204", "platform": "twitter"},
-  {"id": "tw-068", "timestamp": "2023-08-23T09:00:00", "text": "good news - FEMA teams spotted in south dallas handing out fans and water. about time", "zip": "75215", "platform": "twitter"},
-  {"id": "tw-069", "timestamp": "2023-08-23T11:00:00", "text": "i swear its hotter in my apartment than outside. this building has ZERO insulation. landlord doesnt care", "zip": "75217", "platform": "twitter"},
-  {"id": "tw-070", "timestamp": "2023-08-23T13:00:00", "text": "is it just me or has traffic been insane this week? I think the traffic lights keep going out from power issues", "zip": "75220", "platform": "twitter"},
-  {"id": "tw-071", "timestamp": "2023-08-24T10:00:00", "text": "Day 20 straight of triple digits. I genuinely dont remember what normal weather feels like", "zip": "75228", "platform": "twitter"},
-  {"id": "tw-072", "timestamp": "2023-08-24T12:00:00", "text": "oncor truck has been parked on our street for 3 hours. they keep looking at the transformer and shaking their heads. not encouraging", "zip": "75211", "platform": "twitter"},
-  {"id": "tw-073", "timestamp": "2023-08-24T14:00:00", "text": "UPDATE from my ER friend at Parkland: heat cases down from last week but still seeing 5-6 per day. Most are elderly or homeless", "zip": "75215", "platform": "twitter"},
-  {"id": "tw-074", "timestamp": "2023-08-25T11:00:00", "text": "107 again today. Another transformer fire on Lancaster. How many of these have to blow before they upgrade the grid", "zip": "75215", "platform": "twitter"},
-  {"id": "tw-075", "timestamp": "2023-08-25T13:00:00", "text": "The most Texas thing ever is watching your neighbor mow his lawn in 107 degree heat while you sit inside questioning his life choices", "zip": "75228", "platform": "twitter"},
-  {"id": "tw-076", "timestamp": "2023-08-25T14:30:00", "text": "power out AGAIN in pleasant grove. 4th time in 3 weeks. @CityOfDallas @oncaborenergy this area needs infrastructure investment NOW", "zip": "75217", "platform": "twitter"},
-  {"id": "tw-077", "timestamp": "2023-08-25T15:00:00", "text": "Hiring NOW! Full-time barista at our Deep Ellum location. $15/hr + tips. DM for details! #DallasJobs #NowHiring", "zip": "75204", "platform": "twitter"},
-  {"id": "tw-078", "timestamp": "2023-08-26T10:00:00", "text": "Just read someone died on the trails near Katy Trail yesterday. heat related. this is so sad", "zip": "75204", "platform": "twitter"},
-  {"id": "tw-079", "timestamp": "2023-08-26T11:30:00", "text": "church on MLK is running a fan drive — drop off box fans and theyre distributing to elderly residents without AC. if you can help please do", "zip": "75215", "platform": "twitter"},
-  {"id": "tw-080", "timestamp": "2023-08-26T13:00:00", "text": "honestly its fine. i like sweating through 3 shirts a day. builds character. (help)", "zip": "75211", "platform": "twitter"},
-  {"id": "tw-081", "timestamp": "2023-08-26T14:00:00", "text": "Lost power at 2pm. Its 109 outside. I have two cats. This cant keep happening. Heading to petco to sit in the AC with them in carriers", "zip": "75217", "platform": "twitter"},
-  {"id": "tw-082", "timestamp": "2023-08-26T15:00:00", "text": "dallas county medical examiner will probably have a report in a few months on heat deaths. bet its way higher than anyone expects", "zip": "75201", "platform": "twitter"},
-  {"id": "tw-083", "timestamp": "2023-08-26T16:00:00", "text": "Getting married next month! Venue hunting in Dallas - any recommendations? #DallasWedding #BrideToBe #Engaged", "zip": "75220", "platform": "twitter"},
-  {"id": "tw-084", "timestamp": "2023-08-27T09:00:00", "text": "dropped below 100 today for the first time in forever. only 99. the bar is in hell", "zip": "75228", "platform": "twitter"},
-  {"id": "tw-085", "timestamp": "2023-08-27T11:00:00", "text": "final count from my block: 3 transformer fires, 6 days without power (total across outages), one neighbor hospitalized for heat exhaustion. this was august 2023 in dallas TX", "zip": "75217", "platform": "twitter"},
-  {"id": "tw-086", "timestamp": "2023-08-10T17:30:00", "text": "no power no water the city doesnt care about south dallas and never has. but they sure built that new park downtown real fast", "zip": "75215", "platform": "twitter"},
-  {"id": "tw-087", "timestamp": "2023-08-11T08:00:00", "text": "Just tried to make eggs on my car hood as a joke. They actually started cooking. Its 8am.", "zip": "75211", "platform": "twitter"},
-  {"id": "tw-088", "timestamp": "2023-08-12T10:30:00", "text": "Selling 2 tickets to the Rangers game Saturday! Section 121 row 15. $80 each OBO. DM me #Rangers #TexasRangers", "zip": "75243", "platform": "twitter"},
-  {"id": "tw-089", "timestamp": "2023-08-13T15:30:00", "text": "fire hydrant opened up on cedar crest. kids playing in the water. normally id complain but honestly they need it today", "zip": "75215", "platform": "twitter"},
-  {"id": "tw-090", "timestamp": "2023-08-17T16:15:00", "text": "ERCOT: please conserve. Also ERCOT: no we wont invest in grid reliability. pick a lane", "zip": "75201", "platform": "twitter"},
-  {"id": "tw-091", "timestamp": "2023-08-18T17:00:00", "text": "i know i complain about the cold in january but i take it all back. give me 30 degrees over 110 any day", "zip": "75228", "platform": "twitter"},
-  {"id": "tw-092", "timestamp": "2023-08-19T15:30:00", "text": "weird flex but our office AC is set to 68 and its the only reason i come to work anymore", "zip": "75243", "platform": "twitter"},
-  {"id": "tw-093", "timestamp": "2023-08-20T16:00:00", "text": "neighbor told me they found someone dead in a car on Military Pkwy this morning. car was off, windows up. please check on people", "zip": "75217", "platform": "twitter"},
-  {"id": "tw-094", "timestamp": "2023-08-22T10:00:00", "text": "Oncor outage map for 75215 and 75217 has been red for THREE WEEKS STRAIGHT. These are the lowest income zips in Dallas. Coincidence? No.", "zip": "75215", "platform": "twitter"},
-  {"id": "tw-095", "timestamp": "2023-08-24T15:00:00", "text": "literally saw heat waves coming off the road on Buckner Blvd. like a movie. except its real life and people are dying", "zip": "75217", "platform": "twitter"},
-  {"id": "tw-096", "timestamp": "2023-08-25T16:00:00", "text": "yall are so dramatic. its summer. in texas. its hot. this happens every year. drink water and move on 🤷‍♂️", "zip": "75220", "platform": "twitter"},
-  {"id": "tw-097", "timestamp": "2023-08-11T17:00:00", "text": "Props to the Dallas firefighters i saw checking on the homeless camp under 45. they were handing out water in full gear. Heroes", "zip": "75201", "platform": "twitter"},
-  {"id": "tw-098", "timestamp": "2023-08-18T08:00:00", "text": "NWS excessive heat warning: heat index expected to reach 115-120 in parts of Dallas County today. Limit outdoor activity.", "zip": "75201", "platform": "twitter"},
-  {"id": "tw-099", "timestamp": "2023-08-22T17:00:00", "text": "comp had a heat related event on ervay st. saw the whole thing. guy just went down. scary", "zip": "75215", "platform": "twitter"},
-  {"id": "tw-100", "timestamp": "2023-08-12T18:00:00", "text": "sun going down and its still 104. the concrete just radiates heat all night. my apartment wont drop below 88 even with AC on full blast", "zip": "75201", "platform": "twitter"}
+  {
+    "id": "tw-001",
+    "timestamp": "2023-08-14 8:35 AM",
+    "text": "GO RANGERS!! What a game last night! \u26be #StraightUpTX",
+    "platform": "twitter",
+    "zip": "75220"
+  },
+  {
+    "id": "tw-002",
+    "timestamp": "2023-08-17T06:48:43",
+    "text": "elderly mom wont leave his house. no AC. temp inside is 98. calling 311",
+    "platform": "reddit",
+    "zip": "75217"
+  },
+  {
+    "id": "tw-003",
+    "timestamp": "2023-08-19T08:50:34",
+    "text": "best tacos in Dallas GO. wrong answers only. jk i need real answers im hungry",
+    "platform": "reddit"
+  },
+  {
+    "id": "tw-004",
+    "timestamp": "2023-08-10 15:30:50",
+    "text": "just saw a mirrage on 35. or maybe im dehydarted. either way not great",
+    "platform": "twitter"
+  },
+  {
+    "id": "tw-005",
+    "timestamp": "2023-08-14T14:54:32",
+    "text": "first day at the new job!! so nervous but excited \ud83d\ude4f #NewJob #DallasLife",
+    "platform": "twitter",
+    "zip": "75217"
+  },
+  {
+    "id": "tw-006",
+    "timestamp": "2023-08-12T17:04:29",
+    "text": "UPDATE: Oncor confirms 12,000+ customers without power in SE Dallas. Crews working but no ETA.",
+    "zip": "75217",
+    "platform": "twitter"
+  },
+  {
+    "id": "tw-007",
+    "timestamp": "2023-08-12T14:52:22",
+    "text": "alexa play hot in herre by nelly bc thats literally my life rn",
+    "platform": "nextdoor",
+    "zip": "75215"
+  },
+  {
+    "id": "tw-008",
+    "timestamp": "2023-08-14T19:43:31",
+    "text": "shoutout to whoever invented AC. you the real mvp",
+    "platform": "twitter",
+    "zip": "75204"
+  },
+  {
+    "id": "tw-009",
+    "timestamp": "2023-08-08T23:26:14",
+    "text": "oncor truck just showed up on N Jim Miller Rd after 48 hours. finally",
+    "platform": "twitter"
+  },
+  {
+    "id": "tw-010",
+    "timestamp": "2023-08-27T11:39:08",
+    "text": "looking for a 2BR apartment in Uptown. Budget $1800. Any recs? #DallasApartments",
+    "platform": "twitter"
+  },
+  {
+    "id": "tw-011",
+    "timestamp": "2023-08-12T11:48:33",
+    "text": "Power outtage spreading to Oak Cliff now. Oncor crews everywhere but it keeps going out in new areas",
+    "zip": "75211",
+    "platform": "twitter"
+  },
+  {
+    "id": "tw-012",
+    "timestamp": "2023-08-13T10:04:51",
+    "text": "The homeless encampment under I-30 has no shade structures. Saw someone from OHS handing out water bottles but thats not enough when its 107",
+    "zip": "75215",
+    "platform": "twitter"
+  },
+  {
+    "id": "tw-013",
+    "timestamp": "2023-08-22T14:06:33",
+    "text": "Person just colapsed at the bus stop on Ervay. People helping but no shade at that stop. The city needs to add shelters to these stops",
+    "platform": "twitter"
+  },
+  {
+    "id": "tw-014",
+    "timestamp": "2023-08-11T17:11:38",
+    "text": "Props to the Dallas firefighters i saw checking on the homless camp under 45. they were handing out water in full gear. Heros",
+    "platform": "twitter"
+  },
+  {
+    "id": "tw-015",
+    "timestamp": "2023-08-25T13:08:42",
+    "text": "The most Texas thing ever is watching your neighbor mow his lawn in 107 degree heat while you sit inside questioning his life choices",
+    "zip": "75228",
+    "platform": "twitter"
+  },
+  {
+    "id": "tw-016",
+    "timestamp": "2023-08-19T12:07:19",
+    "text": "power holding steady today in pleasant grove \ud83e\udd1e oncor must have fixed somthing",
+    "platform": "twitter"
+  },
+  {
+    "id": "tw-017",
+    "timestamp": "2023-08-22T15:37:48",
+    "text": "the irony of getting a $300 electric bill while also having no electricty for 3 days is not lost on me @oncaborenergy",
+    "zip": "75217",
+    "platform": "twitter"
+  },
+  {
+    "id": "tw-018",
+    "timestamp": "2023-08-10T14:35:12",
+    "text": "my AC died 2 hours ago and oncor says 4-6 hour wait for reparis. i have a 2 year old. someone help",
+    "zip": "75217",
+    "platform": "twitter"
+  },
+  {
+    "id": "tw-019",
+    "timestamp": "2023-08-26T16:50:27",
+    "text": "remember when we complained about the cold in february? good times",
+    "platform": "twitter",
+    "zip": "75228"
+  },
+  {
+    "id": "tw-020",
+    "timestamp": "2023-08-15T16:28:21",
+    "text": "im literally dying rn \ud83d\udc80 this heat is unreal",
+    "platform": "reddit",
+    "zip": "75228"
+  },
+  {
+    "id": "tw-021",
+    "timestamp": "2023-08-20T12:33:18",
+    "text": "just seen them put a body bag in a amblance on Hatcher. im sick of this. RIP whoever that was",
+    "zip": "75215",
+    "platform": "twitter"
+  },
+  {
+    "id": "tw-022",
+    "timestamp": "2023-08-16T09:36:13",
+    "text": "woke up to no power again. 3rd time this month. 75228 is getting destroyed",
+    "platform": "twitter"
+  },
+  {
+    "id": "tw-023",
+    "timestamp": "2023-08-23T16:16:20",
+    "text": "elderly mom wont leave his house. no AC. temp inside is 102. calling 311",
+    "platform": "nextdoor"
+  },
+  {
+    "id": "tw-024",
+    "timestamp": "2023-08-23T10:48:23",
+    "text": "power back on in 75215 but oncor says could go out again tonight. generator sold out everywhere",
+    "platform": "twitter",
+    "zip": "75215"
+  },
+  {
+    "id": "tw-025",
+    "timestamp": "2023-08-09T23:09:27",
+    "text": "PLEASE if you have elderly neighbors CHECK ON THEM. we lost Mrs. Johnson on our street today. 87 years old. no AC.",
+    "platform": "twitter",
+    "zip": "75204"
+  },
+  {
+    "id": "tw-026",
+    "timestamp": "2023-08-14T23:12:23",
+    "text": "person laying on the ground at the sidewalk on Ross Ave. people pouring water on them. someone called 911",
+    "platform": "twitter",
+    "zip": "75220"
+  },
+  {
+    "id": "tw-027",
+    "timestamp": "2023-08-20T13:09:55",
+    "text": "NWS says excessive heat warning extended through Wednesday. Dallas hasnt been below 100 in 2 weeks.",
+    "zip": "75220",
+    "platform": "twitter"
+  },
+  {
+    "id": "tw-028",
+    "timestamp": "2023-08-17T12:08:15",
+    "text": "109 degress at DFW airport. This might be the hottest day of my life and ive lived here 40 years",
+    "zip": "75220",
+    "platform": "twitter"
+  },
+  {
+    "id": "tw-029",
+    "timestamp": "2023-08-25T16:02:19",
+    "text": "yall are so dramatic. its summer. in texas. its hot. this happns every year. drink water and move on \ud83e\udd37\u200d\u2642\ufe0f",
+    "zip": "75220",
+    "platform": "twitter"
+  },
+  {
+    "id": "tw-030",
+    "timestamp": "2023-08-18T19:57:37",
+    "text": "just called 911 for my dad \u2014 not responding. they said 45 min wait. unacceptable",
+    "platform": "twitter"
+  },
+  {
+    "id": "tw-031",
+    "timestamp": "2023-08-11T19:20:25",
+    "text": "ER wait at Methodist is 36 hours per the sign outside. all heat cases?",
+    "platform": "reddit",
+    "zip": "75228"
+  },
+  {
+    "id": "tw-032",
+    "timestamp": "2023-08-14T18:43:57",
+    "text": "cant even wear my seatbelt without getting 3rd degree burns. summer is cancelled",
+    "platform": "nextdoor"
+  },
+  {
+    "id": "tw-033",
+    "timestamp": "2023-08-06T16:41:06",
+    "text": "love how texas politicians say the grid is fixed every year and every year this happens",
+    "platform": "twitter"
+  },
+  {
+    "id": "tw-034",
+    "timestamp": "2023-08-16T21:08:12",
+    "text": "Anyone know a good dentist in the Richardson area? Need a cleaning",
+    "platform": "facebook"
+  },
+  {
+    "id": "tw-035",
+    "timestamp": "2023-08-12T16:16:48",
+    "text": "fun fact: eggs can literally cook on dallas pavement rn. i know bc my kid tried it",
+    "platform": "nextdoor",
+    "zip": "75243"
+  },
+  {
+    "id": "tw-036",
+    "timestamp": "2023-08-22 9:28 PM",
+    "text": "person laying on the ground at the intersection at Lamar and Commerce. people pouring water on them. somone called 911",
+    "platform": "twitter",
+    "zip": "75220"
+  },
+  {
+    "id": "tw-037",
+    "timestamp": "2023-08-12T16:33:58",
+    "text": "power flickering in and out at pleasant grove. fridge is gonna go bad. already lost food once this summer",
+    "platform": "twitter"
+  },
+  {
+    "id": "tw-038",
+    "timestamp": "2023-08-06T10:15:18",
+    "text": "just signed up for the Dallas marathon in December! training starts now \ud83c\udfc3\u200d\u2642\ufe0f #RunDallas",
+    "platform": "nextdoor"
+  },
+  {
+    "id": "tw-039",
+    "timestamp": "2023-08-12T15:06:44",
+    "text": "Just got my electricity bill. $487 for july. FOUR HUNDRED AND EIGHTY SEVEN DOLLARS. for a 1BR apartment.",
+    "zip": "75204",
+    "platform": "twitter"
+  },
+  {
+    "id": "tw-040",
+    "timestamp": "2023-08-10T15:02:44",
+    "text": "Just saw a guy passed out on the sidewalk near Fair Park. Called 911 but they said long wait times",
+    "platform": "twitter"
+  },
+  {
+    "id": "tw-041",
+    "timestamp": "2023-08-18T16:34:11",
+    "text": "friend who works at Parkland ER says theyve had 14 heat-related admisions today. Fourteen. And its not even 5pm",
+    "zip": "75215",
+    "platform": "twitter"
+  },
+  {
+    "id": "tw-042",
+    "timestamp": "2023-08-12T10:17:12",
+    "text": "hot girl summer? more like hot EVERYONE summer amirite",
+    "platform": "twitter",
+    "zip": "75215"
+  },
+  {
+    "id": "tw-043",
+    "timestamp": "2023-08-12T16:35:27",
+    "text": "pro tip: if you put your pillowcase in the freezer for 30 min before bed youll sleep for almost 2 hours before waking up drenched again",
+    "platform": "twitter"
+  },
+  {
+    "id": "tw-044",
+    "timestamp": "2023-08-22 7:35 PM",
+    "text": "the heat index says 115 but it FEELS like standing inside a hair dryer",
+    "platform": "twitter"
+  },
+  {
+    "id": "tw-045",
+    "timestamp": "2023-08-25T15:02:37",
+    "text": "Hiring NOW! Full-time barista at our Deep Ellum location. $15/hr + tips. DM for details! #DallasJobs #NowHiring",
+    "zip": "75204",
+    "platform": "twitter"
+  },
+  {
+    "id": "tw-046",
+    "timestamp": "2023-08-07T10:47:24",
+    "text": "honestly might just sit in a cold bath until october",
+    "platform": "twitter",
+    "zip": "75217"
+  },
+  {
+    "id": "tw-047",
+    "timestamp": "2023-08-23T13:18:02",
+    "text": "New episode of the podcast drops tomorrow! Subscribe now! #DallasPodcast #NewEpisode",
+    "platform": "facebook",
+    "zip": "75201"
+  },
+  {
+    "id": "tw-048",
+    "timestamp": "2023-08-17T16:28:17",
+    "text": "room for rent in my 3BR house in Lakewood. $900/mo utilities included. DM for details",
+    "platform": "twitter",
+    "zip": "75220"
+  },
+  {
+    "id": "tw-049",
+    "timestamp": "2023-08-12T17:32:37",
+    "text": "2 ambulances in the last hour near the 7-11 on MLK. whats going on",
+    "platform": "reddit",
+    "zip": "75217"
+  },
+  {
+    "id": "tw-050",
+    "timestamp": "2023-08-26T10:11:28",
+    "text": "Just read someone died on the trails near Katy Trail yesterday. heat realted. this is so sad",
+    "platform": "twitter"
+  },
+  {
+    "id": "tw-051",
+    "timestamp": "2023-08-12T18:23:07",
+    "text": "me: ill go for a walk today. the sun: absolutely not.",
+    "platform": "twitter"
+  },
+  {
+    "id": "tw-052",
+    "timestamp": "2023-08-12T13:19:07",
+    "text": "Just watched a construciton worker stumble and sit down on Ross Ave. His coworkers poured water on him. This heat is no joke @ABOREOSHA",
+    "platform": "twitter"
+  },
+  {
+    "id": "tw-053",
+    "timestamp": "2023-08-21T18:21:01",
+    "text": "oncor truck just showed up on Ross Ave after 6 hours. finally",
+    "platform": "twitter",
+    "zip": "75220"
+  },
+  {
+    "id": "tw-054",
+    "timestamp": "2023-08-25T10:00:13",
+    "text": "being dramatic about the heat is my entire personality rn and im not sorry",
+    "platform": "twitter",
+    "zip": "75215"
+  },
+  {
+    "id": "tw-055",
+    "timestamp": "2023-08-26T06:00:44",
+    "text": "sunday brunch at Bread Winners = perfection. the french toast is undefeated \ud83c\udf5e",
+    "platform": "twitter"
+  },
+  {
+    "id": "tw-056",
+    "timestamp": "2023-08-11T08:02:41",
+    "text": "Just tried to make eggs on my car hood as a joke. They actually started cooking. Its 8am.",
+    "zip": "75211",
+    "platform": "twitter"
+  },
+  {
+    "id": "tw-057",
+    "timestamp": "2023-08-09T14:41:05",
+    "text": "need a dog walker in the 75204 area. twice daily. $15/walk. serious inquiries only",
+    "platform": "facebook"
+  },
+  {
+    "id": "tw-058",
+    "timestamp": "2023-08-06 8:52 AM",
+    "text": "bruh its so hot the birds arent even flying theyre just sitting there with their mouths open",
+    "platform": "twitter",
+    "zip": "75201"
+  },
+  {
+    "id": "tw-059",
+    "timestamp": "2023-08-10T16:45:30",
+    "text": "power back on in 75220 but oncor says could go out again tonight. generator sold out everywhere",
+    "platform": "twitter",
+    "zip": "75220"
+  },
+  {
+    "id": "tw-060",
+    "timestamp": "2023-08-17T23:34:39",
+    "text": "just finished the new Colleen Hoover book and im WRECKED. who wants to discuss #BookTok",
+    "platform": "twitter",
+    "zip": "75204"
+  },
+  {
+    "id": "tw-061",
+    "timestamp": "2023-08-20T10:11:20",
+    "text": "Happy birthday to the best mom ever!! Love you so much \u2764\ufe0f\ud83c\udf82 #BirthdayGirl",
+    "platform": "facebook",
+    "zip": "75217"
+  },
+  {
+    "id": "tw-062",
+    "timestamp": "2023-08-17T13:19:43",
+    "text": "the sun took today PERSONALLY",
+    "platform": "twitter"
+  },
+  {
+    "id": "tw-063",
+    "timestamp": "2023-08-24T15:04:33",
+    "text": "literally saw heat wavs coming off the road on Buckner Blvd. like a movie. except its real life and poeple are dying",
+    "platform": "twitter"
+  },
+  {
+    "id": "tw-064",
+    "timestamp": "2023-08-09T13:21:49",
+    "text": "Mail carriers outside in this heat should be illegal. saw a crew on Buckner Blvd and none of them looked ok",
+    "platform": "reddit",
+    "zip": "75228"
+  },
+  {
+    "id": "tw-065",
+    "timestamp": "2023-08-13T11:33:26",
+    "text": "If you think THIS is hot you should try Phoenix \ud83d\ude02 Dallas heat is nothing",
+    "zip": "75220",
+    "platform": "twitter"
+  },
+  {
+    "id": "tw-066",
+    "timestamp": "2023-08-07T17:10:41",
+    "text": "day 12 of the heatpocalypse. morale is low. supplies running out. send popsicles",
+    "platform": "reddit"
+  },
+  {
+    "id": "tw-067",
+    "timestamp": "2023-08-18T12:48:55",
+    "text": "Adopting this sweet boy today! Meet Duke \ud83d\udc15 #AdoptDontShop #DallasDogs #RescueDog",
+    "zip": "75228",
+    "platform": "twitter"
+  },
+  {
+    "id": "tw-068",
+    "timestamp": "2023-08-20T16:05:52",
+    "text": "they just medevac'd someone from Bachman Lake. helicopter and everything. heat related per the paramedic i talked to",
+    "platform": "twitter"
+  },
+  {
+    "id": "tw-069",
+    "timestamp": "2023-08-20T18:58:09",
+    "text": "Congrats to the happy couple! Beautiful ceremony today \ud83d\udc92 #DallasWedding",
+    "platform": "twitter"
+  },
+  {
+    "id": "tw-070",
+    "timestamp": "2023-08-11T13:22:56",
+    "text": "3 amblances on MLK Blvd in the last hour. something is very wrong in south dallas today",
+    "zip": "75215",
+    "platform": "twitter"
+  },
+  {
+    "id": "tw-071",
+    "timestamp": "2023-08-10T17:34:22",
+    "text": "no power no water the city doesnt care about south dallas and never has. but they sure built that new park downtown real fast",
+    "platform": "twitter"
+  },
+  {
+    "id": "tw-072",
+    "timestamp": "2023-08-20T16:04:51",
+    "text": "neighbor told me they found someone dead in a car on Military Pkwy this morning. car was off, windows up. plase check on people",
+    "platform": "twitter"
+  },
+  {
+    "id": "tw-073",
+    "timestamp": "2023-08-09T22:18:29",
+    "text": "found a 84 yr old confused and barely conscious sitting on the curb on Hatcher St. called 911. heat stroke??",
+    "platform": "nextdoor",
+    "zip": "75217"
+  },
+  {
+    "id": "tw-074",
+    "timestamp": "2023-08-20 5:20 PM",
+    "text": "normalize canceling plans bc its too hot. sorry i cant make it, its trying to kill me outside",
+    "platform": "twitter"
+  },
+  {
+    "id": "tw-075",
+    "timestamp": "2023-08-24T14:07:31",
+    "text": "UPDATE from my ER friend at Parkland: heat cases down from last week but still seeing 5-6 per day. Most are elderly or homless",
+    "zip": "75215",
+    "platform": "twitter"
+  },
+  {
+    "id": "tw-076",
+    "timestamp": "2023-08-25T18:01:47",
+    "text": "everyone on my TL complaining about the heat like its a surprise. yall. we live in TEXAS.",
+    "platform": "twitter",
+    "zip": "75211"
+  },
+  {
+    "id": "tw-077",
+    "timestamp": "2023-08-25T11:04:16",
+    "text": "107 again today. Another transfomer fire on Lancaster. How many of these have to blow before they upgrade the grid",
+    "platform": "twitter"
+  },
+  {
+    "id": "tw-078",
+    "timestamp": "2023-08-20T07:02:06",
+    "text": "room for rent in my 3BR house in Lakewood. $900/mo utilities included. DM for details",
+    "platform": "reddit",
+    "zip": "75220"
+  },
+  {
+    "id": "tw-079",
+    "timestamp": "2023-08-17T17:19:16",
+    "text": "everyone on my TL complaining about the heat like its a surprise. yall. we live in TEXAS.",
+    "platform": "nextdoor",
+    "zip": "75243"
+  },
+  {
+    "id": "tw-080",
+    "timestamp": "2023-08-11T15:33:27",
+    "text": "Elderly man found dead in apartment on Hatcher St. No AC. This is the 3rd one this week per my neighbor who works EMS",
+    "platform": "twitter"
+  },
+  {
+    "id": "tw-081",
+    "timestamp": "2023-08-17T14:38:41",
+    "text": "Fire at an apartment complex on Illinois Ave. 4 trucks responding. Hope evryone got out ok",
+    "platform": "twitter"
+  },
+  {
+    "id": "tw-082",
+    "timestamp": "2023-08-17T15:49:33",
+    "text": "pavement is literally melting on Ross Ave. watched a girls flip flop get stuck lol sorry not funny but also kinda funny",
+    "platform": "twitter"
+  },
+  {
+    "id": "tw-083",
+    "timestamp": "2023-08-12T11:29:58",
+    "text": "woke up to no power again. 5th time this month. 75215 is getting destroyed",
+    "platform": "reddit",
+    "zip": "75215"
+  },
+  {
+    "id": "tw-084",
+    "timestamp": "2023-08-18T07:15:05",
+    "text": "the new Trader Joes on Lovers Lane is FINALLY open. the line was insane but worth it",
+    "platform": "twitter",
+    "zip": "75215"
+  },
+  {
+    "id": "tw-085",
+    "timestamp": "2023-08-24T16:07:18",
+    "text": "5 ambulances in the last hour near the 7-11 on MLK. whats going on",
+    "platform": "nextdoor",
+    "zip": "75243"
+  },
+  {
+    "id": "tw-086",
+    "timestamp": "2023-08-13T08:37:14",
+    "text": "woke up drenched in sweat. power went out sometime overnight. its already 94 in my apartmnet",
+    "platform": "twitter"
+  },
+  {
+    "id": "tw-087",
+    "timestamp": "2023-08-24T16:01:40",
+    "text": "going outside feels like opening an oven door except theres no pizza just suffering",
+    "platform": "nextdoor",
+    "zip": "75228"
+  },
+  {
+    "id": "tw-088",
+    "timestamp": "2023-08-26T11:38:04",
+    "text": "church on MLK is running a fan drive \u2014 drop off box fans and theyre distribtuing to elderly residents without AC. if you can help plase do",
+    "zip": "75215",
+    "platform": "twitter"
+  },
+  {
+    "id": "tw-089",
+    "timestamp": "2023-08-20T15:54:45",
+    "text": "remember when we complained about the cold in february? good times",
+    "platform": "nextdoor"
+  },
+  {
+    "id": "tw-090",
+    "timestamp": "2023-08-13T18:43:32",
+    "text": "oncor truck just showed up on Illinois Ave after 6 hours. finally",
+    "platform": "twitter"
+  },
+  {
+    "id": "tw-091",
+    "timestamp": "2023-08-13T17:08:47",
+    "text": "Happy birthday to the best mom ever!! Love you so much \u2764\ufe0f\ud83c\udf82 #BirthdayGirl",
+    "platform": "nextdoor"
+  },
+  {
+    "id": "tw-092",
+    "timestamp": "2023-08-07T16:36:54",
+    "text": "just saw a kid crack an egg on the playground slide and it cooked. were living in a dystopia",
+    "platform": "reddit"
+  },
+  {
+    "id": "tw-093",
+    "timestamp": "2023-08-16T22:08:20",
+    "text": "fire department going door to door on Harry Hines Blvd doing welfare checks. never seen that before. this is bad",
+    "platform": "twitter",
+    "zip": "75204"
+  },
+  {
+    "id": "tw-094",
+    "timestamp": "2023-08-27T09:07:14",
+    "text": "dropped below 100 today for the first time in forever. only 99. the bar is in hell",
+    "zip": "75228",
+    "platform": "twitter"
+  },
+  {
+    "id": "tw-095",
+    "timestamp": "2023-08-14T14:06:08",
+    "text": "every year i say im moving out of texas and every year im still here getting cooked",
+    "platform": "nextdoor",
+    "zip": "75243"
+  },
+  {
+    "id": "tw-096",
+    "timestamp": "2023-08-24T20:14:34",
+    "text": "cooling center on Hatcher St just turned people away. FULL. where are people supposed to go",
+    "platform": "nextdoor"
+  },
+  {
+    "id": "tw-097",
+    "timestamp": "2023-08-19T14:11:08",
+    "text": "Happy Friday Dallas! Whos ready for the weekend? Cant wait for the Farmers Market tomorrow morning! #FridayVibes",
+    "zip": "75201",
+    "platform": "twitter"
+  },
+  {
+    "id": "tw-098",
+    "timestamp": "2023-08-22T10:06:17",
+    "text": "Oncor outtage map for 75215 and 75217 has been red for THREE WEEKS STRAIGHT. These are the lowest income zips in Dallas. Coincidence? No.",
+    "zip": "75215",
+    "platform": "twitter"
+  },
+  {
+    "id": "tw-099",
+    "timestamp": "2023-08-07T09:32:43",
+    "text": "just adopted the cutest kitten from the SPCA! Welcome home Luna! \ud83d\udc31 #AdoptDontShop",
+    "platform": "twitter",
+    "zip": "75220"
+  },
+  {
+    "id": "tw-100",
+    "timestamp": "2023-08-11T16:04:11",
+    "text": "just drove past 3 fire trucks on Commerce. hope evryone is ok",
+    "zip": "75201",
+    "platform": "twitter"
+  },
+  {
+    "id": "tw-101",
+    "timestamp": "2023-08-21T10:34:20",
+    "text": "our church small group meets Wednesdays at 7pm. all welcome! DM for address #DallasChurch",
+    "platform": "twitter",
+    "zip": "75215"
+  },
+  {
+    "id": "tw-102",
+    "timestamp": "2023-08-25T12:29:06",
+    "text": "its giving surface of mercury vibes today \ud83c\udf21\ufe0f",
+    "platform": "twitter"
+  },
+  {
+    "id": "tw-103",
+    "timestamp": "2023-08-26T08:43:08",
+    "text": "AC repair guy said hes booked for 2 weeks. TWO WEEKS. in august. in dallas.",
+    "platform": "twitter",
+    "zip": "75217"
+  },
+  {
+    "id": "tw-104",
+    "timestamp": "2023-08-10T22:24:26",
+    "text": "bruh its so hot the birds arent even flying theyre just sitting there with their mouths open",
+    "platform": "reddit",
+    "zip": "75220"
+  },
+  {
+    "id": "tw-105",
+    "timestamp": "2023-08-10T23:44:58",
+    "text": "Just listed my 2019 Honda Civic for sale. 45k miles. $18,500 OBO. DM if interested #DallasForSale",
+    "platform": "twitter"
+  },
+  {
+    "id": "tw-106",
+    "timestamp": "2023-08-25 19:24:28",
+    "text": "recommend me a good hair salon in Oak Lawn pls. need a change \ud83d\udc87\u200d\u2640\ufe0f",
+    "platform": "twitter",
+    "zip": "75217"
+  },
+  {
+    "id": "tw-107",
+    "timestamp": "2023-08-22T15:35:00",
+    "text": "no power since 1am and its 112 degrees inside. Griggs Park area. kids are crying",
+    "platform": "twitter",
+    "zip": "75228"
+  },
+  {
+    "id": "tw-108",
+    "timestamp": "2023-08-21T19:31:03",
+    "text": "recommend me a good hair salon in Oak Lawn pls. need a change \ud83d\udc87\u200d\u2640\ufe0f",
+    "platform": "twitter"
+  },
+  {
+    "id": "tw-109",
+    "timestamp": "2023-08-22T23:01:46",
+    "text": "this is fine \ud83d\udd25\ud83d\udc15\ud83d\udd25 everything is fine",
+    "platform": "twitter",
+    "zip": "75211"
+  },
+  {
+    "id": "tw-110",
+    "timestamp": "2023-08-14T14:05:41",
+    "text": "got my nails done at the new spot on Greenville and they are PERFECT \ud83d\udc85",
+    "platform": "twitter",
+    "zip": "75211"
+  },
+  {
+    "id": "tw-111",
+    "timestamp": "2023-08-20T12:25:58",
+    "text": "pro tip: if you put your pillowcase in the freezer for 30 min before bed youll sleep for almost 2 hours before waking up drenched again",
+    "platform": "twitter"
+  },
+  {
+    "id": "tw-112",
+    "timestamp": "2023-08-18T12:13:17",
+    "text": "normalize canceling plans bc its too hot. sorry i cant make it, its trying to kill me outside",
+    "platform": "twitter"
+  },
+  {
+    "id": "tw-113",
+    "timestamp": "2023-08-23T09:11:34",
+    "text": "good news - FEMA teams spotted in south dallas handing out fans and water. about time",
+    "platform": "twitter"
+  },
+  {
+    "id": "tw-114",
+    "timestamp": "2023-08-22T23:33:08",
+    "text": "at what temprature does a human just spontaneously combust asking for a friend",
+    "platform": "twitter",
+    "zip": "75228"
+  },
+  {
+    "id": "tw-115",
+    "timestamp": "2023-08-19T07:19:50",
+    "text": "brown out on my block. lights dimming, fridge making weird noise. 75217 we might lose power again",
+    "platform": "reddit",
+    "zip": "75217"
+  },
+  {
+    "id": "tw-116",
+    "timestamp": "2023-08-18T19:10:44",
+    "text": "woke up to no power again. 4th time this month. 75211 is getting destroyed",
+    "platform": "nextdoor",
+    "zip": "75211"
+  },
+  {
+    "id": "tw-117",
+    "timestamp": "2023-08-10T18:30:00",
+    "text": "my dog is panting so hard. power been out since 3am. put wet towels on her but im scared",
+    "platform": "twitter"
+  },
+  {
+    "id": "tw-118",
+    "timestamp": "2023-08-15 07:22:32",
+    "text": "5 ambulances in the last hour near the park on Cedar Crest. whats going on",
+    "platform": "nextdoor",
+    "zip": "75204"
+  },
+  {
+    "id": "tw-119",
+    "timestamp": "2023-08-19T23:32:07",
+    "text": "trying to decide between Pecan Lodge and Lockhart for bbq tonight. thoughts? #DallasBBQ",
+    "platform": "nextdoor"
+  },
+  {
+    "id": "tw-120",
+    "timestamp": "2023-08-12T09:07:52",
+    "text": "its 98 degrees at 9AM. today is going to be brutal. stay inside if you can dallas",
+    "platform": "twitter"
+  },
+  {
+    "id": "tw-121",
+    "timestamp": "2023-08-10 2:41 PM",
+    "text": "lol dallas in august is basically living on the surface of the sun",
+    "zip": "75204",
+    "platform": "twitter"
+  },
+  {
+    "id": "tw-122",
+    "timestamp": "2023-08-21T17:07:11",
+    "text": "just called 911 for my mom \u2014 passed out. they said 30 min wait. unacceptable",
+    "platform": "nextdoor",
+    "zip": "75220"
+  },
+  {
+    "id": "tw-123",
+    "timestamp": "2023-08-18T11:37:22",
+    "text": "Grid is struggling again. Brownout in oak cliff \u2014 lights dimming every few minuts. Here we go again",
+    "platform": "twitter"
+  },
+  {
+    "id": "tw-124",
+    "timestamp": "2023-08-10T12:45:21",
+    "text": "UPS guys outside in this heat should be illegal. saw a crew on Scyene Rd and none of them looked ok",
+    "platform": "twitter",
+    "zip": "75215"
+  },
+  {
+    "id": "tw-125",
+    "timestamp": "2023-08-11T21:30:13",
+    "text": "my cat is panting so hard. power been out since 4am. put wet towels on him but im scared",
+    "platform": "twitter",
+    "zip": "75215"
+  },
+  {
+    "id": "tw-126",
+    "timestamp": "2023-08-10T23:14:43",
+    "text": "power back on in 75215 but oncor says could go out again tonight. generator sold out everywhere",
+    "platform": "twitter",
+    "zip": "75215"
+  },
+  {
+    "id": "tw-127",
+    "timestamp": "2023-08-14T13:11:51",
+    "text": "person laying on the ground at the sidewalk on Ross Ave. people pouring water on them. someone called 911",
+    "platform": "reddit",
+    "zip": "75211"
+  },
+  {
+    "id": "tw-128",
+    "timestamp": "2023-08-22T08:22:35",
+    "text": "the pavement burned through my dogs booties. THROUGH THE BOOTIES.",
+    "platform": "reddit"
+  },
+  {
+    "id": "tw-129",
+    "timestamp": "2023-08-12T10:33:07",
+    "text": "Selling 2 tickets to the Rangers game Saturday! Section 121 row 15. $80 each OBO. DM me #Rangers #TexasRangers",
+    "zip": "75243",
+    "platform": "twitter"
+  },
+  {
+    "id": "tw-130",
+    "timestamp": "2023-08-13T20:31:20",
+    "text": "who else is watching Love Island tonight?? no spoilers!! #LoveIsland",
+    "platform": "twitter"
+  },
+  {
+    "id": "tw-131",
+    "timestamp": "2023-08-25T06:00:34",
+    "text": "whoever decided to schedule an outdoor wedding in dallas in august is bold. foolish, but bold",
+    "platform": "twitter",
+    "zip": "75243"
+  },
+  {
+    "id": "tw-132",
+    "timestamp": "2023-08-20T21:26:45",
+    "text": "my fantasy football draft is tonight and i have NO idea who to pick first. help #FantasyFootball #NFL",
+    "platform": "reddit",
+    "zip": "75228"
+  },
+  {
+    "id": "tw-133",
+    "timestamp": "2023-08-10T14:22:37",
+    "text": "Power just went out on Elm St downtown. 107 degrees and no AC. This is not okay. #Dallas #heatwave",
+    "platform": "twitter"
+  },
+  {
+    "id": "tw-134",
+    "timestamp": "2023-08-17T12:51:48",
+    "text": "my electric bill is going to be insane this month but at least ill be alive i guess",
+    "platform": "reddit",
+    "zip": "75201"
+  },
+  {
+    "id": "tw-135",
+    "timestamp": "2023-08-10T15:31:55",
+    "text": "Heading to Northpark Mall just to sit in the AC for free lmao #surviving",
+    "platform": "twitter"
+  },
+  {
+    "id": "tw-136",
+    "timestamp": "2023-08-19T10:54:04",
+    "text": "ER wait at Medical City is 36 hours per the sign outside. all heat cases?",
+    "platform": "nextdoor"
+  },
+  {
+    "id": "tw-137",
+    "timestamp": "2023-08-17T21:10:33",
+    "text": "found a 91 yr old confused and barely conscious sitting on the curb on Lancaster Rd. called 911. heat stroke??",
+    "platform": "reddit"
+  },
+  {
+    "id": "tw-138",
+    "timestamp": "2023-08-19T23:08:39",
+    "text": "my cat is panting so hard. power been out since 9pm. put wet towels on him but im scared",
+    "platform": "twitter",
+    "zip": "75204"
+  },
+  {
+    "id": "tw-139",
+    "timestamp": "2023-08-07T09:49:51",
+    "text": "just adopted the cutest kitten from the SPCA! Welcome home Luna! \ud83d\udc31 #AdoptDontShop",
+    "platform": "facebook"
+  },
+  {
+    "id": "tw-140",
+    "timestamp": "2023-08-10T16:58:17",
+    "text": "My neighbor just colapsed in her yard. Shes 78. EMTs took forever to get here. This heat is KILLING poeple",
+    "platform": "twitter"
+  },
+  {
+    "id": "tw-141",
+    "timestamp": "2023-08-18T12:18:14",
+    "text": "they just medevac'd someone from the apartments on Hatcher. helicopter and everything. heat related per the paramedic i talked to",
+    "platform": "twitter",
+    "zip": "75220"
+  },
+  {
+    "id": "tw-142",
+    "timestamp": "2023-08-16T20:34:13",
+    "text": "Congrats to the happy couple! Beautiful ceremony today \ud83d\udc92 #DallasWedding",
+    "platform": "twitter"
+  },
+  {
+    "id": "tw-143",
+    "timestamp": "2023-08-26T13:06:51",
+    "text": "honestly its fine. i like sweating through 3 shirts a day. builds character. (help)",
+    "platform": "twitter"
+  },
+  {
+    "id": "tw-144",
+    "timestamp": "2023-08-10T13:55:43",
+    "text": "4 ambulances in the last hour near the Walmart on Buckner. whats going on",
+    "platform": "nextdoor"
+  },
+  {
+    "id": "tw-145",
+    "timestamp": "2023-08-12T18:31:04",
+    "text": "cooling center on Singleton Blvd just turned people away. FULL. where are people supposed to go",
+    "platform": "twitter",
+    "zip": "75217"
+  },
+  {
+    "id": "tw-146",
+    "timestamp": "2023-08-24 18:18:41",
+    "text": "moving to dallas next month from Chicago. what do i need to know?? #MovingToDallas",
+    "platform": "twitter",
+    "zip": "75215"
+  },
+  {
+    "id": "tw-147",
+    "timestamp": "2023-08-16T19:36:25",
+    "text": "3 ambulances in the last hour near the sidewalk on Ross Ave. whats going on",
+    "platform": "nextdoor",
+    "zip": "75217"
+  },
+  {
+    "id": "tw-148",
+    "timestamp": "2023-08-17T14:07:19",
+    "text": "OUTTAGE ALERT: Lost power at Buckner and Military. Whole intersection traffic lights are out too. Be careful driving",
+    "platform": "twitter"
+  },
+  {
+    "id": "tw-149",
+    "timestamp": "2023-08-26T19:26:09",
+    "text": "day 21 of the heatpocalypse. morale is low. supplies running out. send popsicles",
+    "platform": "twitter"
+  },
+  {
+    "id": "tw-150",
+    "timestamp": "2023-08-18T23:49:52",
+    "text": "brown out on my block. lights dimming, fridge making weird noise. 75204 we might lose power again",
+    "platform": "reddit",
+    "zip": "75204"
+  },
+  {
+    "id": "tw-151",
+    "timestamp": "2023-08-09T17:27:56",
+    "text": "fire department going door to door on Harry Hines Blvd doing welfare checks. never seen that before. this is bad",
+    "platform": "nextdoor"
+  },
+  {
+    "id": "tw-152",
+    "timestamp": "2023-08-19T09:03:53",
+    "text": "power back on in 75215 but oncor says could go out again tonight. generator sold out everywhere",
+    "platform": "reddit",
+    "zip": "75215"
+  },
+  {
+    "id": "tw-153",
+    "timestamp": "2023-08-21T18:04:56",
+    "text": "looking for a 2BR apartment in Uptown. Budget $1800. Any recs? #DallasApartments",
+    "platform": "nextdoor"
+  },
+  {
+    "id": "tw-154",
+    "timestamp": "2023-08-23T18:52:22",
+    "text": "PLEASE if you have elderly neighbors CHECK ON THEM. we lost Mrs. Johnson on our street today. 84 years old. no AC.",
+    "platform": "twitter",
+    "zip": "75215"
+  },
+  {
+    "id": "tw-155",
+    "timestamp": "2023-08-12T15:29:43",
+    "text": "im literally dying rn \ud83d\udc80 this heat is unreal",
+    "platform": "nextdoor"
+  },
+  {
+    "id": "tw-156",
+    "timestamp": "2023-08-19T08:32:41",
+    "text": "just called 911 for my uncle \u2014 barely breathing. they said 60 min wait. unacceptable",
+    "platform": "twitter"
+  },
+  {
+    "id": "tw-157",
+    "timestamp": "2023-08-20 3:08 PM",
+    "text": "yo dallas people - whos going to deep ellum tonight? new DJ at It'll Do! \ud83c\udfb6 #DeepEllum #DallasNightlife",
+    "zip": "75204",
+    "platform": "twitter"
+  },
+  {
+    "id": "tw-158",
+    "timestamp": "2023-08-18T14:37:14",
+    "text": "saw city trucks setting up what looks like a water station at Pike Park. good.",
+    "platform": "twitter"
+  },
+  {
+    "id": "tw-159",
+    "timestamp": "2023-08-22T17:44:57",
+    "text": "the heat index says 115 but it FEELS like standing inside a hair dryer",
+    "platform": "reddit"
+  },
+  {
+    "id": "tw-160",
+    "timestamp": "2023-08-26T18:04:28",
+    "text": "texas: where your car becomes an oven and your house becomes a sauna",
+    "platform": "nextdoor"
+  },
+  {
+    "id": "tw-161",
+    "timestamp": "2023-08-06T15:14:52",
+    "text": "shoutout to whoever invented AC. you the real mvp",
+    "platform": "reddit",
+    "zip": "75211"
+  },
+  {
+    "id": "tw-162",
+    "timestamp": "2023-08-16 6:38 PM",
+    "text": "ANOTHER transfomer explosion on Westmoreland Rd. saw the flash from my window. power gone instantly",
+    "platform": "twitter"
+  },
+  {
+    "id": "tw-163",
+    "timestamp": "2023-08-12 6:16 PM",
+    "text": "cooling center on Singleton Blvd just turned people away. FULL. where are people supposed to go",
+    "platform": "twitter",
+    "zip": "75211"
+  },
+  {
+    "id": "tw-164",
+    "timestamp": "2023-08-17T18:52:27",
+    "text": "my dog is panting so hard. power been out since 11pm. put wet towels on her but im scared",
+    "platform": "twitter",
+    "zip": "75243"
+  },
+  {
+    "id": "tw-165",
+    "timestamp": "2023-08-23T15:12:24",
+    "text": "person laying on the ground at the parking lot at Fiesta. people pouring water on them. someone called 911",
+    "platform": "twitter",
+    "zip": "75211"
+  },
+  {
+    "id": "tw-166",
+    "timestamp": "2023-08-23T11:06:47",
+    "text": "i swear its hotter in my apartment than outside. this building has ZERO insualtion. landlord doesnt care",
+    "zip": "75217",
+    "platform": "twitter"
+  },
+  {
+    "id": "tw-167",
+    "timestamp": "2023-08-22T10:00:59",
+    "text": "anyone going to the State Fair this year? funnel cake countdown has begun \ud83c\udfa1",
+    "platform": "twitter"
+  },
+  {
+    "id": "tw-168",
+    "timestamp": "2023-08-16T23:31:11",
+    "text": "AC repair guy said hes booked for 2 weeks. TWO WEEKS. in august. in dallas.",
+    "platform": "reddit"
+  },
+  {
+    "id": "tw-169",
+    "timestamp": "2023-08-24T15:42:47",
+    "text": "ISO: someone to sublet my apartment Aug 15-Sep 15. 1BR in Knox/Henderson. $1200",
+    "platform": "twitter",
+    "zip": "75201"
+  },
+  {
+    "id": "tw-170",
+    "timestamp": "2023-08-18 10:03 AM",
+    "text": "110 DEGREES TODAY????? No. Absolutely not. I refuse.",
+    "zip": "75201",
+    "platform": "twitter"
+  },
+  {
+    "id": "tw-171",
+    "timestamp": "2023-08-20T14:04:37",
+    "text": "Okay genuine question \u2014 at what point does the city declare this an emergancy? How many people have to die?",
+    "zip": "75204",
+    "platform": "twitter"
+  },
+  {
+    "id": "tw-172",
+    "timestamp": "2023-08-08T09:33:32",
+    "text": "woke up to no power again. 3rd time this month. 75220 is getting destroyed",
+    "platform": "twitter",
+    "zip": "75220"
+  },
+  {
+    "id": "tw-173",
+    "timestamp": "2023-08-11T06:13:59",
+    "text": "love how texas politicians say the grid is fixed every year and every year this happens",
+    "platform": "twitter"
+  },
+  {
+    "id": "tw-174",
+    "timestamp": "2023-08-25T16:00:48",
+    "text": "my uber rating dropped to 4.7 and honestly i feel personally attacked",
+    "platform": "nextdoor",
+    "zip": "75201"
+  },
+  {
+    "id": "tw-175",
+    "timestamp": "2023-08-15T14:24:20",
+    "text": "they just medevac'd somone from the sidewalk on Ross Ave. helicopter and everything. heat related per the paramedic i talked to",
+    "platform": "twitter",
+    "zip": "75243"
+  },
+  {
+    "id": "tw-176",
+    "timestamp": "2023-08-11 2:03 PM",
+    "text": "ICYMI: Cowboys preseason opener this weekend! Who's going?? #CowboysNation #NFL",
+    "zip": "75220",
+    "platform": "twitter"
+  },
+  {
+    "id": "tw-177",
+    "timestamp": "2023-08-25T07:25:40",
+    "text": "FC Dallas game was insane last night. that goal in the 89th minute!! #DTID",
+    "platform": "twitter",
+    "zip": "75211"
+  },
+  {
+    "id": "tw-178",
+    "timestamp": "2023-08-05T09:53:46",
+    "text": "told my boss i cant come in bc its too hot. he said thats not a real excuse. its LITERALLY dangeous??",
+    "platform": "twitter",
+    "zip": "75243"
+  },
+  {
+    "id": "tw-179",
+    "timestamp": "2023-08-20T11:06:42",
+    "text": "cooling center at Moorland YMCA is PACKED. standing room only. they need to open more of thees",
+    "platform": "twitter"
+  },
+  {
+    "id": "tw-180",
+    "timestamp": "2023-08-24T10:21:05",
+    "text": "fire department going door to door on Military Pkwy doing welfare checks. never seen that before. this is bad",
+    "platform": "twitter"
+  },
+  {
+    "id": "tw-181",
+    "timestamp": "2023-08-26T15:09:33",
+    "text": "dallas county medical examiner will probly have a report in a few months on heat deaths. bet its way higher than anyone expects",
+    "zip": "75201",
+    "platform": "twitter"
+  },
+  {
+    "id": "tw-182",
+    "timestamp": "2023-08-26 8:33 AM",
+    "text": "lake day at Joe Pool Lake! perfect weather for it \u2600\ufe0f\ud83d\udee5\ufe0f #DallasWeekend",
+    "platform": "twitter",
+    "zip": "75211"
+  },
+  {
+    "id": "tw-183",
+    "timestamp": "2023-08-10T11:16:49",
+    "text": "New episode of the podcast drops tomorrow! Subscribe now! #DallasPodcast #NewEpisode",
+    "platform": "facebook"
+  },
+  {
+    "id": "tw-184",
+    "timestamp": "2023-08-23T13:04:22",
+    "text": "is it just me or has traffic been insane this week? I think the traffc lights keep going out from power issues",
+    "zip": "75220",
+    "platform": "twitter"
+  },
+  {
+    "id": "tw-185",
+    "timestamp": "2023-08-12T18:03:27",
+    "text": "sun going down and its still 104. the conrete just radiates heat all night. my apartmnet wont drop below 88 even with AC on full blast",
+    "zip": "75201",
+    "platform": "twitter"
+  },
+  {
+    "id": "tw-186",
+    "timestamp": "2023-08-26T16:02:48",
+    "text": "Getting married next month! Venue hunting in Dallas - any recommendations? #DallasWedding #BrideToBe #Engaged",
+    "zip": "75220",
+    "platform": "twitter"
+  },
+  {
+    "id": "tw-187",
+    "timestamp": "2023-08-10T13:41:09",
+    "text": "elderly dad wont leave her house. no AC. temp inside is 102. calling 311",
+    "platform": "twitter",
+    "zip": "75211"
+  },
+  {
+    "id": "tw-188",
+    "timestamp": "2023-08-14T09:47:47",
+    "text": "oncor truck just showed up on Westmoreland Rd after 3 hours. finally",
+    "platform": "twitter",
+    "zip": "75228"
+  },
+  {
+    "id": "tw-189",
+    "timestamp": "2023-08-13T15:36:48",
+    "text": "fire hydrant opend up on cedar crest. kids playing in the water. normally id complain but honestly they need it today",
+    "platform": "twitter"
+  },
+  {
+    "id": "tw-190",
+    "timestamp": "2023-08-19T15:42:37",
+    "text": "coworker not responding at work today. manager sent everyone home. the kitchen at work has no AC",
+    "platform": "reddit",
+    "zip": "75217"
+  },
+  {
+    "id": "tw-191",
+    "timestamp": "2023-08-05T19:18:09",
+    "text": "my weather app just said RealFeel 120. at that point just say bye",
+    "platform": "twitter",
+    "zip": "75217"
+  },
+  {
+    "id": "tw-192",
+    "timestamp": "2023-08-23T16:01:13",
+    "text": "plot twist: hell is actually just dallas in august",
+    "platform": "nextdoor"
+  },
+  {
+    "id": "tw-193",
+    "timestamp": "2023-08-19T15:37:14",
+    "text": "weird flex but our office AC is set to 68 and its the only reason i come to work anymore",
+    "zip": "75243",
+    "platform": "twitter"
+  },
+  {
+    "id": "tw-194",
+    "timestamp": "2023-08-08T16:51:27",
+    "text": "Anyone know a good dentist in the Richardson area? Need a cleaning",
+    "platform": "twitter",
+    "zip": "75201"
+  },
+  {
+    "id": "tw-195",
+    "timestamp": "2023-08-21T18:29:49",
+    "text": "at what temprature does a human just spontaneously combust asking for a friend",
+    "platform": "reddit",
+    "zip": "75215"
+  },
+  {
+    "id": "tw-196",
+    "timestamp": "2023-08-10T15:18:09",
+    "text": "transfomer blew on our block. sparks everywhere. whole street is dark. 75217 if anyone else affected",
+    "zip": "75217",
+    "platform": "twitter"
+  },
+  {
+    "id": "tw-197",
+    "timestamp": "2023-08-19T20:58:44",
+    "text": "cooling center on Commerce St just turned people away. FULL. where are people supposed to go",
+    "platform": "nextdoor",
+    "zip": "75204"
+  },
+  {
+    "id": "tw-198",
+    "timestamp": "2023-08-21T20:23:23",
+    "text": "Road crew outside in this heat should be illegal. saw a crew on Ervay St and none of them looked ok",
+    "platform": "twitter",
+    "zip": "75217"
+  },
+  {
+    "id": "tw-199",
+    "timestamp": "2023-08-21T13:08:22",
+    "text": "Mom tried to call 311 about a welfare check for her neighbor. On hold for 45 minutes then disconnected. System is broken",
+    "zip": "75215",
+    "platform": "twitter"
+  },
+  {
+    "id": "tw-200",
+    "timestamp": "2023-08-23T23:24:20",
+    "text": "5 ambulances in the last hour near the parking lot at Fiesta. whats going on",
+    "platform": "nextdoor"
+  },
+  {
+    "id": "tw-201",
+    "timestamp": "2023-08-24T13:22:33",
+    "text": "just watched EMTs carry some1 out of Pike Park on a stretcher. not moving. its 106 outside right now",
+    "platform": "twitter",
+    "zip": "75228"
+  },
+  {
+    "id": "tw-202",
+    "timestamp": "2023-08-19T10:38:05",
+    "text": "Saw a mail carrier looking really rough on Gaston. Red face, stumbling. I brought him water and he sat on my porch for 20 min",
+    "platform": "twitter"
+  },
+  {
+    "id": "tw-203",
+    "timestamp": "2023-08-18T07:43:41",
+    "text": "just called 911 for my uncle \u2014 throwing up. they said 45 min wait. unacceptable",
+    "platform": "twitter",
+    "zip": "75204"
+  },
+  {
+    "id": "tw-204",
+    "timestamp": "2023-08-17T13:34:52",
+    "text": "So thankful for WFH today. My car thermomter said 115 in the parking lot",
+    "zip": "75243",
+    "platform": "twitter"
+  },
+  {
+    "id": "tw-205",
+    "timestamp": "2023-08-22 5:11 PM",
+    "text": "comp had a heat realted event on ervay st. saw the whole thing. guy just went down. scary",
+    "platform": "twitter"
+  },
+  {
+    "id": "tw-206",
+    "timestamp": "2023-08-15T11:25:20",
+    "text": "hot girl summer? more like hot EVERYONE summer amirite",
+    "platform": "nextdoor"
+  },
+  {
+    "id": "tw-207",
+    "timestamp": "2023-08-12T14:02:38",
+    "text": "ERCOT asking texans to conserve energy. Maybe if yall built actual infastructure this wouldn't happen every summer #TexasGrid",
+    "zip": "75220",
+    "platform": "twitter"
+  },
+  {
+    "id": "tw-208",
+    "timestamp": "2023-08-06T22:18:40",
+    "text": "anyone know if the DMV on Garland Rd is less busy in the mornings? need to renew my license",
+    "platform": "reddit",
+    "zip": "75228"
+  },
+  {
+    "id": "tw-209",
+    "timestamp": "2023-08-11T08:32:41",
+    "text": "elderly neighbr wont leave his house. no AC. temp inside is 100. calling 311",
+    "platform": "nextdoor"
+  },
+  {
+    "id": "tw-210",
+    "timestamp": "2023-08-09T20:15:54",
+    "text": "just called 911 for my grandpa \u2014 having seizures. they said 35 min wait. unacceptable",
+    "platform": "twitter",
+    "zip": "75217"
+  },
+  {
+    "id": "tw-211",
+    "timestamp": "2023-08-24T08:05:46",
+    "text": "PLEASE if you have elderly neighbors CHECK ON THEM. we lost Ms. Davis on our street today. 91 years old. no AC.",
+    "platform": "twitter"
+  },
+  {
+    "id": "tw-212",
+    "timestamp": "2023-08-25T15:55:02",
+    "text": "anyone else stuck in traffic on 635? been sitting here for 30 min",
+    "platform": "nextdoor"
+  },
+  {
+    "id": "tw-213",
+    "timestamp": "2023-08-08T22:00:02",
+    "text": "trying to decide between Pecan Lodge and Lockhart for bbq tonight. thoughts? #DallasBBQ",
+    "platform": "twitter",
+    "zip": "75215"
+  },
+  {
+    "id": "tw-214",
+    "timestamp": "2023-08-18T14:55:41",
+    "text": "anyone going to the State Fair this year? funnel cake countdown has begun \ud83c\udfa1",
+    "platform": "twitter",
+    "zip": "75201"
+  },
+  {
+    "id": "tw-215",
+    "timestamp": "2023-08-11T19:39:43",
+    "text": "finally tried that new ramen spot in Deep Ellum. 10/10 would slurp again \ud83c\udf5c",
+    "platform": "twitter",
+    "zip": "75211"
+  },
+  {
+    "id": "tw-216",
+    "timestamp": "2023-08-12T11:08:17",
+    "text": "one nice thing about the heat \u2014 absolutely zero mosquitos. even they gave up",
+    "platform": "nextdoor",
+    "zip": "75211"
+  },
+  {
+    "id": "tw-217",
+    "timestamp": "2023-08-10T21:40:11",
+    "text": "Landscapers outside in this heat should be illegal. saw a crew on Ervay St and none of them looked ok",
+    "platform": "twitter"
+  },
+  {
+    "id": "tw-218",
+    "timestamp": "2023-08-07T13:57:54",
+    "text": "who else is watching Love Island tonight?? no spoilers!! #LoveIsland",
+    "platform": "nextdoor",
+    "zip": "75201"
+  },
+  {
+    "id": "tw-219",
+    "timestamp": "2023-08-10T16:22:41",
+    "text": "oh wow soooo hot today \ud83d\ude44 its literally 72 degrees in san francisco rn. miss home",
+    "zip": "75204",
+    "platform": "twitter"
+  },
+  {
+    "id": "tw-220",
+    "timestamp": "2023-08-20T16:53:18",
+    "text": "just signed up for the Dallas marathon in December! training starts now \ud83c\udfc3\u200d\u2642\ufe0f #RunDallas",
+    "platform": "facebook",
+    "zip": "75217"
+  },
+  {
+    "id": "tw-221",
+    "timestamp": "2023-08-19T19:22:46",
+    "text": "fire department going door to door on Hatcher St doing welfare checks. never seen that before. this is bad",
+    "platform": "nextdoor"
+  },
+  {
+    "id": "tw-222",
+    "timestamp": "2023-08-08T09:37:46",
+    "text": "graduation day!! so proud of you babe!! \ud83c\udf93 #UTD #ClassOf2023",
+    "platform": "reddit",
+    "zip": "75211"
+  },
+  {
+    "id": "tw-223",
+    "timestamp": "2023-08-24T10:09:18",
+    "text": "Day 20 straight of triple digits. I genuinly dont remember what normal weather feels like",
+    "zip": "75228",
+    "platform": "twitter"
+  },
+  {
+    "id": "tw-224",
+    "timestamp": "2023-08-18T15:33:17",
+    "text": "BIG SALE THIS WEEKEND! 50% off all summer inventory! Come see us at our Greenville location! #DallasDeals #Shopping",
+    "zip": "75243",
+    "platform": "twitter"
+  },
+  {
+    "id": "tw-225",
+    "timestamp": "2023-08-19T13:02:46",
+    "text": "Anyone else notice more sirens than usual this week? South Dallas has been nonstop amblances",
+    "platform": "twitter"
+  },
+  {
+    "id": "tw-226",
+    "timestamp": "2023-08-18T17:08:26",
+    "text": "i know i complain about the cold in january but i take it all back. give me 30 degress over 110 any day",
+    "zip": "75228",
+    "platform": "twitter"
+  },
+  {
+    "id": "tw-227",
+    "timestamp": "2023-08-18T14:02:48",
+    "text": "Another outtage in Pleasant Grove. This is the same grid section that went down last week. @oncaborenergy FIX THIS",
+    "zip": "75217",
+    "platform": "twitter"
+  },
+  {
+    "id": "tw-228",
+    "timestamp": "2023-08-20T08:38:04",
+    "text": "no power since 8pm and its 110 degress inside. Bachman Lake area. kids are crying",
+    "platform": "twitter",
+    "zip": "75217"
+  },
+  {
+    "id": "tw-229",
+    "timestamp": "2023-08-13 3:56 PM",
+    "text": "cooling center on Hampton Rd just turned people away. FULL. where are people supposed to go",
+    "platform": "reddit"
+  },
+  {
+    "id": "tw-230",
+    "timestamp": "2023-08-18T08:04:22",
+    "text": "NWS excessive heat warning: heat index expected to reach 115-120 in parts of Dallas County today. Limit outdoor activty.",
+    "zip": "75201",
+    "platform": "twitter"
+  },
+  {
+    "id": "tw-231",
+    "timestamp": "2023-08-10T16:11:03",
+    "text": "oncor outtage map is LIT UP red across south dallas. this is dangerous for elderly residents who cant leave",
+    "platform": "twitter"
+  },
+  {
+    "id": "tw-232",
+    "timestamp": "2023-08-08 21:40:38",
+    "text": "review: the new Star Wars show is mid at best. dont @ me",
+    "platform": "twitter"
+  },
+  {
+    "id": "tw-233",
+    "timestamp": "2023-08-27T06:10:31",
+    "text": "Just listed my 2019 Honda Civic for sale. 45k miles. $18,500 OBO. DM if interested #DallasForSale",
+    "platform": "facebook"
+  },
+  {
+    "id": "tw-234",
+    "timestamp": "2023-08-24T10:42:33",
+    "text": "texas: where your car becomes an oven and your house becomes a sauna",
+    "platform": "twitter",
+    "zip": "75220"
+  },
+  {
+    "id": "tw-235",
+    "timestamp": "2023-08-09T17:03:06",
+    "text": "me checking the weather forecast for the 47th time today hoping for rain: \ud83e\udd21",
+    "platform": "twitter",
+    "zip": "75204"
+  },
+  {
+    "id": "tw-236",
+    "timestamp": "2023-08-27T13:20:15",
+    "text": "anyone else stuck in traffic on 635? been sitting here for 30 min",
+    "platform": "nextdoor",
+    "zip": "75228"
+  },
+  {
+    "id": "tw-237",
+    "timestamp": "2023-08-08T08:56:03",
+    "text": "plz if you have elderly neighbors CHECK ON THEM. we lost Mr. Rodriguez on our street today. 81 years old. no AC.",
+    "platform": "reddit",
+    "zip": "75211"
+  },
+  {
+    "id": "tw-238",
+    "timestamp": "2023-08-24T06:54:54",
+    "text": "lost my airpods at the gym on Fitzhugh. if anyone found them PLEASE dm me \ud83d\ude2d",
+    "platform": "nextdoor",
+    "zip": "75217"
+  },
+  {
+    "id": "tw-239",
+    "timestamp": "2023-08-10T20:00:27",
+    "text": "does anyone else think the DART expansion is never actually going to happen or just me",
+    "platform": "twitter"
+  },
+  {
+    "id": "tw-240",
+    "timestamp": "2023-08-11T12:01:45",
+    "text": "Great brunch at The Rustic today! Mango mimosas are perfection \ud83e\udd42 #DallasFoodie #WeekendVibes",
+    "zip": "75201",
+    "platform": "twitter"
+  },
+  {
+    "id": "tw-241",
+    "timestamp": "2023-08-15T14:28:04",
+    "text": "cooling center on Scyene Rd just turned people away. FULL. where are people supposed to go",
+    "platform": "twitter",
+    "zip": "75204"
+  },
+  {
+    "id": "tw-242",
+    "timestamp": "2023-08-11T10:17:33",
+    "text": "Day 2 no power in 75217. Oncor still showing estimated restore 'TBD'. We slept in the car last night with it running for AC",
+    "zip": "75217",
+    "platform": "twitter"
+  },
+  {
+    "id": "tw-243",
+    "timestamp": "2023-08-16T10:24:49",
+    "text": "my neighbor has been doing construction at 7am every saturday for a MONTH. pls make it stop",
+    "platform": "twitter"
+  },
+  {
+    "id": "tw-244",
+    "timestamp": "2023-08-27T11:03:39",
+    "text": "final count from my block: 3 transfomer fires, 6 days without power (total across outtages), one neighbor hospitlized for heat exaustion. this was august 2023 in dallas TX",
+    "zip": "75217",
+    "platform": "twitter"
+  },
+  {
+    "id": "tw-245",
+    "timestamp": "2023-08-23T23:17:38",
+    "text": "GO RANGERS!! What a game last night! \u26be #StraightUpTX",
+    "platform": "nextdoor"
+  },
+  {
+    "id": "tw-246",
+    "timestamp": "2023-08-16T18:05:49",
+    "text": "my neighbor is watering his lawn in 108 degree heat. sir. SIR. that water evaporated before it hit the ground",
+    "platform": "twitter"
+  },
+  {
+    "id": "tw-247",
+    "timestamp": "2023-08-17T18:49:05",
+    "text": "dallas weather: pick your fighter \u2014 108 with humidity OR 112 with a breeze that feels like a convection oven",
+    "platform": "reddit"
+  },
+  {
+    "id": "tw-248",
+    "timestamp": "2023-08-27T13:48:53",
+    "text": "my uber rating dropped to 4.7 and honestly i feel personally attacked",
+    "platform": "reddit",
+    "zip": "75220"
+  },
+  {
+    "id": "tw-249",
+    "timestamp": "2023-08-12T14:33:21",
+    "text": "water main break at Lamar and Commerce. no water presure in downtown. on top of the heat this is insane",
+    "platform": "twitter"
+  },
+  {
+    "id": "tw-250",
+    "timestamp": "2023-08-13T13:02:33",
+    "text": "two more amblances on MLK. my ring doorbell caught them. this is the south dallas heat crisis nobody is talking about",
+    "platform": "twitter"
+  },
+  {
+    "id": "tw-251",
+    "timestamp": "2023-08-23T10:06:10",
+    "text": "does anyone else think the DART expansion is never actually going to happen or just me",
+    "platform": "nextdoor",
+    "zip": "75204"
+  },
+  {
+    "id": "tw-252",
+    "timestamp": "2023-08-18T21:04:14",
+    "text": "JUST ANNOUNCED: Post Malone at AAC in October!! who wants to go?? #PostMalone #Dallas",
+    "platform": "twitter",
+    "zip": "75211"
+  },
+  {
+    "id": "tw-253",
+    "timestamp": "2023-08-16 7:39 PM",
+    "text": "cooling center on Ledbetter Dr just turned people away. FULL. where are people supposed to go",
+    "platform": "reddit",
+    "zip": "75211"
+  },
+  {
+    "id": "tw-254",
+    "timestamp": "2023-08-15T18:55:53",
+    "text": "garage sale this saturday! 1247 Swiss Ave. furniture, clothes, kitchen stuff. 8am-2pm",
+    "platform": "nextdoor"
+  },
+  {
+    "id": "tw-255",
+    "timestamp": "2023-08-19T09:11:27",
+    "text": "3rd straight day over 105. When does this end",
+    "zip": "75228",
+    "platform": "twitter"
+  },
+  {
+    "id": "tw-256",
+    "timestamp": "2023-08-13T14:36:09",
+    "text": "PSA: The Salvation Army on Harry Hines is open as a cooling center until 8pm. They have water and snacks. Spread the word",
+    "platform": "twitter"
+  },
+  {
+    "id": "tw-257",
+    "timestamp": "2023-08-11T11:33:08",
+    "text": "anyone know if the cooling center at MLK rec center is open today? google says closed but the city website says open",
+    "platform": "twitter"
+  },
+  {
+    "id": "tw-258",
+    "timestamp": "2023-08-17T15:11:07",
+    "text": "Just a reminder that hot cars kill. Please check your back seats. Please check on elderly neighbors. Plase take this seriously.",
+    "zip": "75204",
+    "platform": "twitter"
+  },
+  {
+    "id": "tw-259",
+    "timestamp": "2023-08-22T19:21:59",
+    "text": "oncor truck just showed up on Ledbetter Dr after 24 hours. finally",
+    "platform": "twitter"
+  },
+  {
+    "id": "tw-260",
+    "timestamp": "2023-08-18T13:19:06",
+    "text": "work sent us home early. they said the AC cant keep up and its 89 degress INSIDE the warehouse. OSHA violaiton??",
+    "platform": "twitter"
+  },
+  {
+    "id": "tw-261",
+    "timestamp": "2023-08-25T17:05:34",
+    "text": "told my boss i cant come in bc its too hot. he said thats not a real excuse. its LITERALLY dangerous??",
+    "platform": "twitter",
+    "zip": "75204"
+  },
+  {
+    "id": "tw-262",
+    "timestamp": "2023-08-25T18:24:35",
+    "text": "i refuse to believe humans were designed to live in this. we should all be in alaska",
+    "platform": "twitter"
+  },
+  {
+    "id": "tw-263",
+    "timestamp": "2023-08-13T17:36:12",
+    "text": "no power since 6pm and its 106 degrees inside. the Walmart on Buckner area. kids are crying",
+    "platform": "twitter"
+  },
+  {
+    "id": "tw-264",
+    "timestamp": "2023-08-22T16:02:15",
+    "text": "Just finished a great run on the Katy Trail! \ud83c\udfc3\u200d\u2640\ufe0f Only 5 miles but felt good! #RunDallas #FitnessJourney",
+    "platform": "twitter"
+  },
+  {
+    "id": "tw-265",
+    "timestamp": "2023-08-19 9:24 AM",
+    "text": "just called 911 for my uncle \u2014 having seizures. they said 40 min wait. unacceptable",
+    "platform": "nextdoor",
+    "zip": "75215"
+  },
+  {
+    "id": "tw-266",
+    "timestamp": "2023-08-13T12:18:47",
+    "text": "Oncor just came and fixed our street! Power back after 3 days! THANK YOU \ud83d\ude4f",
+    "zip": "75217",
+    "platform": "twitter"
+  },
+  {
+    "id": "tw-267",
+    "timestamp": "2023-08-10T15:47:22",
+    "text": "NEW LISTING: Beautiful 3BR/2BA in Lakewood! Open house this Saturday! #DallasRealEstate #OpenHouse",
+    "zip": "75228",
+    "platform": "twitter"
+  },
+  {
+    "id": "tw-268",
+    "timestamp": "2023-08-21T11:37:14",
+    "text": "oncor reporting another 3,000 customers out in south dallas and oak cliff areas",
+    "platform": "twitter"
+  },
+  {
+    "id": "tw-269",
+    "timestamp": "2023-08-24T12:03:55",
+    "text": "oncor truck has been parked on our street for 3 hours. they keep looking at the transfomer and shaking their heads. not encouraging",
+    "platform": "twitter"
+  },
+  {
+    "id": "tw-270",
+    "timestamp": "2023-08-19T11:04:33",
+    "text": "if ONE MORE PERSON from california tells me dallas heat is dry heat im going to lose it. ITS NOT. ITS HUMID AND AWFULL",
+    "zip": "75204",
+    "platform": "twitter"
+  },
+  {
+    "id": "tw-271",
+    "timestamp": "2023-08-22T12:29:07",
+    "text": "my weather app just said RealFeel 120. at that point just say bye",
+    "platform": "nextdoor"
+  },
+  {
+    "id": "tw-272",
+    "timestamp": "2023-08-18T16:08:42",
+    "text": "my outdoor thermomter says 117. i know its in the sun but STILL",
+    "platform": "twitter"
+  },
+  {
+    "id": "tw-273",
+    "timestamp": "2023-08-23T21:29:32",
+    "text": "my fantasy football draft is tonight and i have NO idea who to pick first. help #FantasyFootball #NFL",
+    "platform": "reddit"
+  },
+  {
+    "id": "tw-274",
+    "timestamp": "2023-08-07T22:08:40",
+    "text": "best tacos in Dallas GO. wrong answers only. jk i need real answers im hungry",
+    "platform": "twitter"
+  },
+  {
+    "id": "tw-275",
+    "timestamp": "2023-08-12T21:17:02",
+    "text": "therapist: whats causing your stress? me: *gestures at the weather app*",
+    "platform": "twitter"
+  },
+  {
+    "id": "tw-276",
+    "timestamp": "2023-08-11T14:47:19",
+    "text": "lights flickering at work again. if this office loses power im going home. 3rd time this week",
+    "platform": "twitter"
+  },
+  {
+    "id": "tw-277",
+    "timestamp": "2023-08-17T16:19:33",
+    "text": "ERCOT: plase conserve. Also ERCOT: no we wont invest in grid reliabilty. pick a lane",
+    "zip": "75201",
+    "platform": "twitter"
+  },
+  {
+    "id": "tw-278",
+    "timestamp": "2023-08-17T21:45:58",
+    "text": "power back on in 75243 but oncor says could go out again tonight. generator sold out everywhere",
+    "platform": "nextdoor"
+  },
+  {
+    "id": "tw-279",
+    "timestamp": "2023-08-20T10:09:04",
+    "text": "power back on in 75211 but oncor says could go out again tonight. generator sold out everywhere",
+    "platform": "twitter",
+    "zip": "75211"
+  },
+  {
+    "id": "tw-280",
+    "timestamp": "2023-08-12T15:49:02",
+    "text": "Check out this amazing sunset from last night! #DallasSkyline #Photography #Beautiful",
+    "zip": "75201",
+    "platform": "twitter"
+  },
+  {
+    "id": "tw-281",
+    "timestamp": "2023-08-07 06:13:30",
+    "text": "looking for a good mechanic near downtown. check engine light came on again \ud83d\ude44",
+    "platform": "facebook",
+    "zip": "75204"
+  },
+  {
+    "id": "tw-282",
+    "timestamp": "2023-08-13T19:51:58",
+    "text": "my car said the outside temp was 118. even if its wrong by 10 degrees THATS STILL 108",
+    "platform": "twitter"
+  },
+  {
+    "id": "tw-283",
+    "timestamp": "2023-08-26 06:15:13",
+    "text": "me: ill go for a walk today. the sun: absolutely not.",
+    "platform": "reddit",
+    "zip": "75228"
+  },
+  {
+    "id": "tw-284",
+    "timestamp": "2023-08-17T12:40:13",
+    "text": "brown out on my block. lights dimming, fridge making weird noise. 75204 we might lose power again",
+    "platform": "twitter",
+    "zip": "75204"
+  },
+  {
+    "id": "tw-285",
+    "timestamp": "2023-08-14T20:23:37",
+    "text": "first day at the new job!! so nervous but excited \ud83d\ude4f #NewJob #DallasLife",
+    "platform": "twitter"
+  },
+  {
+    "id": "tw-286",
+    "timestamp": "2023-08-25T14:33:09",
+    "text": "power out AGAIN in pleasant grove. 4th time in 3 weeks. @CityOfDallas @oncaborenergy this area needs infastructure investment NOW",
+    "zip": "75217",
+    "platform": "twitter"
+  },
+  {
+    "id": "tw-287",
+    "timestamp": "2023-08-11T21:01:05",
+    "text": "fire department going door to door on MLK Blvd doing welfare checks. never seen that before. this is bad",
+    "platform": "reddit",
+    "zip": "75217"
+  },
+  {
+    "id": "tw-288",
+    "timestamp": "2023-08-15T09:04:34",
+    "text": "brown out on my block. lights dimming, fridge making weird noise. 75201 we might lose power again",
+    "platform": "twitter",
+    "zip": "75201"
+  },
+  {
+    "id": "tw-289",
+    "timestamp": "2023-08-12T12:34:16",
+    "text": "my dog wont even go outside to pee. smart dog tbh",
+    "zip": "75228",
+    "platform": "twitter"
+  },
+  {
+    "id": "tw-290",
+    "timestamp": "2023-08-19T14:28:57",
+    "text": "coworker throwing up at work today. manager sent everyone home. the factory off I-30 has no AC",
+    "platform": "nextdoor",
+    "zip": "75243"
+  },
+  {
+    "id": "tw-291",
+    "timestamp": "2023-08-26T14:04:17",
+    "text": "Lost power at 2pm. Its 109 outside. I have two cats. This cant keep hapening. Heading to petco to sit in the AC with them in carriers",
+    "zip": "75217",
+    "platform": "twitter"
+  },
+  {
+    "id": "tw-292",
+    "timestamp": "2023-08-18T15:04:39",
+    "text": "grandma says she fine but her apartmnet is 96 degrees and she wont leave. can somone tell me how to get the city to do a welfare check",
+    "zip": "75215",
+    "platform": "twitter"
+  },
+  {
+    "id": "tw-293",
+    "timestamp": "2023-08-21T10:04:51",
+    "text": "Only 104 today. feels like a cold front compard to last week \ud83d\ude05",
+    "zip": "75243",
+    "platform": "twitter"
+  },
+  {
+    "id": "tw-294",
+    "timestamp": "2023-08-10 11:10:11",
+    "text": "just called 911 for my grandma \u2014 dizzy and cant stand up. they said 35 min wait. unacceptable",
+    "platform": "nextdoor"
+  },
+  {
+    "id": "tw-295",
+    "timestamp": "2023-08-25T18:37:07",
+    "text": "fun fact: eggs can literally cook on dallas pavement rn. i know bc my kid tried it",
+    "platform": "nextdoor"
+  },
+  {
+    "id": "tw-296",
+    "timestamp": "2023-08-12T17:15:36",
+    "text": "coworker not responding at work today. manager sent everyone home. the warehouse on Singleton has no AC",
+    "platform": "twitter",
+    "zip": "75228"
+  },
+  {
+    "id": "tw-297",
+    "timestamp": "2023-08-11T09:28:46",
+    "text": "my electric bill is going to be insane this month but at least ill be alive i guess",
+    "platform": "twitter",
+    "zip": "75243"
+  },
+  {
+    "id": "tw-298",
+    "timestamp": "2023-08-12 1:37 PM",
+    "text": "cooling center on Illinois Ave just turned peolpe away. FULL. where are people supposed to go",
+    "platform": "twitter",
+    "zip": "75211"
+  },
+  {
+    "id": "tw-299",
+    "timestamp": "2023-08-24T07:25:28",
+    "text": "this is fine \ud83d\udd25\ud83d\udc15\ud83d\udd25 everything is fine",
+    "platform": "twitter"
+  },
+  {
+    "id": "tw-300",
+    "timestamp": "2023-08-10 08:01:37",
+    "text": "happy anniversary babe! 5 years and counting \u2764\ufe0f love doing life with you",
+    "platform": "nextdoor",
+    "zip": "75243"
+  }
 ]

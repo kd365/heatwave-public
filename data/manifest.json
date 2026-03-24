@@ -36,10 +36,10 @@
       "file": "data/synthetic/social_media_posts.json",
       "type": "synthetic",
       "source": "Generated",
-      "records": 100,
+      "records": 300,
       "format": "JSON",
-      "description": "Simulated social media posts during the Dallas Aug 2023 heat wave. Mix of: genuine heat complaints and power outage reports (signal), sarcasm and jokes (noise), and completely irrelevant posts (ads, food, sports). Tied to real dates and Dallas zip codes.",
-      "key_fields": ["id", "timestamp", "text", "zip", "platform"],
+      "description": "Simulated social media posts during the Dallas Aug 2023 heat wave. Mix of: ~40% genuine heat/outage signals, ~30% ambiguous/sarcasm, ~30% pure noise (ads, sports, food). Data friction applied: 41% of posts missing zip field (force geocoding from text), 26 malformed timestamps (AM/PM, missing T separator), deliberate misspellings of critical keywords (transfomer, outtage, amblance, colapsed, etc.).",
+      "key_fields": ["id", "timestamp", "text", "zip (optional)", "platform"],
       "agent": "Agent 1 (Spatial Triage)"
     },
     {
