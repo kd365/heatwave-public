@@ -1,0 +1,6 @@
+# Copy to terraform.tfvars (gitignored) and fill in real values
+aws_region   = "us-east-1"
+environment  = "dev"
+account_id   = "388691194728"
+github_org   = "YOUR_GITHUB_USERNAME_OR_ORG"
+github_repo  = "heatwave"
