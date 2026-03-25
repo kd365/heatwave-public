@@ -144,8 +144,8 @@ System prompt: *"Analyze the threat map, consider critical zone count, asset ava
 - [ ] 🟡 **S3 + CloudFront** for React static hosting
 
 ### Terraform Plan/Apply
-- [ ] 🔴 `terraform plan` clean
-- [ ] 🔴 `terraform apply` — provision dev environment
+- [X] 🔴 `terraform plan` clean
+- [X] 🔴 `terraform apply` — provision dev environment
 - [ ] 🟡 Tag all resources: `project=heatwave`, `env=dev`
 
 ---
