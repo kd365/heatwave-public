@@ -9,6 +9,7 @@ until Claude gives a final text answer.
 import json
 import logging
 import os
+import re
 
 import boto3
 
@@ -26,7 +27,9 @@ _client = None
 def _get_client():
     global _client
     if _client is None:
-        _client = boto3.client("bedrock-runtime", region_name=AWS_REGION)
+        from botocore.config import Config
+        config = Config(read_timeout=300, connect_timeout=10, retries={"max_attempts": 3})
+        _client = boto3.client("bedrock-runtime", region_name=AWS_REGION, config=config)
     return _client
 
 
@@ -61,7 +64,7 @@ def run_agent(
             "messages": messages,
             "system": [{"text": system_prompt}],
             "inferenceConfig": {
-                "maxTokens": 4096,
+                "maxTokens": 16384,
                 "temperature": 0.1,
             },
         }
@@ -77,6 +80,10 @@ def run_agent(
         # Check stop reason
         stop_reason = response.get("stopReason", "end_turn")
         assistant_message = response["output"]["message"]
+        # Strip trailing whitespace from text blocks (Bedrock rejects it)
+        for block in assistant_message.get("content", []):
+            if "text" in block:
+                block["text"] = block["text"].rstrip()
         messages.append(assistant_message)
 
         # If Claude is done talking (no tool use), extract final text
@@ -85,6 +92,10 @@ def run_agent(
             for block in assistant_message["content"]:
                 if "text" in block:
                     final_text += block["text"]
+            # Strip markdown code blocks (```json ... ```) that Claude often wraps responses in
+            code_match = re.search(r'```(?:json)?\s*(.*?)\s*```', final_text, re.DOTALL)
+            if code_match:
+                final_text = code_match.group(1)
             return {
                 "response": final_text,
                 "tool_calls": all_tool_calls,

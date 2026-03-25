@@ -171,19 +171,50 @@ System prompt: *"Analyze the threat map, consider critical zone count, asset ava
 *Goal: Ingest raw chaos, filter signal, geocode onto H3 hex grid.*
 *Owner: Kathleen*
 
+### Architecture Decision: LLM Only Where Text Judgment Is Required
+
+Agent 1 uses a **hybrid deterministic + LLM approach** refined through integration testing. The principle: **use the LLM only where human-like text judgment is needed; use deterministic Python for everything else.**
+
+**Evolution of this decision (encountered during integration testing):**
+1. First attempt: single monolithic LLM call with all data → exceeded context window (10,500+ records)
+2. Second attempt: batch processing (500 records/batch) → 9 LLM calls × 90 sec = exceeded Lambda 15-min timeout
+3. Third attempt: larger batches (1,500 records) → still exceeded context window per batch
+4. **Final approach:** analyzed each data source's actual need for LLM judgment
+
+**Key insight:** 311 records have NO narrative/text field — only type, date, address, lat/lon. An LLM cannot add judgment beyond what Python can determine from `service_request_type + daily_temperature`. Sending 4,482 records to Claude for a decision Python can make is wasteful.
+
+**Processing strategy:**
+
+| Step | Data Source | Records | Method | Why |
+|------|-----------|---------|--------|-----|
+| 1a | Weather | 4,608 | **DETERMINISTIC** | Numeric thresholds (>=105F CRITICAL, >=100F HIGH, >=95F MEDIUM) — no ambiguity |
+| 1b | 911 dispatch | 1,035 → ~50 candidates | **LLM (1 call)** | MO narratives have ambiguous language ("hot" = temperature or stolen property?) |
+| 1c | 311 service | 4,482 → ~2,900 signals | **DETERMINISTIC** | No text field. Type + daily temp = signal. Scored by type severity × heat factor |
+| 1d | Social media | 300 | **LLM (1 call)** | Sarcasm detection, noise filtering, location extraction from unstructured text |
+| Synthesis | All findings | Combined | **LLM (1 call)** | Cross-source correlation, multi-source hex scoring |
+
+**Cost impact:** 3 LLM calls instead of 12+. Estimated runtime: 2-3 minutes instead of 15+.
+
+**311 deterministic scoring formula:**
+- Base score by type: Homeless Encampment 0.70, Water/Wastewater 0.40, Dead Animal 0.35, Animal Lack of Care 0.30
+- Heat factor: `daily_max_temp / 110` (hotter day = higher score for same report type)
+- Minimum threshold: 95F (below this, reports are routine, not heat-related)
+- Final score: `base_score × heat_factor`
+
 ### System Prompt & Tools ✅
-- [X] 🔴 Write system prompt (`backend/agents/agent1_triage.py`)
-- [X] 🔴 Define 5 tools: `get_weather_data`, `get_911_records`, `get_311_records`, `get_social_media`, `geocode_events`
+- [X] 🔴 3 LLM prompts (911 MO judgment, social media filtering, synthesis)
+- [X] 🔴 2 deterministic processors (weather thresholds, 311 type+temp scoring)
+- [X] 🔴 All 4 data sources processed — every record classified, every heat signal geocoded
 
 ### Implementation ✅
 - [X] 🔴 H3 geocoding utility (`backend/utils/h3_geocoding.py`) — 21 tests passing
-- [X] 🔴 Weather data loader with smart truncation (summaries + critical records for Claude)
-- [X] 🔴 911 record loader — full records passed to LLM for heat signal detection from MO narratives
-- [X] 🔴 311 record loader — grouped by type for LLM classification
-- [X] 🔴 Social media loader — all 300 posts passed to LLM for sarcasm/noise filtering + text-based geocoding
-- [X] 🔴 Geocode tool handler — wires to `h3_geocoding` functions, returns aggregation counts
+- [X] 🔴 Weather: deterministic classification of all 4,608 records by thresholds
+- [X] 🔴 911: keyword pre-filter → LLM judges ~50 MO narrative candidates
+- [X] 🔴 311: deterministic — type + daily temperature → severity score (no LLM, no narrative)
+- [X] 🔴 Social media: LLM filters 300 posts for sarcasm/noise, extracts location clues
+- [X] 🔴 Synthesis: LLM combines all findings into unified HexEvent list
 - [X] 🔴 Output schema: `HexEvent(hex_id, event_type, severity_score, timestamp, source)`
-- [X] 🟡 Unit tests for all tool handlers (6 tests passing)
+- [X] 🟡 Unit tests for all tool handlers (5 tests passing)
 
 ---
 
