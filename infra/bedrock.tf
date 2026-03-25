@@ -145,9 +145,12 @@ resource "aws_opensearchserverless_access_policy" "kb" {
       ]
       # KB service role needs index write access (ingestion + retrieval).
       # Bedrock agent execution role needs read access (Retrieve API calls).
+      # Deploying IAM user needs access to pre-create the vector index manually
+      # before running terraform apply for the Knowledge Base.
       Principal = [
         aws_iam_role.bedrock_kb.arn,
         aws_iam_role.bedrock_agent.arn,
+        "arn:aws:iam::${var.account_id}:user/Nick",
       ]
     }
   ])
@@ -163,11 +166,24 @@ resource "aws_opensearchserverless_collection" "kb" {
   ]
 }
 
+# Wait for the AOSS collection to reach ACTIVE status and propagate access policies
+# before the KB is created — collection must be ACTIVE.
+resource "time_sleep" "aoss_active" {
+  create_duration = "3m"
+
+  depends_on = [aws_opensearchserverless_collection.kb]
+}
+
 # ── Bedrock Knowledge Base ────────────────────────────────────────────────────
+# PREREQUISITE: The vector index must be created manually before this resource.
+# Run: AOSS_ENDPOINT=<endpoint> AWS_REGION=us-east-1 \
+#        venv/bin/python3 infra/scripts/create_aoss_index.py
 
 resource "aws_bedrockagent_knowledge_base" "heatwave" {
   name     = "${local.prefix}-kb"
   role_arn = aws_iam_role.bedrock_kb.arn
+
+  depends_on = [time_sleep.aoss_active]
 
   knowledge_base_configuration {
     type = "VECTOR"

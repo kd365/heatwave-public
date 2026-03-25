@@ -46,6 +46,12 @@ variable "bedrock_embedding_model_id" {
   default     = "amazon.titan-embed-text-v2:0"
 }
 
+variable "create_github_oidc_provider" {
+  description = "Set true to create the GitHub Actions OIDC provider. Requires iam:CreateOpenIDConnectProvider on the deploying principal."
+  type        = bool
+  default     = false
+}
+
 variable "lambda_memory_mb" {
   description = "Lambda function memory in MB"
   type        = number

@@ -10,13 +10,39 @@
 # AWS validates the OIDC JWT against its own CA trust store at runtime;
 # the thumbprint field is still required by the resource.
 
+# Requires iam:CreateOpenIDConnectProvider — set create_github_oidc_provider=true
+# when running as an IAM admin (e.g. bootstrap role). Skip-able; OIDC can be
+# created manually via the console then imported: terraform import
+#   aws_iam_openid_connect_provider.github_actions <arn>
 resource "aws_iam_openid_connect_provider" "github_actions" {
+  count          = var.create_github_oidc_provider ? 1 : 0
   url            = "https://token.actions.githubusercontent.com"
   client_id_list = ["sts.amazonaws.com"]
   thumbprint_list = [
     "6938fd4d98bab03faadb97b34396831e3780aea1",
     "1c58a3a8518e8759bf075b76b750d4f2df264fcd",
   ]
+}
+
+# ── Deploying User — AOSS data plane access ─────────────────────────────────
+# AOSS requires both an IAM identity-based permission (aoss:APIAccessAll) AND
+# an entry in the collection's data access policy. The data access policy alone
+# is not sufficient for the data plane OpenSearch REST API.
+# This policy lets the Nick IAM user create the heatwave-rag-index manually
+# before running terraform apply for the Knowledge Base.
+resource "aws_iam_user_policy" "nick_aoss" {
+  name = "aoss-dev-data-access"
+  user = "Nick"
+
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [{
+      Sid      = "AOSSDataPlane"
+      Effect   = "Allow"
+      Action   = ["aoss:APIAccessAll"]
+      Resource = [aws_opensearchserverless_collection.kb.arn]
+    }]
+  })
 }
 
 # ── Role 1: Bedrock Agent Execution ─────────────────────────────────────────
@@ -195,13 +221,15 @@ resource "aws_iam_role_policy" "lambda_exec" {
 # ── Role 3: GitHub Actions OIDC ─────────────────────────────────────────────
 
 data "aws_iam_policy_document" "github_actions_trust" {
+  count = var.create_github_oidc_provider ? 1 : 0
+
   statement {
     effect  = "Allow"
     actions = ["sts:AssumeRoleWithWebIdentity"]
 
     principals {
       type        = "Federated"
-      identifiers = [aws_iam_openid_connect_provider.github_actions.arn]
+      identifiers = [aws_iam_openid_connect_provider.github_actions[0].arn]
     }
 
     # Scope to this exact repo — wildcard allows any branch/tag/PR
@@ -220,11 +248,14 @@ data "aws_iam_policy_document" "github_actions_trust" {
 }
 
 resource "aws_iam_role" "github_actions" {
+  count              = var.create_github_oidc_provider ? 1 : 0
   name               = "${local.prefix}-github-actions"
-  assume_role_policy = data.aws_iam_policy_document.github_actions_trust.json
+  assume_role_policy = data.aws_iam_policy_document.github_actions_trust[0].json
 }
 
 data "aws_iam_policy_document" "github_actions_permissions" {
+  count = var.create_github_oidc_provider ? 1 : 0
+
   # Backend Lambda deploy — scoped to the single function by name
   statement {
     sid    = "DeployBackendLambda"
@@ -246,7 +277,7 @@ data "aws_iam_policy_document" "github_actions_permissions" {
     effect  = "Allow"
     actions = ["iam:PassRole"]
     resources = [
-      aws_iam_role.lambda_exec.arn,
+      aws_iam_role.lambda_exec.arn, # lambda_exec has count=0 guard removed — always created
     ]
   }
 
@@ -283,7 +314,8 @@ data "aws_iam_policy_document" "github_actions_permissions" {
 }
 
 resource "aws_iam_role_policy" "github_actions" {
+  count  = var.create_github_oidc_provider ? 1 : 0
   name   = "deploy-permissions"
-  role   = aws_iam_role.github_actions.id
-  policy = data.aws_iam_policy_document.github_actions_permissions.json
+  role   = aws_iam_role.github_actions[0].id
+  policy = data.aws_iam_policy_document.github_actions_permissions[0].json
 }
