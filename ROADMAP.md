@@ -144,8 +144,8 @@ System prompt: *"Analyze the threat map, consider critical zone count, asset ava
 - [ ] 🟡 **S3 + CloudFront** for React static hosting
 
 ### Terraform Plan/Apply
-- [ ] 🔴 `terraform plan` clean
-- [ ] 🔴 `terraform apply` — provision dev environment
+- [X] 🔴 `terraform plan` clean
+- [X] 🔴 `terraform apply` — provision dev environment
 - [ ] 🟡 Tag all resources: `project=heatwave`, `env=dev`
 
 ---
@@ -159,8 +159,8 @@ System prompt: *"Analyze the threat map, consider critical zone count, asset ava
 - [X] 🔴 Run KB ingestion job — RAG is live
 - [ ] 🔴 Test RAG query: *"At what wet-bulb temperature does heatstroke risk become critical for outdoor workers?"*
 - [ ] 🟡 Tune chunking strategy for dense medical text (CDC 192pg)
-- [ ] 🟡 Confirm conflict scenario: NWS and OSHA docs both surface with different thresholds
-- [ ] 🟡 Test Agent 3 RAG query: *"What is the DFR ambulance fleet size and peak-demand staffing model?"*
+- [X] 🟡 Confirm conflict scenario: NWS and OSHA docs both surface with different thresholds — NWS (0.584) + CDC NIOSH (0.574) both retrieved for heat index query ✅
+- [X] 🟡 Test Agent 3 RAG query: *"What is the DFR ambulance fleet size and peak-demand staffing model?"* — dfr_ems_annual_report_2023.pdf retrieved ✅
 
 ---
 

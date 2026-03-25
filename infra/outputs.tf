@@ -28,7 +28,7 @@ output "lambda_exec_role_arn" {
 
 output "github_actions_role_arn" {
   description = "ARN of the GitHub Actions OIDC role — set as GHA secret AWS_ROLE_ARN"
-  value       = aws_iam_role.github_actions.arn
+  value       = var.create_github_oidc_provider ? aws_iam_role.github_actions[0].arn : "not created — set create_github_oidc_provider=true as IAM admin"
 }
 
 # ── DynamoDB ─────────────────────────────────────────────────────────────────
