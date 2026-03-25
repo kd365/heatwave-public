@@ -159,7 +159,10 @@ System prompt: *"Analyze the threat map, consider critical zone count, asset ava
 - [X] 🔴 Run KB ingestion job — RAG is live
 - [ ] 🔴 Test RAG query: *"At what wet-bulb temperature does heatstroke risk become critical for outdoor workers?"*
 - [ ] 🟡 Tune chunking strategy for dense medical text (CDC 192pg)
-- [X] 🟡 Confirm conflict scenario: NWS and OSHA docs both surface with different thresholds — NWS (0.584) + CDC NIOSH (0.574) both retrieved for heat index query ✅
+- [X] 🟡 Confirm conflict scenario: NWS and OSHA docs both surface with different thresholds ✅
+  - Heat Index query → `nws_heat_index_safety.md` (0.634): Danger at HI 103°F
+  - WBGT query → `osha_otm_section3_chapter4_heat_hazards.md` (0.590): moderate work limit 27–28°C WBGT
+  - Same Aug 18 conditions (109.3°F Dallas) → NWS = Extreme Danger; OSHA = work should cease at ~28°C WBGT
 - [X] 🟡 Test Agent 3 RAG query: *"What is the DFR ambulance fleet size and peak-demand staffing model?"* — dfr_ems_annual_report_2023.pdf retrieved ✅
 
 ---
