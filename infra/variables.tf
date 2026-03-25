@@ -40,6 +40,12 @@ variable "bedrock_model_id" {
   default     = "anthropic.claude-3-5-sonnet-20241022-v2:0"
 }
 
+variable "bedrock_embedding_model_id" {
+  description = "Bedrock embedding model ID for the Knowledge Base vector store"
+  type        = string
+  default     = "amazon.titan-embed-text-v2:0"
+}
+
 variable "lambda_memory_mb" {
   description = "Lambda function memory in MB"
   type        = number
