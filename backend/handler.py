@@ -16,7 +16,8 @@ import uuid
 from datetime import datetime, timezone
 
 import boto3
-from fastapi import FastAPI, BackgroundTasks, HTTPException
+import threading
+from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from mangum import Mangum
 
@@ -200,8 +201,13 @@ def health():
 
 
 @app.post("/api/v1/analyze")
-def analyze(background_tasks: BackgroundTasks):
-    """Trigger the 3-agent pipeline. Returns run_id immediately."""
+def analyze():
+    """Trigger the 3-agent pipeline. Returns run_id immediately.
+
+    Creates a DynamoDB record, then invokes this same Lambda asynchronously
+    with a pipeline_run event. The async invocation runs the full pipeline
+    (up to 900s) without blocking the API Gateway response.
+    """
     run_id = str(uuid.uuid4())
     now = datetime.now(timezone.utc).isoformat()
 
@@ -218,8 +224,13 @@ def analyze(background_tasks: BackgroundTasks):
         "expires_at": int(time.time()) + (7 * 86400),  # TTL: 7 days
     })
 
-    # Run pipeline in background
-    background_tasks.add_task(_run_pipeline, run_id)
+    # Invoke this Lambda asynchronously to run the pipeline
+    lambda_client = boto3.client("lambda", region_name=AWS_REGION)
+    lambda_client.invoke(
+        FunctionName=os.environ.get("AWS_LAMBDA_FUNCTION_NAME", "heatwave-dev-backend"),
+        InvocationType="Event",  # async — returns immediately
+        Payload=json.dumps({"pipeline_run": run_id}),
+    )
 
     return {"run_id": run_id, "status": "RUNNING", "created_at": now}
 
@@ -307,7 +318,24 @@ def list_runs():
 
 
 # ---------------------------------------------------------------------------
-# Lambda entry point (Mangum wraps FastAPI for Lambda)
+# Lambda entry point
 # ---------------------------------------------------------------------------
 
-handler = Mangum(app)
+_mangum = Mangum(app)
+
+
+def handler(event, context):
+    """Lambda entry point. Routes between API Gateway requests and async pipeline runs.
+
+    - API Gateway events → Mangum → FastAPI
+    - Async pipeline events (from self-invocation) → _run_pipeline directly
+    """
+    # Check if this is an async pipeline invocation
+    if isinstance(event, dict) and "pipeline_run" in event:
+        run_id = event["pipeline_run"]
+        logger.info("Async pipeline invocation for run_id: %s", run_id)
+        _run_pipeline(run_id)
+        return {"statusCode": 200, "body": json.dumps({"run_id": run_id, "status": "complete"})}
+
+    # Otherwise, route through Mangum/FastAPI
+    return _mangum(event, context)

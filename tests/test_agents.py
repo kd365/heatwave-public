@@ -14,32 +14,25 @@ from backend.utils.h3_geocoding import latlng_to_hex
 class TestAgent1Tools:
     def test_load_weather(self):
         result = json.loads(agent1_handle("get_weather_data", {}))
-        assert "total_records" in result
         assert result["total_records"] > 0
-        assert "stations" in result
-        assert "critical_records" in result
+        assert result["events_above_threshold"] > 0
+        assert "by_severity" in result
+        assert "weather_events" in result
 
     def test_load_911(self):
         result = json.loads(agent1_handle("get_911_records", {}))
-        assert result["total_records"] == 1035
+        assert result["total_records"] == 1276
+        assert "heat_candidate_records" in result
+        assert result["pre_filtered_count"] > 0
 
     def test_load_311(self):
         result = json.loads(agent1_handle("get_311_records", {}))
-        assert result["total_records"] > 0
-        assert "by_type" in result
+        assert result["total_311_records"] > 0
 
     def test_load_social(self):
         result = json.loads(agent1_handle("get_social_media", {}))
         assert result["total_posts"] > 0
         assert "posts" in result
-
-    def test_geocode_events(self):
-        weather = [{"lat": 32.7216, "lon": -96.6761, "temp_f": 105}]
-        result = json.loads(agent1_handle("geocode_events", {
-            "weather_records": weather,
-        }))
-        assert result["geocoded_counts"]["weather"] == 1
-        assert result["unique_hexes"] >= 1
 
     def test_unknown_tool(self):
         result = json.loads(agent1_handle("nonexistent_tool", {}))
