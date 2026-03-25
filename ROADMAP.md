@@ -130,14 +130,14 @@ System prompt: *"Analyze the threat map, consider critical zone count, asset ava
 - [X] 🔴 AWS provider configured (`us-east-1`, Bedrock model ID set)
 
 ### Core Infrastructure ✅
-- [X] 🔴 **S3 Bucket** for data + RAG docs + processed results (`heatwave-dev-data-388691194728`)
+- [X] 🔴 **S3 Bucket** (`heatwave-dev-data-388691194728`) — `raw/`, `rag/`, `results/` prefixes
 - [X] 🔴 **IAM Roles & Policies** — zero trust / least-privilege for:
   - Bedrock agent execution role
   - Lambda execution role (invoke Bedrock, read/write S3 + DynamoDB)
   - GitHub Actions deploy role (OIDC — no long-lived keys)
-- [X] 🔴 **Bedrock Knowledge Base** (`OT8DYXUN9L`) — OpenSearch Serverless, pointing to S3 RAG bucket
-- [X] 🔴 **Lambda function** for FastAPI backend (Mangum handler) — `heatwave-dev-backend`
-- [X] 🔴 **API Gateway** (HTTP API) in front of Lambda — 5 routes wired
+- [X] 🔴 **Bedrock Knowledge Base** (`OT8DYXUN9L`) — OpenSearch Serverless, RAG ingestion complete
+- [X] 🔴 **Lambda function** (`heatwave-dev-backend`) — FastAPI/Mangum handler
+- [X] 🔴 **API Gateway** (HTTP API) — 5 routes wired
 - [X] 🔴 **DynamoDB table** for pipeline run state (keyed by `run_id`)
 - [ ] 🟡 **CloudWatch Log Groups** for agents + backend
 - [ ] 🟡 **CloudWatch Dashboard** (`HEATWAVE-Observability`)
@@ -156,7 +156,7 @@ System prompt: *"Analyze the threat map, consider critical zone count, asset ava
 
 - [X] 🔴 Upload 6 reference documents to S3 RAG bucket (`s3://heatwave-dev-data-388691194728/rag/`)
 - [X] 🔴 Configure and sync Bedrock Knowledge Base data source (`6VWUARQXEM`)
-- [ ] 🔴 Run KB ingestion job; confirm chunks indexed
+- [X] 🔴 Run KB ingestion job — RAG is live
 - [ ] 🔴 Test RAG query: *"At what wet-bulb temperature does heatstroke risk become critical for outdoor workers?"*
 - [ ] 🟡 Tune chunking strategy for dense medical text (CDC 192pg)
 - [ ] 🟡 Confirm conflict scenario: NWS and OSHA docs both surface with different thresholds
@@ -199,7 +199,7 @@ System prompt: *"Analyze the threat map, consider critical zone count, asset ava
 - [X] 🟡 Unit test: CRITICAL score (hot + dispatch + vulnerable) — passing
 - [X] 🟡 Unit test: LOW score (mild weather, no incidents) — passing
 - [X] 🟡 Unit test: aggravating factors tracked — passing
-- [ ] 🟡 Integration test: Agent 2 cites UHI study (requires KB ingestion)
+- [ ] 🟡 Integration test: Agent 2 cites UHI study (requires live Bedrock call)
 
 ---
 
@@ -214,11 +214,11 @@ System prompt: *"Analyze the threat map, consider critical zone count, asset ava
 ### Implementation ✅
 - [X] 🔴 Asset inventory: 101 assets across 11 NIMS-typed categories (from real DFR fleet data)
 - [X] 🔴 Three optimization strategies (`backend/utils/optimization.py`) — 21 tests passing
-- [X] 🔴 Solver wired as callable tool — converts Claude's JSON to ThreatHex/Asset objects, runs strategy, returns plan
+- [X] 🔴 Solver wired as callable tool — converts Claude's JSON to ThreatHex/Asset objects, runs strategy
 - [X] 🔴 `dispatch_orders` tool — writes to DynamoDB (autonomous action), local fallback for testing
 - [X] 🔴 Output schema: `DispatchPlan(strategy_used, orders, unassigned_hexes, summary)`
-- [ ] 🟡 Demo scenario 1: many CRITICAL hexes → Agent 3 picks `optimize_coverage` (requires KB)
-- [ ] 🟡 Demo scenario 2: few CRITICAL hexes → Agent 3 picks `optimize_response_time` (requires KB)
+- [ ] 🟡 Demo scenario 1: many CRITICAL hexes → Agent 3 picks `optimize_coverage` (requires live Bedrock)
+- [ ] 🟡 Demo scenario 2: few CRITICAL hexes → Agent 3 picks `optimize_response_time` (requires live Bedrock)
 
 ---
 
@@ -332,8 +332,8 @@ System prompt: *"Analyze the threat map, consider critical zone count, asset ava
 
 | Day | Date | Kathleen | czarnick89 | Milestone |
 |-----|------|----------|------------|-----------|
-| **1** | Tue 3/24 | ✅ Data, H3 geocoding, optimization solver, 3 agents, FastAPI orchestrator, RAG S3 upload | ✅ Terraform: S3, IAM, DynamoDB, Bedrock KB, Lambda, API Gateway, AOSS index | Backend complete, infra provisioned |
-| **2** | Wed 3/25 | KB ingestion + RAG test, CI/CD workflows, integration test | CI/CD workflows, CloudWatch dashboard | RAG verified, pipeline tested end-to-end |
+| **1** | Tue 3/24 | ✅ Data, H3 geocoding, optimization solver, 3 agents, FastAPI orchestrator, RAG S3 upload | ✅ Terraform: S3, IAM, DynamoDB, Bedrock KB, Lambda, API Gateway, AOSS index | Backend complete, infra provisioned, RAG live |
+| **2** | Wed 3/25 | RAG test queries, CI/CD workflows, integration test, deploy to Lambda | CI/CD workflows, CloudWatch dashboard | Pipeline tested end-to-end |
 | **3** | Thu 3/26 | Demo scenarios, frontend (together) | Frontend map + hex grid (together) | Working GUI with live pipeline |
 | **4** | Fri 3/27 | Frontend (together) — map, hex grid, panels | Frontend (together) — observability, controls | Working GUI with live pipeline |
 | **5** | Sat 3/28 AM | Integration testing, demo rehearsal | Security guardrails, final fixes | Demo-ready by noon |
@@ -348,7 +348,7 @@ System prompt: *"Analyze the threat map, consider critical zone count, asset ava
 | Automated CI/CD | [ ] | `.github/workflows/` |
 | Infrastructure as Code | [X] ✅ | `/infra/` — S3, IAM (zero trust), DynamoDB, Lambda, API Gateway, Bedrock KB, OpenSearch |
 | Observability | [ ] | CloudWatch + frontend dashboard |
-| Vector Integration (RAG) | [ ] | Bedrock Knowledge Base (6 reference docs ready) |
+| Vector Integration (RAG) | [X] ✅ | Bedrock KB `OT8DYXUN9L`, 6 docs ingested, RAG live |
 | Security & Governance | [ ] | Bedrock Guardrails + IAM zero trust |
 
 > All five selected — exceeds the "pick three" minimum.
