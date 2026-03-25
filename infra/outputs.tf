@@ -42,3 +42,32 @@ output "pipeline_runs_table_arn" {
   description = "DynamoDB table ARN for pipeline run state"
   value       = aws_dynamodb_table.pipeline_runs.arn
 }
+
+# ── Bedrock ───────────────────────────────────────────────────────────────────
+
+output "knowledge_base_id" {
+  description = "Bedrock Knowledge Base ID — used by agents for Retrieve calls"
+  value       = aws_bedrockagent_knowledge_base.heatwave.id
+}
+
+output "knowledge_base_data_source_id" {
+  description = "Bedrock KB data source ID — used to trigger ingestion sync"
+  value       = aws_bedrockagent_data_source.rag_docs.data_source_id
+}
+
+output "opensearch_collection_endpoint" {
+  description = "OpenSearch Serverless collection endpoint (for debugging)"
+  value       = aws_opensearchserverless_collection.kb.collection_endpoint
+}
+
+# ── Lambda + API Gateway ──────────────────────────────────────────────────────
+
+output "api_gateway_url" {
+  description = "Base URL for the API — set as VITE_API_BASE_URL in the frontend"
+  value       = aws_apigatewayv2_stage.default.invoke_url
+}
+
+output "lambda_function_name" {
+  description = "Lambda function name — used by deploy-backend.yml for UpdateFunctionCode"
+  value       = aws_lambda_function.backend.function_name
+}

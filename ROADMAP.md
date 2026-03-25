@@ -135,9 +135,9 @@ System prompt: *"Analyze the threat map, consider critical zone count, asset ava
   - Bedrock agent execution role
   - Lambda execution role (invoke Bedrock, read/write S3 + DynamoDB)
   - GitHub Actions deploy role (OIDC — no long-lived keys)
-- [ ] 🔴 **Bedrock Knowledge Base** — managed OpenSearch Serverless, pointing to S3 RAG bucket
-- [ ] 🔴 **Lambda function** for FastAPI backend (Mangum handler)
-- [ ] 🔴 **API Gateway** (HTTP API) in front of Lambda
+- [X] 🔴 **Bedrock Knowledge Base** — managed OpenSearch Serverless, pointing to S3 RAG bucket
+- [X] 🔴 **Lambda function** for FastAPI backend (Mangum handler)
+- [X] 🔴 **API Gateway** (HTTP API) in front of Lambda
 - [X] 🔴 **DynamoDB table** for pipeline run state (keyed by `run_id`)
 - [ ] 🟡 **CloudWatch Log Groups** for agents + backend
 - [ ] 🟡 **CloudWatch Dashboard** (`HEATWAVE-Observability`)
