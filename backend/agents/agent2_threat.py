@@ -269,7 +269,7 @@ def _load_hex_events(run_id: str = None) -> str:
             bucket = os.environ.get("DATA_BUCKET")
             if bucket:
                 s3 = boto3.client("s3")
-                key = f"results/{run_id}/hex_events.json"
+                key = f"results/{run_id}/agent1.json"
                 obj = s3.get_object(Bucket=bucket, Key=key)
                 return obj["Body"].read().decode("utf-8")
         except Exception as e:
