@@ -102,7 +102,7 @@ System prompt: *"Analyze the threat map, consider critical zone count, asset ava
 
 ### Data Storage
 - [X] 🔴 All docs in `/data/` with `manifest.json` (12 datasets, DIL compliance mapping)
-- [ ] 🟡 Upload reference docs to S3 RAG bucket (blocked on Terraform S3 provisioning)
+- [X] 🟡 Upload reference docs to S3 RAG bucket (`s3://heatwave-dev-data-388691194728/rag/`)
 
 ### PRs
 - [X] PR #26 — Data sourcing for Dallas Aug 2023 heat wave
@@ -129,15 +129,15 @@ System prompt: *"Analyze the threat map, consider critical zone count, asset ava
 - [X] 🔴 `variables.tf`, `outputs.tf`, `main.tf` scaffolding
 - [X] 🔴 AWS provider configured (`us-east-1`, Bedrock model ID set)
 
-### Core Infrastructure — IN PROGRESS
-- [X] 🔴 **S3 Bucket** for data + RAG docs + processed results
+### Core Infrastructure ✅
+- [X] 🔴 **S3 Bucket** for data + RAG docs + processed results (`heatwave-dev-data-388691194728`)
 - [X] 🔴 **IAM Roles & Policies** — zero trust / least-privilege for:
   - Bedrock agent execution role
   - Lambda execution role (invoke Bedrock, read/write S3 + DynamoDB)
   - GitHub Actions deploy role (OIDC — no long-lived keys)
-- [X] 🔴 **Bedrock Knowledge Base** — managed OpenSearch Serverless, pointing to S3 RAG bucket
-- [X] 🔴 **Lambda function** for FastAPI backend (Mangum handler)
-- [X] 🔴 **API Gateway** (HTTP API) in front of Lambda
+- [X] 🔴 **Bedrock Knowledge Base** (`OT8DYXUN9L`) — OpenSearch Serverless, pointing to S3 RAG bucket
+- [X] 🔴 **Lambda function** for FastAPI backend (Mangum handler) — `heatwave-dev-backend`
+- [X] 🔴 **API Gateway** (HTTP API) in front of Lambda — 5 routes wired
 - [X] 🔴 **DynamoDB table** for pipeline run state (keyed by `run_id`)
 - [ ] 🟡 **CloudWatch Log Groups** for agents + backend
 - [ ] 🟡 **CloudWatch Dashboard** (`HEATWAVE-Observability`)
@@ -154,8 +154,8 @@ System prompt: *"Analyze the threat map, consider critical zone count, asset ava
 *Goal: Agent 2 can retrieve relevant clinical thresholds from reference docs.*
 *Owner: Kathleen (upload + test), czarnick89 (KB provisioning)*
 
-- [ ] 🔴 Upload 6 reference documents to S3 RAG bucket
-- [ ] 🔴 Configure and sync Bedrock Knowledge Base data source
+- [X] 🔴 Upload 6 reference documents to S3 RAG bucket (`s3://heatwave-dev-data-388691194728/rag/`)
+- [X] 🔴 Configure and sync Bedrock Knowledge Base data source (`6VWUARQXEM`)
 - [ ] 🔴 Run KB ingestion job; confirm chunks indexed
 - [ ] 🔴 Test RAG query: *"At what wet-bulb temperature does heatstroke risk become critical for outdoor workers?"*
 - [ ] 🟡 Tune chunking strategy for dense medical text (CDC 192pg)
@@ -168,26 +168,19 @@ System prompt: *"Analyze the threat map, consider critical zone count, asset ava
 *Goal: Ingest raw chaos, filter signal, geocode onto H3 hex grid.*
 *Owner: Kathleen*
 
-### System Prompt & Tools
-- [ ] 🔴 Write system prompt: *"You are a Spatial Triage Analyst. Ingest raw data streams, extract heat-relevant signals, ignore noise and sarcasm, output structured spatial events geocoded to H3 hexagons."*
-- [ ] 🔴 Define tools:
-  - `get_weather_data(region, time_window)` — reads `dallas_weather_aug2023.json`
-  - `get_911_records(region, time_window)` — reads `dallas_911_aug2023.json`
-  - `get_311_records(region, time_window)` — reads `dallas_311_aug2023.json`
-  - `get_social_media_posts(region, time_window)` — reads `social_media_posts.json`
-  - `geocode_to_h3(lat, lon)` — calls `h3_geocoding.latlng_to_hex()`
+### System Prompt & Tools ✅
+- [X] 🔴 Write system prompt (`backend/agents/agent1_triage.py`)
+- [X] 🔴 Define 5 tools: `get_weather_data`, `get_911_records`, `get_311_records`, `get_social_media`, `geocode_events`
 
-### Implementation
+### Implementation ✅
 - [X] 🔴 H3 geocoding utility (`backend/utils/h3_geocoding.py`) — 21 tests passing
-  - `latlng_to_hex`, `hex_to_center`, `hex_to_boundary`, `get_hex_neighbors`
-  - `geocode_911_records` (with zip fallback), `geocode_weather_records`, `geocode_social_media_posts`
-  - `aggregate_by_hex`
-- [ ] 🔴 Weather data parser (JSON → HexEvents with temp/humidity conditions)
-- [ ] 🔴 911 record classifier — LLM-assisted heat signal detection from MO narratives
-- [ ] 🔴 311 record classifier — flag homeless encampment + water complaints as heat signals
-- [ ] 🔴 Social media parser — detect sarcasm/noise, classify heat relevance; unlocated posts require text analysis for location clues
-- [ ] 🔴 Output schema: `HexEvent(hex_id, event_type, severity_score, timestamp, source)`
-- [ ] 🟡 Unit test: synthetic dataset → known heat signals surface, sarcasm discarded
+- [X] 🔴 Weather data loader with smart truncation (summaries + critical records for Claude)
+- [X] 🔴 911 record loader — full records passed to LLM for heat signal detection from MO narratives
+- [X] 🔴 311 record loader — grouped by type for LLM classification
+- [X] 🔴 Social media loader — all 300 posts passed to LLM for sarcasm/noise filtering + text-based geocoding
+- [X] 🔴 Geocode tool handler — wires to `h3_geocoding` functions, returns aggregation counts
+- [X] 🔴 Output schema: `HexEvent(hex_id, event_type, severity_score, timestamp, source)`
+- [X] 🟡 Unit tests for all tool handlers (6 tests passing)
 
 ---
 
@@ -195,20 +188,18 @@ System prompt: *"Analyze the threat map, consider critical zone count, asset ava
 *Goal: Cross-reference spatial grid against clinical knowledge to score each hex.*
 *Owner: Kathleen*
 
-### System Prompt & Tools
-- [ ] 🔴 Write system prompt: *"You are a Threat Assessment Analyst with expertise in environmental medicine. Query the medical knowledge base to determine which hexagonal zones have crossed physiological danger thresholds. Output a threat map with risk levels."*
-- [ ] 🔴 Define tools:
-  - `query_knowledge_base(query_text)` — RAG retrieval from Bedrock KB
-  - `get_hex_events(run_id)` — fetch Agent 1 output
-  - `score_hex_threat(hex_id, conditions)` — deterministic scoring
+### System Prompt & Tools ✅
+- [X] 🔴 Write system prompt (`backend/agents/agent2_threat.py`)
+- [X] 🔴 Define 3 tools: `get_hex_events`, `query_knowledge_base`, `score_hex_threat`
 
-### Implementation
-- [ ] 🔴 RAG query tool wired to Bedrock Knowledge Base
-- [ ] 🔴 Threat scoring logic (weather conditions + 911/311 density + social signal → risk score 0.0-1.0)
-- [ ] 🔴 Output schema: `ThreatMap(run_id, hexes: list[ThreatHex(hex_id, risk_level, risk_score, justification)])`
-- [ ] 🟡 Unit test: high heat index + multiple 911 calls → CRITICAL
-- [ ] 🟡 Test: sarcastic social posts do not inflate risk score
-- [ ] 🟡 Test: Agent 2 cites UHI study to justify South Dallas vulnerability scoring
+### Implementation ✅
+- [X] 🔴 RAG query tool wired to Bedrock Knowledge Base (`KNOWLEDGE_BASE_ID` env var, graceful local fallback)
+- [X] 🔴 Deterministic threat scoring: weather 40% + dispatch 25% + 311 15% + social 10% + aggravating 10%
+- [X] 🔴 Output schema: `ThreatMap` with risk levels, scores, justifications, and conflict notes
+- [X] 🟡 Unit test: CRITICAL score (hot + dispatch + vulnerable) — passing
+- [X] 🟡 Unit test: LOW score (mild weather, no incidents) — passing
+- [X] 🟡 Unit test: aggravating factors tracked — passing
+- [ ] 🟡 Integration test: Agent 2 cites UHI study (requires KB ingestion)
 
 ---
 
@@ -216,28 +207,18 @@ System prompt: *"Analyze the threat map, consider critical zone count, asset ava
 *Goal: Translate threat map into optimized resource dispatch orders via autonomous strategy selection.*
 *Owner: Kathleen*
 
-### System Prompt & Tools
-- [ ] 🔴 Write system prompt: *"You are the Dispatch Commander. Given a threat map and asset inventory, autonomously select and execute the most appropriate dispatch strategy. Justify your choice. Available strategies: optimize_coverage, optimize_response_time, optimize_staged_reserve."*
-- [ ] 🔴 Define tools:
-  - `get_threat_map(run_id)` — fetch Agent 2 output
-  - `get_available_assets()` — fetch from `dallas_asset_inventory.json` (101 assets, 11 types)
-  - `optimize_coverage(threat_map, assets)` — PuLP LP solver
-  - `optimize_response_time(threat_map, assets)` — greedy nearest assignment
-  - `optimize_staged_reserve(threat_map, assets, staging_radius, reserve_ratio)` — split deploy
-  - `dispatch_assets(orders)` — write to DynamoDB, trigger notification
-  - `query_knowledge_base(query_text)` — RAG for FEMA NIMS resource typing + DFR fleet constraints
+### System Prompt & Tools ✅
+- [X] 🔴 Write system prompt (`backend/agents/agent3_dispatch.py`)
+- [X] 🔴 Define 5 tools: `get_threat_map`, `get_available_assets`, `query_knowledge_base`, `run_optimization`, `dispatch_orders`
 
-### Implementation
+### Implementation ✅
 - [X] 🔴 Asset inventory: 101 assets across 11 NIMS-typed categories (from real DFR fleet data)
-  - 47 front-line ALS ambulances, 8 peak-demand rescues, 8 special event rescues
-  - 4 mini-ambulances, 4 mobile medical units, 4 RIGHT Care, 4 DART Cares, 1 Medic 1, 1 MODSS
-  - 10 cooling centers (libraries), 10 cooling centers (rec centers)
 - [X] 🔴 Three optimization strategies (`backend/utils/optimization.py`) — 21 tests passing
-- [ ] 🔴 Wire solver to Bedrock agent as callable tools
-- [ ] 🔴 `dispatch_assets` tool — write orders to DynamoDB + log to CloudWatch
-- [ ] 🔴 Output schema: `DispatchPlan(strategy_used, orders, unassigned_hexes, summary)`
-- [ ] 🟡 Demo scenario 1: many CRITICAL hexes → Agent 3 picks `optimize_coverage`
-- [ ] 🟡 Demo scenario 2: few CRITICAL hexes → Agent 3 picks `optimize_response_time`
+- [X] 🔴 Solver wired as callable tool — converts Claude's JSON to ThreatHex/Asset objects, runs strategy, returns plan
+- [X] 🔴 `dispatch_orders` tool — writes to DynamoDB (autonomous action), local fallback for testing
+- [X] 🔴 Output schema: `DispatchPlan(strategy_used, orders, unassigned_hexes, summary)`
+- [ ] 🟡 Demo scenario 1: many CRITICAL hexes → Agent 3 picks `optimize_coverage` (requires KB)
+- [ ] 🟡 Demo scenario 2: few CRITICAL hexes → Agent 3 picks `optimize_response_time` (requires KB)
 
 ---
 
@@ -245,22 +226,22 @@ System prompt: *"Analyze the threat map, consider critical zone count, asset ava
 *Goal: Pipeline runs end-to-end: Agent 1 → Agent 2 → Agent 3, exposed via FastAPI.*
 *Owner: czarnick89 (primary), Kathleen (agent integration)*
 
-### Orchestration
-- [ ] 🔴 `POST /api/v1/analyze` — triggers full 3-agent pipeline, returns `run_id` (async)
-- [ ] 🔴 `GET /api/v1/runs/{run_id}/status` — poll pipeline status
-- [ ] 🔴 `GET /api/v1/runs/{run_id}/result` — fetch dispatch plan + threat map
-- [ ] 🔴 Agent handoff: Agent 1 → DynamoDB/S3 → Agent 2 → DynamoDB/S3 → Agent 3
+### Orchestration ✅
+- [X] 🔴 `POST /api/v1/analyze` — triggers full 3-agent pipeline, returns `run_id` (async background task)
+- [X] 🔴 `GET /api/v1/runs/{run_id}/status` — poll per-agent status from DynamoDB
+- [X] 🔴 `GET /api/v1/runs/{run_id}/result` — fetch all 3 agent outputs from S3
+- [X] 🔴 Agent handoff: Agent 1 output passed directly → Agent 2 → Agent 3 + saved to S3 per step
 - [ ] 🟡 Retry logic for Bedrock API calls (exponential backoff)
-- [ ] 🟡 `GET /api/v1/runs` — list recent pipeline runs
+- [X] 🟡 `GET /api/v1/runs` — list 20 most recent pipeline runs
 
-### FastAPI Backend
-- [ ] 🔴 FastAPI app with CORS for frontend
-- [ ] 🔴 `GET /health` health check
-- [ ] 🔴 Pydantic models for request/response schemas
-- [ ] 🔴 Bedrock client (boto3) with IAM role assumption
+### FastAPI Backend ✅
+- [X] 🔴 FastAPI app with CORS (`backend/handler.py`) + Mangum for Lambda
+- [X] 🔴 `GET /health` health check — verified locally
+- [ ] 🟡 Pydantic models for request/response schemas
+- [X] 🔴 Bedrock client (boto3) via `backend/agents/base.py`
 - [ ] 🟡 Structured JSON logging → CloudWatch
 - [ ] 🟡 Request/response time middleware → CloudWatch metrics
-- [ ] 🟡 Token usage capture → DynamoDB for cost dashboard
+- [X] 🟡 Token usage capture → DynamoDB (accumulated across all 3 agents per run)
 
 ---
 
@@ -351,9 +332,9 @@ System prompt: *"Analyze the threat map, consider critical zone count, asset ava
 
 | Day | Date | Kathleen | czarnick89 | Milestone |
 |-----|------|----------|------------|-----------|
-| **1** | Tue 3/24 | ~~Phase 0+1 data~~ ✅, ~~H3 geocoding~~ ✅, ~~Optimization solver~~ ✅ | Terraform provisioning (S3, IAM, Bedrock KB) | Data + solver complete, infra provisioned |
-| **2** | Wed 3/25 | RAG upload + test, Agent 1 system prompt + wiring | Lambda + API Gateway + DynamoDB, CI/CD workflow | RAG working, Agent 1 prototype |
-| **3** | Thu 3/26 | Agent 2 + Agent 3 Bedrock wiring | Orchestration layer, FastAPI backend | All 3 agents callable, pipeline wired |
+| **1** | Tue 3/24 | ✅ Data, H3 geocoding, optimization solver, 3 agents, FastAPI orchestrator, RAG S3 upload | ✅ Terraform: S3, IAM, DynamoDB, Bedrock KB, Lambda, API Gateway, AOSS index | Backend complete, infra provisioned |
+| **2** | Wed 3/25 | KB ingestion + RAG test, CI/CD workflows, integration test | CI/CD workflows, CloudWatch dashboard | RAG verified, pipeline tested end-to-end |
+| **3** | Thu 3/26 | Demo scenarios, frontend (together) | Frontend map + hex grid (together) | Working GUI with live pipeline |
 | **4** | Fri 3/27 | Frontend (together) — map, hex grid, panels | Frontend (together) — observability, controls | Working GUI with live pipeline |
 | **5** | Sat 3/28 AM | Integration testing, demo rehearsal | Security guardrails, final fixes | Demo-ready by noon |
 | | Sat 3/28 4pm | 🎤 **PRESENT** | 🎤 **PRESENT** | |
@@ -365,7 +346,7 @@ System prompt: *"Analyze the threat map, consider critical zone count, asset ava
 | Requirement | Status | Where |
 |---|---|---|
 | Automated CI/CD | [ ] | `.github/workflows/` |
-| Infrastructure as Code | [X] partially | `/infra/` (scaffolding done, provisioning in progress) |
+| Infrastructure as Code | [X] ✅ | `/infra/` — S3, IAM (zero trust), DynamoDB, Lambda, API Gateway, Bedrock KB, OpenSearch |
 | Observability | [ ] | CloudWatch + frontend dashboard |
 | Vector Integration (RAG) | [ ] | Bedrock Knowledge Base (6 reference docs ready) |
 | Security & Governance | [ ] | Bedrock Guardrails + IAM zero trust |
@@ -448,6 +429,10 @@ We never hardcode the selection. The system prompt tells Agent 3: *"Analyze the 
 - [X] PR #26 — Data sourcing
 - [X] PR #27 — H3 geocoding utility
 - [X] PR #28 — Dispatch optimization + data
+- [X] PR #29 — Mobile units + cooling centers
+- [X] PR #30 — ROADMAP consolidation
+- [X] PR #31 — Phase 2 core infra (S3, IAM, DynamoDB, Bedrock KB, Lambda, API Gateway)
+- [ ] PR #32 — 3-agent pipeline + FastAPI orchestrator (in review)
 
 ### Open Issues
 - [ ] #8 — Terraform root module & remote state → ✅ done (PR #24, #25)
