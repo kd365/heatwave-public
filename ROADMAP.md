@@ -130,15 +130,15 @@ System prompt: *"Analyze the threat map, consider critical zone count, asset ava
 - [X] 🔴 AWS provider configured (`us-east-1`, Bedrock model ID set)
 
 ### Core Infrastructure — IN PROGRESS
-- [ ] 🔴 **S3 Bucket** for data + RAG docs + processed results
-- [ ] 🔴 **IAM Roles & Policies** — zero trust / least-privilege for:
+- [X] 🔴 **S3 Bucket** for data + RAG docs + processed results
+- [X] 🔴 **IAM Roles & Policies** — zero trust / least-privilege for:
   - Bedrock agent execution role
   - Lambda execution role (invoke Bedrock, read/write S3 + DynamoDB)
   - GitHub Actions deploy role (OIDC — no long-lived keys)
 - [ ] 🔴 **Bedrock Knowledge Base** — managed OpenSearch Serverless, pointing to S3 RAG bucket
 - [ ] 🔴 **Lambda function** for FastAPI backend (Mangum handler)
 - [ ] 🔴 **API Gateway** (HTTP API) in front of Lambda
-- [ ] 🔴 **DynamoDB table** for pipeline run state (keyed by `run_id`)
+- [X] 🔴 **DynamoDB table** for pipeline run state (keyed by `run_id`)
 - [ ] 🟡 **CloudWatch Log Groups** for agents + backend
 - [ ] 🟡 **CloudWatch Dashboard** (`HEATWAVE-Observability`)
 - [ ] 🟡 **S3 + CloudFront** for React static hosting
