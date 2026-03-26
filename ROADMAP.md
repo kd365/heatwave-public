@@ -296,7 +296,7 @@ Agent 1 uses a **hybrid deterministic + LLM approach** refined through integrati
 
 ### Panels
 - [X] 🔴 Agent status panel: `IDLE | RUNNING | COMPLETE | ERROR` per agent
-- [ ] 🔴 Dispatch orders table (asset, type, target hex, distance)
+- [X] 🔴 Dispatch orders table (asset, type, target hex, distance)
 - [X] 🔴 Observability panel: run count, avg response time, token usage, cost estimate
 - [ ] 🟡 Agent reasoning/justification expandable panel
 - [ ] 🟡 CloudWatch metrics embedded or fetched via proxy

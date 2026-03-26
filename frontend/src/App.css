@@ -43,7 +43,15 @@ html, body, #root {
 .app-main {
   flex: 1;
   display: flex;
+  flex-direction: column;
   min-height: 0;
+}
+
+.app-map-row {
+  flex: 1;
+  display: flex;
+  min-height: 0;
+  position: relative;
 }
 
 .map-container {
@@ -158,6 +166,120 @@ html, body, #root {
   display: flex;
   flex-direction: column;
   gap: 0.2rem;
+}
+
+/* ========== Dispatch orders bottom panel ========== */
+
+.orders-panel {
+  flex-shrink: 0;
+  background: #111;
+  border-top: 1px solid #2a2a2a;
+  display: flex;
+  flex-direction: column;
+  max-height: 220px;
+}
+.orders-panel--collapsed {
+  max-height: unset;
+}
+.orders-header {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.45rem 1rem;
+  cursor: pointer;
+  user-select: none;
+  flex-shrink: 0;
+}
+.orders-header:hover { background: #161616; }
+.orders-title {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: #666;
+  text-transform: uppercase;
+}
+.orders-count {
+  font-size: 0.66rem;
+  color: #444;
+}
+.orders-toggle {
+  margin-left: auto;
+  font-size: 0.6rem;
+  color: #444;
+}
+.orders-body {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: auto;
+}
+.orders-empty {
+  padding: 0.75rem 1rem;
+  font-size: 0.72rem;
+  color: #3a3a3a;
+  font-style: italic;
+}
+
+/* Orders table */
+.orders-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.72rem;
+}
+.orders-table thead th {
+  position: sticky;
+  top: 0;
+  background: #111;
+  padding: 0.3rem 0.75rem;
+  text-align: left;
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: #444;
+  text-transform: uppercase;
+  border-bottom: 1px solid #1e1e1e;
+  white-space: nowrap;
+}
+.orders-table tbody tr {
+  border-bottom: 1px solid #161616;
+  transition: background 0.1s;
+}
+.orders-table tbody tr:hover { background: #181818; }
+.orders-table td {
+  padding: 0.3rem 0.75rem;
+  color: #999;
+  white-space: nowrap;
+}
+.orders-cell-asset {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+.orders-asset-id {
+  color: #ccc;
+  font-weight: 600;
+}
+.orders-asset-desc {
+  font-size: 0.62rem;
+  color: #505050;
+}
+.orders-role-badge {
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  padding: 0.1rem 0.35rem;
+  border-radius: 3px;
+  border: 1px solid currentColor;
+  text-transform: capitalize;
+  opacity: 0.85;
+}
+.orders-cell-mono {
+  font-family: monospace;
+  font-size: 0.68rem;
+  color: #555;
+}
+.orders-cell-num {
+  text-align: right;
+  padding-right: 1.25rem !important;
 }
 
 /* ========== Agent side panel ========== */

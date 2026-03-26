@@ -7,6 +7,7 @@ import { HexLayer } from './components/HexLayer'
 import { Legend } from './components/Legend'
 import { AssetLayer } from './components/AssetLayer'
 import { AgentPanel } from './components/AgentPanel'
+import { OrdersPanel } from './components/OrdersPanel'
 import { triggerAnalysis, fetchRunStatus, fetchResult, fetchLatestRun, fetchAssets, fetchRuns } from './api'
 import type { HexEvent, RunStatus, PipelineResult, DispatchOrder, Asset } from './api'
 import './App.css'
@@ -128,30 +129,34 @@ function App() {
       </header>
 
       <main className="app-main">
-        <MapContainer
-          center={DALLAS_CENTER}
-          zoom={DEFAULT_ZOOM}
-          className="map-container"
-          zoomControl={true}
-        >
-          <TileLayer
-            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-          />
-          {hexEvents.length > 0 && <HexLayer hexEvents={hexEvents} />}
-          <AssetLayer
-            assets={assets}
-            orders={orders}
-            activatedCoolingIds={activatedCoolingIds}
-          />
-        </MapContainer>
+        <div className="app-map-row">
+          <MapContainer
+            center={DALLAS_CENTER}
+            zoom={DEFAULT_ZOOM}
+            className="map-container"
+            zoomControl={true}
+          >
+            <TileLayer
+              attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            />
+            {hexEvents.length > 0 && <HexLayer hexEvents={hexEvents} />}
+            <AssetLayer
+              assets={assets}
+              orders={orders}
+              activatedCoolingIds={activatedCoolingIds}
+            />
+          </MapContainer>
 
-        <AgentPanel
-          runStatus={runStatus ?? latestRun ?? null}
-          result={result ?? null}
-          recentRuns={recentRuns}
-        />
-        <Legend hexEvents={hexEvents} runStatus={runStatus ?? latestRun ?? null} />
+          <AgentPanel
+            runStatus={runStatus ?? latestRun ?? null}
+            result={result ?? null}
+            recentRuns={recentRuns}
+          />
+          <Legend hexEvents={hexEvents} runStatus={runStatus ?? latestRun ?? null} />
+        </div>
+
+        <OrdersPanel orders={orders} assets={assets} />
       </main>
     </div>
   )
