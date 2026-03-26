@@ -285,23 +285,24 @@ Agent 1 uses a **hybrid deterministic + LLM approach** refined through integrati
 
 ### Setup
 - [X] 🔴 Vite + React + TypeScript scaffolding
-- [ ] 🔴 Install: `leaflet`, `react-leaflet`, `h3-js`, `recharts`, `@tanstack/react-query`
+- [X] 🔴 Install: `leaflet`, `react-leaflet`, `h3-js`, `@tanstack/react-query` ✅
 
 ### Map & Hex Grid
-- [ ] 🔴 Base map with OpenStreetMap/CartoDB tiles (no key needed)
-- [ ] 🔴 H3 hex overlay color-coded by risk level (green → yellow → orange → red)
-- [ ] 🔴 Dispatch asset markers on map (ambulance, cooling center icons)
+- [X] 🔴 Base map with OpenStreetMap tiles, dark-theme layout, Dallas center ✅
+- [X] 🔴 H3 hex overlay color-coded by risk level (green → yellow → orange → red) — CRITICAL/HIGH/MEDIUM/LOW thresholds, sticky tooltip per hex ✅
+- [X] 🔴 Legend panel (bottom-left): severity key, per-level counts, tokens/duration/agents from run ✅
+- [X] 🔴 Dispatch asset markers on map — mobile assets at LP-assigned `to_hex`, cooling centers at fixed address (dim until activated), emoji DivIcons ✅
 - [ ] 🟡 Animate hex transitions on new results
 
 ### Panels
-- [ ] 🔴 Agent status panel: `IDLE | RUNNING | COMPLETE | ERROR` per agent
-- [ ] 🔴 Dispatch orders table (asset, type, target hex, distance)
-- [ ] 🔴 Observability panel: run count, avg response time, token usage, cost estimate
+- [X] 🔴 Agent status panel: `IDLE | RUNNING | COMPLETE | ERROR` per agent
+- [X] 🔴 Dispatch orders table (asset, type, target hex, distance)
+- [X] 🔴 Observability panel: run count, avg response time, token usage, cost estimate
 - [ ] 🟡 Agent reasoning/justification expandable panel
 - [ ] 🟡 CloudWatch metrics embedded or fetched via proxy
 
 ### Controls
-- [ ] 🔴 "Run Analysis" button → `POST /api/v1/analyze`, poll, update map
+- [X] 🔴 "Run Analysis" button → `POST /api/v1/analyze`, poll every 5s, update map on COMPLETE ✅
 - [ ] 🟡 Date/time range selector
 
 ---

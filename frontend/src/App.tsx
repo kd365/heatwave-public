@@ -1,120 +1,182 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
+import { useState, useEffect, useMemo } from 'react'
+import { gridDisk, latLngToCell } from 'h3-js'
+import { useQuery } from '@tanstack/react-query'
+import 'leaflet/dist/leaflet.css'
+import { MapContainer, TileLayer } from 'react-leaflet'
+import { HexLayer } from './components/HexLayer'
+import { Legend } from './components/Legend'
+import { AssetLayer } from './components/AssetLayer'
+import { AgentPanel } from './components/AgentPanel'
+import { OrdersPanel } from './components/OrdersPanel'
+import { triggerAnalysis, fetchRunStatus, fetchResult, fetchLatestRun, fetchAssets, fetchRuns } from './api'
+import type { HexEvent, RunStatus, PipelineResult, DispatchOrder, Asset } from './api'
 import './App.css'
 
+const DALLAS_CENTER: [number, number] = [32.7767, -96.797]
+const DEFAULT_ZOOM = 11
+
 function App() {
-  const [count, setCount] = useState(0)
+  const [activeRunId, setActiveRunId] = useState<string | null>(null)
+  const [isTriggering, setIsTriggering] = useState(false)
+
+  // On load, pick up the latest completed run
+  const { data: latestRun } = useQuery({
+    queryKey: ['latestRun'],
+    queryFn: fetchLatestRun,
+  })
+
+  useEffect(() => {
+    if (latestRun?.run_id && !activeRunId) {
+      setActiveRunId(latestRun.run_id)
+    }
+  }, [latestRun, activeRunId])
+
+  // Poll active run status while RUNNING
+  const { data: runStatus } = useQuery<RunStatus>({
+    queryKey: ['runStatus', activeRunId],
+    queryFn: () => fetchRunStatus(activeRunId!),
+    enabled: !!activeRunId,
+    refetchInterval: (query) => {
+      const status = query.state.data?.status
+      return status === 'RUNNING' ? 5000 : false
+    },
+  })
+
+  // Fetch result when COMPLETE
+  const { data: result } = useQuery<PipelineResult>({
+    queryKey: ['result', activeRunId],
+    queryFn: () => fetchResult(activeRunId!),
+    enabled: !!activeRunId && runStatus?.status === 'COMPLETE',
+  })
+
+  // Fetch all recent runs for observability history
+  const { data: recentRuns = [] } = useQuery({
+    queryKey: ['runs'],
+    queryFn: fetchRuns,
+    staleTime: 30_000,
+  })
+
+  const hexEvents: HexEvent[] = result?.hex_events?.hex_events ?? []
+  const orders: DispatchOrder[] = result?.dispatch_plan?.dispatch_plan?.orders ?? []
+  const status = runStatus?.status ?? latestRun?.status ?? 'IDLE'
+
+  // Load asset inventory (cooling centers + mobile fleet)
+  const { data: assets = [] } = useQuery({
+    queryKey: ['assets'],
+    queryFn: fetchAssets,
+    staleTime: Infinity,
+  })
+
+  const activatedCoolingIds: string[] = useMemo(() => {
+    const fromResult: string[] = result?.dispatch_plan?.cooling_centers_activated ?? []
+    // Validate LLM IDs against real asset inventory — LLM sometimes invents IDs
+    // that don't match the actual COOL-XXX format used in the inventory
+    const knownIds = new Set(assets.map(a => a.id))
+    const validFromResult = fromResult.filter(id => knownIds.has(id))
+    if (validFromResult.length > 0) return validFromResult
+    // Frontend geometry fallback: activate cooling centers near HIGH/CRITICAL hex events
+    if (!assets.length || !hexEvents.length) return []
+    const ACTIVATION_RADIUS = 2
+    const HIGH_SEVERITY_THRESHOLD = 0.65
+    const activationZone = new Set<string>()
+    for (const h of hexEvents) {
+      if ((h.severity_score ?? 0) >= HIGH_SEVERITY_THRESHOLD) {
+        for (const ring of gridDisk(h.hex_id, ACTIVATION_RADIUS)) {
+          activationZone.add(ring)
+        }
+      }
+    }
+    if (activationZone.size === 0) return []
+    return (assets as Asset[])
+      .filter(a => a.asset_type.startsWith('cooling_center'))
+      .filter(a => {
+        if (a.home_lat == null || a.home_lon == null) return false
+        try {
+          const ccHex = latLngToCell(a.home_lat, a.home_lon, 7)
+          return activationZone.has(ccHex)
+        } catch {
+          return false
+        }
+      })
+      .map(a => a.id)
+  }, [result, assets, hexEvents])
+
+  async function handleRunAnalysis() {
+    setIsTriggering(true)
+    try {
+      const { run_id } = await triggerAnalysis()
+      setActiveRunId(run_id)
+    } finally {
+      setIsTriggering(false)
+    }
+  }
 
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
+    <div className="app-layout">
+      <header className="app-header">
+        <h1>🌡️ HEATWAVE</h1>
+        <span className="app-subtitle">Dallas Heat Emergency Response — Aug 2023</span>
+        <div className="header-right">
+          <AgentStatusBadges runStatus={runStatus ?? null} />
+          <button
+            className={`run-btn ${isTriggering || status === 'RUNNING' ? 'running' : ''}`}
+            onClick={handleRunAnalysis}
+            disabled={isTriggering || status === 'RUNNING'}
+          >
+            {isTriggering ? 'Starting…' : status === 'RUNNING' ? 'Running…' : '▶ Run Analysis'}
+          </button>
         </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.tsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
+      </header>
 
-      <div className="ticks"></div>
+      <main className="app-main">
+        <div className="app-map-row">
+          <MapContainer
+            center={DALLAS_CENTER}
+            zoom={DEFAULT_ZOOM}
+            className="map-container"
+            zoomControl={true}
+          >
+            <TileLayer
+              attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            />
+            {hexEvents.length > 0 && <HexLayer hexEvents={hexEvents} />}
+            <AssetLayer
+              assets={assets}
+              orders={orders}
+              activatedCoolingIds={activatedCoolingIds}
+            />
+          </MapContainer>
 
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
+          <AgentPanel
+            runStatus={runStatus ?? latestRun ?? null}
+            result={result ?? null}
+            recentRuns={recentRuns}
+          />
+          <Legend hexEvents={hexEvents} runStatus={runStatus ?? latestRun ?? null} />
         </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
 
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
+        <OrdersPanel orders={orders} assets={assets} />
+      </main>
+    </div>
+  )
+}
+
+function AgentStatusBadges({ runStatus }: { runStatus: RunStatus | null }) {
+  if (!runStatus) return null
+  const agents = [
+    { label: 'A1', status: runStatus.agent_1_status },
+    { label: 'A2', status: runStatus.agent_2_status },
+    { label: 'A3', status: runStatus.agent_3_status },
+  ]
+  return (
+    <div className="agent-badges">
+      {agents.map(({ label, status }) => (
+        <span key={label} className={`badge badge-${(status ?? 'IDLE').toLowerCase()}`}>
+          {label}: {status ?? 'IDLE'}
+        </span>
+      ))}
+    </div>
   )
 }
 

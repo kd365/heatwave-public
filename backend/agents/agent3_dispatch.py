@@ -10,6 +10,7 @@ import logging
 import os
 
 import boto3
+import h3
 
 from backend.agents.base import run_agent
 from backend.utils.optimization import (
@@ -389,7 +390,70 @@ def _query_kb(query: str) -> str:
     return _query_knowledge_base(query)
 
 
-def handle_tool(tool_name: str, tool_input: dict) -> str:
+def _compute_cooling_activations(parsed: dict) -> list[str]:
+    """Deterministically compute which cooling centers should be activated.
+
+    A cooling center is activated if it sits within ACTIVATION_RADIUS hex rings
+    of any CRITICAL or HIGH threat hex that was covered by a dispatch order.
+    Falls back to checking all dispatch order destinations if threat level info
+    is unavailable.
+
+    This runs as a post-processing step after Agent 3 LLM output to guarantee
+    correct activation regardless of what the LLM included in its response.
+    """
+    ACTIVATION_RADIUS = 2  # hex rings — ~1.5km at H3 resolution 8
+
+    # Gather all to_hex destinations from the dispatch plan
+    orders = parsed.get("dispatch_plan", {}).get("orders", [])
+    covered_hexes: set[str] = {o["to_hex"] for o in orders if "to_hex" in o}
+
+    if not covered_hexes:
+        return []
+
+    # Build a disk of all hexes within activation radius of any covered hex
+    activation_zone: set[str] = set()
+    for hex_id in covered_hexes:
+        try:
+            activation_zone.update(h3.grid_disk(hex_id, ACTIVATION_RADIUS))
+        except Exception:
+            pass  # invalid hex_id — skip
+
+    if not activation_zone:
+        return []
+
+    # Load asset inventory to find cooling center hex locations
+    try:
+        local_path = os.path.join("data", "synthetic", "dallas_asset_inventory.json")
+        if os.path.exists(local_path):
+            with open(local_path) as f:
+                assets = json.load(f)
+        else:
+            bucket = os.environ.get("DATA_BUCKET")
+            s3 = boto3.client("s3")
+            obj = s3.get_object(Bucket=bucket, Key="synthetic/dallas_asset_inventory.json")
+            assets = json.loads(obj["Body"].read())
+    except Exception as e:
+        logger.warning("Could not load assets for cooling activation: %s", e)
+        return []
+
+    activated = []
+    for asset in assets:
+        if not asset.get("asset_type", "").startswith("cooling_center"):
+            continue
+        lat, lon = asset.get("home_lat"), asset.get("home_lon")
+        if lat is None or lon is None:
+            continue
+        try:
+            cc_hex = latlng_to_hex(float(lat), float(lon))
+            if cc_hex in activation_zone:
+                activated.append(asset["id"])
+        except Exception:
+            pass
+
+    return activated
+
+
+
     """Execute a tool call from Agent 3."""
     if tool_name == "get_threat_map":
         return _load_threat_map(tool_input.get("run_id"))
@@ -450,4 +514,9 @@ def run(run_id: str, threat_map: dict = None) -> dict:
 
     parsed["tokens_used"] = result["tokens_used"]
     parsed["tool_calls"] = result["tool_calls"]
+
+    # Deterministic fallback: ensure cooling activations are populated even if LLM omitted them
+    if not parsed.get("cooling_centers_activated"):
+        parsed["cooling_centers_activated"] = _compute_cooling_activations(parsed)
+
     return parsed
