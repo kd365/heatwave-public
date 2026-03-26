@@ -24,14 +24,18 @@ SYSTEM_PROMPT = """You are the Threat Assessment Analyst for HEATWAVE, a heat cr
 YOUR MISSION: Given a spatial event grid from Agent 1 (hex cells with heat-related events), query the medical knowledge base to determine which zones have crossed physiological danger thresholds. Output a threat map with risk levels.
 
 YOUR PROCESS:
-1. Use get_hex_events to load Agent 1's output (hex cells with event counts and conditions).
-2. For each hex with events, use query_knowledge_base to look up relevant medical thresholds:
-   - Query for WBGT thresholds and heat stroke risk criteria (CDC/NIOSH document)
-   - Query for heat index danger levels (NWS document — NOTE: this may CONFLICT with WBGT thresholds)
-   - Query for Dallas-specific urban heat vulnerability (UHI Study)
-   - Query for DFR EMS response patterns during heat events
-3. Score each hex using score_hex_threat with the conditions and evidence gathered.
-4. IMPORTANT: When you find conflicting thresholds between NWS Heat Index and OSHA/NIOSH WBGT, you MUST note the discrepancy in your justification. Do not silently pick one — acknowledge both and explain which you weighted more heavily and why.
+1. Use get_hex_events to load Agent 1's output. Each hex now includes:
+   - max_temp_f, max_apparent_f, hot_days (temperature data — may be direct station or interpolated from nearest station)
+   - dispatch_count + dispatch_incidents (911 heat incidents with descriptions like "unexplained death", "found unresponsive")
+   - service_count + service_types (311 requests by type: Homeless Encampment, Dead Animal, etc.)
+   - social_count + social_signals (social media text excerpts about heat)
+   - weather_source: "direct_station" vs "interpolated_nearest_station"
+2. Query the knowledge base 2-3 times for medical thresholds:
+   - WBGT/heat stroke criteria (CDC/NIOSH)
+   - Heat index danger levels (NWS — may CONFLICT with WBGT)
+   - Dallas UHI vulnerability data
+3. Score ALL hexes using score_hex_batch. Send ONE batch call at a time with 20-30 hexes per batch. Make one call, wait for the result, then make the next call. Do NOT make multiple parallel tool calls. You MUST score every hex — do not stop after scoring only the top ones. Use 6-9 sequential batch calls to cover all 170 hexes.
+4. IMPORTANT: When you find conflicting thresholds between NWS Heat Index and OSHA/NIOSH WBGT, note the discrepancy. Use the incident descriptions to inform your judgment — "unexplained death during 109F heat" should weigh heavily.
 
 SCORING CRITERIA:
 - CRITICAL (0.85-1.0): temp >= 105F AND (911 heat incidents OR vulnerable population signals OR power outage reports)
@@ -124,22 +128,55 @@ TOOLS = [
     {
         "toolSpec": {
             "name": "score_hex_threat",
-            "description": "Calculate a deterministic threat score for a hex cell based on conditions. Uses weighted formula: weather (40%) + dispatch density (25%) + 311 signals (15%) + social media (10%) + aggravating factors (10%).",
+            "description": "Score a SINGLE hex cell. Prefer score_hex_batch for efficiency.",
             "inputSchema": {
                 "json": {
                     "type": "object",
                     "properties": {
                         "hex_id": {"type": "string"},
-                        "max_temp_f": {"type": "number", "description": "Maximum recorded temperature in this hex"},
-                        "apparent_temp_f": {"type": "number", "description": "Maximum apparent temperature"},
-                        "dispatch_count": {"type": "integer", "description": "Number of heat-related 911 dispatches"},
-                        "service_count": {"type": "integer", "description": "Number of heat-relevant 311 requests"},
-                        "social_count": {"type": "integer", "description": "Number of heat-related social media posts"},
-                        "has_vulnerable_population": {"type": "boolean", "description": "Homeless encampment or elderly reports in hex"},
-                        "nighttime_temp_above_80": {"type": "boolean", "description": "Overnight low stayed above 80F"},
-                        "multi_source_corroboration": {"type": "boolean", "description": "3+ different data sources flagging this hex"},
+                        "max_temp_f": {"type": "number"},
+                        "apparent_temp_f": {"type": "number"},
+                        "dispatch_count": {"type": "integer"},
+                        "service_count": {"type": "integer"},
+                        "social_count": {"type": "integer"},
+                        "has_vulnerable_population": {"type": "boolean"},
+                        "nighttime_temp_above_80": {"type": "boolean"},
+                        "multi_source_corroboration": {"type": "boolean"},
                     },
                     "required": ["hex_id", "max_temp_f"],
+                }
+            },
+        }
+    },
+    {
+        "toolSpec": {
+            "name": "score_hex_batch",
+            "description": "Score MULTIPLE hex cells in one call. Pass an array of hex objects. Each hex needs: hex_id, max_temp_f, and optionally apparent_temp_f, dispatch_count, service_count, social_count, has_vulnerable_population, nighttime_temp_above_80, multi_source_corroboration. Returns all scores at once. USE THIS to score all 170 hexes efficiently in batches of 20-30.",
+            "inputSchema": {
+                "json": {
+                    "type": "object",
+                    "properties": {
+                        "hexes": {
+                            "type": "array",
+                            "description": "Array of hex objects to score",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "hex_id": {"type": "string"},
+                                    "max_temp_f": {"type": "number"},
+                                    "apparent_temp_f": {"type": "number"},
+                                    "dispatch_count": {"type": "integer"},
+                                    "service_count": {"type": "integer"},
+                                    "social_count": {"type": "integer"},
+                                    "has_vulnerable_population": {"type": "boolean"},
+                                    "nighttime_temp_above_80": {"type": "boolean"},
+                                    "multi_source_corroboration": {"type": "boolean"},
+                                },
+                                "required": ["hex_id", "max_temp_f"],
+                            },
+                        },
+                    },
+                    "required": ["hexes"],
                 }
             },
         }
@@ -261,6 +298,16 @@ def _score_hex_threat(tool_input: dict) -> str:
     })
 
 
+def _score_hex_batch(tool_input: dict) -> str:
+    """Score multiple hexes in one call."""
+    hexes = tool_input.get("hexes", [])
+    results = []
+    for h in hexes:
+        result = json.loads(_score_hex_threat(h))
+        results.append(result)
+    return json.dumps({"scored": results, "count": len(results)})
+
+
 def _load_hex_events(run_id: str = None) -> str:
     """Load Agent 1's output from S3 or local file."""
     # Try S3 first if run_id provided
@@ -295,6 +342,9 @@ def handle_tool(tool_name: str, tool_input: dict) -> str:
     elif tool_name == "score_hex_threat":
         return _score_hex_threat(tool_input)
 
+    elif tool_name == "score_hex_batch":
+        return _score_hex_batch(tool_input)
+
     else:
         return json.dumps({"error": f"Unknown tool: {tool_name}"})
 
@@ -324,18 +374,49 @@ def run(run_id: str, hex_events: dict = None) -> dict:
     else:
         user_message += f"Use get_hex_events with run_id '{run_id}' to load Agent 1's output.\n\n"
 
+    # Collect all scored hexes from batch tool calls
+    all_scored = []
+
+    def tracking_handler(tool_name, tool_input):
+        result = handle_tool(tool_name, tool_input)
+        if tool_name in ("score_hex_batch", "score_hex_threat"):
+            try:
+                parsed_result = json.loads(result)
+                if "scored" in parsed_result:
+                    all_scored.extend(parsed_result["scored"])
+                elif "hex_id" in parsed_result:
+                    all_scored.append(parsed_result)
+            except json.JSONDecodeError:
+                pass
+        return result
+
     result = run_agent(
         system_prompt=SYSTEM_PROMPT,
         tools=TOOLS,
-        tool_handler=handle_tool,
+        tool_handler=tracking_handler,
         user_message=user_message,
+        max_turns=25,
+        model="lite",  # Haiku — scoring uses deterministic formula, LLM just orchestrates
     )
 
     try:
         parsed = json.loads(result["response"])
     except json.JSONDecodeError:
-        logger.warning("Agent 2 response was not valid JSON, returning raw")
+        logger.warning("Agent 2 response was not valid JSON, using collected scores")
         parsed = {"raw_response": result["response"]}
+
+    # Always use the collected scores — they're complete even if the LLM text was truncated
+    if all_scored:
+        parsed["threat_map"] = all_scored
+        by_level = {}
+        for s in all_scored:
+            lvl = s.get("risk_level", "UNKNOWN")
+            by_level[lvl] = by_level.get(lvl, 0) + 1
+        parsed["summary"] = {
+            "total_hexes_scored": len(all_scored),
+            **by_level,
+        }
+        logger.info("Agent 2 scored %d hexes: %s", len(all_scored), by_level)
 
     parsed["tokens_used"] = result["tokens_used"]
     parsed["tool_calls"] = result["tool_calls"]

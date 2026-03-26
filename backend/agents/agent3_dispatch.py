@@ -453,7 +453,7 @@ def _compute_cooling_activations(parsed: dict) -> list[str]:
     return activated
 
 
-
+def handle_tool(tool_name: str, tool_input: dict) -> str:
     """Execute a tool call from Agent 3."""
     if tool_name == "get_threat_map":
         return _load_threat_map(tool_input.get("run_id"))
@@ -499,11 +499,25 @@ def run(run_id: str, threat_map: dict = None) -> dict:
     else:
         user_message += f"Use get_threat_map with run_id '{run_id}' to load Agent 2's output.\n\n"
 
+    # Capture optimization results from the tool handler
+    optimization_result = {}
+
+    def tracking_handler(tool_name, tool_input):
+        result = handle_tool(tool_name, tool_input)
+        if tool_name == "run_optimization":
+            try:
+                optimization_result.update(json.loads(result))
+            except json.JSONDecodeError:
+                pass
+        return result
+
     result = run_agent(
         system_prompt=SYSTEM_PROMPT,
         tools=TOOLS,
-        tool_handler=handle_tool,
+        tool_handler=tracking_handler,
         user_message=user_message,
+        max_turns=15,
+        model="lite",  # Haiku — strategy selection + tool orchestration
     )
 
     try:
@@ -511,6 +525,22 @@ def run(run_id: str, threat_map: dict = None) -> dict:
     except json.JSONDecodeError:
         logger.warning("Agent 3 response was not valid JSON, returning raw")
         parsed = {"raw_response": result["response"]}
+
+    # Use optimization result directly — the LLM text may truncate or omit orders
+    if optimization_result.get("orders"):
+        parsed["orders"] = optimization_result["orders"]
+        parsed.setdefault("strategy_used", optimization_result.get("strategy_used"))
+        parsed.setdefault("unassigned_hexes", optimization_result.get("unassigned_hexes", []))
+        parsed.setdefault("optimization_summary", optimization_result.get("summary", {}))
+        logger.info("Agent 3 dispatched %d orders via %s",
+                     len(optimization_result["orders"]),
+                     optimization_result.get("strategy_used"))
+
+    # Also extract justification from tool calls
+    for tc in result["tool_calls"]:
+        if tc["tool"] == "dispatch_orders":
+            plan = tc["input"].get("dispatch_plan", {})
+            parsed.setdefault("strategy_justification", plan.get("strategy_justification"))
 
     parsed["tokens_used"] = result["tokens_used"]
     parsed["tool_calls"] = result["tool_calls"]

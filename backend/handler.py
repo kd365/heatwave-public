@@ -105,6 +105,10 @@ def _run_pipeline(run_id: str):
             },
         )
 
+        # Rate limit cooldown between agents
+        logger.info("Cooling down 60s between Agent 1 and Agent 2...")
+        time.sleep(60)
+
         # ── Agent 2: Threat Assessment ──
         table.update_item(
             Key={"run_id": run_id},
@@ -133,6 +137,10 @@ def _run_pipeline(run_id: str):
                 ":k": f"results/{run_id}/agent2.json",
             },
         )
+
+        # Rate limit cooldown between agents
+        logger.info("Cooling down 60s between Agent 2 and Agent 3...")
+        time.sleep(60)
 
         # ── Agent 3: Dispatch Commander ──
         table.update_item(

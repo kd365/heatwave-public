@@ -25,15 +25,25 @@ export interface DispatchOrder {
 
 export interface HexEvent {
   hex_id: string
-  event_type: string
-  severity_score: number
+  max_temp_f: number
+  max_apparent_f: number
+  hot_days: number
+  weather_source: string
+  dispatch_count: number
+  dispatch_incidents: string[]
+  service_count: number
+  service_types: Record<string, number>
+  social_count: number
+  social_signals: string[]
+  total_incident_count: number
   source_count: number
   sources: string[]
-  weather_count: number
-  weather_max_temp: number
-  dispatch_count: number
-  service_count: number
-  social_count: number
+}
+
+export interface ThreatScore {
+  hex_id: string
+  risk_level: string
+  risk_score: number
 }
 
 export interface RunStatus {
@@ -50,11 +60,12 @@ export interface RunStatus {
 
 export interface PipelineResult extends RunStatus {
   hex_events: { hex_events: HexEvent[] }
-  threat_map: unknown
+  threat_map: { threat_map: ThreatScore[] }
   dispatch_plan: {
     strategy_used: string
     strategy_justification: string
-    dispatch_plan: {
+    orders: DispatchOrder[]
+    dispatch_plan?: {
       orders: DispatchOrder[]
       summary: {
         total_deployed: number
