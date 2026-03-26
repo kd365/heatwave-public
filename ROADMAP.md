@@ -289,7 +289,8 @@ Agent 1 uses a **hybrid deterministic + LLM approach** refined through integrati
 
 ### Map & Hex Grid
 - [X] 🔴 Base map with OpenStreetMap tiles, dark-theme layout, Dallas center ✅
-- [ ] 🔴 H3 hex overlay color-coded by risk level (green → yellow → orange → red)
+- [X] 🔴 H3 hex overlay color-coded by risk level (green → yellow → orange → red) — CRITICAL/HIGH/MEDIUM/LOW thresholds, sticky tooltip per hex ✅
+- [X] 🔴 Legend panel (bottom-left): severity key, per-level counts, tokens/duration/agents from run ✅
 - [ ] 🔴 Dispatch asset markers on map (ambulance, cooling center icons)
 - [ ] 🟡 Animate hex transitions on new results
 
@@ -301,7 +302,7 @@ Agent 1 uses a **hybrid deterministic + LLM approach** refined through integrati
 - [ ] 🟡 CloudWatch metrics embedded or fetched via proxy
 
 ### Controls
-- [ ] 🔴 "Run Analysis" button → `POST /api/v1/analyze`, poll, update map
+- [X] 🔴 "Run Analysis" button → `POST /api/v1/analyze`, poll every 5s, update map on COMPLETE ✅
 - [ ] 🟡 Date/time range selector
 
 ---
