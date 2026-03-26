@@ -57,7 +57,14 @@ function App() {
   })
 
   const hexEvents: HexEvent[] = result?.hex_events?.hex_events ?? []
-  const orders: DispatchOrder[] = result?.dispatch_plan?.dispatch_plan?.orders ?? []
+  const orders: DispatchOrder[] = (() => {
+    const dp = result?.dispatch_plan
+    if (!dp) return []
+    // Check all possible paths where orders might be
+    if (dp.orders?.length) return dp.orders
+    if (dp.dispatch_plan?.orders?.length) return dp.dispatch_plan.orders
+    return []
+  })()
   const status = runStatus?.status ?? latestRun?.status ?? 'IDLE'
 
   // Load asset inventory (cooling centers + mobile fleet)
@@ -80,7 +87,8 @@ function App() {
     const HIGH_SEVERITY_THRESHOLD = 0.65
     const activationZone = new Set<string>()
     for (const h of hexEvents) {
-      if ((h.severity_score ?? 0) >= HIGH_SEVERITY_THRESHOLD) {
+      const threatScore = (result?.threat_map?.threat_map ?? []).find((t: any) => t.hex_id === h.hex_id)
+      if ((threatScore?.risk_score ?? 0) >= HIGH_SEVERITY_THRESHOLD) {
         for (const ring of gridDisk(h.hex_id, ACTIVATION_RADIUS)) {
           activationZone.add(ring)
         }
@@ -140,7 +148,7 @@ function App() {
               attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
-            {hexEvents.length > 0 && <HexLayer hexEvents={hexEvents} />}
+            {hexEvents.length > 0 && <HexLayer hexEvents={hexEvents} threatMap={result?.threat_map?.threat_map ?? []} />}
             <AssetLayer
               assets={assets}
               orders={orders}
@@ -153,7 +161,7 @@ function App() {
             result={result ?? null}
             recentRuns={recentRuns}
           />
-          <Legend hexEvents={hexEvents} runStatus={runStatus ?? latestRun ?? null} />
+          <Legend hexEvents={hexEvents} threatMap={result?.threat_map?.threat_map ?? []} runStatus={runStatus ?? latestRun ?? null} />
         </div>
 
         <OrdersPanel orders={orders} assets={assets} />

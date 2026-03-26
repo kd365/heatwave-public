@@ -1,22 +1,22 @@
 import { useState } from 'react'
-import type { HexEvent, RunStatus } from '../api'
+import type { HexEvent, ThreatScore, RunStatus } from '../api'
 
 interface Props {
   hexEvents: HexEvent[]
+  threatMap?: ThreatScore[]
   runStatus: RunStatus | null
 }
 
-function riskLevel(score: number): string {
-  if (score >= 0.85) return 'CRITICAL'
-  if (score >= 0.65) return 'HIGH'
-  if (score >= 0.40) return 'MEDIUM'
-  return 'LOW'
-}
-
-export function Legend({ hexEvents, runStatus }: Props) {
+export function Legend({ hexEvents, threatMap = [], runStatus }: Props) {
   const [collapsed, setCollapsed] = useState(false)
-  const counts = { CRITICAL: 0, HIGH: 0, MEDIUM: 0, LOW: 0 }
-  for (const h of hexEvents) counts[riskLevel(h.severity_score) as keyof typeof counts]++
+  const counts = { CRITICAL: 0, HIGH: 0, MEDIUM: 0, LOW: 0, UNSCORED: 0 }
+  const threatLookup = new Map(threatMap.map(t => [t.hex_id, t]))
+  for (const h of hexEvents) {
+    const t = threatLookup.get(h.hex_id)
+    const level = (t?.risk_level ?? 'UNSCORED') as keyof typeof counts
+    if (level in counts) counts[level]++
+    else counts.UNSCORED++
+  }
   const multiSource = hexEvents.filter(h => h.source_count >= 2).length
 
   return (
