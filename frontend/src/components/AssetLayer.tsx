@@ -115,11 +115,34 @@ export function AssetLayer({ assets, orders, activatedCoolingIds }: Props) {
         )
       })}
 
-      {/* Dispatched / staged mobile assets — positioned at assigned hex center */}
-      {orders.map((order, i) => {
+      {/* Dispatched / staged mobile assets — jittered when multiple orders share a hex */}
+      {(() => {
+        // Group orders by to_hex so we can compute offsets for stacked assets
+        const hexCount = new Map<string, number>()
+        const hexIndex = new Map<string, number>()
+        for (const o of orders) {
+          hexCount.set(o.to_hex, (hexCount.get(o.to_hex) ?? 0) + 1)
+          hexIndex.set(o.to_hex, 0)
+        }
+        // Offsets: center first, then a ring of 6 positions matching hex geometry
+        const OFFSETS: [number, number][] = [
+          [0, 0],
+          [0.0013, 0],
+          [-0.0013, 0],
+          [0, 0.0018],
+          [0, -0.0018],
+          [0.0013, 0.0018],
+          [-0.0013, -0.0018],
+        ]
+        return orders.map((order, i) => {
+          const idx = hexIndex.get(order.to_hex)!
+          hexIndex.set(order.to_hex, idx + 1)
+          const [dLat, dLng] = OFFSETS[Math.min(idx, OFFSETS.length - 1)]
         const asset = assetById.get(order.asset_id)
         const assetType = asset?.asset_type ?? ''
-        const [lat, lng] = cellToLatLng(order.to_hex)
+          const [baseLat, baseLng] = cellToLatLng(order.to_hex)
+          const lat = baseLat + dLat
+          const lng = baseLng + dLng
         const icon = order.role === 'stage' ? ICONS.staged : mobileIcon(assetType)
         const roleColor = order.role === 'stage'
           ? { bg: '#713f12', text: '#fef08a' }
@@ -148,7 +171,8 @@ export function AssetLayer({ assets, orders, activatedCoolingIds }: Props) {
             </Tooltip>
           </Marker>
         )
-      })}
+        })
+      })()}
     </>
   )
 }

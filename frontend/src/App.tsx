@@ -60,7 +60,11 @@ function App() {
 
   const activatedCoolingIds: string[] = useMemo(() => {
     const fromResult: string[] = result?.dispatch_plan?.cooling_centers_activated ?? []
-    if (fromResult.length > 0) return fromResult
+    // Validate LLM IDs against real asset inventory — LLM sometimes invents IDs
+    // that don't match the actual COOL-XXX format used in the inventory
+    const knownIds = new Set(assets.map(a => a.id))
+    const validFromResult = fromResult.filter(id => knownIds.has(id))
+    if (validFromResult.length > 0) return validFromResult
     // Frontend geometry fallback: activate cooling centers near HIGH/CRITICAL hex events
     if (!assets.length || !hexEvents.length) return []
     const ACTIVATION_RADIUS = 2
