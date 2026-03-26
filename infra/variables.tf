@@ -35,9 +35,15 @@ variable "github_repo" {
 }
 
 variable "bedrock_model_id" {
-  description = "Bedrock model ID for the agents"
+  description = "Bedrock model ID for agents requiring full reasoning (Sonnet)"
   type        = string
-  default     = "anthropic.claude-3-5-sonnet-20241022-v2:0"
+  default     = "us.anthropic.claude-sonnet-4-20250514-v1:0"
+}
+
+variable "bedrock_model_lite" {
+  description = "Bedrock model ID for lightweight orchestration calls (Haiku)"
+  type        = string
+  default     = "us.anthropic.claude-haiku-4-5-20251001-v1:0"
 }
 
 variable "bedrock_embedding_model_id" {
