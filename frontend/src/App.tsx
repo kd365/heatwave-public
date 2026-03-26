@@ -1,4 +1,5 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo } from 'react'
+import { gridDisk, latLngToCell } from 'h3-js'
 import { useQuery } from '@tanstack/react-query'
 import 'leaflet/dist/leaflet.css'
 import { MapContainer, TileLayer } from 'react-leaflet'
@@ -6,7 +7,7 @@ import { HexLayer } from './components/HexLayer'
 import { Legend } from './components/Legend'
 import { AssetLayer } from './components/AssetLayer'
 import { triggerAnalysis, fetchRunStatus, fetchResult, fetchLatestRun, fetchAssets } from './api'
-import type { HexEvent, RunStatus, DispatchOrder } from './api'
+import type { HexEvent, RunStatus, DispatchOrder, Asset } from './api'
 import './App.css'
 
 const DALLAS_CENTER: [number, number] = [32.7767, -96.797]
@@ -48,7 +49,6 @@ function App() {
 
   const hexEvents: HexEvent[] = result?.hex_events?.hex_events ?? []
   const orders: DispatchOrder[] = result?.dispatch_plan?.dispatch_plan?.orders ?? []
-  const activatedCoolingIds: string[] = result?.dispatch_plan?.cooling_centers_activated ?? []
   const status = runStatus?.status ?? latestRun?.status ?? 'IDLE'
 
   // Load asset inventory (cooling centers + mobile fleet)
@@ -57,6 +57,36 @@ function App() {
     queryFn: fetchAssets,
     staleTime: Infinity,
   })
+
+  const activatedCoolingIds: string[] = useMemo(() => {
+    const fromResult: string[] = result?.dispatch_plan?.cooling_centers_activated ?? []
+    if (fromResult.length > 0) return fromResult
+    // Frontend geometry fallback: activate cooling centers near HIGH/CRITICAL hex events
+    if (!assets.length || !hexEvents.length) return []
+    const ACTIVATION_RADIUS = 2
+    const HIGH_SEVERITY_THRESHOLD = 0.65
+    const activationZone = new Set<string>()
+    for (const h of hexEvents) {
+      if ((h.severity_score ?? 0) >= HIGH_SEVERITY_THRESHOLD) {
+        for (const ring of gridDisk(h.hex_id, ACTIVATION_RADIUS)) {
+          activationZone.add(ring)
+        }
+      }
+    }
+    if (activationZone.size === 0) return []
+    return (assets as Asset[])
+      .filter(a => a.asset_type.startsWith('cooling_center'))
+      .filter(a => {
+        if (a.home_lat == null || a.home_lon == null) return false
+        try {
+          const ccHex = latLngToCell(a.home_lat, a.home_lon, 8)
+          return activationZone.has(ccHex)
+        } catch {
+          return false
+        }
+      })
+      .map(a => a.id)
+  }, [result, assets, hexEvents])
 
   async function handleRunAnalysis() {
     setIsTriggering(true)
