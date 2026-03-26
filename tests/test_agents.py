@@ -1,7 +1,6 @@
 """Tests for agent tool handlers (no Bedrock calls — tests run locally)."""
 
 import json
-import pytest
 
 from backend.agents.agent1_triage import handle_tool as agent1_handle
 from backend.agents.agent2_threat import handle_tool as agent2_handle, _score_hex_threat

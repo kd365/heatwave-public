@@ -1,0 +1,68 @@
+name: Deploy Backend
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'backend/**'
+      - 'requirements.txt'
+
+jobs:
+  deploy:
+    name: Package & deploy Lambda
+    runs-on: ubuntu-latest
+    environment: production
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+
+      - name: Install dependencies into package dir
+        run: |
+          pip install \
+            --platform manylinux2014_x86_64 \
+            --target ./package \
+            --implementation cp \
+            --python-version 3.12 \
+            --only-binary=:all: \
+            --upgrade \
+            -r requirements.txt
+
+      - name: Copy backend source
+        run: cp -r backend package/
+
+      - name: Zip deployment package
+        run: cd package && zip -r ../lambda.zip . -x "*.pyc" -x "*/__pycache__/*"
+
+      - name: Deploy to Lambda
+        run: |
+          aws lambda update-function-code \
+            --function-name heatwave-dev-backend \
+            --zip-file fileb://lambda.zip \
+            --region us-east-1
+
+      - name: Wait for update to complete
+        run: |
+          aws lambda wait function-updated \
+            --function-name heatwave-dev-backend \
+            --region us-east-1
+
+      - name: Verify deployment
+        run: |
+          aws lambda invoke \
+            --function-name heatwave-dev-backend \
+            --payload '{"httpMethod":"GET","path":"/health","headers":{},"queryStringParameters":null,"body":null}' \
+            --cli-binary-format raw-in-base64-out \
+            /tmp/response.json \
+            --region us-east-1
+          cat /tmp/response.json
