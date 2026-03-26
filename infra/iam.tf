@@ -151,16 +151,18 @@ data "aws_iam_policy_document" "lambda_exec_permissions" {
   }
 
   # Direct model invocation (orchestration layer calls Claude directly)
+  # Covers both foundation models and cross-region inference profiles
   statement {
     sid     = "InvokeBedrockModel"
     effect  = "Allow"
-    actions = ["bedrock:InvokeModel"]
+    actions = ["bedrock:InvokeModel", "bedrock:InvokeModelWithResponseStream"]
     resources = [
-      "arn:aws:bedrock:${var.aws_region}::foundation-model/${var.bedrock_model_id}",
+      "arn:aws:bedrock:${var.aws_region}::foundation-model/*",
+      "arn:aws:bedrock:${var.aws_region}:${var.account_id}:inference-profile/*",
     ]
   }
 
-  # Read raw data and RAG docs; results prefix excluded from reads
+  # Read raw data, synthetic data, and RAG docs; results prefix excluded from reads
   statement {
     sid     = "ReadS3Data"
     effect  = "Allow"
@@ -168,6 +170,7 @@ data "aws_iam_policy_document" "lambda_exec_permissions" {
     resources = [
       "${aws_s3_bucket.data.arn}/raw/*",
       "${aws_s3_bucket.data.arn}/rag/*",
+      "${aws_s3_bucket.data.arn}/synthetic/*",
     ]
   }
 

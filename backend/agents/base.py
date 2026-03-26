@@ -10,6 +10,7 @@ import json
 import logging
 import os
 import re
+import time
 
 import boto3
 
@@ -28,7 +29,11 @@ def _get_client():
     global _client
     if _client is None:
         from botocore.config import Config
-        config = Config(read_timeout=300, connect_timeout=10, retries={"max_attempts": 3})
+        config = Config(
+            read_timeout=300,
+            connect_timeout=10,
+            retries={"max_attempts": 8, "mode": "adaptive"},
+        )
         _client = boto3.client("bedrock-runtime", region_name=AWS_REGION, config=config)
     return _client
 
@@ -58,7 +63,7 @@ def run_agent(
     total_tokens = 0
 
     for turn in range(max_turns):
-        # Call Claude
+        # Call Claude with manual throttle retry
         request = {
             "modelId": BEDROCK_MODEL_ID,
             "messages": messages,
@@ -71,7 +76,16 @@ def run_agent(
         if tools:
             request["toolConfig"] = {"tools": tools}
 
-        response = client.converse(**request)
+        for attempt in range(5):
+            try:
+                response = client.converse(**request)
+                break
+            except client.exceptions.ThrottlingException as e:
+                if attempt == 4:
+                    raise
+                wait = 20 * (2 ** attempt)  # 20, 40, 80, 160 seconds
+                logger.warning("Throttled on turn %d, waiting %ds (attempt %d/5)", turn, wait, attempt + 1)
+                time.sleep(wait)
 
         # Track token usage
         usage = response.get("usage", {})

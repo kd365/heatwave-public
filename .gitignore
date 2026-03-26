@@ -172,3 +172,7 @@ CLAUDE.md
 *.bak
 *.tmp
 *.orig
+
+# Lambda build artifacts
+package/
+lambda.zip

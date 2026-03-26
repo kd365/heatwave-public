@@ -157,7 +157,7 @@ System prompt: *"Analyze the threat map, consider critical zone count, asset ava
 - [X] 🔴 Upload 6 reference documents to S3 RAG bucket (`s3://heatwave-dev-data-388691194728/rag/`)
 - [X] 🔴 Configure and sync Bedrock Knowledge Base data source (`6VWUARQXEM`)
 - [X] 🔴 Run KB ingestion job — RAG is live
-- [ ] 🔴 Test RAG query: *"At what wet-bulb temperature does heatstroke risk become critical for outdoor workers?"*
+- [X] 🔴 Test RAG query: *"At what wet-bulb temperature does heatstroke risk become critical for outdoor workers?"* — CDC NIOSH: 30°C WBGT (86°F) upper limit for moderate work ✅
 - [ ] 🟡 Tune chunking strategy for dense medical text (CDC 192pg)
 - [X] 🟡 Confirm conflict scenario: NWS and OSHA docs both surface with different thresholds ✅
   - Heat Index query → `nws_heat_index_safety.md` (0.634): Danger at HI 103°F
@@ -251,8 +251,8 @@ Agent 1 uses a **hybrid deterministic + LLM approach** refined through integrati
 - [X] 🔴 Solver wired as callable tool — converts Claude's JSON to ThreatHex/Asset objects, runs strategy
 - [X] 🔴 `dispatch_orders` tool — writes to DynamoDB (autonomous action), local fallback for testing
 - [X] 🔴 Output schema: `DispatchPlan(strategy_used, orders, unassigned_hexes, summary)`
-- [ ] 🟡 Demo scenario 1: many CRITICAL hexes → Agent 3 picks `optimize_coverage` (requires live Bedrock)
-- [ ] 🟡 Demo scenario 2: few CRITICAL hexes → Agent 3 picks `optimize_response_time` (requires live Bedrock)
+- [X] 🟡 Demo scenario 1: Agent 3 autonomously picked `optimize_coverage` (run `cd2e924e`) — 1 CRITICAL hex, 3 HIGH, scarce assets (13 units), 109°F. Justified: "maximize weighted threat coverage" ✅
+- [ ] 🟡 Demo scenario 2: few CRITICAL hexes → Agent 3 picks `optimize_response_time` (requires live Bedrock with low-threat dataset)
 
 ---
 
@@ -265,7 +265,7 @@ Agent 1 uses a **hybrid deterministic + LLM approach** refined through integrati
 - [X] 🔴 `GET /api/v1/runs/{run_id}/status` — poll per-agent status from DynamoDB
 - [X] 🔴 `GET /api/v1/runs/{run_id}/result` — fetch all 3 agent outputs from S3
 - [X] 🔴 Agent handoff: Agent 1 output passed directly → Agent 2 → Agent 3 + saved to S3 per step
-- [ ] 🟡 Retry logic for Bedrock API calls (exponential backoff)
+- [X] 🟡 Retry logic for Bedrock API calls (exponential backoff) — adaptive mode + manual 20/40/80/160s backoff in `base.py` ✅
 - [X] 🟡 `GET /api/v1/runs` — list 20 most recent pipeline runs
 
 ### FastAPI Backend ✅
@@ -339,7 +339,7 @@ Agent 1 uses a **hybrid deterministic + LLM approach** refined through integrati
 *Goal: End-to-end tested, demo rehearsed, presentation ready.*
 
 ### Integration Testing
-- [ ] 🔴 Full pipeline with real Dallas dataset → valid dispatch plan
+- [X] 🔴 Full pipeline with real Dallas dataset → valid dispatch plan — run `cd2e924e`, 8 min, 720k tokens, A1→A2→A3 all COMPLETE ✅
 - [ ] 🔴 **Signal-to-noise test**: irrelevant 911 calls do not appear in Agent 1 output
 - [ ] 🔴 **Sarcasm test**: sarcastic social posts discarded, threat score not inflated
 - [ ] 🔴 **Conflict doc test**: NWS vs OSHA thresholds — Agent 2 surfaces discrepancy in justification
