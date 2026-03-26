@@ -295,7 +295,7 @@ Agent 1 uses a **hybrid deterministic + LLM approach** refined through integrati
 - [ ] 🟡 Animate hex transitions on new results
 
 ### Panels
-- [ ] 🔴 Agent status panel: `IDLE | RUNNING | COMPLETE | ERROR` per agent
+- [X] 🔴 Agent status panel: `IDLE | RUNNING | COMPLETE | ERROR` per agent
 - [ ] 🔴 Dispatch orders table (asset, type, target hex, distance)
 - [ ] 🔴 Observability panel: run count, avg response time, token usage, cost estimate
 - [ ] 🟡 Agent reasoning/justification expandable panel

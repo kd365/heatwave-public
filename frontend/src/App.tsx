@@ -6,6 +6,7 @@ import { MapContainer, TileLayer } from 'react-leaflet'
 import { HexLayer } from './components/HexLayer'
 import { Legend } from './components/Legend'
 import { AssetLayer } from './components/AssetLayer'
+import { AgentPanel } from './components/AgentPanel'
 import { triggerAnalysis, fetchRunStatus, fetchResult, fetchLatestRun, fetchAssets } from './api'
 import type { HexEvent, RunStatus, DispatchOrder, Asset } from './api'
 import './App.css'
@@ -138,6 +139,7 @@ function App() {
           />
         </MapContainer>
 
+        <AgentPanel runStatus={runStatus ?? latestRun ?? null} />
         <Legend hexEvents={hexEvents} runStatus={runStatus ?? latestRun ?? null} />
       </main>
     </div>
