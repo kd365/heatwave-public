@@ -1,8 +1,19 @@
 import { useState } from 'react'
-import type { RunStatus } from '../api'
+import type { RunStatus, PipelineResult } from '../api'
+
+// Claude Sonnet 3.5 v2 blended rate — 80% input @ $3/MTok, 20% output @ $15/MTok
+const COST_PER_TOKEN = (0.8 * 3 + 0.2 * 15) / 1_000_000
+
+const STRATEGY_LABELS: Record<string, string> = {
+  optimize_coverage:      'Coverage Maximization',
+  optimize_response_time: 'Response Time',
+  optimize_staged_reserve:'Staged Reserve',
+}
 
 interface Props {
   runStatus: RunStatus | null
+  result?: PipelineResult | null
+  recentRuns?: RunStatus[]
 }
 
 const AGENTS: {
@@ -31,8 +42,9 @@ const AGENTS: {
   },
 ]
 
-export function AgentPanel({ runStatus }: Props) {
+export function AgentPanel({ runStatus, result, recentRuns = [] }: Props) {
   const [collapsed, setCollapsed] = useState(false)
+  const [obsCollapsed, setObsCollapsed] = useState(false)
 
   if (collapsed) {
     return (
@@ -95,6 +107,95 @@ export function AgentPanel({ runStatus }: Props) {
           )
         })}
       </div>
+
+      <ObsSection
+        runStatus={runStatus}
+        result={result ?? null}
+        recentRuns={recentRuns}
+        collapsed={obsCollapsed}
+        onToggle={() => setObsCollapsed(c => !c)}
+      />
     </aside>
+  )
+}
+
+function ObsSection({
+  runStatus,
+  result,
+  recentRuns,
+  collapsed,
+  onToggle,
+}: {
+  runStatus: RunStatus | null
+  result: PipelineResult | null
+  recentRuns: RunStatus[]
+  collapsed: boolean
+  onToggle: () => void
+}) {
+  const dp = result?.dispatch_plan
+  const strategy = dp?.strategy_used
+  const summary = dp?.dispatch_plan?.summary
+  const tokens = runStatus?.tokens_used ?? 0
+  const duration_ms = runStatus?.duration_ms ?? null
+  const estCost = tokens > 0 ? (tokens * COST_PER_TOKEN).toFixed(2) : null
+
+  const completedRuns = recentRuns.filter(r => r.status === 'COMPLETE')
+  const avgDurationMin = completedRuns.length > 0
+    ? completedRuns.reduce((sum, r) => sum + (r.duration_ms ?? 0), 0) / completedRuns.length / 60_000
+    : null
+
+  return (
+    <div className="obs-section">
+      <div className="obs-header" onClick={onToggle}>
+        <span className="obs-title">OBSERVABILITY</span>
+        <span className="obs-toggle">{collapsed ? '▲' : '▼'}</span>
+      </div>
+      {!collapsed && (
+        <div className="obs-body">
+          {tokens === 0 && !strategy ? (
+            <div className="obs-empty">No run data yet</div>
+          ) : (
+            <>
+              {strategy && (
+                <ObsRow label="Strategy" value={STRATEGY_LABELS[strategy] ?? strategy} highlight />
+              )}
+              {duration_ms != null && (
+                <ObsRow label="Duration" value={`${(duration_ms / 60_000).toFixed(1)} min`} />
+              )}
+              {tokens > 0 && (
+                <ObsRow label="Tokens" value={`${Math.round(tokens / 1000)}K`} />
+              )}
+              {estCost && (
+                <ObsRow label="Est. cost" value={`~$${estCost}`} />
+              )}
+              {summary && (
+                <ObsRow
+                  label="Coverage"
+                  value={`${summary.critical_covered}/${summary.critical_total} critical · ${summary.total_deployed} deployed`}
+                />
+              )}
+              {completedRuns.length > 0 && (
+                <div className="obs-divider" />
+              )}
+              {completedRuns.length > 0 && (
+                <ObsRow
+                  label="History"
+                  value={`${completedRuns.length} run${completedRuns.length !== 1 ? 's' : ''}${avgDurationMin != null ? ` · avg ${avgDurationMin.toFixed(1)} min` : ''}`}
+                />
+              )}
+            </>
+          )}
+        </div>
+      )}
+    </div>
+  )
+}
+
+function ObsRow({ label, value, highlight }: { label: string; value: string; highlight?: boolean }) {
+  return (
+    <div className="obs-row">
+      <span className="obs-label">{label}</span>
+      <span className={`obs-value${highlight ? ' obs-value--highlight' : ''}`}>{value}</span>
+    </div>
   )
 }

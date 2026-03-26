@@ -7,8 +7,8 @@ import { HexLayer } from './components/HexLayer'
 import { Legend } from './components/Legend'
 import { AssetLayer } from './components/AssetLayer'
 import { AgentPanel } from './components/AgentPanel'
-import { triggerAnalysis, fetchRunStatus, fetchResult, fetchLatestRun, fetchAssets } from './api'
-import type { HexEvent, RunStatus, DispatchOrder, Asset } from './api'
+import { triggerAnalysis, fetchRunStatus, fetchResult, fetchLatestRun, fetchAssets, fetchRuns } from './api'
+import type { HexEvent, RunStatus, PipelineResult, DispatchOrder, Asset } from './api'
 import './App.css'
 
 const DALLAS_CENTER: [number, number] = [32.7767, -96.797]
@@ -42,10 +42,17 @@ function App() {
   })
 
   // Fetch result when COMPLETE
-  const { data: result } = useQuery({
+  const { data: result } = useQuery<PipelineResult>({
     queryKey: ['result', activeRunId],
     queryFn: () => fetchResult(activeRunId!),
     enabled: !!activeRunId && runStatus?.status === 'COMPLETE',
+  })
+
+  // Fetch all recent runs for observability history
+  const { data: recentRuns = [] } = useQuery({
+    queryKey: ['runs'],
+    queryFn: fetchRuns,
+    staleTime: 30_000,
   })
 
   const hexEvents: HexEvent[] = result?.hex_events?.hex_events ?? []
@@ -139,7 +146,11 @@ function App() {
           />
         </MapContainer>
 
-        <AgentPanel runStatus={runStatus ?? latestRun ?? null} />
+        <AgentPanel
+          runStatus={runStatus ?? latestRun ?? null}
+          result={result ?? null}
+          recentRuns={recentRuns}
+        />
         <Legend hexEvents={hexEvents} runStatus={runStatus ?? latestRun ?? null} />
       </main>
     </div>

@@ -94,6 +94,13 @@ export async function fetchLatestRun(): Promise<RunStatus | null> {
   return runs.find(r => r.status === 'COMPLETE') ?? runs[0] ?? null
 }
 
+export async function fetchRuns(): Promise<RunStatus[]> {
+  const res = await fetch(`${API_BASE}/api/v1/runs`)
+  if (!res.ok) return []
+  const data = await res.json()
+  return Array.isArray(data) ? data : data.runs ?? []
+}
+
 export async function fetchAssets(): Promise<Asset[]> {
   const res = await fetch('/assets.json')
   if (!res.ok) throw new Error('Failed to load asset inventory')
