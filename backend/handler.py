@@ -16,7 +16,6 @@ import uuid
 from datetime import datetime, timezone
 
 import boto3
-import threading
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from mangum import Mangum

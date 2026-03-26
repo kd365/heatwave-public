@@ -6,7 +6,6 @@ if Claude wants to use a tool, execute it and send result back → repeat
 until Claude gives a final text answer.
 """
 
-import json
 import logging
 import os
 import re
