@@ -83,7 +83,7 @@ function App() {
       .filter(a => {
         if (a.home_lat == null || a.home_lon == null) return false
         try {
-          const ccHex = latLngToCell(a.home_lat, a.home_lon, 8)
+          const ccHex = latLngToCell(a.home_lat, a.home_lon, 7)
           return activationZone.has(ccHex)
         } catch {
           return false
