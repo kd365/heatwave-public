@@ -27,12 +27,13 @@ import os
 import time
 from collections import defaultdict
 
+import h3
+
 from backend.agents.base import run_agent
 from backend.utils.h3_geocoding import (
     geocode_911_records,
     geocode_weather_records,
     geocode_social_media_posts,
-    aggregate_by_hex,
     latlng_to_hex,
 )
 

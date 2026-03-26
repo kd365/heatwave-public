@@ -17,7 +17,6 @@ from enum import Enum
 import h3
 import pulp
 
-from backend.utils.h3_geocoding import get_hex_neighbors
 
 logger = logging.getLogger(__name__)
 
@@ -220,7 +219,6 @@ def optimize_response_time(
 
     # Track remaining capacity per asset
     remaining_capacity = {a.id: a.capacity for a in available}
-    asset_lookup = {a.id: a for a in available}
     orders = []
     covered_hexes = set()
 
