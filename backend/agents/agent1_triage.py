@@ -24,6 +24,7 @@ Design rationale:
 import json
 import logging
 import os
+import time
 from collections import defaultdict
 
 from backend.agents.base import run_agent
@@ -203,24 +204,25 @@ These records were pre-filtered from 1,276 total police dispatch records. Your j
 
 3. When in doubt, INCLUDE the record with a lower severity score. It is better to flag a possible heat death for Agent 2 to evaluate than to miss a real one.
 
+IMPORTANT: Keep your response CONCISE to avoid truncation. For each incident use max 10 words in the reason field.
+
 OUTPUT: Return JSON:
 {
   "confirmed_heat_incidents": [
     {
       "incidentnum": "string",
       "date1": "string",
-      "time1": "string",
       "incident_address": "string",
       "zip_code": "string",
       "severity_score": float,
-      "reason": "brief explanation",
+      "reason": "max 10 words",
       "geocoded_column": {"latitude": "string", "longitude": "string"}
     }
   ],
-  "rejected": [{"incidentnum": "string", "reason": "clear non-heat cause"}],
-  "summary": "brief description of findings"
+  "rejected_count": int,
+  "summary": "one sentence"
 }
-Return ONLY JSON."""
+Return ONLY the JSON object. No markdown, no code blocks, no preamble."""
 
 DISPATCH_TOOLS = [{
     "toolSpec": {
@@ -531,153 +533,179 @@ def _synthesize(weather, dispatch, service, social) -> dict:
     """Build complete hex grid DETERMINISTICALLY, use LLM only for narrative.
 
     The hex grid must contain ALL hexes with events — not a summary.
-    Agent 2 and Agent 3 need the complete grid for threat scoring and optimization.
+    Agent 2 needs descriptive data (temps, incident types, counts) to make
+    RAG-informed risk judgments. We do NOT pre-score severity here.
     """
-    # Collect all geocoded events by hex
-    hex_data = defaultdict(lambda: {
-        "weather_count": 0, "weather_max_temp": 0, "weather_severity": None,
-        "dispatch_count": 0, "dispatch_scores": [],
-        "service_count": 0, "service_scores": [],
-        "social_count": 0, "social_scores": [],
-        "sources": set(),
-    })
-
-    # Weather events
+    # Build weather station lookup for nearest-station interpolation
+    station_hexes = {}  # hex_id -> {max_temp_f, hot_days, apparent_temp_f, ...}
     for e in weather.get("weather_events", []):
         hid = e.get("hex_id")
         if not hid:
             continue
-        h = hex_data[hid]
-        h["weather_count"] += 1
-        h["weather_max_temp"] = max(h["weather_max_temp"], e.get("temp_f", 0))
-        h["weather_severity"] = e.get("severity", h["weather_severity"])
-        h["sources"].add("weather")
+        if hid not in station_hexes:
+            station_hexes[hid] = {
+                "max_temp_f": 0, "max_apparent_f": 0,
+                "hot_days": 0, "temps_by_day": {},
+            }
+        sh = station_hexes[hid]
+        sh["max_temp_f"] = max(sh["max_temp_f"], e.get("max_temp_f", e.get("temp_f", 0)))
+        sh["max_apparent_f"] = max(sh["max_apparent_f"], e.get("max_apparent_f", e.get("apparent_temp_f", 0)))
+        day = e.get("date")
+        if day:
+            sh["temps_by_day"][day] = max(sh["temps_by_day"].get(day, 0), e.get("max_temp_f", e.get("temp_f", 0)))
 
-    # 911 dispatches
+    # Finalize station data
+    for sh in station_hexes.values():
+        sh["hot_days"] = len([t for t in sh["temps_by_day"].values() if t >= 100])
+        del sh["temps_by_day"]
+
+    # Nearest-station interpolation: find closest station for each hex
+    station_hex_list = list(station_hexes.keys())
+
+    def _nearest_station_weather(hex_id):
+        """Assign weather from nearest station. Returns (data, source_type)."""
+        if hex_id in station_hexes:
+            return station_hexes[hex_id], "direct_station"
+        if not station_hex_list:
+            return {"max_temp_f": 0, "max_apparent_f": 0, "hot_days": 0}, "none"
+        best_dist = float("inf")
+        best_hex = station_hex_list[0]
+        for sh in station_hex_list:
+            try:
+                d = h3.grid_distance(hex_id, sh)
+            except Exception:
+                d = 999
+            if d < best_dist:
+                best_dist = d
+                best_hex = sh
+        return station_hexes[best_hex], "interpolated_nearest_station"
+
+    # Collect all hexes from all sources
+    all_hex_ids = set()
+    for e in weather.get("weather_events", []):
+        if e.get("hex_id"):
+            all_hex_ids.add(e["hex_id"])
+    for e in dispatch.get("heat_dispatches", []):
+        if e.get("hex_id"):
+            all_hex_ids.add(e["hex_id"])
+    for e in service.get("service_events", []):
+        if e.get("hex_id"):
+            all_hex_ids.add(e["hex_id"])
+    for e in social.get("social_events", []):
+        if e.get("hex_id"):
+            all_hex_ids.add(e["hex_id"])
+
+    # Build descriptive data per hex (for Agent 2 to judge with RAG)
+    hex_data = {}
+    for hid in all_hex_ids:
+        wx, wx_source = _nearest_station_weather(hid)
+        hex_data[hid] = {
+            "max_temp_f": wx["max_temp_f"],
+            "max_apparent_f": wx["max_apparent_f"],
+            "hot_days": wx["hot_days"],
+            "weather_source": wx_source,
+            "dispatch_incidents": [],
+            "dispatch_count": 0,
+            "service_types": defaultdict(int),
+            "service_count": 0,
+            "social_signals": [],
+            "social_count": 0,
+            "sources": set(),
+        }
+
+    # Weather — mark hexes with direct station data
+    for e in weather.get("weather_events", []):
+        hid = e.get("hex_id")
+        if hid and hid in hex_data:
+            hex_data[hid]["sources"].add("weather")
+
+    # 911 dispatches — include incident descriptions
     for e in dispatch.get("heat_dispatches", []):
         hid = e.get("hex_id")
-        if not hid:
+        if not hid or hid not in hex_data:
             continue
         h = hex_data[hid]
         h["dispatch_count"] += 1
-        h["dispatch_scores"].append(e.get("severity_score", 0.5))
+        reason = e.get("reason", e.get("mo", "heat-related incident"))
+        h["dispatch_incidents"].append(reason[:80])
         h["sources"].add("dispatch_911")
 
-    # 311 service events
+    # 311 service events — group by type
     for e in service.get("service_events", []):
         hid = e.get("hex_id")
-        if not hid:
+        if not hid or hid not in hex_data:
             continue
         h = hex_data[hid]
         h["service_count"] += 1
-        h["service_scores"].append(e.get("severity_score", 0.3))
+        stype = e.get("service_type", "unknown")
+        h["service_types"][stype] += 1
         h["sources"].add("service_311")
 
-    # Social media events
+    # Social media — include signal text
     for e in social.get("social_events", []):
         hid = e.get("hex_id")
-        if not hid:
+        if not hid or hid not in hex_data:
             continue
         h = hex_data[hid]
         h["social_count"] += 1
-        h["social_scores"].append(e.get("severity_score", 0.5))
+        text = e.get("text", e.get("content", "social media signal"))
+        h["social_signals"].append(text[:100])
         h["sources"].add("social_media")
 
-    # Build hex_events list with deterministic scoring
+    # Build hex_events list — descriptive, no pre-scored severity
     hex_events = []
     for hex_id, h in hex_data.items():
         sources = h["sources"]
-        source_count = len(sources)
-
-        # Composite severity: weighted by data source importance + multi-source bonus
-        weather_score = min(1.0, (h["weather_max_temp"] - 85) / 30) if h["weather_count"] > 0 else 0
-        dispatch_score = (sum(h["dispatch_scores"]) / len(h["dispatch_scores"])) if h["dispatch_scores"] else 0
-        service_score = (sum(h["service_scores"]) / len(h["service_scores"])) if h["service_scores"] else 0
-        social_score = (sum(h["social_scores"]) / len(h["social_scores"])) if h["social_scores"] else 0
-
-        # Weighted composite
-        total_weight = 0
-        weighted_sum = 0
-        if h["weather_count"] > 0:
-            weighted_sum += weather_score * 0.35
-            total_weight += 0.35
-        if h["dispatch_count"] > 0:
-            weighted_sum += dispatch_score * 0.30
-            total_weight += 0.30
-        if h["service_count"] > 0:
-            weighted_sum += service_score * 0.20
-            total_weight += 0.20
-        if h["social_count"] > 0:
-            weighted_sum += social_score * 0.15
-            total_weight += 0.15
-
-        severity = weighted_sum / total_weight if total_weight > 0 else 0
-
-        # Multi-source corroboration bonus (10% per additional source)
-        if source_count >= 2:
-            severity = min(1.0, severity + (source_count - 1) * 0.10)
-
-        # Determine event type
-        if source_count >= 2:
-            event_type = "multi_source"
-        elif "weather" in sources:
-            event_type = "weather"
-        elif "dispatch_911" in sources:
-            event_type = "dispatch_911"
-        elif "service_311" in sources:
-            event_type = "service_311"
-        else:
-            event_type = "social_media"
+        total_incidents = h["dispatch_count"] + h["service_count"] + h["social_count"]
 
         hex_events.append({
             "hex_id": hex_id,
-            "event_type": event_type,
-            "severity_score": round(severity, 3),
-            "source_count": source_count,
-            "sources": sorted(sources),
-            "weather_count": h["weather_count"],
-            "weather_max_temp": h["weather_max_temp"],
+            "max_temp_f": h["max_temp_f"],
+            "max_apparent_f": h["max_apparent_f"],
+            "hot_days": h["hot_days"],
+            "weather_source": h["weather_source"],
             "dispatch_count": h["dispatch_count"],
+            "dispatch_incidents": h["dispatch_incidents"],
             "service_count": h["service_count"],
+            "service_types": dict(h["service_types"]),
             "social_count": h["social_count"],
+            "social_signals": h["social_signals"],
+            "total_incident_count": total_incidents,
+            "source_count": len(sources),
+            "sources": sorted(sources),
         })
 
-    # Sort by severity (highest first)
-    hex_events.sort(key=lambda x: x["severity_score"], reverse=True)
+    # Sort by total incident count (highest first)
+    hex_events.sort(key=lambda x: x["total_incident_count"], reverse=True)
 
-    # Counts
-    by_type = defaultdict(int)
-    for e in hex_events:
-        by_type[e["event_type"]] += 1
-
+    # Summary counts
     multi_source = len([e for e in hex_events if e["source_count"] >= 2])
-    critical = len([e for e in hex_events if e["severity_score"] >= 0.85])
-    high = len([e for e in hex_events if 0.65 <= e["severity_score"] < 0.85])
-    medium = len([e for e in hex_events if 0.40 <= e["severity_score"] < 0.65])
-    low = len([e for e in hex_events if e["severity_score"] < 0.40])
 
     summary = {
         "total_hexes": len(hex_events),
-        "by_type": dict(by_type),
-        "by_severity": {"critical": critical, "high": high, "medium": medium, "low": low},
         "multi_source_hexes": multi_source,
+        "hexes_with_dispatch": len([e for e in hex_events if e["dispatch_count"] > 0]),
+        "hexes_with_service": len([e for e in hex_events if e["service_count"] > 0]),
+        "hexes_with_social": len([e for e in hex_events if e["social_count"] > 0]),
+        "hexes_with_direct_weather": len([e for e in hex_events if e["weather_source"] == "direct_station"]),
+        "hexes_with_interpolated_weather": len([e for e in hex_events if e["weather_source"] == "interpolated_nearest_station"]),
         "total_weather_events": weather.get("events_above_threshold", 0),
         "total_dispatch_confirmed": dispatch.get("confirmed", 0),
         "total_service_signals": service.get("heat_signals", 0),
         "total_social_signals": social.get("heat_signals", 0),
+        "note": "Severity scoring is deferred to Agent 2 (RAG-informed). Weather for hexes without stations is interpolated from nearest station.",
     }
 
     # LLM narrative (optional — if it fails, the hex grid is still complete)
     try:
         narrative_input = json.dumps({
             "hex_count": len(hex_events),
-            "severity_distribution": {"critical": critical, "high": high, "medium": medium, "low": low},
             "multi_source_hexes": multi_source,
             "top_5_hexes": hex_events[:5],
-            "weather_summary": weather.get("by_severity", {}),
-            "dispatch_summary": f"{dispatch.get('confirmed', 0)} confirmed heat incidents",
-            "service_summary": f"{service.get('heat_signals', 0)} heat-related 311 requests",
-            "social_summary": f"{social.get('heat_signals', 0)} social media signals",
+            "weather_note": f"{summary['hexes_with_direct_weather']} hexes with direct station data, {summary['hexes_with_interpolated_weather']} interpolated from nearest station",
+            "dispatch_summary": f"{dispatch.get('confirmed', 0)} confirmed heat incidents across {summary['hexes_with_dispatch']} hexes",
+            "service_summary": f"{service.get('heat_signals', 0)} heat-related 311 requests across {summary['hexes_with_service']} hexes",
+            "social_summary": f"{social.get('heat_signals', 0)} social media signals across {summary['hexes_with_social']} hexes",
         })
 
         prompt = SYNTHESIS_PROMPT.format(hex_count=len(hex_events))
@@ -686,6 +714,7 @@ def _synthesize(weather, dispatch, service, social) -> dict:
             tools=[],
             tool_handler=lambda n, i: "{}",
             user_message=f"Write the operational summary:\n\n{narrative_input}",
+            model="lite",  # Haiku — summarization only, no judgment needed
         )
 
         try:
@@ -739,10 +768,18 @@ def run(run_id: str = None) -> dict:
     logger.info("Agent 1 — 311: classifying by type + temperature...")
     service = _process_311(weather.get("daily_max_temps", {}))
 
+    # Rate limit cooldown between LLM calls
+    logger.info("Agent 1 — cooling down 30s before social media LLM call...")
+    time.sleep(30)
+
     # 4. Social Media (1 LLM call)
     logger.info("Agent 1 — Social: filtering sarcasm and noise...")
     social = _process_social()
     total_tokens += social.get("tokens_used", 0)
+
+    # Rate limit cooldown before synthesis LLM call
+    logger.info("Agent 1 — cooling down 30s before synthesis LLM call...")
+    time.sleep(30)
 
     # 5. Synthesis (1 LLM call)
     logger.info("Agent 1 — Synthesis: combining all findings...")

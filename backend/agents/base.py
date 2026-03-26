@@ -13,11 +13,15 @@ import re
 import time
 
 import boto3
+from botocore.exceptions import ClientError
 
 logger = logging.getLogger(__name__)
 
 BEDROCK_MODEL_ID = os.environ.get(
-    "BEDROCK_MODEL_ID", "anthropic.claude-3-5-sonnet-20241022-v2:0"
+    "BEDROCK_MODEL_ID", "us.anthropic.claude-sonnet-4-20250514-v1:0"
+)
+BEDROCK_MODEL_LITE = os.environ.get(
+    "BEDROCK_MODEL_LITE", "us.anthropic.claude-haiku-4-5-20251001-v1:0"
 )
 AWS_REGION = os.environ.get("AWS_REGION", "us-east-1")
 
@@ -44,6 +48,7 @@ def run_agent(
     tool_handler: callable,
     user_message: str,
     max_turns: int = 10,
+    model: str = "default",
 ) -> dict:
     """Run an agent conversation loop with tool use.
 
@@ -53,11 +58,14 @@ def run_agent(
         tool_handler: Function that takes (tool_name, tool_input) and returns a result string.
         user_message: The initial task/data to send to the agent.
         max_turns: Max tool-use round trips before forcing a stop.
+        model: "default" for Sonnet (hard judgment), "lite" for Haiku (summarization/scoring).
 
     Returns:
         {"response": str, "tool_calls": list[dict], "tokens_used": int}
     """
     client = _get_client()
+    model_id = BEDROCK_MODEL_LITE if model == "lite" else BEDROCK_MODEL_ID
+    logger.info("Using model: %s (%s)", model, model_id)
     messages = [{"role": "user", "content": [{"text": user_message}]}]
     all_tool_calls = []
     total_tokens = 0
@@ -65,7 +73,7 @@ def run_agent(
     for turn in range(max_turns):
         # Call Claude with manual throttle retry
         request = {
-            "modelId": BEDROCK_MODEL_ID,
+            "modelId": model_id,
             "messages": messages,
             "system": [{"text": system_prompt}],
             "inferenceConfig": {
@@ -76,16 +84,18 @@ def run_agent(
         if tools:
             request["toolConfig"] = {"tools": tools}
 
+        # Retry with exponential backoff for throttling
         for attempt in range(5):
             try:
                 response = client.converse(**request)
                 break
-            except client.exceptions.ThrottlingException as e:
-                if attempt == 4:
+            except ClientError as e:
+                if "ThrottlingException" in str(e) and attempt < 4:
+                    wait = 30 * (2 ** attempt)  # 30s, 60s, 120s, 240s
+                    logger.warning("Throttled (attempt %d/5), waiting %ds...", attempt + 1, wait)
+                    time.sleep(wait)
+                else:
                     raise
-                wait = 20 * (2 ** attempt)  # 20, 40, 80, 160 seconds
-                logger.warning("Throttled on turn %d, waiting %ds (attempt %d/5)", turn, wait, attempt + 1)
-                time.sleep(wait)
 
         # Track token usage
         usage = response.get("usage", {})
@@ -119,6 +129,8 @@ def run_agent(
         # If Claude wants to use tools, execute them
         if stop_reason == "tool_use":
             tool_results = []
+            tool_use_count = sum(1 for b in assistant_message["content"] if "toolUse" in b)
+            logger.info("Agent returned %d tool_use blocks in one turn", tool_use_count)
             for block in assistant_message["content"]:
                 if "toolUse" in block:
                     tool_use = block["toolUse"]
