@@ -4,8 +4,9 @@ import 'leaflet/dist/leaflet.css'
 import { MapContainer, TileLayer } from 'react-leaflet'
 import { HexLayer } from './components/HexLayer'
 import { Legend } from './components/Legend'
-import { triggerAnalysis, fetchRunStatus, fetchResult, fetchLatestRun } from './api'
-import type { HexEvent, RunStatus } from './api'
+import { AssetLayer } from './components/AssetLayer'
+import { triggerAnalysis, fetchRunStatus, fetchResult, fetchLatestRun, fetchAssets } from './api'
+import type { HexEvent, RunStatus, DispatchOrder } from './api'
 import './App.css'
 
 const DALLAS_CENTER: [number, number] = [32.7767, -96.797]
@@ -46,7 +47,16 @@ function App() {
   })
 
   const hexEvents: HexEvent[] = result?.hex_events?.hex_events ?? []
+  const orders: DispatchOrder[] = result?.dispatch_plan?.dispatch_plan?.orders ?? []
+  const activatedCoolingIds: string[] = result?.dispatch_plan?.cooling_centers_activated ?? []
   const status = runStatus?.status ?? latestRun?.status ?? 'IDLE'
+
+  // Load asset inventory (cooling centers + mobile fleet)
+  const { data: assets = [] } = useQuery({
+    queryKey: ['assets'],
+    queryFn: fetchAssets,
+    staleTime: Infinity,
+  })
 
   async function handleRunAnalysis() {
     setIsTriggering(true)
@@ -87,6 +97,11 @@ function App() {
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
           {hexEvents.length > 0 && <HexLayer hexEvents={hexEvents} />}
+          <AssetLayer
+            assets={assets}
+            orders={orders}
+            activatedCoolingIds={activatedCoolingIds}
+          />
         </MapContainer>
 
         <Legend hexEvents={hexEvents} runStatus={runStatus ?? latestRun ?? null} />

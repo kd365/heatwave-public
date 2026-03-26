@@ -291,7 +291,7 @@ Agent 1 uses a **hybrid deterministic + LLM approach** refined through integrati
 - [X] 🔴 Base map with OpenStreetMap tiles, dark-theme layout, Dallas center ✅
 - [X] 🔴 H3 hex overlay color-coded by risk level (green → yellow → orange → red) — CRITICAL/HIGH/MEDIUM/LOW thresholds, sticky tooltip per hex ✅
 - [X] 🔴 Legend panel (bottom-left): severity key, per-level counts, tokens/duration/agents from run ✅
-- [ ] 🔴 Dispatch asset markers on map (ambulance, cooling center icons)
+- [X] 🔴 Dispatch asset markers on map — mobile assets at LP-assigned `to_hex`, cooling centers at fixed address (dim until activated), emoji DivIcons ✅
 - [ ] 🟡 Animate hex transitions on new results
 
 ### Panels

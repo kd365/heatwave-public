@@ -1,6 +1,28 @@
 const API_BASE = import.meta.env.VITE_API_BASE_URL?.replace(/\/$/, '')
   ?? 'https://b5wnyxsvm4.execute-api.us-east-1.amazonaws.com'
 
+export interface Asset {
+  id: string
+  asset_type: string
+  description: string
+  home_address: string
+  home_zip: string
+  home_lat: number
+  home_lon: number
+  status: string
+  shift: string
+  capacity: number
+  coverage_radius: number
+}
+
+export interface DispatchOrder {
+  asset_id: string
+  from_hex: string
+  to_hex: string
+  distance: number
+  role: string
+}
+
 export interface HexEvent {
   hex_id: string
   event_type: string
@@ -33,14 +55,7 @@ export interface PipelineResult extends RunStatus {
     strategy_used: string
     strategy_justification: string
     dispatch_plan: {
-      orders: Array<{
-        asset_id: string
-        asset_type: string
-        from_hex: string
-        to_hex: string
-        distance: number
-        role: string
-      }>
+      orders: DispatchOrder[]
       summary: {
         total_deployed: number
         total_staged: number
@@ -77,4 +92,10 @@ export async function fetchLatestRun(): Promise<RunStatus | null> {
   const data = await res.json()
   const runs: RunStatus[] = Array.isArray(data) ? data : data.runs ?? []
   return runs.find(r => r.status === 'COMPLETE') ?? runs[0] ?? null
+}
+
+export async function fetchAssets(): Promise<Asset[]> {
+  const res = await fetch('/assets.json')
+  if (!res.ok) throw new Error('Failed to load asset inventory')
+  return res.json()
 }
