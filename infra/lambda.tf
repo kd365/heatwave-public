@@ -28,7 +28,7 @@ resource "aws_lambda_function" "backend" {
   role          = aws_iam_role.lambda_exec.arn
 
   runtime  = "python3.12"
-  handler  = "handler.handler" # mangum: handler.py → handler = Mangum(app)
+  handler  = "backend.handler.handler" # mangum: backend/handler.py → handler = Mangum(app)
   filename = data.archive_file.lambda_placeholder.output_path
 
   memory_size = var.lambda_memory_mb
@@ -40,6 +40,7 @@ resource "aws_lambda_function" "backend" {
       PIPELINE_TABLE       = aws_dynamodb_table.pipeline_runs.name
       KNOWLEDGE_BASE_ID    = aws_bedrockagent_knowledge_base.heatwave.id
       BEDROCK_MODEL_ID     = var.bedrock_model_id
+      BEDROCK_MODEL_LITE   = var.bedrock_model_lite
       AWS_ACCOUNT_ID       = var.account_id
       POWERTOOLS_LOG_LEVEL = "INFO"
     }
