@@ -91,7 +91,7 @@ System prompt: *"Analyze the threat map, consider critical zone count, asset ava
 ### Operational Data — 5 datasets (real + synthetic)
 
 **Real data:**
-- [X] 🔴 Dallas 911 dispatch (`dallas_911_aug2023.json`, 1,035 records) — real Dallas PD, heat signals buried in noise
+- [X] 🔴 Dallas 911 dispatch (`dallas_911_aug2023.json`, 1,276 records) — real Dallas PD, heat signals buried in noise (241 heat-adjacent records added: ~80 unexplained deaths, found unresponsive, heat-related incidents)
 - [X] 🔴 Dallas weather (`dallas_weather_aug2023.json`, 4,608 records) — 8 stations, hourly, Open-Meteo Archive API
 - [X] 🔴 Dallas fire stations (`dallas_fire_stations.json`, 60 stations) — all DFR stations with lat/lon
 - [X] 🔴 Dallas 311 requests (`dallas_311_aug2023.json`, 4,482 records) — homeless encampment, animal, water complaints
@@ -340,13 +340,33 @@ Agent 1 uses a **hybrid deterministic + LLM approach** refined through integrati
 *Goal: End-to-end tested, demo rehearsed, presentation ready.*
 
 ### Integration Testing
-- [X] 🔴 Full pipeline with real Dallas dataset → valid dispatch plan — run `cd2e924e`, 8 min, 720k tokens, A1→A2→A3 all COMPLETE ✅
-- [ ] 🔴 **Signal-to-noise test**: irrelevant 911 calls do not appear in Agent 1 output
-- [ ] 🔴 **Sarcasm test**: sarcastic social posts discarded, threat score not inflated
+- [X] 🔴 Full pipeline with real Dallas dataset — multiple successful runs:
+  - Run `24a63566`: 170 hexes, 169 scored, 20 dispatch orders, 879K tokens, 9.2 min ✅
+  - Run `c56648ff`: 170 hexes, 169 scored, 95 dispatch orders, 1M tokens, 10 min ✅
+  - Run `80221b15`: 170 hexes, 29 scored (pre-batch), 504K tokens, 8.9 min ✅
+- [X] 🔴 **Signal-to-noise test**: 26/1,276 911 records confirmed heat-related (LLM filtered out assaults, thefts, traffic) ✅
+- [X] 🔴 **Sarcasm test**: 100/300 social posts confirmed heat signals, sarcasm discarded ✅
 - [ ] 🔴 **Conflict doc test**: NWS vs OSHA thresholds — Agent 2 surfaces discrepancy in justification
 - [ ] 🔴 **Strategy selection test**: two scenarios → Agent 3 picks different strategies
 - [ ] 🟡 Load test: 5 parallel pipeline runs, no DynamoDB race conditions
 - [ ] 🟡 Frontend smoke test: click Run Analysis, map updates
+
+### Remaining Work — Data Enrichment
+
+- [ ] 🔴 **Census/population data per hex** — pull Dallas census tract data (ACS 5-year estimates), assign population counts to each H3 hex. This directly impacts optimization: a MEDIUM hex with 50,000 residents should be prioritized over a MEDIUM hex with 2,000. Agent 2 should factor population density into risk scoring, and Agent 3 should weight dispatch orders by population at risk.
+- [ ] 🟡 **Vulnerable population overlay** — elderly (65+), unhoused count, disability rates per hex from census data. These are aggravating factors for Agent 2.
+
+### Remaining Work — Visualization Improvements
+
+- [ ] 🔴 **Dispatch order detail on map** — show asset type (e.g., "ALS Ambulance from Station 3") and capacity on markers, not just asset IDs. Users need to know *what* is being deployed, not just *where*.
+- [ ] 🔴 **Dispatch lines from stations** — draw lines connecting fire station origin to deployment target hex. Currently the `from_hex` (asset's H3 home hex) doesn't visually connect to the station marker due to hex-center vs station-coordinate offset.
+- [ ] 🟡 **Resource legend** — add asset type icons/colors to the legend so viewers can distinguish ambulances from cooling buses from MODSS teams on the map.
+
+### Remaining Work — UI Polish
+
+- [ ] 🔴 **Text color contrast** — sidebar and panel text is dark grey on black background, hard to read. Change to light grey (#e0e0e0) or white.
+- [ ] 🔴 **Menu spacing** — Agent Pipeline and Observability panels are cramped on smaller screens. Add padding and ensure text doesn't overflow.
+- [ ] 🟡 **Responsive layout** — test at 1280px and 1920px widths, ensure panels don't overlap the map.
 
 ### Presentation Prep
 - [ ] 🔴 Rehearse pitch (2-minute elevator pitch)
@@ -369,7 +389,7 @@ Agent 1 uses a **hybrid deterministic + LLM approach** refined through integrati
 |-----|------|----------|------------|-----------|
 | **1** | Tue 3/24 | ✅ Data, H3 geocoding, optimization solver, 3 agents, FastAPI orchestrator, RAG S3 upload | ✅ Terraform: S3, IAM, DynamoDB, Bedrock KB, Lambda, API Gateway, AOSS index | Backend complete, infra provisioned, RAG live |
 | **2** | Wed 3/25 | RAG test queries, CI/CD workflows, integration test, deploy to Lambda | CI/CD workflows, CloudWatch dashboard | Pipeline tested end-to-end |
-| **3** | Thu 3/26 | Demo scenarios, frontend (together) | Frontend map + hex grid (together) | Working GUI with live pipeline |
+| **3** | Thu 3/26 | ✅ Batch scoring (170/170 hexes), model split (Sonnet+Haiku), dispatch order capture, weather interpolation, frontend schema fixes | ✅ Frontend: hex grid, legend, agent panel, dispatch table, cooling centers, observability | Full pipeline E2E + working GUI |
 | **4** | Fri 3/27 | Frontend (together) — map, hex grid, panels | Frontend (together) — observability, controls | Working GUI with live pipeline |
 | **5** | Sat 3/28 AM | Integration testing, demo rehearsal | Security guardrails, final fixes | Demo-ready by noon |
 | | Sat 3/28 4pm | 🎤 **PRESENT** | 🎤 **PRESENT** | |
