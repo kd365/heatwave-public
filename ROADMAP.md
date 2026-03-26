@@ -285,10 +285,10 @@ Agent 1 uses a **hybrid deterministic + LLM approach** refined through integrati
 
 ### Setup
 - [X] 🔴 Vite + React + TypeScript scaffolding
-- [ ] 🔴 Install: `leaflet`, `react-leaflet`, `h3-js`, `recharts`, `@tanstack/react-query`
+- [X] 🔴 Install: `leaflet`, `react-leaflet`, `h3-js`, `@tanstack/react-query` ✅
 
 ### Map & Hex Grid
-- [ ] 🔴 Base map with OpenStreetMap/CartoDB tiles (no key needed)
+- [X] 🔴 Base map with OpenStreetMap tiles, dark-theme layout, Dallas center ✅
 - [ ] 🔴 H3 hex overlay color-coded by risk level (green → yellow → orange → red)
 - [ ] 🔴 Dispatch asset markers on map (ambulance, cooling center icons)
 - [ ] 🟡 Animate hex transitions on new results
