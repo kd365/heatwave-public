@@ -21,9 +21,10 @@ from fastapi.middleware.cors import CORSMiddleware
 from mangum import Mangum
 
 from backend.agents import agent1_triage, agent2_threat, agent3_dispatch
+from backend.utils.logging_config import configure_logging
 
+configure_logging()
 logger = logging.getLogger(__name__)
-logging.basicConfig(level=os.environ.get("POWERTOOLS_LOG_LEVEL", "INFO"))
 
 # ---------------------------------------------------------------------------
 # App setup
@@ -105,7 +106,7 @@ def _run_pipeline(run_id: str):
         )
 
         # Rate limit cooldown between agents
-        logger.info("Cooling down 60s between Agent 1 and Agent 2...")
+        logger.info("Cooling down 60s between Agent 1 and Agent 2...", extra={"run_id": run_id, "event": "agent.cooldown", "after_agent": 1})
         time.sleep(60)
 
         # ── Agent 2: Threat Assessment ──
@@ -138,7 +139,7 @@ def _run_pipeline(run_id: str):
         )
 
         # Rate limit cooldown between agents
-        logger.info("Cooling down 60s between Agent 2 and Agent 3...")
+        logger.info("Cooling down 60s between Agent 2 and Agent 3...", extra={"run_id": run_id, "event": "agent.cooldown", "after_agent": 2})
         time.sleep(60)
 
         # ── Agent 3: Dispatch Commander ──
@@ -181,12 +182,21 @@ def _run_pipeline(run_id: str):
         )
 
         logger.info(
-            "Pipeline %s complete: %d tokens, %d ms",
-            run_id, total_tokens, duration_ms,
+            "pipeline.complete",
+            extra={
+                "event": "pipeline.complete",
+                "run_id": run_id,
+                "duration_ms": duration_ms,
+                "tokens_used": total_tokens,
+            },
         )
 
     except Exception as e:
-        logger.error("Pipeline %s failed: %s", run_id, e)
+        logger.error(
+            "pipeline.error",
+            extra={"event": "pipeline.error", "run_id": run_id, "error": str(e)},
+            exc_info=True,
+        )
         table.update_item(
             Key={"run_id": run_id},
             UpdateExpression="SET #st = :s, error_message = :e",
@@ -340,7 +350,10 @@ def handler(event, context):
     # Check if this is an async pipeline invocation
     if isinstance(event, dict) and "pipeline_run" in event:
         run_id = event["pipeline_run"]
-        logger.info("Async pipeline invocation for run_id: %s", run_id)
+        logger.info(
+            "pipeline.start",
+            extra={"event": "pipeline.start", "run_id": run_id},
+        )
         _run_pipeline(run_id)
         return {"statusCode": 200, "body": json.dumps({"run_id": run_id, "status": "complete"})}
 
