@@ -63,7 +63,7 @@ def _load_json(filename: str) -> list[dict]:
         bucket = os.environ.get("DATA_BUCKET")
         if bucket:
             s3 = boto3.client("s3")
-            for prefix in ["raw/", "synthetic/"]:
+            for prefix in ["raw/", "synthetic/", "reference/"]:
                 try:
                     obj = s3.get_object(Bucket=bucket, Key=f"{prefix}{filename}")
                     return json.loads(obj["Body"].read())
