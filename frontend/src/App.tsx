@@ -1,6 +1,6 @@
-import { useState, useEffect, useMemo } from 'react'
+import { useState, useEffect, useMemo, useRef } from 'react'
 import { gridDisk, latLngToCell } from 'h3-js'
-import { useQuery } from '@tanstack/react-query'
+import { useQuery, useQueryClient } from '@tanstack/react-query'
 import 'leaflet/dist/leaflet.css'
 import { MapContainer, TileLayer } from 'react-leaflet'
 import { HexLayer } from './components/HexLayer'
@@ -16,9 +16,11 @@ const DALLAS_CENTER: [number, number] = [32.7767, -96.797]
 const DEFAULT_ZOOM = 11
 
 function App() {
+  const queryClient = useQueryClient()
   const [activeRunId, setActiveRunId] = useState<string | null>(null)
   const [isTriggering, setIsTriggering] = useState(false)
   const [targetDate, setTargetDate] = useState('2023-08-18')
+  const prevStatus = useRef<string | undefined>(undefined)
 
   // Available dates with temperature context
   const DATES = [
@@ -70,6 +72,17 @@ function App() {
       return status === 'RUNNING' ? 5000 : false
     },
   })
+
+  // When a run transitions to COMPLETE, refresh queries so result loads immediately
+  useEffect(() => {
+    const cur = runStatus?.status
+    if (prevStatus.current === 'RUNNING' && cur === 'COMPLETE') {
+      queryClient.invalidateQueries({ queryKey: ['result', activeRunId] })
+      queryClient.invalidateQueries({ queryKey: ['runs'] })
+      queryClient.invalidateQueries({ queryKey: ['latestRun'] })
+    }
+    prevStatus.current = cur
+  }, [runStatus?.status, activeRunId, queryClient])
 
   // Fetch result when COMPLETE
   const { data: result } = useQuery<PipelineResult>({

@@ -332,8 +332,7 @@ def list_runs():
     """List recent pipeline runs."""
     table = _get_table()
     response = table.scan(
-        Limit=20,
-        ProjectionExpression="run_id, #st, created_at, tokens_used, duration_ms",
+        ProjectionExpression="run_id, #st, created_at, tokens_used, duration_ms, target_date, error_message",
         ExpressionAttributeNames={"#st": "status"},
     )
 
