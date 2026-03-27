@@ -21,23 +21,23 @@ html, body, #root {
 .app-header {
   display: flex;
   align-items: center;
-  gap: 1rem;
-  padding: 0.75rem 1.25rem;
+  gap: 0.75rem;
+  padding: 0.05rem 1.25rem;
   background: #1a1a1a;
   border-bottom: 1px solid #333;
   flex-shrink: 0;
 }
 
 .app-header h1 {
-  font-size: 1.25rem;
+  font-size: 1rem;
   font-weight: 700;
   letter-spacing: 0.05em;
   color: #ff6b35;
 }
 
 .app-subtitle {
-  font-size: 0.85rem;
-  color: #888;
+  font-size: 0.75rem;
+  color: #e0e0e0;
 }
 
 .app-main {
@@ -100,7 +100,7 @@ html, body, #root {
 .badge-complete  { background: #14532d; color: #86efac; }
 .badge-running   { background: #1e3a5f; color: #93c5fd; }
 .badge-error     { background: #450a0a; color: #fca5a5; }
-.badge-idle      { background: #333;    color: #888;    }
+.badge-idle      { background: #333;    color: #ccc;    }
 
 /* Legend panel (Leaflet overlay) */
 .legend {
@@ -139,7 +139,7 @@ html, body, #root {
 .legend-toggle {
   background: none;
   border: none;
-  color: #888;
+  color: #ccc;
   font-size: 0.65rem;
   cursor: pointer;
   padding: 0 2px;
@@ -155,14 +155,14 @@ html, body, #root {
   flex-shrink: 0;
   opacity: 0.85;
 }
-.legend-label { font-size: 0.78rem; color: #ddd; flex: 1; }
-.legend-count  { font-size: 0.72rem; color: #888; }
+.legend-label { font-size: 0.78rem; color: #fff; flex: 1; }
+.legend-count  { font-size: 0.72rem; color: #ccc; }
 .legend-stats {
   margin-top: 0.6rem;
   padding-top: 0.5rem;
   border-top: 1px solid #333;
   font-size: 0.72rem;
-  color: #888;
+  color: #ccc;
   display: flex;
   flex-direction: column;
   gap: 0.2rem;
@@ -195,17 +195,17 @@ html, body, #root {
   font-size: 0.68rem;
   font-weight: 700;
   letter-spacing: 0.12em;
-  color: #666;
+  color: #e0e0e0;
   text-transform: uppercase;
 }
 .orders-count {
   font-size: 0.66rem;
-  color: #444;
+  color: #ccc;
 }
 .orders-toggle {
   margin-left: auto;
   font-size: 0.6rem;
-  color: #444;
+  color: #ccc;
 }
 .orders-body {
   flex: 1;
@@ -215,7 +215,7 @@ html, body, #root {
 .orders-empty {
   padding: 0.75rem 1rem;
   font-size: 0.72rem;
-  color: #3a3a3a;
+  color: #bbb;
   font-style: italic;
 }
 
@@ -234,7 +234,7 @@ html, body, #root {
   font-size: 0.62rem;
   font-weight: 600;
   letter-spacing: 0.06em;
-  color: #444;
+  color: #e0e0e0;
   text-transform: uppercase;
   border-bottom: 1px solid #1e1e1e;
   white-space: nowrap;
@@ -246,7 +246,7 @@ html, body, #root {
 .orders-table tbody tr:hover { background: #181818; }
 .orders-table td {
   padding: 0.3rem 0.75rem;
-  color: #999;
+  color: #f0f0f0;
   white-space: nowrap;
 }
 .orders-cell-asset {
@@ -255,12 +255,12 @@ html, body, #root {
   gap: 1px;
 }
 .orders-asset-id {
-  color: #ccc;
+  color: #fff;
   font-weight: 600;
 }
 .orders-asset-desc {
   font-size: 0.62rem;
-  color: #505050;
+  color: #ccc;
 }
 .orders-role-badge {
   font-size: 0.62rem;
@@ -275,7 +275,7 @@ html, body, #root {
 .orders-cell-mono {
   font-family: monospace;
   font-size: 0.68rem;
-  color: #555;
+  color: #ccc;
 }
 .orders-cell-num {
   text-align: right;
@@ -312,14 +312,14 @@ html, body, #root {
   font-size: 0.68rem;
   font-weight: 700;
   letter-spacing: 0.12em;
-  color: #666;
+  color: #fff;
   text-transform: uppercase;
   white-space: nowrap;
 }
 .agent-panel-toggle {
   background: none;
   border: none;
-  color: #555;
+  color: #aaa;
   font-size: 0.9rem;
   cursor: pointer;
   padding: 2px 4px;
@@ -335,14 +335,14 @@ html, body, #root {
   font-size: 0.62rem;
   font-weight: 700;
   letter-spacing: 0.14em;
-  color: #444;
+  color: #ccc;
   text-transform: uppercase;
   user-select: none;
 }
 .agent-panel-run-info {
   padding: 0.45rem 0.85rem;
   font-size: 0.7rem;
-  color: #555;
+  color: #e0e0e0;
   border-bottom: 1px solid #1a1a1a;
   flex-shrink: 0;
   white-space: nowrap;
@@ -351,7 +351,7 @@ html, body, #root {
 }
 .agent-panel-run-info code {
   font-size: 0.68rem;
-  color: #888;
+  color: #ccc;
   background: #1e1e1e;
   padding: 0 3px;
   border-radius: 2px;
@@ -359,7 +359,7 @@ html, body, #root {
 .run-status-text--complete { color: #86efac; }
 .run-status-text--running  { color: #93c5fd; }
 .run-status-text--error    { color: #fca5a5; }
-.run-status-text--idle     { color: #666; }
+.run-status-text--idle     { color: #bbb; }
 
 .agent-panel-body {
   flex: 1;
@@ -396,16 +396,16 @@ html, body, #root {
   font-size: 0.65rem;
   font-weight: 700;
   letter-spacing: 0.08em;
-  color: #555;
+  color: #ccc;
 }
 .agent-card-name {
   font-size: 0.8rem;
   font-weight: 600;
-  color: #d8d8d8;
+  color: #fff;
 }
 .agent-card-desc {
   font-size: 0.68rem;
-  color: #555;
+  color: #e0e0e0;
   line-height: 1.45;
 }
 
@@ -420,12 +420,12 @@ html, body, #root {
   align-items: center;
   gap: 0.3rem;
   background: #222;
-  color: #666;
+  color: #ccc;
 }
 .agent-status-badge--complete { background: #14532d; color: #86efac; }
 .agent-status-badge--running  { background: #1e3a5f; color: #93c5fd; }
 .agent-status-badge--error    { background: #450a0a; color: #fca5a5; }
-.agent-status-badge--idle     { background: #1e1e1e; color: #555; }
+.agent-status-badge--idle     { background: #1e1e1e; color: #ccc; }
 
 /* Spinner dot */
 .agent-spinner-dot {
@@ -479,12 +479,12 @@ html, body, #root {
   font-size: 0.65rem;
   font-weight: 700;
   letter-spacing: 0.12em;
-  color: #555;
+  color: #fff;
   text-transform: uppercase;
 }
 .obs-toggle {
   font-size: 0.6rem;
-  color: #444;
+  color: #ccc;
 }
 .obs-body {
   padding: 0.3rem 0.85rem 0.75rem;
@@ -494,7 +494,7 @@ html, body, #root {
 }
 .obs-empty {
   font-size: 0.68rem;
-  color: #3a3a3a;
+  color: #bbb;
   font-style: italic;
 }
 .obs-row {
@@ -505,12 +505,12 @@ html, body, #root {
 }
 .obs-label {
   font-size: 0.66rem;
-  color: #4a4a4a;
+  color: #ccc;
   flex-shrink: 0;
 }
 .obs-value {
   font-size: 0.7rem;
-  color: #888;
+  color: #fff;
   text-align: right;
   white-space: nowrap;
   overflow: hidden;
