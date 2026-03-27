@@ -38,8 +38,10 @@ jobs:
             --upgrade \
             -r requirements.txt
 
-      - name: Copy backend source
-        run: cp -r backend package/
+      - name: Copy backend source and data
+        run: |
+          cp -r backend package/
+          cp -r data package/
 
       - name: Zip deployment package
         run: cd package && zip -r ../lambda.zip . -x "*.pyc" -x "*/__pycache__/*"

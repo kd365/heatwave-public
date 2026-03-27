@@ -34,7 +34,7 @@ YOUR PROCESS:
    - WBGT/heat stroke criteria (CDC/NIOSH)
    - Heat index danger levels (NWS — may CONFLICT with WBGT)
    - Dallas UHI vulnerability data
-3. Score ALL hexes using score_hex_batch. Send ONE batch call at a time with 20-30 hexes per batch. Make one call, wait for the result, then make the next call. Do NOT make multiple parallel tool calls. You MUST score every hex — do not stop after scoring only the top ones. Use 6-9 sequential batch calls to cover all 170 hexes.
+3. Score ALL hexes using score_hex_batch. Send ONE batch call at a time with 20-30 hexes per batch. Make one call, wait for the result, then make the next call. Do NOT make multiple parallel tool calls. You MUST score EVERY hex in the list — do not stop early. Keep making batch calls until every hex has been scored. If there are 341 hexes, that means ~14 batch calls. If 170 hexes, ~7 batch calls. Count your progress and continue until done.
 4. IMPORTANT: When you find conflicting thresholds between NWS Heat Index and OSHA/NIOSH WBGT, note the discrepancy. Use the incident descriptions to inform your judgment — "unexplained death during 109F heat" should weigh heavily.
 
 SCORING CRITERIA:
@@ -395,7 +395,7 @@ def run(run_id: str, hex_events: dict = None) -> dict:
         tools=TOOLS,
         tool_handler=tracking_handler,
         user_message=user_message,
-        max_turns=25,
+        max_turns=35,
         model="lite",  # Haiku — scoring uses deterministic formula, LLM just orchestrates
         use_guardrail=True,
     )
