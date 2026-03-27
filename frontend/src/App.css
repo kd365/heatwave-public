@@ -69,6 +69,18 @@ html, body, #root {
 }
 
 /* Run Analysis button */
+.date-selector {
+  padding: 0.4rem 0.6rem;
+  background: #2a2a2a;
+  color: #e0e0e0;
+  border: 1px solid #555;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+.date-selector:disabled { opacity: 0.5; cursor: not-allowed; }
+.date-selector:focus { outline: 1px solid #ff6b35; }
+
 .run-btn {
   padding: 0.4rem 1rem;
   background: #ff6b35;

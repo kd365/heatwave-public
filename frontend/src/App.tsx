@@ -18,6 +18,35 @@ const DEFAULT_ZOOM = 11
 function App() {
   const [activeRunId, setActiveRunId] = useState<string | null>(null)
   const [isTriggering, setIsTriggering] = useState(false)
+  const [targetDate, setTargetDate] = useState('2023-08-18')
+
+  // Available dates with temperature context
+  const DATES = [
+    { date: '2023-08-04', temp: 104.4, label: 'Aug 4 — 104°F' },
+    { date: '2023-08-05', temp: 105.5, label: 'Aug 5 — 106°F' },
+    { date: '2023-08-06', temp: 103.9, label: 'Aug 6 — 104°F' },
+    { date: '2023-08-07', temp: 103.0, label: 'Aug 7 — 103°F' },
+    { date: '2023-08-08', temp: 101.4, label: 'Aug 8 — 101°F' },
+    { date: '2023-08-09', temp: 106.6, label: 'Aug 9 — 107°F 🔴' },
+    { date: '2023-08-10', temp: 107.7, label: 'Aug 10 — 108°F 🔴' },
+    { date: '2023-08-11', temp: 107.3, label: 'Aug 11 — 107°F 🔴' },
+    { date: '2023-08-12', temp: 107.7, label: 'Aug 12 — 108°F 🔴' },
+    { date: '2023-08-13', temp: 106.7, label: 'Aug 13 — 107°F 🔴' },
+    { date: '2023-08-14', temp: 101.6, label: 'Aug 14 — 102°F' },
+    { date: '2023-08-15', temp: 95.9, label: 'Aug 15 — 96°F 🟢' },
+    { date: '2023-08-16', temp: 94.2, label: 'Aug 16 — 94°F 🟢 (coolest)' },
+    { date: '2023-08-17', temp: 108.5, label: 'Aug 17 — 109°F 🔴🔴' },
+    { date: '2023-08-18', temp: 109.3, label: 'Aug 18 — 109°F 🔴🔴 (peak)' },
+    { date: '2023-08-19', temp: 106.5, label: 'Aug 19 — 107°F 🔴' },
+    { date: '2023-08-20', temp: 107.2, label: 'Aug 20 — 107°F 🔴' },
+    { date: '2023-08-21', temp: 104.4, label: 'Aug 21 — 104°F' },
+    { date: '2023-08-22', temp: 104.1, label: 'Aug 22 — 104°F' },
+    { date: '2023-08-23', temp: 103.6, label: 'Aug 23 — 104°F' },
+    { date: '2023-08-24', temp: 105.9, label: 'Aug 24 — 106°F' },
+    { date: '2023-08-25', temp: 107.6, label: 'Aug 25 — 108°F 🔴' },
+    { date: '2023-08-26', temp: 107.3, label: 'Aug 26 — 107°F 🔴' },
+    { date: '2023-08-27', temp: 99.1, label: 'Aug 27 — 99°F 🟢' },
+  ]
 
   // On load, pick up the latest completed run
   const { data: latestRun } = useQuery({
@@ -115,7 +144,7 @@ function App() {
   async function handleRunAnalysis() {
     setIsTriggering(true)
     try {
-      const { run_id } = await triggerAnalysis()
+      const { run_id } = await triggerAnalysis(targetDate)
       setActiveRunId(run_id)
     } finally {
       setIsTriggering(false)
@@ -129,6 +158,16 @@ function App() {
         <span className="app-subtitle">Dallas Heat Emergency Response — Aug 2023</span>
         <div className="header-right">
           <AgentStatusBadges runStatus={runStatus ?? null} />
+          <select
+            className="date-selector"
+            value={targetDate}
+            onChange={(e) => setTargetDate(e.target.value)}
+            disabled={isTriggering || status === 'RUNNING'}
+          >
+            {DATES.map(d => (
+              <option key={d.date} value={d.date}>{d.label}</option>
+            ))}
+          </select>
           <button
             className={`run-btn ${isTriggering || status === 'RUNNING' ? 'running' : ''}`}
             onClick={handleRunAnalysis}
