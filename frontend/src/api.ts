@@ -115,6 +115,12 @@ export async function fetchRuns(): Promise<RunStatus[]> {
   return Array.isArray(data) ? data : data.runs ?? []
 }
 
+export async function cancelRun(runId: string): Promise<{ status: string }> {
+  const res = await fetch(`${API_BASE}/api/v1/runs/${runId}/cancel`, { method: 'POST' })
+  if (!res.ok) throw new Error(`Cancel failed: ${res.status}`)
+  return res.json()
+}
+
 export async function fetchAssets(): Promise<Asset[]> {
   const res = await fetch('/assets.json')
   if (!res.ok) throw new Error('Failed to load asset inventory')
