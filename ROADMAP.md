@@ -313,16 +313,16 @@ Agent 1 uses a **hybrid deterministic + LLM approach** refined through integrati
 ### Observability
 - [X] 🔴 CloudWatch Log Groups: `/aws/lambda/heatwave-dev-backend` — 30-day retention, managed by Terraform
 - [X] 🔴 Structured logs: JSON per line `{timestamp, level, logger, message, run_id, duration_ms, tokens_used}` — queryable via Logs Insights
-- [ ] 🔴 CloudWatch Metrics: `AgentLatencyMs`, `AgentTokensUsed`, `PipelineRunCount`, `PipelineErrorCount`
-- [ ] 🔴 CloudWatch Dashboard: `HEATWAVE-Observability`
+- [X] 🔴 CloudWatch Metrics: `AgentLatencyMs`, `AgentTokensUsed`, `PipelineRunCount`, `PipelineErrorCount`
+- [X] 🔴 CloudWatch Dashboard: `HEATWAVE-Observability`
 - [ ] 🟡 Alarm: pipeline error rate > 10% → SNS
 - [X] 🟡 Token cost tracking (Claude Sonnet 4 + Haiku 4.5 pricing — captured per run in DynamoDB)
 
 ### Security & Governance
-- [ ] 🔴 Bedrock Guardrail (Terraform): deny ungrounded medical advice, content filter, grounding enforcement
-- [ ] 🔴 Apply guardrail to Agent 2 RAG output path
-- [ ] 🔴 IAM audit: no `*` actions, least-privilege per role
-- [ ] 🔴 GitHub Actions OIDC federation (no static AWS keys)
+- [X] 🔴 Bedrock Guardrail (Terraform): deny ungrounded medical advice, content filter, grounding enforcement
+- [X] 🔴 Apply guardrail to Agent 2 RAG output path
+- [X] 🔴 IAM audit: no `*` actions, least-privilege per role
+- [~] 🔴 GitHub Actions OIDC federation — BLOCKED: education account lacks `iam:CreateOpenIDConnectProvider`; using static key secrets instead
 - [ ] 🟡 S3 block public access on all buckets
 - [ ] 🟡 Secrets Manager for API keys
 - [ ] 🟡 CloudTrail audit logging

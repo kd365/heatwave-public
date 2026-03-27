@@ -22,6 +22,7 @@ from mangum import Mangum
 
 from backend.agents import agent1_triage, agent2_threat, agent3_dispatch
 from backend.utils.logging_config import configure_logging
+from backend.utils.metrics import emit_agent_metrics, emit_pipeline_metrics
 
 configure_logging()
 logger = logging.getLogger(__name__)
@@ -86,7 +87,10 @@ def _run_pipeline(run_id: str):
         )
 
         agent1_result = agent1_triage.run(run_id=run_id)
-        total_tokens += agent1_result.get("tokens_used", 0)
+        a1_tokens = agent1_result.get("tokens_used", 0)
+        a1_duration_ms = int((time.time() - start_time) * 1000)
+        total_tokens += a1_tokens
+        emit_agent_metrics("agent1_triage", run_id=run_id, duration_ms=a1_duration_ms, tokens_used=a1_tokens)
 
         # Save Agent 1 output to S3
         s3.put_object(
@@ -120,7 +124,10 @@ def _run_pipeline(run_id: str):
             run_id=run_id,
             hex_events=agent1_result,
         )
-        total_tokens += agent2_result.get("tokens_used", 0)
+        a2_tokens = agent2_result.get("tokens_used", 0)
+        a2_duration_ms = int((time.time() - start_time) * 1000) - a1_duration_ms - 60000
+        total_tokens += a2_tokens
+        emit_agent_metrics("agent2_threat", run_id=run_id, duration_ms=a2_duration_ms, tokens_used=a2_tokens)
 
         s3.put_object(
             Bucket=DATA_BUCKET,
@@ -153,7 +160,10 @@ def _run_pipeline(run_id: str):
             run_id=run_id,
             threat_map=agent2_result,
         )
-        total_tokens += agent3_result.get("tokens_used", 0)
+        a3_tokens = agent3_result.get("tokens_used", 0)
+        a3_duration_ms = int((time.time() - start_time) * 1000) - a1_duration_ms - a2_duration_ms - 120000
+        total_tokens += a3_tokens
+        emit_agent_metrics("agent3_dispatch", run_id=run_id, duration_ms=a3_duration_ms, tokens_used=a3_tokens)
 
         s3.put_object(
             Bucket=DATA_BUCKET,
@@ -190,6 +200,7 @@ def _run_pipeline(run_id: str):
                 "tokens_used": total_tokens,
             },
         )
+        emit_pipeline_metrics(run_id=run_id, duration_ms=duration_ms, tokens_used=total_tokens, success=True)
 
     except Exception as e:
         logger.error(
@@ -197,6 +208,7 @@ def _run_pipeline(run_id: str):
             extra={"event": "pipeline.error", "run_id": run_id, "error": str(e)},
             exc_info=True,
         )
+        emit_pipeline_metrics(run_id=run_id, duration_ms=int((time.time() - start_time) * 1000), tokens_used=total_tokens, success=False)
         table.update_item(
             Key={"run_id": run_id},
             UpdateExpression="SET #st = :s, error_message = :e",

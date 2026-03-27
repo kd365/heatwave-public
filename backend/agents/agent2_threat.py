@@ -397,6 +397,7 @@ def run(run_id: str, hex_events: dict = None) -> dict:
         user_message=user_message,
         max_turns=25,
         model="lite",  # Haiku — scoring uses deterministic formula, LLM just orchestrates
+        use_guardrail=True,
     )
 
     try:
