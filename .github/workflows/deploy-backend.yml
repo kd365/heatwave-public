@@ -38,10 +38,13 @@ jobs:
             --upgrade \
             -r requirements.txt
 
-      - name: Copy backend source and data
+      - name: Copy backend source and data (JSON only, skip large PDFs)
         run: |
           cp -r backend package/
-          cp -r data package/
+          mkdir -p package/data/raw package/data/synthetic package/data/reference
+          cp data/raw/*.json package/data/raw/ 2>/dev/null || true
+          cp data/synthetic/*.json package/data/synthetic/ 2>/dev/null || true
+          cp data/reference/*.json package/data/reference/ 2>/dev/null || true
 
       - name: Zip deployment package
         run: cd package && zip -r ../lambda.zip . -x "*.pyc" -x "*/__pycache__/*"
