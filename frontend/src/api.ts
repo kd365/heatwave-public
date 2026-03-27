@@ -82,8 +82,8 @@ export interface PipelineResult extends RunStatus {
   }
 }
 
-export async function triggerAnalysis(): Promise<{ run_id: string }> {
-  const res = await fetch(`${API_BASE}/api/v1/analyze`, { method: 'POST' })
+export async function triggerAnalysis(targetDate: string): Promise<{ run_id: string }> {
+  const res = await fetch(`${API_BASE}/api/v1/analyze?target_date=${targetDate}`, { method: 'POST' })
   if (!res.ok) throw new Error(`Trigger failed: ${res.status}`)
   return res.json()
 }
