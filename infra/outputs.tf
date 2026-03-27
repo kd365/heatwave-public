@@ -71,3 +71,20 @@ output "lambda_function_name" {
   description = "Lambda function name — used by deploy-backend.yml for UpdateFunctionCode"
   value       = aws_lambda_function.backend.function_name
 }
+
+# ── Frontend (S3 + CloudFront) ────────────────────────────────────────────────
+
+output "frontend_bucket_name" {
+  description = "S3 bucket for frontend static assets — used by deploy-frontend.yml"
+  value       = aws_s3_bucket.frontend.id
+}
+
+output "frontend_url" {
+  description = "CloudFront HTTPS URL for the frontend — open this in the browser"
+  value       = "https://${aws_cloudfront_distribution.frontend.domain_name}"
+}
+
+output "cloudfront_distribution_id" {
+  description = "CloudFront distribution ID — used by deploy-frontend.yml for cache invalidation"
+  value       = aws_cloudfront_distribution.frontend.id
+}
