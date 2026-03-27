@@ -5,7 +5,9 @@ on:
     branches: [main]
     paths:
       - 'backend/**'
+      - 'data/**'
       - 'requirements.txt'
+      - '.github/workflows/deploy-backend.yml'
 
 jobs:
   deploy:
