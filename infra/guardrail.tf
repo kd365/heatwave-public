@@ -12,36 +12,18 @@
 resource "aws_bedrock_guardrail" "agent2" {
   name                      = "${local.prefix}-agent2-guardrail"
   blocked_input_messaging   = "This request cannot be processed."
-  blocked_outputs_messaging = "The response was blocked by safety filters."
+  blocked_outputs_messaging = "Response blocked: answer not grounded in source documents."
 
-  # ── Content Filters ────────────────────────────────────────────────────────
-  content_policy_config {
-    filters_config {
-      type            = "HATE"
-      input_strength  = "HIGH"
-      output_strength = "HIGH"
-    }
-    filters_config {
-      type            = "VIOLENCE"
-      input_strength  = "HIGH"
-      output_strength = "HIGH"
-    }
-    filters_config {
-      type            = "SEXUAL"
-      input_strength  = "HIGH"
-      output_strength = "HIGH"
-    }
-    filters_config {
-      type            = "INSULTS"
-      input_strength  = "MEDIUM"
-      output_strength = "MEDIUM"
-    }
-  }
+  # Content filters (HATE/VIOLENCE/SEXUAL etc.) are intentionally omitted.
+  # All traffic is internal agent-to-agent structured JSON — content moderation
+  # adds overhead with zero benefit. The two meaningful controls here are:
+  # 1. Contextual grounding — hard block on hallucinated medical thresholds
+  # 2. Topic denial        — prevent the model acting as a clinical prescriber
 
   # ── Topic Denial ───────────────────────────────────────────────────────────
-  # Prevent the model from acting as a clinical decision-maker or prescribing
-  # specific medical treatments — it should only surface risk thresholds from
-  # the RAG docs, not tell responders what medications to administer.
+  # Block outputs where the model gives specific clinical treatment decisions.
+  # Agent 2 should cite heat risk thresholds from the RAG docs, not prescribe
+  # interventions (IV fluids, medications, dosing) for individual patients.
   topic_policy_config {
     topics_config {
       name       = "ClinicalTreatmentAdvice"
