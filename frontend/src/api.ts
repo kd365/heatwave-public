@@ -29,6 +29,9 @@ export interface HexEvent {
   max_apparent_f: number
   hot_days: number
   weather_source: string
+  population: number
+  elderly_65plus: number
+  pct_elderly: number
   dispatch_count: number
   dispatch_incidents: string[]
   service_count: number

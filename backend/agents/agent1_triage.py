@@ -49,8 +49,10 @@ def _load_json(filename: str) -> list[dict]:
     local_paths = [
         os.path.join("data", "raw", filename),
         os.path.join("data", "synthetic", filename),
+        os.path.join("data", "reference", filename),
         os.path.join("/var/task", "data", "raw", filename),
         os.path.join("/var/task", "data", "synthetic", filename),
+        os.path.join("/var/task", "data", "reference", filename),
     ]
     for path in local_paths:
         if os.path.exists(path):
@@ -76,7 +78,7 @@ def _load_json(filename: str) -> list[dict]:
 # Sub-task 1a: Weather (DETERMINISTIC)
 # ---------------------------------------------------------------------------
 
-def _process_weather() -> dict:
+def _process_weather(target_date: str = None) -> dict:
     """Classify all weather records by numeric thresholds and geocode.
 
     No LLM needed — temperature thresholds are unambiguous:
@@ -85,6 +87,8 @@ def _process_weather() -> dict:
     - MEDIUM: temp_f >= 95
     """
     data = _load_json("dallas_weather_aug2023.json")
+    if target_date:
+        data = [r for r in data if r.get("timestamp", "")[:10] == target_date]
 
     # Aggregate to daily summary per station — one event per station-day.
     # Captures BOTH peak temperature AND duration of dangerous heat.
@@ -234,13 +238,15 @@ DISPATCH_TOOLS = [{
 }]
 
 
-def _process_911() -> dict:
+def _process_911(target_date: str = None) -> dict:
     """Pre-filter by keywords, send MO narrative candidates to LLM for judgment.
 
     The LLM is essential here because MO narratives contain ambiguous language
     that only contextual reading can resolve (e.g., "hot" = temperature vs stolen property).
     """
     data = _load_json("dallas_911_aug2023.json")
+    if target_date:
+        data = [r for r in data if (r.get("date1") or "")[:10] == target_date]
 
     heat_keywords = ["heat related", "heat stroke", "heat exhaust", "dehydrat",
                      "unresponsive", "collapse", "pass out", "passed out",
@@ -317,7 +323,7 @@ SERVICE_TYPE_SCORES = {
 MIN_HEAT_TEMP_F = 95
 
 
-def _process_311(daily_max_temps: dict) -> dict:
+def _process_311(daily_max_temps: dict, target_date: str = None) -> dict:
     """Classify 311 records deterministically using type + date temperature.
 
     No LLM needed — 311 records have no narrative/text field. The only data
@@ -329,6 +335,8 @@ def _process_311(daily_max_temps: dict) -> dict:
     hotter days (109F homeless encampment > 96F homeless encampment).
     """
     data = _load_json("dallas_311_aug2023.json")
+    if target_date:
+        data = [r for r in data if (r.get("created_date") or "")[:10] == target_date]
 
     events = []
     skipped_cool_day = 0
@@ -455,8 +463,8 @@ SOCIAL_TOOLS = [{
 }]
 
 
-def _process_social() -> dict:
-    """Send all 300 posts to LLM for sarcasm/noise filtering and location extraction.
+def _process_social(target_date: str = None) -> dict:
+    """Send posts to LLM for sarcasm/noise filtering and location extraction.
 
     The LLM is essential here because social media text requires:
     - Sarcasm detection ("sooo hot" = genuine or mocking?)
@@ -465,6 +473,19 @@ def _process_social() -> dict:
     These are judgment calls that code cannot make reliably.
     """
     data = _load_json("social_media_posts.json")
+    if target_date:
+        data = [p for p in data if (p.get("timestamp") or "")[:10] == target_date]
+    elif len(data) > 300:
+        # When running all days, sample to keep within context limits:
+        # Take all posts from peak days + random sample from other days
+        peak_days = {"2023-08-17", "2023-08-18", "2023-08-19", "2023-08-20"}
+        peak_posts = [p for p in data if (p.get("timestamp") or "")[:10] in peak_days]
+        other_posts = [p for p in data if (p.get("timestamp") or "")[:10] not in peak_days]
+        import random
+        sample_size = max(0, 300 - len(peak_posts))
+        sampled = random.sample(other_posts, min(sample_size, len(other_posts)))
+        data = peak_posts + sampled
+        logger.info("Social: sampled %d posts (all %d peak + %d other)", len(data), len(peak_posts), len(sampled))
 
     trimmed = []
     for p in data:
@@ -551,7 +572,7 @@ def _synthesize(weather, dispatch, service, social) -> dict:
         sh = station_hexes[hid]
         sh["max_temp_f"] = max(sh["max_temp_f"], e.get("max_temp_f", e.get("temp_f", 0)))
         sh["max_apparent_f"] = max(sh["max_apparent_f"], e.get("max_apparent_f", e.get("apparent_temp_f", 0)))
-        day = e.get("date")
+        day = e.get("date") or e.get("timestamp", "")[:10]
         if day:
             sh["temps_by_day"][day] = max(sh["temps_by_day"].get(day, 0), e.get("max_temp_f", e.get("temp_f", 0)))
 
@@ -560,15 +581,44 @@ def _synthesize(weather, dispatch, service, social) -> dict:
         sh["hot_days"] = len([t for t in sh["temps_by_day"].values() if t >= 100])
         del sh["temps_by_day"]
 
-    # Nearest-station interpolation: find closest station for each hex
+    # Nearest-station interpolation + UHI adjustment
+    # Dallas UHI Study (Texas Trees Foundation, 2017) found:
+    # - Downtown/South Dallas: up to +5F above suburban baseline
+    # - Industrial corridors (SE): +3-4F
+    # - Northern suburbs (tree canopy): baseline or -1F
+    # We model this as a latitude gradient + impervious surface proxy.
+    # Dallas center: ~32.78 lat. South = hotter, north = cooler.
+    DALLAS_CENTER_LAT = 32.78
+    UHI_MAX_ADJUSTMENT = 5.0  # max degrees F added in hottest urban core
+
+    def _uhi_adjustment(hex_id):
+        """Estimate UHI temperature offset based on location within Dallas.
+
+        Based on Dallas UHI Study findings. South/central Dallas has higher
+        impervious surface and less tree canopy = hotter. This is an
+        approximation — documented as a limitation.
+        """
+        lat, lon = h3.cell_to_latlng(hex_id)
+        # Latitude factor: south of center = positive adjustment
+        lat_factor = max(0, min(1.0, (DALLAS_CENTER_LAT - lat + 0.05) / 0.25))
+        # Longitude factor: central Dallas (around -96.80) is denser
+        lon_center = -96.80
+        lon_factor = max(0, min(1.0, 1.0 - abs(lon - lon_center) / 0.15))
+        # Combined: multiply factors, scale by max adjustment
+        return round(UHI_MAX_ADJUSTMENT * lat_factor * lon_factor, 1)
+
     station_hex_list = list(station_hexes.keys())
 
     def _nearest_station_weather(hex_id):
-        """Assign weather from nearest station. Returns (data, source_type)."""
+        """Assign weather from nearest station + UHI adjustment. Returns (data, source_type)."""
         if hex_id in station_hexes:
-            return station_hexes[hex_id], "direct_station"
+            data = dict(station_hexes[hex_id])
+            data["uhi_adjustment_f"] = _uhi_adjustment(hex_id)
+            data["max_temp_f"] = round(data["max_temp_f"] + data["uhi_adjustment_f"], 1)
+            data["max_apparent_f"] = round(data["max_apparent_f"] + data["uhi_adjustment_f"], 1)
+            return data, "direct_station_uhi_adjusted"
         if not station_hex_list:
-            return {"max_temp_f": 0, "max_apparent_f": 0, "hot_days": 0}, "none"
+            return {"max_temp_f": 0, "max_apparent_f": 0, "hot_days": 0, "uhi_adjustment_f": 0}, "none"
         best_dist = float("inf")
         best_hex = station_hex_list[0]
         for sh in station_hex_list:
@@ -579,10 +629,35 @@ def _synthesize(weather, dispatch, service, social) -> dict:
             if d < best_dist:
                 best_dist = d
                 best_hex = sh
-        return station_hexes[best_hex], "interpolated_nearest_station"
+        data = dict(station_hexes[best_hex])
+        data["uhi_adjustment_f"] = _uhi_adjustment(hex_id)
+        data["max_temp_f"] = round(data["max_temp_f"] + data["uhi_adjustment_f"], 1)
+        data["max_apparent_f"] = round(data["max_apparent_f"] + data["uhi_adjustment_f"], 1)
+        return data, "interpolated_nearest_station_uhi_adjusted"
 
-    # Collect all hexes from all sources
+    # Load census data for population per hex
+    census_lookup = {}
+    try:
+        census_data = _load_json("dallas_census_by_hex.json")
+        for c in census_data:
+            census_lookup[c["hex_id"]] = {
+                "population": c["population"],
+                "elderly_65plus": c["elderly_65plus"],
+                "pct_elderly": c["pct_elderly"],
+            }
+        logger.info("Census: loaded population for %d hexes", len(census_lookup))
+    except FileNotFoundError:
+        logger.warning("Census data not found — population will not be included in hex grid")
+
+    # Collect all hexes: start with full Dallas grid, then add any from data sources
     all_hex_ids = set()
+    try:
+        dallas_grid = _load_json("dallas_hex_grid.json")
+        all_hex_ids.update(dallas_grid)
+        logger.info("Loaded full Dallas hex grid: %d hexes", len(dallas_grid))
+    except FileNotFoundError:
+        logger.warning("Dallas hex grid not found — using only hexes with data")
+
     for e in weather.get("weather_events", []):
         if e.get("hex_id"):
             all_hex_ids.add(e["hex_id"])
@@ -600,11 +675,15 @@ def _synthesize(weather, dispatch, service, social) -> dict:
     hex_data = {}
     for hid in all_hex_ids:
         wx, wx_source = _nearest_station_weather(hid)
+        census = census_lookup.get(hid, {})
         hex_data[hid] = {
             "max_temp_f": wx["max_temp_f"],
             "max_apparent_f": wx["max_apparent_f"],
             "hot_days": wx["hot_days"],
             "weather_source": wx_source,
+            "population": census.get("population", 0),
+            "elderly_65plus": census.get("elderly_65plus", 0),
+            "pct_elderly": census.get("pct_elderly", 0),
             "dispatch_incidents": [],
             "dispatch_count": 0,
             "service_types": defaultdict(int),
@@ -665,6 +744,9 @@ def _synthesize(weather, dispatch, service, social) -> dict:
             "max_apparent_f": h["max_apparent_f"],
             "hot_days": h["hot_days"],
             "weather_source": h["weather_source"],
+            "population": h["population"],
+            "elderly_65plus": h["elderly_65plus"],
+            "pct_elderly": h["pct_elderly"],
             "dispatch_count": h["dispatch_count"],
             "dispatch_incidents": h["dispatch_incidents"],
             "service_count": h["service_count"],
@@ -742,8 +824,13 @@ def _synthesize(weather, dispatch, service, social) -> dict:
 # Public API
 # ---------------------------------------------------------------------------
 
-def run(run_id: str = None) -> dict:
+def run(run_id: str = None, target_date: str = None) -> dict:
     """Execute Agent 1: Spatial Triage.
+
+    Args:
+        run_id: Pipeline run ID.
+        target_date: Optional date filter (YYYY-MM-DD). If provided, only
+                     processes data from that specific day.
 
     Pipeline: 3 LLM calls + 2 deterministic steps
     1. Weather — deterministic (no LLM)
@@ -754,20 +841,22 @@ def run(run_id: str = None) -> dict:
 
     Returns: {"hex_events": [...], "summary": {...}, "tokens_used": int}
     """
+    if target_date:
+        logger.info("Agent 1 — filtering to target_date: %s", target_date)
     total_tokens = 0
 
     # 1. Weather (deterministic)
     logger.info("Agent 1 — Weather: classifying all records by thresholds...")
-    weather = _process_weather()
+    weather = _process_weather(target_date=target_date)
 
     # 2. 911 Dispatch (1 LLM call)
     logger.info("Agent 1 — 911: analyzing MO narratives...")
-    dispatch = _process_911()
+    dispatch = _process_911(target_date=target_date)
     total_tokens += dispatch.get("tokens_used", 0)
 
     # 3. 311 Service (deterministic)
     logger.info("Agent 1 — 311: classifying by type + temperature...")
-    service = _process_311(weather.get("daily_max_temps", {}))
+    service = _process_311(weather.get("daily_max_temps", {}), target_date=target_date)
 
     # Rate limit cooldown between LLM calls
     logger.info("Agent 1 — cooling down 30s before social media LLM call...")
@@ -775,7 +864,7 @@ def run(run_id: str = None) -> dict:
 
     # 4. Social Media (1 LLM call)
     logger.info("Agent 1 — Social: filtering sarcasm and noise...")
-    social = _process_social()
+    social = _process_social(target_date=target_date)
     total_tokens += social.get("tokens_used", 0)
 
     # Rate limit cooldown before synthesis LLM call

@@ -71,7 +71,7 @@ def _get_table():
 # Pipeline execution (runs as background task)
 # ---------------------------------------------------------------------------
 
-def _run_pipeline(run_id: str):
+def _run_pipeline(run_id: str, target_date: str = None):
     """Execute the 3-agent pipeline sequentially."""
     table = _get_table()
     s3 = _get_s3()
@@ -86,7 +86,7 @@ def _run_pipeline(run_id: str):
             ExpressionAttributeValues={":s": "RUNNING"},
         )
 
-        agent1_result = agent1_triage.run(run_id=run_id)
+        agent1_result = agent1_triage.run(run_id=run_id, target_date=target_date)
         a1_tokens = agent1_result.get("tokens_used", 0)
         a1_duration_ms = int((time.time() - start_time) * 1000)
         total_tokens += a1_tokens
@@ -230,12 +230,11 @@ def health():
 
 
 @app.post("/api/v1/analyze")
-def analyze():
-    """Trigger the 3-agent pipeline. Returns run_id immediately.
+def analyze(target_date: str = "2023-08-18"):
+    """Trigger the 3-agent pipeline for a specific day. Returns run_id immediately.
 
-    Creates a DynamoDB record, then invokes this same Lambda asynchronously
-    with a pipeline_run event. The async invocation runs the full pipeline
-    (up to 900s) without blocking the API Gateway response.
+    Args:
+        target_date: Date to analyze (YYYY-MM-DD). Defaults to Aug 18 (peak day, 109.3F).
     """
     run_id = str(uuid.uuid4())
     now = datetime.now(timezone.utc).isoformat()
@@ -246,6 +245,7 @@ def analyze():
         "run_id": run_id,
         "created_at": now,
         "status": "RUNNING",
+        "target_date": target_date or "all",
         "agent_1_status": "IDLE",
         "agent_2_status": "IDLE",
         "agent_3_status": "IDLE",
@@ -258,10 +258,10 @@ def analyze():
     lambda_client.invoke(
         FunctionName=os.environ.get("AWS_LAMBDA_FUNCTION_NAME", "heatwave-dev-backend"),
         InvocationType="Event",  # async — returns immediately
-        Payload=json.dumps({"pipeline_run": run_id}),
+        Payload=json.dumps({"pipeline_run": run_id, "target_date": target_date}),
     )
 
-    return {"run_id": run_id, "status": "RUNNING", "created_at": now}
+    return {"run_id": run_id, "status": "RUNNING", "created_at": now, "target_date": target_date or "all"}
 
 
 @app.get("/api/v1/runs/{run_id}/status")
@@ -362,11 +362,12 @@ def handler(event, context):
     # Check if this is an async pipeline invocation
     if isinstance(event, dict) and "pipeline_run" in event:
         run_id = event["pipeline_run"]
+        target_date = event.get("target_date")
         logger.info(
             "pipeline.start",
-            extra={"event": "pipeline.start", "run_id": run_id},
+            extra={"event": "pipeline.start", "run_id": run_id, "target_date": target_date},
         )
-        _run_pipeline(run_id)
+        _run_pipeline(run_id, target_date=target_date)
         return {"statusCode": 200, "body": json.dumps({"run_id": run_id, "status": "complete"})}
 
     # Otherwise, route through Mangum/FastAPI
