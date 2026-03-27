@@ -94,6 +94,8 @@ html, body, #root {
 }
 .run-btn:hover:not(:disabled) { background: #e55a25; }
 .run-btn:disabled, .run-btn.running { background: #555; cursor: not-allowed; }
+.cancel-btn { background: #dc2626 !important; cursor: pointer !important; }
+.cancel-btn:hover { background: #b91c1c !important; }
 
 /* Agent status badges */
 .agent-badges {

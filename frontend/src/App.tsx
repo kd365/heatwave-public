@@ -8,7 +8,7 @@ import { Legend } from './components/Legend'
 import { AssetLayer } from './components/AssetLayer'
 import { AgentPanel } from './components/AgentPanel'
 import { OrdersPanel } from './components/OrdersPanel'
-import { triggerAnalysis, fetchRunStatus, fetchResult, fetchLatestRun, fetchAssets, fetchRuns } from './api'
+import { triggerAnalysis, fetchRunStatus, fetchResult, fetchLatestRun, fetchAssets, fetchRuns, cancelRun } from './api'
 import type { HexEvent, RunStatus, PipelineResult, DispatchOrder, Asset, ThreatScore } from './api'
 import './App.css'
 
@@ -164,6 +164,17 @@ function App() {
     }
   }
 
+  async function handleCancel() {
+    if (!activeRunId) return
+    try {
+      await cancelRun(activeRunId)
+      queryClient.invalidateQueries({ queryKey: ['runStatus', activeRunId] })
+      queryClient.invalidateQueries({ queryKey: ['runs'] })
+    } catch {
+      // ignore — may already be complete
+    }
+  }
+
   return (
     <div className="app-layout">
       <header className="app-header">
@@ -181,13 +192,19 @@ function App() {
               <option key={d.date} value={d.date}>{d.label}</option>
             ))}
           </select>
-          <button
-            className={`run-btn ${isTriggering || status === 'RUNNING' ? 'running' : ''}`}
-            onClick={handleRunAnalysis}
-            disabled={isTriggering || status === 'RUNNING'}
-          >
-            {isTriggering ? 'Starting…' : status === 'RUNNING' ? 'Running…' : '▶ Run Analysis'}
-          </button>
+          {status === 'RUNNING' ? (
+            <button className="run-btn cancel-btn" onClick={handleCancel}>
+              Cancel
+            </button>
+          ) : (
+            <button
+              className={`run-btn ${isTriggering ? 'running' : ''}`}
+              onClick={handleRunAnalysis}
+              disabled={isTriggering}
+            >
+              {isTriggering ? 'Starting…' : '▶ Run Analysis'}
+            </button>
+          )}
         </div>
       </header>
 

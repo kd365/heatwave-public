@@ -71,6 +71,17 @@ def _get_table():
 # Pipeline execution (runs as background task)
 # ---------------------------------------------------------------------------
 
+def _check_cancelled(run_id: str) -> bool:
+    """Check if a run has been cancelled via the API."""
+    table = _get_table()
+    response = table.get_item(Key={"run_id": run_id}, ProjectionExpression="#st", ExpressionAttributeNames={"#st": "status"})
+    return response.get("Item", {}).get("status") == "CANCELLED"
+
+
+class PipelineCancelled(Exception):
+    pass
+
+
 def _run_pipeline(run_id: str, target_date: str = None):
     """Execute the 3-agent pipeline sequentially."""
     table = _get_table()
@@ -113,6 +124,9 @@ def _run_pipeline(run_id: str, target_date: str = None):
         logger.info("Cooling down 60s between Agent 1 and Agent 2...", extra={"run_id": run_id, "event": "agent.cooldown", "after_agent": 1})
         time.sleep(60)
 
+        if _check_cancelled(run_id):
+            raise PipelineCancelled(f"Run {run_id} was cancelled")
+
         # ── Agent 2: Threat Assessment ──
         table.update_item(
             Key={"run_id": run_id},
@@ -148,6 +162,9 @@ def _run_pipeline(run_id: str, target_date: str = None):
         # Rate limit cooldown between agents
         logger.info("Cooling down 60s between Agent 2 and Agent 3...", extra={"run_id": run_id, "event": "agent.cooldown", "after_agent": 2})
         time.sleep(60)
+
+        if _check_cancelled(run_id):
+            raise PipelineCancelled(f"Run {run_id} was cancelled")
 
         # ── Agent 3: Dispatch Commander ──
         table.update_item(
@@ -201,6 +218,22 @@ def _run_pipeline(run_id: str, target_date: str = None):
             },
         )
         emit_pipeline_metrics(run_id=run_id, duration_ms=duration_ms, tokens_used=total_tokens, success=True)
+
+    except PipelineCancelled:
+        logger.info("pipeline.cancelled", extra={"event": "pipeline.cancelled", "run_id": run_id})
+        duration_ms = int((time.time() - start_time) * 1000)
+        table.update_item(
+            Key={"run_id": run_id},
+            UpdateExpression="SET #st = :s, error_message = :e, duration_ms = :d, tokens_used = :t",
+            ExpressionAttributeNames={"#st": "status"},
+            ExpressionAttributeValues={
+                ":s": "CANCELLED",
+                ":e": "Cancelled by user",
+                ":d": duration_ms,
+                ":t": total_tokens,
+            },
+        )
+        emit_pipeline_metrics(run_id=run_id, duration_ms=duration_ms, tokens_used=total_tokens, success=False)
 
     except Exception as e:
         logger.error(
@@ -262,6 +295,29 @@ def analyze(target_date: str = "2023-08-18"):
     )
 
     return {"run_id": run_id, "status": "RUNNING", "created_at": now, "target_date": target_date or "all"}
+
+
+@app.post("/api/v1/runs/{run_id}/cancel")
+def cancel_run(run_id: str):
+    """Cancel a running pipeline. Takes effect at the next agent boundary."""
+    table = _get_table()
+    response = table.get_item(Key={"run_id": run_id})
+    item = response.get("Item")
+
+    if not item:
+        raise HTTPException(status_code=404, detail=f"Run {run_id} not found")
+
+    if item.get("status") != "RUNNING":
+        raise HTTPException(status_code=409, detail=f"Run {run_id} is {item.get('status')} — can only cancel RUNNING runs")
+
+    table.update_item(
+        Key={"run_id": run_id},
+        UpdateExpression="SET #st = :s",
+        ExpressionAttributeNames={"#st": "status"},
+        ExpressionAttributeValues={":s": "CANCELLED"},
+    )
+
+    return {"run_id": run_id, "status": "CANCELLED", "detail": "Cancellation requested — will stop at next agent boundary"}
 
 
 @app.get("/api/v1/runs/{run_id}/status")
