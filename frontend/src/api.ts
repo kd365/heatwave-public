@@ -51,7 +51,7 @@ export interface ThreatScore {
 
 export interface RunStatus {
   run_id: string
-  status: 'RUNNING' | 'COMPLETE' | 'ERROR' | 'IDLE'
+  status: 'RUNNING' | 'COMPLETE' | 'ERROR' | 'IDLE' | 'CANCELLED'
   agent_1_status: string
   agent_2_status: string
   agent_3_status: string

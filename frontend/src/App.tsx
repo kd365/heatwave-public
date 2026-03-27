@@ -192,19 +192,21 @@ function App() {
               <option key={d.date} value={d.date}>{d.label}</option>
             ))}
           </select>
-          {status === 'RUNNING' ? (
+          {status === 'RUNNING' && (
             <button className="run-btn cancel-btn" onClick={handleCancel}>
               Cancel
             </button>
-          ) : (
-            <button
-              className={`run-btn ${isTriggering ? 'running' : ''}`}
-              onClick={handleRunAnalysis}
-              disabled={isTriggering}
-            >
-              {isTriggering ? 'Starting…' : '▶ Run Analysis'}
-            </button>
           )}
+          {status === 'CANCELLED' && (
+            <span className="cancel-notice">Cancelling after current agent completes...</span>
+          )}
+          <button
+            className={`run-btn ${isTriggering ? 'running' : ''}`}
+            onClick={handleRunAnalysis}
+            disabled={isTriggering || status === 'RUNNING'}
+          >
+            {isTriggering ? 'Starting…' : '▶ Run Analysis'}
+          </button>
         </div>
       </header>
 
