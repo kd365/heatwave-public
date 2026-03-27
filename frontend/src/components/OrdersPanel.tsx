@@ -15,7 +15,7 @@ const ROLE_COLORS: Record<string, string> = {
 }
 
 export function OrdersPanel({ orders, assets }: Props) {
-  const [collapsed, setCollapsed] = useState(false)
+  const [collapsed, setCollapsed] = useState(true)
 
   const assetMap = new Map(assets.map(a => [a.id, a]))
 

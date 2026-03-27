@@ -141,7 +141,7 @@ System prompt: *"Analyze the threat map, consider critical zone count, asset ava
 - [X] 🔴 **DynamoDB table** for pipeline run state (keyed by `run_id`)
 - [ ] 🟡 **CloudWatch Log Groups** for agents + backend
 - [ ] 🟡 **CloudWatch Dashboard** (`HEATWAVE-Observability`)
-- [ ] 🟡 **S3 + CloudFront** for React static hosting
+- [X] 🔴 **S3 + CloudFront** for React static hosting — bucket `heatwave-dev-frontend-388691194728`, CF `E2DTZPXZ56DA7Z`, live at https://d1fkyokay3hahf.cloudfront.net
 
 ### Terraform Plan/Apply
 - [X] 🔴 `terraform plan` clean
@@ -273,7 +273,7 @@ Agent 1 uses a **hybrid deterministic + LLM approach** refined through integrati
 - [X] 🔴 `GET /health` health check — verified locally
 - [ ] 🟡 Pydantic models for request/response schemas
 - [X] 🔴 Bedrock client (boto3) via `backend/agents/base.py`
-- [ ] 🟡 Structured JSON logging → CloudWatch
+- [X] 🟡 Structured JSON logging → CloudWatch (`backend/utils/logging_config.py`, events: `pipeline.start/complete/error`, `agent.cooldown`)
 - [ ] 🟡 Request/response time middleware → CloudWatch metrics
 - [X] 🟡 Token usage capture → DynamoDB (accumulated across all 3 agents per run)
 
@@ -311,27 +311,27 @@ Agent 1 uses a **hybrid deterministic + LLM approach** refined through integrati
 *Goal: Production-grade ops — logging, monitoring, guardrails, automated deploy.*
 
 ### Observability
-- [ ] 🔴 CloudWatch Log Groups: `heatwave-agent-1`, `-agent-2`, `-agent-3`, `-backend`
-- [ ] 🔴 Structured logs: `{agent, run_id, action, duration_ms, tokens_used, model}`
-- [ ] 🔴 CloudWatch Metrics: `AgentLatencyMs`, `AgentTokensUsed`, `PipelineRunCount`, `PipelineErrorCount`
-- [ ] 🔴 CloudWatch Dashboard: `HEATWAVE-Observability`
+- [X] 🔴 CloudWatch Log Groups: `/aws/lambda/heatwave-dev-backend` — 30-day retention, managed by Terraform
+- [X] 🔴 Structured logs: JSON per line `{timestamp, level, logger, message, run_id, duration_ms, tokens_used}` — queryable via Logs Insights
+- [X] 🔴 CloudWatch Metrics: `AgentLatencyMs`, `AgentTokensUsed`, `PipelineRunCount`, `PipelineErrorCount`
+- [X] 🔴 CloudWatch Dashboard: `HEATWAVE-Observability`
 - [ ] 🟡 Alarm: pipeline error rate > 10% → SNS
-- [ ] 🟡 Token cost tracking (Claude Sonnet 3.5 v2 pricing)
+- [X] 🟡 Token cost tracking (Claude Sonnet 4 + Haiku 4.5 pricing — captured per run in DynamoDB)
 
 ### Security & Governance
-- [ ] 🔴 Bedrock Guardrail (Terraform): deny ungrounded medical advice, content filter, grounding enforcement
-- [ ] 🔴 Apply guardrail to Agent 2 RAG output path
-- [ ] 🔴 IAM audit: no `*` actions, least-privilege per role
-- [ ] 🔴 GitHub Actions OIDC federation (no static AWS keys)
+- [X] 🔴 Bedrock Guardrail (Terraform): deny ungrounded medical advice, content filter, grounding enforcement
+- [X] 🔴 Apply guardrail to Agent 2 RAG output path
+- [X] 🔴 IAM audit: no `*` actions, least-privilege per role
+- [~] 🔴 GitHub Actions OIDC federation — BLOCKED: education account lacks `iam:CreateOpenIDConnectProvider`; using static key secrets instead
 - [ ] 🟡 S3 block public access on all buckets
 - [ ] 🟡 Secrets Manager for API keys
 - [ ] 🟡 CloudTrail audit logging
 
 ### CI/CD (GitHub Actions)
-- [ ] 🔴 `.github/workflows/ci.yml` — PR: lint (ruff), pytest, ESLint, frontend build
-- [ ] 🔴 `.github/workflows/deploy-backend.yml` — push to main: package + deploy Lambda
+- [X] 🔴 `.github/workflows/ci.yml` — PR gate: ruff lint, pytest (60 tests), ESLint, vite build
+- [X] 🔴 `.github/workflows/deploy-backend.yml` — push to main: package Lambda zip + deploy + health verify
 - [ ] 🟡 `.github/workflows/terraform.yml` — terraform fmt/validate/plan/apply
-- [ ] 🟡 `.github/workflows/deploy-frontend.yml` — build + sync to S3 + CloudFront invalidate
+- [X] 🟡 `.github/workflows/deploy-frontend.yml` — build + `aws s3 sync` + CloudFront invalidation
 - [ ] 🟡 Status badges in README
 
 ---
@@ -400,9 +400,9 @@ Agent 1 uses a **hybrid deterministic + LLM approach** refined through integrati
 
 | Requirement | Status | Where |
 |---|---|---|
-| Automated CI/CD | [ ] | `.github/workflows/` |
+| Automated CI/CD | [X] ✅ | `.github/workflows/` — CI gate (ruff+pytest+eslint+build), Lambda deploy, frontend deploy |
 | Infrastructure as Code | [X] ✅ | `/infra/` — S3, IAM (zero trust), DynamoDB, Lambda, API Gateway, Bedrock KB, OpenSearch |
-| Observability | [ ] | CloudWatch + frontend dashboard |
+| Observability | [~] | CloudWatch JSON structured logging live; dashboard TBD |
 | Vector Integration (RAG) | [X] ✅ | Bedrock KB `OT8DYXUN9L`, 6 docs ingested, RAG live |
 | Security & Governance | [ ] | Bedrock Guardrails + IAM zero trust |
 

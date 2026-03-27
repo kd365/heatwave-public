@@ -88,3 +88,15 @@ output "cloudfront_distribution_id" {
   description = "CloudFront distribution ID — used by deploy-frontend.yml for cache invalidation"
   value       = aws_cloudfront_distribution.frontend.id
 }
+
+# ── Guardrail ─────────────────────────────────────────────────────────────────
+
+output "guardrail_id" {
+  description = "Bedrock Guardrail ID for Agent 2 — set as BEDROCK_GUARDRAIL_ID env var"
+  value       = aws_bedrock_guardrail.agent2.guardrail_id
+}
+
+output "guardrail_version" {
+  description = "Bedrock Guardrail version for Agent 2"
+  value       = aws_bedrock_guardrail_version.agent2.version
+}
