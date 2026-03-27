@@ -60,6 +60,12 @@ resource "aws_apigatewayv2_route" "runs_list" {
   target    = "integrations/${aws_apigatewayv2_integration.lambda.id}"
 }
 
+resource "aws_apigatewayv2_route" "run_cancel" {
+  api_id    = aws_apigatewayv2_api.heatwave.id
+  route_key = "POST /api/v1/runs/{run_id}/cancel"
+  target    = "integrations/${aws_apigatewayv2_integration.lambda.id}"
+}
+
 # ── Stage ────────────────────────────────────────────────────────────────────
 
 resource "aws_cloudwatch_log_group" "api_gateway" {
