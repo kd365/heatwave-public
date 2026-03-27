@@ -38,10 +38,10 @@ YOUR PROCESS:
 4. IMPORTANT: When you find conflicting thresholds between NWS Heat Index and OSHA/NIOSH WBGT, note the discrepancy. Use the incident descriptions to inform your judgment — "unexplained death during 109F heat" should weigh heavily.
 
 SCORING CRITERIA:
-- CRITICAL (0.85-1.0): temp >= 105F AND (911 heat incidents OR vulnerable population signals OR power outage reports)
-- HIGH (0.65-0.84): temp >= 100F AND (any corroborating signals from 911/311/social media)
-- MEDIUM (0.40-0.64): temp >= 95F OR isolated heat signals without weather corroboration
-- LOW (0.0-0.39): below thresholds, minimal signals
+- CRITICAL (0.82-1.0): extreme apparent temp (110F+) AND 911 heat incidents AND multi-source corroboration
+- HIGH (0.65-0.81): apparent temp >= 105F AND (vulnerable population OR multi-source corroboration)
+- MEDIUM (0.45-0.64): apparent temp >= 95F OR isolated heat signals without corroboration
+- LOW (0.0-0.44): below thresholds, minimal signals, no vulnerable populations
 
 AGGRAVATING FACTORS (increase score within band):
 - Homeless encampment 311 reports in the hex (vulnerable population)
@@ -228,57 +228,91 @@ def _query_knowledge_base(query: str, num_results: int = 5) -> str:
 
 
 def _score_hex_threat(tool_input: dict) -> str:
-    """Deterministic threat scoring formula."""
+    """Deterministic threat scoring formula.
+
+    Weights: weather 50%, incidents 25% (dispatch 15% + service 5% + social 5%),
+    aggravating factors 25%.  Aggravating factors are auto-derived from hex data
+    so the LLM does not need to pass boolean flags.
+    """
     max_temp = tool_input.get("max_temp_f", 0)
     apparent_temp = tool_input.get("apparent_temp_f", max_temp)
     dispatch_count = tool_input.get("dispatch_count", 0)
     service_count = tool_input.get("service_count", 0)
     social_count = tool_input.get("social_count", 0)
-    vulnerable = tool_input.get("has_vulnerable_population", False)
-    hot_night = tool_input.get("nighttime_temp_above_80", False)
-    multi_source = tool_input.get("multi_source_corroboration", False)
 
-    # Weather component (40%): use apparent temp (heat index) — scale 85-115F to 0.0-1.0
-    weather_score = max(0.0, min(1.0, (apparent_temp - 85) / 30))
+    # --- Auto-derive aggravating factors from hex data (Issue 3 fix) ---
+    # Vulnerable population: elderly 65+ present OR homeless encampment 311 reports
+    elderly = tool_input.get("elderly_65plus", 0)
+    pct_elderly = tool_input.get("pct_elderly", 0)
+    service_types = tool_input.get("service_types", {})
+    homeless_reports = sum(v for k, v in service_types.items() if "homeless" in k.lower() or "encampment" in k.lower())
+    vulnerable = (
+        tool_input.get("has_vulnerable_population", False)
+        or elderly > 0
+        or pct_elderly >= 10
+        or homeless_reports > 0
+    )
 
-    # Dispatch component (25%): each incident adds weight, cap at 5
-    dispatch_score = min(1.0, dispatch_count / 5)
+    # Hot night: only flag when apparent temp is extreme (110F+ suggests no nighttime relief)
+    hot_night = tool_input.get("nighttime_temp_above_80", False) or apparent_temp >= 110
 
-    # 311 component (15%): each request adds weight, cap at 10
-    service_score = min(1.0, service_count / 10)
+    # Multi-source corroboration: need 2+ *incident* sources (not counting weather, since every hex has it)
+    incident_sources = 0
+    if dispatch_count > 0:
+        incident_sources += 1
+    if service_count > 0:
+        incident_sources += 1
+    if social_count > 0:
+        incident_sources += 1
+    multi_source = tool_input.get("multi_source_corroboration", False) or incident_sources >= 2
 
-    # Social component (10%): each post adds weight, cap at 5
-    social_score = min(1.0, social_count / 5)
+    # --- Weather component (50%) ---
+    # Nonlinear: ramps 85-105F, then steep ramp 105-115F for extreme heat
+    if apparent_temp >= 105:
+        # Extreme heat zone: 105F=0.7, 110F=0.90, 115F=1.0 (steeper ramp)
+        weather_score = min(1.0, 0.7 + (apparent_temp - 105) * 0.04)
+    else:
+        # Normal ramp: 85F=0.0, 95F=0.35, 105F=0.7
+        weather_score = max(0.0, min(0.7, (apparent_temp - 85) * 0.035))
 
-    # Aggravating factors (10%): each adds 0.33
+    # Dispatch component (15%): 911 heat incidents are high-signal
+    dispatch_score = min(1.0, dispatch_count / 3)
+
+    # 311 component (5%): service requests are lower-signal
+    service_score = min(1.0, service_count / 8)
+
+    # Social component (5%): social media signals
+    social_score = min(1.0, social_count / 4)
+
+    # Aggravating factors (25%): each factor contributes
     agg_score = 0.0
     factors = []
     if vulnerable:
-        agg_score += 0.33
+        agg_score += 0.35
         factors.append("vulnerable_population")
     if hot_night:
-        agg_score += 0.33
+        agg_score += 0.30
         factors.append("no_nighttime_recovery")
     if multi_source:
-        agg_score += 0.34
+        agg_score += 0.35
         factors.append("multi_source_corroboration")
     agg_score = min(1.0, agg_score)
 
     # Weighted total
     total = (
-        weather_score * 0.40
-        + dispatch_score * 0.25
-        + service_score * 0.15
-        + social_score * 0.10
-        + agg_score * 0.10
+        weather_score * 0.50
+        + dispatch_score * 0.15
+        + service_score * 0.05
+        + social_score * 0.05
+        + agg_score * 0.25
     )
 
     # Map to risk level
-    if total >= 0.85:
+    if total >= 0.82:
         level = "CRITICAL"
     elif total >= 0.65:
         level = "HIGH"
-    elif total >= 0.40:
+    elif total >= 0.45:
         level = "MEDIUM"
     else:
         level = "LOW"
@@ -409,15 +443,46 @@ def run(run_id: str, hex_events: dict = None) -> dict:
     # Always use the collected scores — they're complete even if the LLM text was truncated
     if all_scored:
         parsed["threat_map"] = all_scored
+
+    # --- Issue 2 fix: score any hexes the LLM missed ---
+    scored_ids = {s["hex_id"] for s in parsed.get("threat_map", [])}
+    all_hex_events = []
+    if hex_events:
+        all_hex_events = hex_events.get("hex_events", [])
+    if not all_hex_events and "hex_events" in parsed.get("raw_response", ""):
+        pass  # no hex_events available to backfill from
+    # Try loading from S3 if we have a run_id and hex_events weren't passed
+    if not all_hex_events and run_id:
+        try:
+            raw = _load_hex_events(run_id)
+            loaded = json.loads(raw)
+            all_hex_events = loaded.get("hex_events", [])
+        except Exception:
+            pass
+
+    if all_hex_events:
+        missing = [h for h in all_hex_events if h["hex_id"] not in scored_ids]
+        if missing:
+            logger.info("Backfill-scoring %d hexes the LLM missed", len(missing))
+            backfilled = []
+            for h in missing:
+                score_result = json.loads(_score_hex_threat(h))
+                backfilled.append(score_result)
+            if "threat_map" not in parsed:
+                parsed["threat_map"] = []
+            parsed["threat_map"].extend(backfilled)
+
+    # Build summary from final threat_map
+    if parsed.get("threat_map"):
         by_level = {}
-        for s in all_scored:
+        for s in parsed["threat_map"]:
             lvl = s.get("risk_level", "UNKNOWN")
             by_level[lvl] = by_level.get(lvl, 0) + 1
         parsed["summary"] = {
-            "total_hexes_scored": len(all_scored),
+            "total_hexes_scored": len(parsed["threat_map"]),
             **by_level,
         }
-        logger.info("Agent 2 scored %d hexes: %s", len(all_scored), by_level)
+        logger.info("Agent 2 final: %d hexes scored: %s", len(parsed["threat_map"]), by_level)
 
     parsed["tokens_used"] = result["tokens_used"]
     parsed["tool_calls"] = result["tool_calls"]
