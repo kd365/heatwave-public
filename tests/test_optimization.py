@@ -1,6 +1,5 @@
 """Tests for backend.utils.optimization module."""
 
-import pytest
 from backend.utils.h3_geocoding import latlng_to_hex
 from backend.utils.optimization import (
     RiskLevel,

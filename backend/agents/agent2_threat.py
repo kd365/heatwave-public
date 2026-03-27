@@ -238,8 +238,8 @@ def _score_hex_threat(tool_input: dict) -> str:
     hot_night = tool_input.get("nighttime_temp_above_80", False)
     multi_source = tool_input.get("multi_source_corroboration", False)
 
-    # Weather component (40%): scale 85-115F to 0.0-1.0
-    weather_score = max(0.0, min(1.0, (max_temp - 85) / 30))
+    # Weather component (40%): use apparent temp (heat index) — scale 85-115F to 0.0-1.0
+    weather_score = max(0.0, min(1.0, (apparent_temp - 85) / 30))
 
     # Dispatch component (25%): each incident adds weight, cap at 5
     dispatch_score = min(1.0, dispatch_count / 5)
@@ -397,6 +397,7 @@ def run(run_id: str, hex_events: dict = None) -> dict:
         user_message=user_message,
         max_turns=25,
         model="lite",  # Haiku — scoring uses deterministic formula, LLM just orchestrates
+        use_guardrail=True,
     )
 
     try:

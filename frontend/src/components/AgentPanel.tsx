@@ -43,8 +43,8 @@ const AGENTS: {
 ]
 
 export function AgentPanel({ runStatus, result, recentRuns = [] }: Props) {
-  const [collapsed, setCollapsed] = useState(false)
-  const [obsCollapsed, setObsCollapsed] = useState(false)
+  const [collapsed, setCollapsed] = useState(true)
+  const [obsCollapsed, setObsCollapsed] = useState(true)
 
   if (collapsed) {
     return (

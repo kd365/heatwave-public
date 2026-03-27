@@ -6,7 +6,6 @@ if Claude wants to use a tool, execute it and send result back → repeat
 until Claude gives a final text answer.
 """
 
-import json
 import logging
 import os
 import re
@@ -49,6 +48,7 @@ def run_agent(
     user_message: str,
     max_turns: int = 10,
     model: str = "default",
+    use_guardrail: bool = False,
 ) -> dict:
     """Run an agent conversation loop with tool use.
 
@@ -83,6 +83,14 @@ def run_agent(
         }
         if tools:
             request["toolConfig"] = {"tools": tools}
+        if use_guardrail:
+            guardrail_id = os.environ.get("BEDROCK_GUARDRAIL_ID")
+            if guardrail_id:
+                request["guardrailConfig"] = {
+                    "guardrailIdentifier": guardrail_id,
+                    "guardrailVersion": os.environ.get("BEDROCK_GUARDRAIL_VERSION", "DRAFT"),
+                    "trace": "enabled",
+                }
 
         # Retry with exponential backoff for throttling
         for attempt in range(5):

@@ -1,6 +1,5 @@
 """Tests for backend.utils.h3_geocoding module."""
 
-import pytest
 from backend.utils.h3_geocoding import (
     H3_RESOLUTION,
     latlng_to_hex,

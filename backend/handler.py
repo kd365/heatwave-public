@@ -16,15 +16,16 @@ import uuid
 from datetime import datetime, timezone
 
 import boto3
-import threading
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from mangum import Mangum
 
 from backend.agents import agent1_triage, agent2_threat, agent3_dispatch
+from backend.utils.logging_config import configure_logging
+from backend.utils.metrics import emit_agent_metrics, emit_pipeline_metrics
 
+configure_logging()
 logger = logging.getLogger(__name__)
-logging.basicConfig(level=os.environ.get("POWERTOOLS_LOG_LEVEL", "INFO"))
 
 # ---------------------------------------------------------------------------
 # App setup
@@ -86,7 +87,10 @@ def _run_pipeline(run_id: str, target_date: str = None):
         )
 
         agent1_result = agent1_triage.run(run_id=run_id, target_date=target_date)
-        total_tokens += agent1_result.get("tokens_used", 0)
+        a1_tokens = agent1_result.get("tokens_used", 0)
+        a1_duration_ms = int((time.time() - start_time) * 1000)
+        total_tokens += a1_tokens
+        emit_agent_metrics("agent1_triage", run_id=run_id, duration_ms=a1_duration_ms, tokens_used=a1_tokens)
 
         # Save Agent 1 output to S3
         s3.put_object(
@@ -106,7 +110,7 @@ def _run_pipeline(run_id: str, target_date: str = None):
         )
 
         # Rate limit cooldown between agents
-        logger.info("Cooling down 60s between Agent 1 and Agent 2...")
+        logger.info("Cooling down 60s between Agent 1 and Agent 2...", extra={"run_id": run_id, "event": "agent.cooldown", "after_agent": 1})
         time.sleep(60)
 
         # ── Agent 2: Threat Assessment ──
@@ -120,7 +124,10 @@ def _run_pipeline(run_id: str, target_date: str = None):
             run_id=run_id,
             hex_events=agent1_result,
         )
-        total_tokens += agent2_result.get("tokens_used", 0)
+        a2_tokens = agent2_result.get("tokens_used", 0)
+        a2_duration_ms = int((time.time() - start_time) * 1000) - a1_duration_ms - 60000
+        total_tokens += a2_tokens
+        emit_agent_metrics("agent2_threat", run_id=run_id, duration_ms=a2_duration_ms, tokens_used=a2_tokens)
 
         s3.put_object(
             Bucket=DATA_BUCKET,
@@ -139,7 +146,7 @@ def _run_pipeline(run_id: str, target_date: str = None):
         )
 
         # Rate limit cooldown between agents
-        logger.info("Cooling down 60s between Agent 2 and Agent 3...")
+        logger.info("Cooling down 60s between Agent 2 and Agent 3...", extra={"run_id": run_id, "event": "agent.cooldown", "after_agent": 2})
         time.sleep(60)
 
         # ── Agent 3: Dispatch Commander ──
@@ -153,7 +160,10 @@ def _run_pipeline(run_id: str, target_date: str = None):
             run_id=run_id,
             threat_map=agent2_result,
         )
-        total_tokens += agent3_result.get("tokens_used", 0)
+        a3_tokens = agent3_result.get("tokens_used", 0)
+        a3_duration_ms = int((time.time() - start_time) * 1000) - a1_duration_ms - a2_duration_ms - 120000
+        total_tokens += a3_tokens
+        emit_agent_metrics("agent3_dispatch", run_id=run_id, duration_ms=a3_duration_ms, tokens_used=a3_tokens)
 
         s3.put_object(
             Bucket=DATA_BUCKET,
@@ -182,12 +192,23 @@ def _run_pipeline(run_id: str, target_date: str = None):
         )
 
         logger.info(
-            "Pipeline %s complete: %d tokens, %d ms",
-            run_id, total_tokens, duration_ms,
+            "pipeline.complete",
+            extra={
+                "event": "pipeline.complete",
+                "run_id": run_id,
+                "duration_ms": duration_ms,
+                "tokens_used": total_tokens,
+            },
         )
+        emit_pipeline_metrics(run_id=run_id, duration_ms=duration_ms, tokens_used=total_tokens, success=True)
 
     except Exception as e:
-        logger.error("Pipeline %s failed: %s", run_id, e)
+        logger.error(
+            "pipeline.error",
+            extra={"event": "pipeline.error", "run_id": run_id, "error": str(e)},
+            exc_info=True,
+        )
+        emit_pipeline_metrics(run_id=run_id, duration_ms=int((time.time() - start_time) * 1000), tokens_used=total_tokens, success=False)
         table.update_item(
             Key={"run_id": run_id},
             UpdateExpression="SET #st = :s, error_message = :e",
@@ -342,7 +363,10 @@ def handler(event, context):
     if isinstance(event, dict) and "pipeline_run" in event:
         run_id = event["pipeline_run"]
         target_date = event.get("target_date")
-        logger.info("Async pipeline invocation for run_id: %s, target_date: %s", run_id, target_date)
+        logger.info(
+            "pipeline.start",
+            extra={"event": "pipeline.start", "run_id": run_id, "target_date": target_date},
+        )
         _run_pipeline(run_id, target_date=target_date)
         return {"statusCode": 200, "body": json.dumps({"run_id": run_id, "status": "complete"})}
 

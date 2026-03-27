@@ -1,5 +1,5 @@
-import { useMemo } from 'react'
-import { Marker, Tooltip } from 'react-leaflet'
+import React, { useMemo } from 'react'
+import { Marker, Tooltip, Polyline } from 'react-leaflet'
 import L from 'leaflet'
 import { cellToLatLng } from 'h3-js'
 import type { Asset, DispatchOrder } from '../api'
@@ -38,6 +38,14 @@ const ICONS = {
   medical:   makeIcon('🏥'),
   outreach:  makeIcon('🚐'),
   staged:    makeIcon('📍'),
+}
+
+const ROLE_LINE_COLORS: Record<string, string> = {
+  primary: '#ff6b35',
+  cooling: '#38bdf8',
+  medical: '#f472b6',
+  staged:  '#a3e635',
+  support: '#a78bfa',
 }
 
 function mobileIcon(assetType: string) {
@@ -147,29 +155,37 @@ export function AssetLayer({ assets, orders, activatedCoolingIds }: Props) {
         const roleColor = order.role === 'stage'
           ? { bg: '#713f12', text: '#fef08a' }
           : { bg: '#7c2d12', text: '#fed7aa' }
+        const lineColor = ROLE_LINE_COLORS[order.role?.toLowerCase()] ?? '#888'
 
         return (
-          <Marker
-            key={`order-${i}`}
-            position={[lat, lng]}
-            icon={icon}
-          >
-            <Tooltip direction="top" offset={[0, -12]}>
-              <div style={{ fontSize: '0.8rem', lineHeight: 1.6 }}>
-                <div>
-                  <strong>{order.asset_id}</strong>
-                  <span style={{ marginLeft: 6, padding: '1px 5px', borderRadius: 3,
-                    background: roleColor.bg, color: roleColor.text,
-                    fontSize: '0.7rem', fontWeight: 600 }}>
-                    {order.role.toUpperCase()}
-                  </span>
+          <React.Fragment key={`order-${i}`}>
+            {/* Line from station to deployed position */}
+            {asset?.home_lat != null && asset?.home_lon != null && (
+              <Polyline
+                positions={[[asset.home_lat, asset.home_lon], [lat, lng]]}
+                pathOptions={{ color: lineColor, weight: 1.5, opacity: 0.35, dashArray: '5 5' }}
+              />
+            )}
+            <Marker position={[lat, lng]} icon={icon}>
+              <Tooltip direction="top" offset={[0, -12]}>
+                <div style={{ fontSize: '0.8rem', lineHeight: 1.6 }}>
+                  <div>
+                    <strong>{order.asset_id}</strong>
+                    <span style={{ marginLeft: 6, padding: '1px 5px', borderRadius: 3,
+                      background: roleColor.bg, color: roleColor.text,
+                      fontSize: '0.7rem', fontWeight: 600 }}>
+                      {order.role.toUpperCase()}
+                    </span>
+                  </div>
+                  <div>{assetLabel(assetType)}</div>
+                  {asset && <div><strong>From:</strong> {asset.home_address}</div>}
+                  {asset && asset.capacity > 0 && <div><strong>Capacity:</strong> {asset.capacity} persons</div>}
+                  <div><strong>Distance:</strong> {order.distance.toFixed(1)} km</div>
+                  <div><strong>Target hex:</strong> …{order.to_hex.slice(-8)}</div>
                 </div>
-                <div>{assetLabel(assetType)}</div>
-                <div><strong>Distance:</strong> {order.distance} hex ring{order.distance !== 1 ? 's' : ''}</div>
-                <div><strong>Assigned hex:</strong> …{order.to_hex.slice(-8)}</div>
-              </div>
-            </Tooltip>
-          </Marker>
+              </Tooltip>
+            </Marker>
+          </React.Fragment>
         )
         })
       })()}

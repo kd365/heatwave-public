@@ -8,7 +8,7 @@ interface Props {
 }
 
 export function Legend({ hexEvents, threatMap = [], runStatus }: Props) {
-  const [collapsed, setCollapsed] = useState(false)
+  const [collapsed, setCollapsed] = useState(true)
   const counts = { CRITICAL: 0, HIGH: 0, MEDIUM: 0, LOW: 0, UNSCORED: 0 }
   const threatLookup = new Map(threatMap.map(t => [t.hex_id, t]))
   for (const h of hexEvents) {

@@ -9,7 +9,7 @@ import { AssetLayer } from './components/AssetLayer'
 import { AgentPanel } from './components/AgentPanel'
 import { OrdersPanel } from './components/OrdersPanel'
 import { triggerAnalysis, fetchRunStatus, fetchResult, fetchLatestRun, fetchAssets, fetchRuns } from './api'
-import type { HexEvent, RunStatus, PipelineResult, DispatchOrder, Asset } from './api'
+import type { HexEvent, RunStatus, PipelineResult, DispatchOrder, Asset, ThreatScore } from './api'
 import './App.css'
 
 const DALLAS_CENTER: [number, number] = [32.7767, -96.797]
@@ -56,7 +56,10 @@ function App() {
     staleTime: 30_000,
   })
 
-  const hexEvents: HexEvent[] = result?.hex_events?.hex_events ?? []
+  const hexEvents: HexEvent[] = useMemo(
+    () => result?.hex_events?.hex_events ?? [],
+    [result]
+  )
   const orders: DispatchOrder[] = (() => {
     const dp = result?.dispatch_plan
     if (!dp) return []
@@ -87,7 +90,7 @@ function App() {
     const HIGH_SEVERITY_THRESHOLD = 0.65
     const activationZone = new Set<string>()
     for (const h of hexEvents) {
-      const threatScore = (result?.threat_map?.threat_map ?? []).find((t: any) => t.hex_id === h.hex_id)
+      const threatScore = (result?.threat_map?.threat_map ?? []).find((t: ThreatScore) => t.hex_id === h.hex_id)
       if ((threatScore?.risk_score ?? 0) >= HIGH_SEVERITY_THRESHOLD) {
         for (const ring of gridDisk(h.hex_id, ACTIVATION_RADIUS)) {
           activationZone.add(ring)
