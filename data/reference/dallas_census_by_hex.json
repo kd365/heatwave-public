@@ -1,184 +1,352 @@
 [
   {
-    "hex_id": "8726c8642ffffff",
-    "population": 28072,
-    "elderly_65plus": 1643,
-    "pct_elderly": 5.9,
-    "tract_count": 6
+    "hex_id": "8726c864bffffff",
+    "population": 26064,
+    "elderly_65plus": 2542,
+    "pct_elderly": 9.8,
+    "tract_count": 10
   },
   {
-    "hex_id": "8726c8292ffffff",
-    "population": 24079,
-    "elderly_65plus": 2298,
-    "pct_elderly": 9.5,
-    "tract_count": 6
-  },
-  {
-    "hex_id": "8726c8649ffffff",
-    "population": 22348,
-    "elderly_65plus": 1130,
-    "pct_elderly": 5.1,
-    "tract_count": 9
-  },
-  {
-    "hex_id": "8726cbd61ffffff",
-    "population": 22105,
-    "elderly_65plus": 2151,
-    "pct_elderly": 9.7,
-    "tract_count": 4
-  },
-  {
-    "hex_id": "8726c8284ffffff",
-    "population": 20113,
-    "elderly_65plus": 2530,
-    "pct_elderly": 12.6,
-    "tract_count": 3
-  },
-  {
-    "hex_id": "8726c864dffffff",
-    "population": 19793,
-    "elderly_65plus": 1500,
-    "pct_elderly": 7.6,
-    "tract_count": 5
-  },
-  {
-    "hex_id": "8726c86c5ffffff",
-    "population": 19728,
-    "elderly_65plus": 1765,
-    "pct_elderly": 8.9,
-    "tract_count": 4
-  },
-  {
-    "hex_id": "8726cb9aaffffff",
-    "population": 18951,
-    "elderly_65plus": 1826,
-    "pct_elderly": 9.6,
-    "tract_count": 3
-  },
-  {
-    "hex_id": "8726c8669ffffff",
-    "population": 18948,
-    "elderly_65plus": 1095,
-    "pct_elderly": 5.8,
+    "hex_id": "8726c8608ffffff",
+    "population": 25140,
+    "elderly_65plus": 1343,
+    "pct_elderly": 5.3,
     "tract_count": 7
   },
   {
-    "hex_id": "8726cb90cffffff",
-    "population": 18701,
-    "elderly_65plus": 1139,
-    "pct_elderly": 6.1,
-    "tract_count": 3
+    "hex_id": "8726c86e3ffffff",
+    "population": 24756,
+    "elderly_65plus": 1676,
+    "pct_elderly": 6.8,
+    "tract_count": 7
   },
   {
-    "hex_id": "8726cb986ffffff",
-    "population": 18419,
-    "elderly_65plus": 2264,
-    "pct_elderly": 12.3,
+    "hex_id": "8726c8649ffffff",
+    "population": 24371,
+    "elderly_65plus": 1506,
+    "pct_elderly": 6.2,
+    "tract_count": 10
+  },
+  {
+    "hex_id": "8726cb90cffffff",
+    "population": 22640,
+    "elderly_65plus": 1441,
+    "pct_elderly": 6.4,
     "tract_count": 4
+  },
+  {
+    "hex_id": "8726cb980ffffff",
+    "population": 22194,
+    "elderly_65plus": 2265,
+    "pct_elderly": 10.2,
+    "tract_count": 5
+  },
+  {
+    "hex_id": "8726c8291ffffff",
+    "population": 22089,
+    "elderly_65plus": 2575,
+    "pct_elderly": 11.7,
+    "tract_count": 5
+  },
+  {
+    "hex_id": "8726c8668ffffff",
+    "population": 21961,
+    "elderly_65plus": 3555,
+    "pct_elderly": 16.2,
+    "tract_count": 8
   },
   {
     "hex_id": "8726c8280ffffff",
-    "population": 17227,
-    "elderly_65plus": 2467,
-    "pct_elderly": 14.3,
+    "population": 21812,
+    "elderly_65plus": 2817,
+    "pct_elderly": 12.9,
+    "tract_count": 4
+  },
+  {
+    "hex_id": "8726c864affffff",
+    "population": 21314,
+    "elderly_65plus": 1017,
+    "pct_elderly": 4.8,
+    "tract_count": 8
+  },
+  {
+    "hex_id": "8726c8669ffffff",
+    "population": 21259,
+    "elderly_65plus": 1333,
+    "pct_elderly": 6.3,
+    "tract_count": 8
+  },
+  {
+    "hex_id": "8726c8642ffffff",
+    "population": 20209,
+    "elderly_65plus": 907,
+    "pct_elderly": 4.5,
+    "tract_count": 4
+  },
+  {
+    "hex_id": "8726c864dffffff",
+    "population": 20189,
+    "elderly_65plus": 1524,
+    "pct_elderly": 7.5,
+    "tract_count": 5
+  },
+  {
+    "hex_id": "8726cb984ffffff",
+    "population": 19843,
+    "elderly_65plus": 1985,
+    "pct_elderly": 10.0,
+    "tract_count": 4
+  },
+  {
+    "hex_id": "8726c8664ffffff",
+    "population": 18965,
+    "elderly_65plus": 2637,
+    "pct_elderly": 13.9,
+    "tract_count": 4
+  },
+  {
+    "hex_id": "8726cb914ffffff",
+    "population": 18943,
+    "elderly_65plus": 1867,
+    "pct_elderly": 9.9,
+    "tract_count": 7
+  },
+  {
+    "hex_id": "8726c86ccffffff",
+    "population": 18806,
+    "elderly_65plus": 2702,
+    "pct_elderly": 14.4,
+    "tract_count": 4
+  },
+  {
+    "hex_id": "8726cb923ffffff",
+    "population": 18760,
+    "elderly_65plus": 1380,
+    "pct_elderly": 7.4,
     "tract_count": 3
   },
   {
-    "hex_id": "8726c8296ffffff",
-    "population": 16862,
-    "elderly_65plus": 1898,
-    "pct_elderly": 11.3,
-    "tract_count": 4
-  },
-  {
-    "hex_id": "8726cb924ffffff",
-    "population": 16755,
-    "elderly_65plus": 1198,
-    "pct_elderly": 7.2,
-    "tract_count": 4
-  },
-  {
-    "hex_id": "8726cb90effffff",
-    "population": 16558,
-    "elderly_65plus": 1113,
-    "pct_elderly": 6.7,
+    "hex_id": "8726c86eeffffff",
+    "population": 18492,
+    "elderly_65plus": 2191,
+    "pct_elderly": 11.8,
     "tract_count": 4
   },
   {
     "hex_id": "8726c8660ffffff",
-    "population": 15376,
-    "elderly_65plus": 1143,
+    "population": 18289,
+    "elderly_65plus": 895,
+    "pct_elderly": 4.9,
+    "tract_count": 6
+  },
+  {
+    "hex_id": "8726c8283ffffff",
+    "population": 18208,
+    "elderly_65plus": 1478,
+    "pct_elderly": 8.1,
+    "tract_count": 4
+  },
+  {
+    "hex_id": "8726c8293ffffff",
+    "population": 18114,
+    "elderly_65plus": 1211,
+    "pct_elderly": 6.7,
+    "tract_count": 4
+  },
+  {
+    "hex_id": "8726cb9a5ffffff",
+    "population": 17899,
+    "elderly_65plus": 757,
+    "pct_elderly": 4.2,
+    "tract_count": 5
+  },
+  {
+    "hex_id": "8726cb985ffffff",
+    "population": 17550,
+    "elderly_65plus": 1738,
+    "pct_elderly": 9.9,
+    "tract_count": 4
+  },
+  {
+    "hex_id": "8726c8285ffffff",
+    "population": 17180,
+    "elderly_65plus": 3627,
+    "pct_elderly": 21.1,
+    "tract_count": 3
+  },
+  {
+    "hex_id": "8726c8292ffffff",
+    "population": 16501,
+    "elderly_65plus": 1222,
     "pct_elderly": 7.4,
     "tract_count": 4
   },
   {
-    "hex_id": "8726cb9a8ffffff",
-    "population": 15372,
-    "elderly_65plus": 2436,
-    "pct_elderly": 15.8,
-    "tract_count": 3
-  },
-  {
-    "hex_id": "8726c864bffffff",
-    "population": 15181,
-    "elderly_65plus": 1547,
-    "pct_elderly": 10.2,
+    "hex_id": "8726c829affffff",
+    "population": 16149,
+    "elderly_65plus": 2169,
+    "pct_elderly": 13.4,
     "tract_count": 6
   },
   {
-    "hex_id": "8726cb99bffffff",
-    "population": 14994,
-    "elderly_65plus": 2230,
-    "pct_elderly": 14.9,
+    "hex_id": "8726c864cffffff",
+    "population": 16024,
+    "elderly_65plus": 1637,
+    "pct_elderly": 10.2,
     "tract_count": 3
   },
   {
-    "hex_id": "8726cb90dffffff",
-    "population": 14637,
-    "elderly_65plus": 1051,
-    "pct_elderly": 7.2,
+    "hex_id": "8726c828affffff",
+    "population": 15756,
+    "elderly_65plus": 2017,
+    "pct_elderly": 12.8,
     "tract_count": 3
   },
   {
-    "hex_id": "8726cb982ffffff",
-    "population": 14139,
-    "elderly_65plus": 1565,
-    "pct_elderly": 11.1,
-    "tract_count": 3
-  },
-  {
-    "hex_id": "8726cb920ffffff",
-    "population": 14011,
-    "elderly_65plus": 1640,
-    "pct_elderly": 11.7,
-    "tract_count": 3
-  },
-  {
-    "hex_id": "8726c8644ffffff",
-    "population": 13944,
-    "elderly_65plus": 2351,
-    "pct_elderly": 16.9,
+    "hex_id": "8726c865cffffff",
+    "population": 15498,
+    "elderly_65plus": 1197,
+    "pct_elderly": 7.7,
     "tract_count": 4
   },
   {
-    "hex_id": "8726c860cffffff",
-    "population": 13936,
-    "elderly_65plus": 1053,
-    "pct_elderly": 7.6,
+    "hex_id": "8726cb920ffffff",
+    "population": 15463,
+    "elderly_65plus": 2055,
+    "pct_elderly": 13.3,
+    "tract_count": 4
+  },
+  {
+    "hex_id": "8726cb92effffff",
+    "population": 15035,
+    "elderly_65plus": 1213,
+    "pct_elderly": 8.1,
+    "tract_count": 3
+  },
+  {
+    "hex_id": "8726c86e9ffffff",
+    "population": 14837,
+    "elderly_65plus": 1190,
+    "pct_elderly": 8.0,
+    "tract_count": 3
+  },
+  {
+    "hex_id": "8726cb981ffffff",
+    "population": 14738,
+    "elderly_65plus": 2001,
+    "pct_elderly": 13.6,
+    "tract_count": 3
+  },
+  {
+    "hex_id": "8726cb98cffffff",
+    "population": 14641,
+    "elderly_65plus": 1976,
+    "pct_elderly": 13.5,
+    "tract_count": 3
+  },
+  {
+    "hex_id": "8726c829effffff",
+    "population": 14564,
+    "elderly_65plus": 887,
+    "pct_elderly": 6.1,
+    "tract_count": 5
+  },
+  {
+    "hex_id": "8726c82d6ffffff",
+    "population": 14526,
+    "elderly_65plus": 1711,
+    "pct_elderly": 11.8,
     "tract_count": 3
   },
   {
     "hex_id": "8726c866bffffff",
-    "population": 13862,
-    "elderly_65plus": 2356,
-    "pct_elderly": 17.0,
+    "population": 14487,
+    "elderly_65plus": 1506,
+    "pct_elderly": 10.4,
     "tract_count": 6
   },
   {
-    "hex_id": "8726c8293ffffff",
-    "population": 13776,
-    "elderly_65plus": 1329,
-    "pct_elderly": 9.6,
+    "hex_id": "8726c86e8ffffff",
+    "population": 14389,
+    "elderly_65plus": 1339,
+    "pct_elderly": 9.3,
+    "tract_count": 4
+  },
+  {
+    "hex_id": "8726cb986ffffff",
+    "population": 14257,
+    "elderly_65plus": 1819,
+    "pct_elderly": 12.8,
+    "tract_count": 3
+  },
+  {
+    "hex_id": "8726cb99bffffff",
+    "population": 14239,
+    "elderly_65plus": 2138,
+    "pct_elderly": 15.0,
+    "tract_count": 3
+  },
+  {
+    "hex_id": "8726cb9a3ffffff",
+    "population": 14165,
+    "elderly_65plus": 2052,
+    "pct_elderly": 14.5,
+    "tract_count": 5
+  },
+  {
+    "hex_id": "8726c8290ffffff",
+    "population": 14151,
+    "elderly_65plus": 1255,
+    "pct_elderly": 8.9,
+    "tract_count": 3
+  },
+  {
+    "hex_id": "8726c874bffffff",
+    "population": 13710,
+    "elderly_65plus": 2869,
+    "pct_elderly": 20.9,
+    "tract_count": 3
+  },
+  {
+    "hex_id": "8726cb911ffffff",
+    "population": 13702,
+    "elderly_65plus": 1457,
+    "pct_elderly": 10.6,
+    "tract_count": 2
+  },
+  {
+    "hex_id": "8726c8298ffffff",
+    "population": 13594,
+    "elderly_65plus": 1627,
+    "pct_elderly": 12.0,
+    "tract_count": 3
+  },
+  {
+    "hex_id": "8726cb926ffffff",
+    "population": 13590,
+    "elderly_65plus": 2027,
+    "pct_elderly": 14.9,
+    "tract_count": 3
+  },
+  {
+    "hex_id": "8726c86ecffffff",
+    "population": 13557,
+    "elderly_65plus": 1653,
+    "pct_elderly": 12.2,
+    "tract_count": 5
+  },
+  {
+    "hex_id": "8726cb901ffffff",
+    "population": 13531,
+    "elderly_65plus": 868,
+    "pct_elderly": 6.4,
+    "tract_count": 3
+  },
+  {
+    "hex_id": "8726cb906ffffff",
+    "population": 13516,
+    "elderly_65plus": 1224,
+    "pct_elderly": 9.1,
     "tract_count": 3
   },
   {
@@ -189,87 +357,38 @@
     "tract_count": 2
   },
   {
-    "hex_id": "8726c8670ffffff",
-    "population": 13222,
-    "elderly_65plus": 1418,
-    "pct_elderly": 10.7,
-    "tract_count": 3
-  },
-  {
-    "hex_id": "8726c864affffff",
-    "population": 13144,
-    "elderly_65plus": 799,
-    "pct_elderly": 6.1,
+    "hex_id": "8726cb916ffffff",
+    "population": 13059,
+    "elderly_65plus": 897,
+    "pct_elderly": 6.9,
     "tract_count": 5
   },
   {
-    "hex_id": "8726cb932ffffff",
-    "population": 13078,
-    "elderly_65plus": 1059,
-    "pct_elderly": 8.1,
-    "tract_count": 4
-  },
-  {
-    "hex_id": "8726cb974ffffff",
-    "population": 13016,
-    "elderly_65plus": 1782,
-    "pct_elderly": 13.7,
+    "hex_id": "8726cb91dffffff",
+    "population": 12744,
+    "elderly_65plus": 856,
+    "pct_elderly": 6.7,
     "tract_count": 3
   },
   {
-    "hex_id": "8726c829effffff",
-    "population": 12759,
-    "elderly_65plus": 822,
-    "pct_elderly": 6.4,
+    "hex_id": "8726cb921ffffff",
+    "population": 12475,
+    "elderly_65plus": 1199,
+    "pct_elderly": 9.6,
     "tract_count": 4
   },
   {
-    "hex_id": "8726c8664ffffff",
-    "population": 12724,
-    "elderly_65plus": 1779,
-    "pct_elderly": 14.0,
-    "tract_count": 3
-  },
-  {
-    "hex_id": "8726cb936ffffff",
-    "population": 12644,
-    "elderly_65plus": 1874,
-    "pct_elderly": 14.8,
-    "tract_count": 4
-  },
-  {
-    "hex_id": "8726c86edffffff",
-    "population": 12527,
-    "elderly_65plus": 808,
-    "pct_elderly": 6.5,
-    "tract_count": 3
-  },
-  {
-    "hex_id": "8726cb8b1ffffff",
-    "population": 12404,
-    "elderly_65plus": 1406,
-    "pct_elderly": 11.3,
+    "hex_id": "8726cb928ffffff",
+    "population": 12346,
+    "elderly_65plus": 1117,
+    "pct_elderly": 9.0,
     "tract_count": 2
   },
   {
-    "hex_id": "8726cb8b3ffffff",
-    "population": 12352,
-    "elderly_65plus": 1176,
-    "pct_elderly": 9.5,
-    "tract_count": 3
-  },
-  {
-    "hex_id": "8726c828cffffff",
-    "population": 12296,
-    "elderly_65plus": 1095,
-    "pct_elderly": 8.9,
-    "tract_count": 2
-  },
-  {
-    "hex_id": "8726c8668ffffff",
-    "population": 12125,
-    "elderly_65plus": 1321,
-    "pct_elderly": 10.9,
+    "hex_id": "8726c8286ffffff",
+    "population": 12157,
+    "elderly_65plus": 1855,
+    "pct_elderly": 15.3,
     "tract_count": 3
   },
   {
@@ -280,13 +399,6 @@
     "tract_count": 3
   },
   {
-    "hex_id": "8726c829affffff",
-    "population": 12095,
-    "elderly_65plus": 1277,
-    "pct_elderly": 10.6,
-    "tract_count": 4
-  },
-  {
     "hex_id": "8726cb810ffffff",
     "population": 12075,
     "elderly_65plus": 664,
@@ -294,31 +406,38 @@
     "tract_count": 2
   },
   {
-    "hex_id": "8726c8299ffffff",
-    "population": 11825,
-    "elderly_65plus": 932,
-    "pct_elderly": 7.9,
+    "hex_id": "8726cb9a9ffffff",
+    "population": 11782,
+    "elderly_65plus": 1346,
+    "pct_elderly": 11.4,
     "tract_count": 3
   },
   {
-    "hex_id": "8726cbd45ffffff",
-    "population": 11753,
-    "elderly_65plus": 1202,
-    "pct_elderly": 10.2,
+    "hex_id": "8726c8674ffffff",
+    "population": 11662,
+    "elderly_65plus": 1545,
+    "pct_elderly": 13.2,
     "tract_count": 3
   },
   {
-    "hex_id": "8726cb984ffffff",
-    "population": 11684,
-    "elderly_65plus": 1310,
-    "pct_elderly": 11.2,
-    "tract_count": 2
+    "hex_id": "8726c86eaffffff",
+    "population": 11587,
+    "elderly_65plus": 1102,
+    "pct_elderly": 9.5,
+    "tract_count": 3
   },
   {
-    "hex_id": "8726c82d2ffffff",
-    "population": 11445,
-    "elderly_65plus": 2526,
-    "pct_elderly": 22.1,
+    "hex_id": "8726cb92cffffff",
+    "population": 11530,
+    "elderly_65plus": 1515,
+    "pct_elderly": 13.1,
+    "tract_count": 3
+  },
+  {
+    "hex_id": "8726c86e5ffffff",
+    "population": 11526,
+    "elderly_65plus": 325,
+    "pct_elderly": 2.8,
     "tract_count": 3
   },
   {
@@ -329,17 +448,52 @@
     "tract_count": 2
   },
   {
-    "hex_id": "8726c8283ffffff",
-    "population": 10837,
-    "elderly_65plus": 758,
-    "pct_elderly": 7.0,
+    "hex_id": "8726cb9aeffffff",
+    "population": 11269,
+    "elderly_65plus": 1686,
+    "pct_elderly": 15.0,
+    "tract_count": 3
+  },
+  {
+    "hex_id": "8726c875affffff",
+    "population": 11040,
+    "elderly_65plus": 2114,
+    "pct_elderly": 19.1,
     "tract_count": 2
   },
   {
-    "hex_id": "8726cb825ffffff",
-    "population": 10557,
-    "elderly_65plus": 705,
-    "pct_elderly": 6.7,
+    "hex_id": "8726c828effffff",
+    "population": 11032,
+    "elderly_65plus": 1051,
+    "pct_elderly": 9.5,
+    "tract_count": 2
+  },
+  {
+    "hex_id": "8726c828cffffff",
+    "population": 10851,
+    "elderly_65plus": 831,
+    "pct_elderly": 7.7,
+    "tract_count": 2
+  },
+  {
+    "hex_id": "8726cbd69ffffff",
+    "population": 10738,
+    "elderly_65plus": 637,
+    "pct_elderly": 5.9,
+    "tract_count": 2
+  },
+  {
+    "hex_id": "8726cb9abffffff",
+    "population": 10590,
+    "elderly_65plus": 1480,
+    "pct_elderly": 14.0,
+    "tract_count": 2
+  },
+  {
+    "hex_id": "8726c82abffffff",
+    "population": 10541,
+    "elderly_65plus": 991,
+    "pct_elderly": 9.4,
     "tract_count": 2
   },
   {
@@ -350,25 +504,18 @@
     "tract_count": 2
   },
   {
-    "hex_id": "8726cb8a8ffffff",
-    "population": 10447,
-    "elderly_65plus": 1015,
-    "pct_elderly": 9.7,
+    "hex_id": "8726cb925ffffff",
+    "population": 10395,
+    "elderly_65plus": 946,
+    "pct_elderly": 9.1,
     "tract_count": 2
   },
   {
-    "hex_id": "8726c82b2ffffff",
-    "population": 10416,
-    "elderly_65plus": 1817,
-    "pct_elderly": 17.4,
+    "hex_id": "8726c82a9ffffff",
+    "population": 10389,
+    "elderly_65plus": 1136,
+    "pct_elderly": 10.9,
     "tract_count": 2
-  },
-  {
-    "hex_id": "8726cbd60ffffff",
-    "population": 10407,
-    "elderly_65plus": 1761,
-    "pct_elderly": 16.9,
-    "tract_count": 3
   },
   {
     "hex_id": "8726cb9a6ffffff",
@@ -378,25 +525,11 @@
     "tract_count": 2
   },
   {
-    "hex_id": "8726c875affffff",
-    "population": 10348,
-    "elderly_65plus": 1491,
-    "pct_elderly": 14.4,
-    "tract_count": 2
-  },
-  {
-    "hex_id": "8726cb926ffffff",
-    "population": 10330,
-    "elderly_65plus": 1673,
-    "pct_elderly": 16.2,
-    "tract_count": 2
-  },
-  {
-    "hex_id": "8726cb895ffffff",
-    "population": 10327,
-    "elderly_65plus": 835,
-    "pct_elderly": 8.1,
-    "tract_count": 2
+    "hex_id": "8726cb924ffffff",
+    "population": 10222,
+    "elderly_65plus": 748,
+    "pct_elderly": 7.3,
+    "tract_count": 3
   },
   {
     "hex_id": "8726cb98bffffff",
@@ -406,32 +539,46 @@
     "tract_count": 2
   },
   {
-    "hex_id": "8726c8759ffffff",
-    "population": 10169,
-    "elderly_65plus": 1319,
-    "pct_elderly": 13.0,
+    "hex_id": "8726c8601ffffff",
+    "population": 10198,
+    "elderly_65plus": 925,
+    "pct_elderly": 9.1,
+    "tract_count": 2
+  },
+  {
+    "hex_id": "8726c82d4ffffff",
+    "population": 10097,
+    "elderly_65plus": 1071,
+    "pct_elderly": 10.6,
+    "tract_count": 2
+  },
+  {
+    "hex_id": "8726cbd61ffffff",
+    "population": 10093,
+    "elderly_65plus": 1120,
+    "pct_elderly": 11.1,
+    "tract_count": 2
+  },
+  {
+    "hex_id": "8726c8646ffffff",
+    "population": 10084,
+    "elderly_65plus": 1224,
+    "pct_elderly": 12.1,
     "tract_count": 3
   },
   {
-    "hex_id": "8726c86e8ffffff",
-    "population": 10138,
-    "elderly_65plus": 866,
-    "pct_elderly": 8.5,
-    "tract_count": 2
+    "hex_id": "8726c8749ffffff",
+    "population": 10040,
+    "elderly_65plus": 1488,
+    "pct_elderly": 14.8,
+    "tract_count": 3
   },
   {
-    "hex_id": "8726cb923ffffff",
-    "population": 10062,
-    "elderly_65plus": 938,
-    "pct_elderly": 9.3,
-    "tract_count": 2
-  },
-  {
-    "hex_id": "8726c874bffffff",
-    "population": 10053,
-    "elderly_65plus": 2259,
-    "pct_elderly": 22.5,
-    "tract_count": 2
+    "hex_id": "8726cb931ffffff",
+    "population": 10024,
+    "elderly_65plus": 1693,
+    "pct_elderly": 16.9,
+    "tract_count": 4
   },
   {
     "hex_id": "8726cbd6affffff",
@@ -448,38 +595,45 @@
     "tract_count": 2
   },
   {
-    "hex_id": "8726c8285ffffff",
-    "population": 9919,
-    "elderly_65plus": 2656,
-    "pct_elderly": 26.8,
+    "hex_id": "8726c8666ffffff",
+    "population": 9982,
+    "elderly_65plus": 655,
+    "pct_elderly": 6.6,
     "tract_count": 2
   },
   {
-    "hex_id": "8726cb981ffffff",
-    "population": 9830,
-    "elderly_65plus": 1276,
-    "pct_elderly": 13.0,
+    "hex_id": "8726cb922ffffff",
+    "population": 9973,
+    "elderly_65plus": 1211,
+    "pct_elderly": 12.1,
     "tract_count": 2
   },
   {
-    "hex_id": "8726c86eeffffff",
-    "population": 9673,
-    "elderly_65plus": 1335,
-    "pct_elderly": 13.8,
-    "tract_count": 2
-  },
-  {
-    "hex_id": "8726c86e1ffffff",
-    "population": 9665,
-    "elderly_65plus": 1552,
-    "pct_elderly": 16.1,
+    "hex_id": "8726cb936ffffff",
+    "population": 9704,
+    "elderly_65plus": 1791,
+    "pct_elderly": 18.5,
     "tract_count": 3
   },
   {
-    "hex_id": "8726c8656ffffff",
-    "population": 9595,
-    "elderly_65plus": 401,
-    "pct_elderly": 4.2,
+    "hex_id": "8726cb90dffffff",
+    "population": 9667,
+    "elderly_65plus": 746,
+    "pct_elderly": 7.7,
+    "tract_count": 2
+  },
+  {
+    "hex_id": "8726c8294ffffff",
+    "population": 9603,
+    "elderly_65plus": 1716,
+    "pct_elderly": 17.9,
+    "tract_count": 2
+  },
+  {
+    "hex_id": "8726cb908ffffff",
+    "population": 9518,
+    "elderly_65plus": 583,
+    "pct_elderly": 6.1,
     "tract_count": 2
   },
   {
@@ -497,13 +651,6 @@
     "tract_count": 3
   },
   {
-    "hex_id": "8726c82d6ffffff",
-    "population": 9441,
-    "elderly_65plus": 1404,
-    "pct_elderly": 14.9,
-    "tract_count": 2
-  },
-  {
     "hex_id": "8726c8675ffffff",
     "population": 9384,
     "elderly_65plus": 1546,
@@ -511,24 +658,45 @@
     "tract_count": 3
   },
   {
-    "hex_id": "8726c875bffffff",
-    "population": 9353,
-    "elderly_65plus": 1560,
-    "pct_elderly": 16.7,
-    "tract_count": 2
-  },
-  {
-    "hex_id": "8726c82abffffff",
-    "population": 9257,
-    "elderly_65plus": 917,
-    "pct_elderly": 9.9,
-    "tract_count": 2
-  },
-  {
     "hex_id": "8726cb903ffffff",
     "population": 9225,
     "elderly_65plus": 1173,
     "pct_elderly": 12.7,
+    "tract_count": 2
+  },
+  {
+    "hex_id": "8726cb833ffffff",
+    "population": 9206,
+    "elderly_65plus": 1324,
+    "pct_elderly": 14.4,
+    "tract_count": 2
+  },
+  {
+    "hex_id": "8726c8670ffffff",
+    "population": 9199,
+    "elderly_65plus": 1044,
+    "pct_elderly": 11.3,
+    "tract_count": 2
+  },
+  {
+    "hex_id": "8726c82d2ffffff",
+    "population": 9182,
+    "elderly_65plus": 2135,
+    "pct_elderly": 23.3,
+    "tract_count": 2
+  },
+  {
+    "hex_id": "8726cb932ffffff",
+    "population": 9084,
+    "elderly_65plus": 770,
+    "pct_elderly": 8.5,
+    "tract_count": 3
+  },
+  {
+    "hex_id": "8726cb918ffffff",
+    "population": 9071,
+    "elderly_65plus": 751,
+    "pct_elderly": 8.3,
     "tract_count": 2
   },
   {
@@ -539,18 +707,18 @@
     "tract_count": 2
   },
   {
-    "hex_id": "8726c8601ffffff",
-    "population": 9013,
-    "elderly_65plus": 882,
-    "pct_elderly": 9.8,
-    "tract_count": 2
+    "hex_id": "8726cb933ffffff",
+    "population": 8956,
+    "elderly_65plus": 614,
+    "pct_elderly": 6.9,
+    "tract_count": 3
   },
   {
-    "hex_id": "8726c8648ffffff",
-    "population": 8928,
-    "elderly_65plus": 1357,
-    "pct_elderly": 15.2,
-    "tract_count": 2
+    "hex_id": "8726c8644ffffff",
+    "population": 8947,
+    "elderly_65plus": 1470,
+    "pct_elderly": 16.4,
+    "tract_count": 3
   },
   {
     "hex_id": "8726cb970ffffff",
@@ -560,24 +728,45 @@
     "tract_count": 1
   },
   {
-    "hex_id": "8726c86c1ffffff",
-    "population": 8815,
-    "elderly_65plus": 879,
-    "pct_elderly": 10.0,
+    "hex_id": "8726cb982ffffff",
+    "population": 8879,
+    "elderly_65plus": 1013,
+    "pct_elderly": 11.4,
     "tract_count": 2
   },
   {
-    "hex_id": "8726c828affffff",
-    "population": 8677,
-    "elderly_65plus": 1243,
-    "pct_elderly": 14.3,
+    "hex_id": "8726cb902ffffff",
+    "population": 8878,
+    "elderly_65plus": 953,
+    "pct_elderly": 10.7,
     "tract_count": 2
   },
   {
-    "hex_id": "8726cb8a4ffffff",
-    "population": 8660,
-    "elderly_65plus": 1032,
-    "pct_elderly": 11.9,
+    "hex_id": "8726c8662ffffff",
+    "population": 8773,
+    "elderly_65plus": 1102,
+    "pct_elderly": 12.6,
+    "tract_count": 2
+  },
+  {
+    "hex_id": "8726cb92bffffff",
+    "population": 8678,
+    "elderly_65plus": 855,
+    "pct_elderly": 9.9,
+    "tract_count": 2
+  },
+  {
+    "hex_id": "8726cb8a5ffffff",
+    "population": 8648,
+    "elderly_65plus": 1134,
+    "pct_elderly": 13.1,
+    "tract_count": 2
+  },
+  {
+    "hex_id": "8726cb983ffffff",
+    "population": 8647,
+    "elderly_65plus": 1142,
+    "pct_elderly": 13.2,
     "tract_count": 2
   },
   {
@@ -588,11 +777,32 @@
     "tract_count": 2
   },
   {
-    "hex_id": "8726cb914ffffff",
-    "population": 8542,
-    "elderly_65plus": 729,
+    "hex_id": "8726c8656ffffff",
+    "population": 8557,
+    "elderly_65plus": 688,
+    "pct_elderly": 8.0,
+    "tract_count": 2
+  },
+  {
+    "hex_id": "8726c86c5ffffff",
+    "population": 8482,
+    "elderly_65plus": 724,
     "pct_elderly": 8.5,
-    "tract_count": 3
+    "tract_count": 2
+  },
+  {
+    "hex_id": "8726cb99affffff",
+    "population": 8460,
+    "elderly_65plus": 1079,
+    "pct_elderly": 12.8,
+    "tract_count": 2
+  },
+  {
+    "hex_id": "8726c82aeffffff",
+    "population": 8453,
+    "elderly_65plus": 1617,
+    "pct_elderly": 19.1,
+    "tract_count": 2
   },
   {
     "hex_id": "8726cb919ffffff",
@@ -602,13 +812,6 @@
     "tract_count": 1
   },
   {
-    "hex_id": "8726c82f2ffffff",
-    "population": 8349,
-    "elderly_65plus": 1419,
-    "pct_elderly": 17.0,
-    "tract_count": 2
-  },
-  {
     "hex_id": "8726cb98affffff",
     "population": 8348,
     "elderly_65plus": 1474,
@@ -616,129 +819,143 @@
     "tract_count": 2
   },
   {
-    "hex_id": "8726cbd64ffffff",
-    "population": 8243,
-    "elderly_65plus": 819,
-    "pct_elderly": 9.9,
-    "tract_count": 2
-  },
-  {
-    "hex_id": "8726c860bffffff",
-    "population": 8135,
-    "elderly_65plus": 565,
-    "pct_elderly": 6.9,
-    "tract_count": 2
-  },
-  {
-    "hex_id": "8726c86eaffffff",
-    "population": 8102,
-    "elderly_65plus": 713,
-    "pct_elderly": 8.8,
-    "tract_count": 2
-  },
-  {
-    "hex_id": "8726cb921ffffff",
-    "population": 8088,
-    "elderly_65plus": 737,
-    "pct_elderly": 9.1,
-    "tract_count": 2
-  },
-  {
-    "hex_id": "8726cb98dffffff",
-    "population": 8079,
-    "elderly_65plus": 1692,
-    "pct_elderly": 20.9,
-    "tract_count": 2
-  },
-  {
-    "hex_id": "8726cb931ffffff",
-    "population": 8000,
-    "elderly_65plus": 1335,
-    "pct_elderly": 16.7,
-    "tract_count": 3
-  },
-  {
-    "hex_id": "8726cb92dffffff",
-    "population": 7963,
-    "elderly_65plus": 1399,
-    "pct_elderly": 17.6,
-    "tract_count": 2
-  },
-  {
-    "hex_id": "8726cb880ffffff",
-    "population": 7960,
-    "elderly_65plus": 546,
-    "pct_elderly": 6.9,
-    "tract_count": 1
-  },
-  {
-    "hex_id": "8726cb9a9ffffff",
-    "population": 7927,
-    "elderly_65plus": 901,
-    "pct_elderly": 11.4,
-    "tract_count": 2
-  },
-  {
-    "hex_id": "8726cb922ffffff",
-    "population": 7916,
-    "elderly_65plus": 1093,
+    "hex_id": "8726cb8b6ffffff",
+    "population": 8326,
+    "elderly_65plus": 1149,
     "pct_elderly": 13.8,
     "tract_count": 2
   },
   {
-    "hex_id": "8726cb9aeffffff",
-    "population": 7897,
-    "elderly_65plus": 1179,
-    "pct_elderly": 14.9,
-    "tract_count": 2
-  },
-  {
-    "hex_id": "8726cb91effffff",
-    "population": 7874,
-    "elderly_65plus": 726,
-    "pct_elderly": 9.2,
-    "tract_count": 1
-  },
-  {
-    "hex_id": "8726cb999ffffff",
-    "population": 7857,
-    "elderly_65plus": 197,
-    "pct_elderly": 2.5,
-    "tract_count": 2
-  },
-  {
-    "hex_id": "8726cbd65ffffff",
-    "population": 7841,
-    "elderly_65plus": 472,
-    "pct_elderly": 6.0,
-    "tract_count": 2
-  },
-  {
-    "hex_id": "8726c865cffffff",
-    "population": 7838,
-    "elderly_65plus": 410,
-    "pct_elderly": 5.2,
-    "tract_count": 2
-  },
-  {
-    "hex_id": "8726cb916ffffff",
-    "population": 7796,
-    "elderly_65plus": 622,
-    "pct_elderly": 8.0,
+    "hex_id": "8726c8648ffffff",
+    "population": 8298,
+    "elderly_65plus": 1482,
+    "pct_elderly": 17.9,
     "tract_count": 3
   },
   {
-    "hex_id": "8726c86cdffffff",
-    "population": 7620,
-    "elderly_65plus": 1010,
-    "pct_elderly": 13.3,
+    "hex_id": "8726cb9a0ffffff",
+    "population": 8296,
+    "elderly_65plus": 877,
+    "pct_elderly": 10.6,
     "tract_count": 2
   },
   {
-    "hex_id": "8726c864cffffff",
-    "population": 7496,
-    "elderly_65plus": 662,
-    "pct_elderly": 8.8,
+    "hex_id": "8726c86c1ffffff",
+    "population": 8291,
+    "elderly_65plus": 1169,
+    "pct_elderly": 14.1,
+    "tract_count": 2
+  },
+  {
+    "hex_id": "8726cb975ffffff",
+    "population": 8290,
+    "elderly_65plus": 795,
+    "pct_elderly": 9.6,
+    "tract_count": 2
+  },
+  {
+    "hex_id": "8726c8288ffffff",
+    "population": 8250,
+    "elderly_65plus": 669,
+    "pct_elderly": 8.1,
+    "tract_count": 2
+  },
+  {
+    "hex_id": "8726cb99dffffff",
+    "population": 8239,
+    "elderly_65plus": 219,
+    "pct_elderly": 2.7,
+    "tract_count": 2
+  },
+  {
+    "hex_id": "8726cb935ffffff",
+    "population": 8098,
+    "elderly_65plus": 1304,
+    "pct_elderly": 16.1,
+    "tract_count": 2
+  },
+  {
+    "hex_id": "8726c8296ffffff",
+    "population": 8060,
+    "elderly_65plus": 621,
+    "pct_elderly": 7.7,
+    "tract_count": 2
+  },
+  {
+    "hex_id": "8726cb974ffffff",
+    "population": 7861,
+    "elderly_65plus": 977,
+    "pct_elderly": 12.4,
+    "tract_count": 2
+  },
+  {
+    "hex_id": "8726cb9aaffffff",
+    "population": 7850,
+    "elderly_65plus": 592,
+    "pct_elderly": 7.5,
+    "tract_count": 1
+  },
+  {
+    "hex_id": "8726c866cffffff",
+    "population": 7844,
+    "elderly_65plus": 1835,
+    "pct_elderly": 23.4,
+    "tract_count": 3
+  },
+  {
+    "hex_id": "8726c82b1ffffff",
+    "population": 7790,
+    "elderly_65plus": 1596,
+    "pct_elderly": 20.5,
+    "tract_count": 2
+  },
+  {
+    "hex_id": "8726cb832ffffff",
+    "population": 7751,
+    "elderly_65plus": 1394,
+    "pct_elderly": 18.0,
+    "tract_count": 2
+  },
+  {
+    "hex_id": "8726c866dffffff",
+    "population": 7697,
+    "elderly_65plus": 2068,
+    "pct_elderly": 26.9,
+    "tract_count": 2
+  },
+  {
+    "hex_id": "8726c82a2ffffff",
+    "population": 7660,
+    "elderly_65plus": 613,
+    "pct_elderly": 8.0,
+    "tract_count": 1
+  },
+  {
+    "hex_id": "8726c8661ffffff",
+    "population": 7596,
+    "elderly_65plus": 1658,
+    "pct_elderly": 21.8,
+    "tract_count": 2
+  },
+  {
+    "hex_id": "8726c829cffffff",
+    "population": 7572,
+    "elderly_65plus": 526,
+    "pct_elderly": 6.9,
+    "tract_count": 2
+  },
+  {
+    "hex_id": "8726c82acffffff",
+    "population": 7511,
+    "elderly_65plus": 879,
+    "pct_elderly": 11.7,
+    "tract_count": 1
+  },
+  {
+    "hex_id": "8726cbd6dffffff",
+    "population": 7341,
+    "elderly_65plus": 340,
+    "pct_elderly": 4.6,
     "tract_count": 1
   },
   {
@@ -749,31 +966,17 @@
     "tract_count": 1
   },
   {
+    "hex_id": "8726cb98effffff",
+    "population": 7300,
+    "elderly_65plus": 2099,
+    "pct_elderly": 28.8,
+    "tract_count": 2
+  },
+  {
     "hex_id": "8726c8643ffffff",
     "population": 7285,
     "elderly_65plus": 1269,
     "pct_elderly": 17.4,
-    "tract_count": 2
-  },
-  {
-    "hex_id": "8726cb985ffffff",
-    "population": 7156,
-    "elderly_65plus": 729,
-    "pct_elderly": 10.2,
-    "tract_count": 2
-  },
-  {
-    "hex_id": "8726c8603ffffff",
-    "population": 7145,
-    "elderly_65plus": 566,
-    "pct_elderly": 7.9,
-    "tract_count": 1
-  },
-  {
-    "hex_id": "8726c8646ffffff",
-    "population": 7140,
-    "elderly_65plus": 897,
-    "pct_elderly": 12.6,
     "tract_count": 2
   },
   {
@@ -784,11 +987,39 @@
     "tract_count": 2
   },
   {
+    "hex_id": "8726cb999ffffff",
+    "population": 7095,
+    "elderly_65plus": 358,
+    "pct_elderly": 5.0,
+    "tract_count": 2
+  },
+  {
+    "hex_id": "8726c86e4ffffff",
+    "population": 6997,
+    "elderly_65plus": 204,
+    "pct_elderly": 2.9,
+    "tract_count": 2
+  },
+  {
     "hex_id": "8726cb954ffffff",
     "population": 6973,
     "elderly_65plus": 588,
     "pct_elderly": 8.4,
     "tract_count": 1
+  },
+  {
+    "hex_id": "8726cb8a6ffffff",
+    "population": 6959,
+    "elderly_65plus": 1150,
+    "pct_elderly": 16.5,
+    "tract_count": 3
+  },
+  {
+    "hex_id": "8726cb90effffff",
+    "population": 6954,
+    "elderly_65plus": 573,
+    "pct_elderly": 8.2,
+    "tract_count": 2
   },
   {
     "hex_id": "8726c864effffff",
@@ -798,11 +1029,25 @@
     "tract_count": 2
   },
   {
-    "hex_id": "8726c860dffffff",
-    "population": 6798,
-    "elderly_65plus": 678,
-    "pct_elderly": 10.0,
+    "hex_id": "8726cb9a8ffffff",
+    "population": 6885,
+    "elderly_65plus": 1368,
+    "pct_elderly": 19.9,
     "tract_count": 2
+  },
+  {
+    "hex_id": "8726cb952ffffff",
+    "population": 6871,
+    "elderly_65plus": 459,
+    "pct_elderly": 6.7,
+    "tract_count": 1
+  },
+  {
+    "hex_id": "8726cb992ffffff",
+    "population": 6717,
+    "elderly_65plus": 592,
+    "pct_elderly": 8.8,
+    "tract_count": 1
   },
   {
     "hex_id": "8726cb90bffffff",
@@ -812,32 +1057,11 @@
     "tract_count": 1
   },
   {
-    "hex_id": "8726cb92cffffff",
-    "population": 6650,
-    "elderly_65plus": 705,
-    "pct_elderly": 10.6,
-    "tract_count": 2
-  },
-  {
-    "hex_id": "8726c8674ffffff",
-    "population": 6639,
-    "elderly_65plus": 458,
-    "pct_elderly": 6.9,
-    "tract_count": 2
-  },
-  {
-    "hex_id": "8726cb804ffffff",
+    "hex_id": "8726cb823ffffff",
     "population": 6619,
     "elderly_65plus": 292,
     "pct_elderly": 4.4,
     "tract_count": 1
-  },
-  {
-    "hex_id": "8726c86d9ffffff",
-    "population": 6590,
-    "elderly_65plus": 1340,
-    "pct_elderly": 20.3,
-    "tract_count": 2
   },
   {
     "hex_id": "8726cb973ffffff",
@@ -847,32 +1071,60 @@
     "tract_count": 1
   },
   {
-    "hex_id": "8726c821effffff",
-    "population": 6465,
-    "elderly_65plus": 778,
-    "pct_elderly": 12.0,
-    "tract_count": 1
+    "hex_id": "8726c8652ffffff",
+    "population": 6440,
+    "elderly_65plus": 357,
+    "pct_elderly": 5.5,
+    "tract_count": 3
   },
   {
-    "hex_id": "8726cb9b3ffffff",
+    "hex_id": "8726c860effffff",
+    "population": 6438,
+    "elderly_65plus": 634,
+    "pct_elderly": 9.8,
+    "tract_count": 2
+  },
+  {
+    "hex_id": "8726cb995ffffff",
     "population": 6331,
     "elderly_65plus": 638,
     "pct_elderly": 10.1,
     "tract_count": 1
   },
   {
-    "hex_id": "8726c86ccffffff",
-    "population": 6149,
-    "elderly_65plus": 880,
-    "pct_elderly": 14.3,
+    "hex_id": "8726c8281ffffff",
+    "population": 6284,
+    "elderly_65plus": 699,
+    "pct_elderly": 11.1,
+    "tract_count": 2
+  },
+  {
+    "hex_id": "8726c82d0ffffff",
+    "population": 6268,
+    "elderly_65plus": 1133,
+    "pct_elderly": 18.1,
     "tract_count": 1
   },
   {
-    "hex_id": "8726cb98cffffff",
-    "population": 6148,
-    "elderly_65plus": 489,
-    "pct_elderly": 8.0,
+    "hex_id": "8726c828dffffff",
+    "population": 6263,
+    "elderly_65plus": 561,
+    "pct_elderly": 9.0,
     "tract_count": 1
+  },
+  {
+    "hex_id": "8726c8663ffffff",
+    "population": 6171,
+    "elderly_65plus": 1843,
+    "pct_elderly": 29.9,
+    "tract_count": 2
+  },
+  {
+    "hex_id": "8726c8653ffffff",
+    "population": 6108,
+    "elderly_65plus": 232,
+    "pct_elderly": 3.8,
+    "tract_count": 2
   },
   {
     "hex_id": "8726cb998ffffff",
@@ -882,24 +1134,10 @@
     "tract_count": 2
   },
   {
-    "hex_id": "8726cb959ffffff",
-    "population": 6086,
-    "elderly_65plus": 836,
-    "pct_elderly": 13.7,
-    "tract_count": 1
-  },
-  {
-    "hex_id": "8726cb928ffffff",
-    "population": 6067,
-    "elderly_65plus": 397,
-    "pct_elderly": 6.5,
-    "tract_count": 1
-  },
-  {
-    "hex_id": "8726c86cbffffff",
-    "population": 6064,
-    "elderly_65plus": 499,
-    "pct_elderly": 8.2,
+    "hex_id": "8726cbd65ffffff",
+    "population": 6039,
+    "elderly_65plus": 533,
+    "pct_elderly": 8.8,
     "tract_count": 2
   },
   {
@@ -910,7 +1148,7 @@
     "tract_count": 1
   },
   {
-    "hex_id": "8726c8651ffffff",
+    "hex_id": "8726c8650ffffff",
     "population": 6024,
     "elderly_65plus": 255,
     "pct_elderly": 4.2,
@@ -924,11 +1162,11 @@
     "tract_count": 1
   },
   {
-    "hex_id": "8726cb940ffffff",
-    "population": 5958,
-    "elderly_65plus": 992,
-    "pct_elderly": 16.6,
-    "tract_count": 1
+    "hex_id": "8726cb836ffffff",
+    "population": 5954,
+    "elderly_65plus": 739,
+    "pct_elderly": 12.4,
+    "tract_count": 2
   },
   {
     "hex_id": "8726c8665ffffff",
@@ -938,31 +1176,38 @@
     "tract_count": 2
   },
   {
-    "hex_id": "8726cb905ffffff",
-    "population": 5910,
-    "elderly_65plus": 414,
-    "pct_elderly": 7.0,
+    "hex_id": "8726cb942ffffff",
+    "population": 5911,
+    "elderly_65plus": 462,
+    "pct_elderly": 7.8,
     "tract_count": 1
   },
   {
-    "hex_id": "8726cb811ffffff",
-    "population": 5873,
-    "elderly_65plus": 565,
-    "pct_elderly": 9.6,
+    "hex_id": "8726cb8b4ffffff",
+    "population": 5908,
+    "elderly_65plus": 1160,
+    "pct_elderly": 19.6,
     "tract_count": 1
   },
   {
-    "hex_id": "8726cb8a1ffffff",
-    "population": 5845,
-    "elderly_65plus": 728,
-    "pct_elderly": 12.5,
+    "hex_id": "8726cb90affffff",
+    "population": 5889,
+    "elderly_65plus": 326,
+    "pct_elderly": 5.5,
     "tract_count": 1
   },
   {
-    "hex_id": "8726cb911ffffff",
-    "population": 5828,
-    "elderly_65plus": 731,
-    "pct_elderly": 12.5,
+    "hex_id": "8726cb9acffffff",
+    "population": 5853,
+    "elderly_65plus": 947,
+    "pct_elderly": 16.2,
+    "tract_count": 1
+  },
+  {
+    "hex_id": "8726c86cbffffff",
+    "population": 5815,
+    "elderly_65plus": 752,
+    "pct_elderly": 12.9,
     "tract_count": 1
   },
   {
@@ -973,6 +1218,27 @@
     "tract_count": 1
   },
   {
+    "hex_id": "8726c86e0ffffff",
+    "population": 5755,
+    "elderly_65plus": 329,
+    "pct_elderly": 5.7,
+    "tract_count": 2
+  },
+  {
+    "hex_id": "8726cb909ffffff",
+    "population": 5743,
+    "elderly_65plus": 622,
+    "pct_elderly": 10.8,
+    "tract_count": 1
+  },
+  {
+    "hex_id": "8726cb830ffffff",
+    "population": 5718,
+    "elderly_65plus": 400,
+    "pct_elderly": 7.0,
+    "tract_count": 1
+  },
+  {
     "hex_id": "8726c8289ffffff",
     "population": 5715,
     "elderly_65plus": 1755,
@@ -980,28 +1246,49 @@
     "tract_count": 1
   },
   {
-    "hex_id": "8726c82b3ffffff",
-    "population": 5643,
-    "elderly_65plus": 669,
-    "pct_elderly": 11.9,
-    "tract_count": 3
+    "hex_id": "8726c829bffffff",
+    "population": 5693,
+    "elderly_65plus": 1097,
+    "pct_elderly": 19.3,
+    "tract_count": 2
   },
   {
-    "hex_id": "8726cb906ffffff",
-    "population": 5607,
+    "hex_id": "8726c874affffff",
+    "population": 5667,
+    "elderly_65plus": 1368,
+    "pct_elderly": 24.1,
+    "tract_count": 2
+  },
+  {
+    "hex_id": "8726cb915ffffff",
+    "population": 5602,
     "elderly_65plus": 758,
     "pct_elderly": 13.5,
     "tract_count": 1
   },
   {
-    "hex_id": "8726cb972ffffff",
+    "hex_id": "8726c8759ffffff",
+    "population": 5586,
+    "elderly_65plus": 587,
+    "pct_elderly": 10.5,
+    "tract_count": 2
+  },
+  {
+    "hex_id": "8726cb9b4ffffff",
+    "population": 5551,
+    "elderly_65plus": 530,
+    "pct_elderly": 9.5,
+    "tract_count": 1
+  },
+  {
+    "hex_id": "8726cb976ffffff",
     "population": 5545,
     "elderly_65plus": 638,
     "pct_elderly": 11.5,
     "tract_count": 1
   },
   {
-    "hex_id": "8726c8211ffffff",
+    "hex_id": "8726c8213ffffff",
     "population": 5513,
     "elderly_65plus": 736,
     "pct_elderly": 13.4,
@@ -1015,13 +1302,6 @@
     "tract_count": 2
   },
   {
-    "hex_id": "8726cb90affffff",
-    "population": 5491,
-    "elderly_65plus": 279,
-    "pct_elderly": 5.1,
-    "tract_count": 1
-  },
-  {
     "hex_id": "8726c82aaffffff",
     "population": 5477,
     "elderly_65plus": 739,
@@ -1029,52 +1309,45 @@
     "tract_count": 1
   },
   {
-    "hex_id": "8726c86e9ffffff",
-    "population": 5468,
-    "elderly_65plus": 402,
-    "pct_elderly": 7.4,
-    "tract_count": 1
-  },
-  {
-    "hex_id": "8726c866cffffff",
-    "population": 5337,
-    "elderly_65plus": 1595,
-    "pct_elderly": 29.9,
+    "hex_id": "8726c860affffff",
+    "population": 5471,
+    "elderly_65plus": 733,
+    "pct_elderly": 13.4,
     "tract_count": 2
   },
   {
-    "hex_id": "8726c82d3ffffff",
+    "hex_id": "8726cb9a1ffffff",
+    "population": 5458,
+    "elderly_65plus": 418,
+    "pct_elderly": 7.7,
+    "tract_count": 2
+  },
+  {
+    "hex_id": "8726cb951ffffff",
+    "population": 5403,
+    "elderly_65plus": 189,
+    "pct_elderly": 3.5,
+    "tract_count": 1
+  },
+  {
+    "hex_id": "8726cb834ffffff",
+    "population": 5337,
+    "elderly_65plus": 588,
+    "pct_elderly": 11.0,
+    "tract_count": 1
+  },
+  {
+    "hex_id": "8726c82d1ffffff",
     "population": 5322,
     "elderly_65plus": 876,
     "pct_elderly": 16.5,
     "tract_count": 1
   },
   {
-    "hex_id": "8726cb9abffffff",
-    "population": 5299,
-    "elderly_65plus": 517,
-    "pct_elderly": 9.8,
-    "tract_count": 1
-  },
-  {
-    "hex_id": "8726c8749ffffff",
-    "population": 5292,
-    "elderly_65plus": 744,
-    "pct_elderly": 14.1,
-    "tract_count": 2
-  },
-  {
     "hex_id": "8726c82a8ffffff",
     "population": 5274,
     "elderly_65plus": 451,
     "pct_elderly": 8.6,
-    "tract_count": 1
-  },
-  {
-    "hex_id": "8726cb8a2ffffff",
-    "population": 5271,
-    "elderly_65plus": 1184,
-    "pct_elderly": 22.5,
     "tract_count": 1
   },
   {
@@ -1085,70 +1358,77 @@
     "tract_count": 1
   },
   {
-    "hex_id": "8726cbd69ffffff",
-    "population": 5230,
-    "elderly_65plus": 344,
-    "pct_elderly": 6.6,
+    "hex_id": "8726c866affffff",
+    "population": 5223,
+    "elderly_65plus": 2235,
+    "pct_elderly": 42.8,
+    "tract_count": 2
+  },
+  {
+    "hex_id": "8726c82f0ffffff",
+    "population": 5195,
+    "elderly_65plus": 777,
+    "pct_elderly": 15.0,
     "tract_count": 1
   },
   {
-    "hex_id": "8726cbd41ffffff",
-    "population": 5152,
-    "elderly_65plus": 735,
-    "pct_elderly": 14.3,
+    "hex_id": "8726cb929ffffff",
+    "population": 5155,
+    "elderly_65plus": 805,
+    "pct_elderly": 15.6,
     "tract_count": 1
   },
   {
-    "hex_id": "8726cb909ffffff",
+    "hex_id": "8726c860cffffff",
+    "population": 5092,
+    "elderly_65plus": 599,
+    "pct_elderly": 11.8,
+    "tract_count": 1
+  },
+  {
+    "hex_id": "8726cb972ffffff",
     "population": 5043,
     "elderly_65plus": 390,
     "pct_elderly": 7.7,
     "tract_count": 1
   },
   {
-    "hex_id": "8726c8291ffffff",
-    "population": 5025,
-    "elderly_65plus": 596,
-    "pct_elderly": 11.9,
+    "hex_id": "8726c82daffffff",
+    "population": 4941,
+    "elderly_65plus": 766,
+    "pct_elderly": 15.5,
     "tract_count": 1
   },
   {
-    "hex_id": "8726cb980ffffff",
-    "population": 4995,
-    "elderly_65plus": 395,
-    "pct_elderly": 7.9,
+    "hex_id": "8726c8299ffffff",
+    "population": 4926,
+    "elderly_65plus": 234,
+    "pct_elderly": 4.8,
     "tract_count": 1
   },
   {
-    "hex_id": "8726c86ebffffff",
-    "population": 4900,
-    "elderly_65plus": 647,
-    "pct_elderly": 13.2,
+    "hex_id": "8726c8655ffffff",
+    "population": 4919,
+    "elderly_65plus": 409,
+    "pct_elderly": 8.3,
     "tract_count": 1
   },
   {
-    "hex_id": "8726cb8a0ffffff",
-    "population": 4856,
-    "elderly_65plus": 714,
-    "pct_elderly": 14.7,
+    "hex_id": "8726cb946ffffff",
+    "population": 4912,
+    "elderly_65plus": 162,
+    "pct_elderly": 3.3,
     "tract_count": 1
   },
   {
-    "hex_id": "8726cb92bffffff",
-    "population": 4855,
-    "elderly_65plus": 421,
-    "pct_elderly": 8.7,
+    "hex_id": "8726c82f3ffffff",
+    "population": 4837,
+    "elderly_65plus": 551,
+    "pct_elderly": 11.4,
     "tract_count": 1
   },
   {
-    "hex_id": "8726c82a1ffffff",
-    "population": 4843,
-    "elderly_65plus": 1007,
-    "pct_elderly": 20.8,
-    "tract_count": 1
-  },
-  {
-    "hex_id": "8726c8213ffffff",
+    "hex_id": "8726c8212ffffff",
     "population": 4830,
     "elderly_65plus": 697,
     "pct_elderly": 14.4,
@@ -1162,35 +1442,14 @@
     "tract_count": 1
   },
   {
-    "hex_id": "8726c8288ffffff",
-    "population": 4818,
-    "elderly_65plus": 297,
-    "pct_elderly": 6.2,
-    "tract_count": 1
-  },
-  {
-    "hex_id": "8726cb944ffffff",
-    "population": 4792,
-    "elderly_65plus": 264,
-    "pct_elderly": 5.5,
-    "tract_count": 1
-  },
-  {
-    "hex_id": "8726cb98effffff",
-    "population": 4771,
-    "elderly_65plus": 1630,
-    "pct_elderly": 34.2,
-    "tract_count": 1
-  },
-  {
-    "hex_id": "8726cb8b6ffffff",
+    "hex_id": "8726cbd6bffffff",
     "population": 4764,
     "elderly_65plus": 724,
     "pct_elderly": 15.2,
     "tract_count": 1
   },
   {
-    "hex_id": "8726cb990ffffff",
+    "hex_id": "8726cb994ffffff",
     "population": 4674,
     "elderly_65plus": 571,
     "pct_elderly": 12.2,
@@ -1204,59 +1463,38 @@
     "tract_count": 1
   },
   {
-    "hex_id": "8726c86e3ffffff",
-    "population": 4595,
-    "elderly_65plus": 148,
-    "pct_elderly": 3.2,
+    "hex_id": "8726c82b2ffffff",
+    "population": 4639,
+    "elderly_65plus": 810,
+    "pct_elderly": 17.5,
+    "tract_count": 1
+  },
+  {
+    "hex_id": "8726c8758ffffff",
+    "population": 4579,
+    "elderly_65plus": 583,
+    "pct_elderly": 12.7,
+    "tract_count": 1
+  },
+  {
+    "hex_id": "8726c866effffff",
+    "population": 4561,
+    "elderly_65plus": 1069,
+    "pct_elderly": 23.4,
     "tract_count": 2
   },
   {
-    "hex_id": "8726cb8aeffffff",
-    "population": 4583,
-    "elderly_65plus": 883,
-    "pct_elderly": 19.3,
-    "tract_count": 1
-  },
-  {
-    "hex_id": "8726cb8a6ffffff",
-    "population": 4565,
-    "elderly_65plus": 842,
-    "pct_elderly": 18.4,
-    "tract_count": 2
-  },
-  {
-    "hex_id": "8726cb901ffffff",
-    "population": 4556,
-    "elderly_65plus": 353,
-    "pct_elderly": 7.7,
-    "tract_count": 1
-  },
-  {
-    "hex_id": "8726cb908ffffff",
-    "population": 4548,
-    "elderly_65plus": 278,
-    "pct_elderly": 6.1,
-    "tract_count": 1
-  },
-  {
-    "hex_id": "8726cb824ffffff",
+    "hex_id": "8726cb91bffffff",
     "population": 4526,
     "elderly_65plus": 663,
     "pct_elderly": 14.6,
     "tract_count": 1
   },
   {
-    "hex_id": "8726c8663ffffff",
-    "population": 4489,
-    "elderly_65plus": 1558,
-    "pct_elderly": 34.7,
-    "tract_count": 1
-  },
-  {
-    "hex_id": "8726c829bffffff",
-    "population": 4489,
-    "elderly_65plus": 898,
-    "pct_elderly": 20.0,
+    "hex_id": "8726c86ceffffff",
+    "population": 4523,
+    "elderly_65plus": 172,
+    "pct_elderly": 3.8,
     "tract_count": 1
   },
   {
@@ -1274,10 +1512,17 @@
     "tract_count": 1
   },
   {
-    "hex_id": "8726c82d8ffffff",
+    "hex_id": "8726c86edffffff",
+    "population": 4417,
+    "elderly_65plus": 245,
+    "pct_elderly": 5.5,
+    "tract_count": 1
+  },
+  {
+    "hex_id": "8726cb826ffffff",
     "population": 4385,
-    "elderly_65plus": 397,
-    "pct_elderly": 9.1,
+    "elderly_65plus": 768,
+    "pct_elderly": 17.5,
     "tract_count": 1
   },
   {
@@ -1288,31 +1533,17 @@
     "tract_count": 1
   },
   {
-    "hex_id": "8726cb934ffffff",
-    "population": 4321,
-    "elderly_65plus": 678,
-    "pct_elderly": 15.7,
+    "hex_id": "8726c875bffffff",
+    "population": 4330,
+    "elderly_65plus": 473,
+    "pct_elderly": 10.9,
     "tract_count": 1
   },
   {
-    "hex_id": "8726cb836ffffff",
-    "population": 4301,
-    "elderly_65plus": 540,
-    "pct_elderly": 12.6,
-    "tract_count": 1
-  },
-  {
-    "hex_id": "8726c82c6ffffff",
+    "hex_id": "8726c82d5ffffff",
     "population": 4289,
     "elderly_65plus": 459,
     "pct_elderly": 10.7,
-    "tract_count": 1
-  },
-  {
-    "hex_id": "8726c86e4ffffff",
-    "population": 4288,
-    "elderly_65plus": 91,
-    "pct_elderly": 2.1,
     "tract_count": 1
   },
   {
@@ -1323,38 +1554,10 @@
     "tract_count": 1
   },
   {
-    "hex_id": "8726c8608ffffff",
-    "population": 4282,
-    "elderly_65plus": 220,
-    "pct_elderly": 5.1,
-    "tract_count": 2
-  },
-  {
-    "hex_id": "8726c8218ffffff",
-    "population": 4279,
-    "elderly_65plus": 209,
-    "pct_elderly": 4.9,
-    "tract_count": 1
-  },
-  {
-    "hex_id": "8726c829cffffff",
-    "population": 4272,
-    "elderly_65plus": 433,
-    "pct_elderly": 10.1,
-    "tract_count": 1
-  },
-  {
     "hex_id": "8726c8600ffffff",
     "population": 4207,
     "elderly_65plus": 319,
     "pct_elderly": 7.6,
-    "tract_count": 1
-  },
-  {
-    "hex_id": "8726cbd63ffffff",
-    "population": 4169,
-    "elderly_65plus": 633,
-    "pct_elderly": 15.2,
     "tract_count": 1
   },
   {
@@ -1365,17 +1568,17 @@
     "tract_count": 1
   },
   {
-    "hex_id": "8726c860effffff",
-    "population": 4147,
-    "elderly_65plus": 164,
-    "pct_elderly": 4.0,
+    "hex_id": "8726c8609ffffff",
+    "population": 4118,
+    "elderly_65plus": 451,
+    "pct_elderly": 11.0,
     "tract_count": 1
   },
   {
-    "hex_id": "8726cb9a1ffffff",
-    "population": 4056,
-    "elderly_65plus": 689,
-    "pct_elderly": 17.0,
+    "hex_id": "8726c86cdffffff",
+    "population": 4039,
+    "elderly_65plus": 541,
+    "pct_elderly": 13.4,
     "tract_count": 1
   },
   {
@@ -1386,45 +1589,17 @@
     "tract_count": 1
   },
   {
-    "hex_id": "8726c8618ffffff",
-    "population": 3926,
-    "elderly_65plus": 631,
-    "pct_elderly": 16.1,
+    "hex_id": "8726c8672ffffff",
+    "population": 4023,
+    "elderly_65plus": 374,
+    "pct_elderly": 9.3,
     "tract_count": 1
   },
   {
-    "hex_id": "8726c828effffff",
-    "population": 3925,
-    "elderly_65plus": 518,
-    "pct_elderly": 13.2,
-    "tract_count": 1
-  },
-  {
-    "hex_id": "8726c82f4ffffff",
-    "population": 3921,
-    "elderly_65plus": 294,
-    "pct_elderly": 7.5,
-    "tract_count": 1
-  },
-  {
-    "hex_id": "8726c8666ffffff",
-    "population": 3913,
-    "elderly_65plus": 487,
-    "pct_elderly": 12.4,
-    "tract_count": 1
-  },
-  {
-    "hex_id": "8726cb8a5ffffff",
-    "population": 3904,
-    "elderly_65plus": 609,
-    "pct_elderly": 15.6,
-    "tract_count": 1
-  },
-  {
-    "hex_id": "8726cb925ffffff",
-    "population": 3862,
-    "elderly_65plus": 496,
-    "pct_elderly": 12.8,
+    "hex_id": "8726cb8a4ffffff",
+    "population": 3916,
+    "elderly_65plus": 507,
+    "pct_elderly": 12.9,
     "tract_count": 1
   },
   {
@@ -1442,102 +1617,67 @@
     "tract_count": 1
   },
   {
-    "hex_id": "8726cb983ffffff",
-    "population": 3812,
-    "elderly_65plus": 595,
-    "pct_elderly": 15.6,
+    "hex_id": "8726c8641ffffff",
+    "population": 3807,
+    "elderly_65plus": 872,
+    "pct_elderly": 22.9,
+    "tract_count": 2
+  },
+  {
+    "hex_id": "8726c865bffffff",
+    "population": 3702,
+    "elderly_65plus": 115,
+    "pct_elderly": 3.1,
     "tract_count": 1
   },
   {
-    "hex_id": "8726c82dbffffff",
-    "population": 3786,
-    "elderly_65plus": 395,
-    "pct_elderly": 10.4,
+    "hex_id": "8726cb825ffffff",
+    "population": 3686,
+    "elderly_65plus": 246,
+    "pct_elderly": 6.7,
     "tract_count": 1
   },
   {
-    "hex_id": "8726cb935ffffff",
-    "population": 3777,
-    "elderly_65plus": 626,
-    "pct_elderly": 16.6,
+    "hex_id": "8726c860bffffff",
+    "population": 3641,
+    "elderly_65plus": 61,
+    "pct_elderly": 1.7,
     "tract_count": 1
   },
   {
-    "hex_id": "8726c8662ffffff",
-    "population": 3776,
-    "elderly_65plus": 221,
-    "pct_elderly": 5.9,
+    "hex_id": "8726cb824ffffff",
+    "population": 3609,
+    "elderly_65plus": 198,
+    "pct_elderly": 5.5,
     "tract_count": 1
   },
   {
-    "hex_id": "8726cb933ffffff",
-    "population": 3744,
-    "elderly_65plus": 180,
-    "pct_elderly": 4.8,
+    "hex_id": "8726cb99cffffff",
+    "population": 3457,
+    "elderly_65plus": 62,
+    "pct_elderly": 1.8,
     "tract_count": 1
   },
   {
-    "hex_id": "8726c8286ffffff",
-    "population": 3733,
-    "elderly_65plus": 531,
-    "pct_elderly": 14.2,
+    "hex_id": "8726cb988ffffff",
+    "population": 3442,
+    "elderly_65plus": 913,
+    "pct_elderly": 26.5,
     "tract_count": 1
   },
   {
-    "hex_id": "8726cb8a3ffffff",
-    "population": 3721,
-    "elderly_65plus": 516,
-    "pct_elderly": 13.9,
+    "hex_id": "8726cb996ffffff",
+    "population": 3380,
+    "elderly_65plus": 279,
+    "pct_elderly": 8.3,
     "tract_count": 1
   },
   {
-    "hex_id": "8726cb902ffffff",
-    "population": 3678,
-    "elderly_65plus": 369,
-    "pct_elderly": 10.0,
-    "tract_count": 1
-  },
-  {
-    "hex_id": "8726cb833ffffff",
-    "population": 3633,
-    "elderly_65plus": 495,
-    "pct_elderly": 13.6,
-    "tract_count": 1
-  },
-  {
-    "hex_id": "8726cb91dffffff",
-    "population": 3538,
-    "elderly_65plus": 363,
-    "pct_elderly": 10.3,
-    "tract_count": 1
-  },
-  {
-    "hex_id": "8726c86e2ffffff",
-    "population": 3416,
-    "elderly_65plus": 263,
-    "pct_elderly": 7.7,
-    "tract_count": 1
-  },
-  {
-    "hex_id": "8726cb92effffff",
-    "population": 3415,
-    "elderly_65plus": 537,
-    "pct_elderly": 15.7,
-    "tract_count": 1
-  },
-  {
-    "hex_id": "8726c821bffffff",
-    "population": 3329,
-    "elderly_65plus": 248,
-    "pct_elderly": 7.4,
-    "tract_count": 1
-  },
-  {
-    "hex_id": "8726c8653ffffff",
-    "population": 3308,
-    "elderly_65plus": 145,
-    "pct_elderly": 4.4,
-    "tract_count": 1
+    "hex_id": "8726c8645ffffff",
+    "population": 3350,
+    "elderly_65plus": 839,
+    "pct_elderly": 25.0,
+    "tract_count": 2
   },
   {
     "hex_id": "8726cb8b0ffffff",
@@ -1547,10 +1687,17 @@
     "tract_count": 1
   },
   {
-    "hex_id": "8726cbd48ffffff",
-    "population": 3277,
-    "elderly_65plus": 243,
-    "pct_elderly": 7.4,
+    "hex_id": "8726c82f2ffffff",
+    "population": 3297,
+    "elderly_65plus": 713,
+    "pct_elderly": 21.6,
+    "tract_count": 1
+  },
+  {
+    "hex_id": "8726cb9b5ffffff",
+    "population": 3280,
+    "elderly_65plus": 369,
+    "pct_elderly": 11.2,
     "tract_count": 1
   },
   {
@@ -1561,17 +1708,10 @@
     "tract_count": 1
   },
   {
-    "hex_id": "8726cb9a0ffffff",
-    "population": 3177,
-    "elderly_65plus": 403,
-    "pct_elderly": 12.7,
-    "tract_count": 1
-  },
-  {
-    "hex_id": "8726c82f1ffffff",
-    "population": 3072,
-    "elderly_65plus": 245,
-    "pct_elderly": 8.0,
+    "hex_id": "8726cb92dffffff",
+    "population": 3083,
+    "elderly_65plus": 589,
+    "pct_elderly": 19.1,
     "tract_count": 1
   },
   {
@@ -1582,31 +1722,17 @@
     "tract_count": 1
   },
   {
-    "hex_id": "8726c86ecffffff",
-    "population": 2998,
-    "elderly_65plus": 333,
-    "pct_elderly": 11.1,
-    "tract_count": 1
-  },
-  {
-    "hex_id": "8726c86e5ffffff",
-    "population": 2983,
-    "elderly_65plus": 80,
-    "pct_elderly": 2.7,
-    "tract_count": 1
-  },
-  {
-    "hex_id": "8726cb966ffffff",
-    "population": 2959,
-    "elderly_65plus": 182,
-    "pct_elderly": 6.2,
-    "tract_count": 1
-  },
-  {
     "hex_id": "8726cb9b6ffffff",
     "population": 2938,
     "elderly_65plus": 221,
     "pct_elderly": 7.5,
+    "tract_count": 1
+  },
+  {
+    "hex_id": "8726cb9b0ffffff",
+    "population": 2932,
+    "elderly_65plus": 169,
+    "pct_elderly": 5.8,
     "tract_count": 1
   },
   {
@@ -1617,84 +1743,56 @@
     "tract_count": 1
   },
   {
-    "hex_id": "8726c866dffffff",
-    "population": 2780,
-    "elderly_65plus": 661,
-    "pct_elderly": 23.8,
+    "hex_id": "8726c86c9ffffff",
+    "population": 2684,
+    "elderly_65plus": 220,
+    "pct_elderly": 8.2,
     "tract_count": 1
   },
   {
-    "hex_id": "8726cb8acffffff",
-    "population": 2716,
-    "elderly_65plus": 86,
-    "pct_elderly": 3.2,
-    "tract_count": 1
-  },
-  {
-    "hex_id": "8726c8619ffffff",
-    "population": 2709,
-    "elderly_65plus": 113,
-    "pct_elderly": 4.2,
-    "tract_count": 1
-  },
-  {
-    "hex_id": "8726c86c0ffffff",
-    "population": 2662,
-    "elderly_65plus": 230,
-    "pct_elderly": 8.6,
-    "tract_count": 1
-  },
-  {
-    "hex_id": "8726c86caffffff",
-    "population": 2553,
-    "elderly_65plus": 353,
-    "pct_elderly": 13.8,
-    "tract_count": 1
-  },
-  {
-    "hex_id": "8726c8661ffffff",
-    "population": 2525,
-    "elderly_65plus": 822,
-    "pct_elderly": 32.6,
-    "tract_count": 1
-  },
-  {
-    "hex_id": "8726c86c4ffffff",
-    "population": 2433,
-    "elderly_65plus": 52,
+    "hex_id": "8726c86ebffffff",
+    "population": 2671,
+    "elderly_65plus": 56,
     "pct_elderly": 2.1,
     "tract_count": 1
   },
   {
-    "hex_id": "8726cb99affffff",
-    "population": 2320,
-    "elderly_65plus": 422,
-    "pct_elderly": 18.2,
+    "hex_id": "8726c86e1ffffff",
+    "population": 2636,
+    "elderly_65plus": 512,
+    "pct_elderly": 19.4,
     "tract_count": 1
   },
   {
-    "hex_id": "8726c860affffff",
-    "population": 2193,
-    "elderly_65plus": 22,
-    "pct_elderly": 1.0,
+    "hex_id": "8726c82b3ffffff",
+    "population": 2526,
+    "elderly_65plus": 45,
+    "pct_elderly": 1.8,
+    "tract_count": 2
+  },
+  {
+    "hex_id": "8726cb98dffffff",
+    "population": 2381,
+    "elderly_65plus": 654,
+    "pct_elderly": 27.5,
     "tract_count": 1
   },
   {
-    "hex_id": "8726cbc65ffffff",
-    "population": 2139,
-    "elderly_65plus": 232,
-    "pct_elderly": 10.8,
+    "hex_id": "8726cb910ffffff",
+    "population": 2271,
+    "elderly_65plus": 361,
+    "pct_elderly": 15.9,
     "tract_count": 1
   },
   {
-    "hex_id": "8726c8658ffffff",
+    "hex_id": "8726c8659ffffff",
     "population": 2124,
     "elderly_65plus": 346,
     "pct_elderly": 16.3,
     "tract_count": 1
   },
   {
-    "hex_id": "8726cb9b4ffffff",
+    "hex_id": "8726c865affffff",
     "population": 2104,
     "elderly_65plus": 154,
     "pct_elderly": 7.3,
@@ -1708,24 +1806,10 @@
     "tract_count": 1
   },
   {
-    "hex_id": "8726c866affffff",
-    "population": 1971,
-    "elderly_65plus": 961,
-    "pct_elderly": 48.8,
-    "tract_count": 1
-  },
-  {
-    "hex_id": "8726c8641ffffff",
-    "population": 1783,
-    "elderly_65plus": 281,
-    "pct_elderly": 15.8,
-    "tract_count": 1
-  },
-  {
-    "hex_id": "8726c8281ffffff",
-    "population": 1710,
-    "elderly_65plus": 178,
-    "pct_elderly": 10.4,
+    "hex_id": "8726c860dffffff",
+    "population": 1706,
+    "elderly_65plus": 79,
+    "pct_elderly": 4.6,
     "tract_count": 1
   }
 ]
