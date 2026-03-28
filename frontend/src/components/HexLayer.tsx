@@ -45,15 +45,13 @@ export function HexLayer({ hexEvents, threatMap = [] }: Props) {
               opacity: 0.7,
             }}
           >
-            <Tooltip sticky>
+            <Tooltip direction="top" offset={[0, -4]}>
               <div style={{ fontSize: '0.8rem', lineHeight: 1.5 }}>
                 <div><strong>Hex:</strong> {hex.hex_id}</div>
                 <div><strong>Risk:</strong> <span style={{ color }}>{level}</span> ({score.toFixed(3)})</div>
                 <div><strong>Temp:</strong> {hex.max_temp_f}°F (apparent: {hex.max_apparent_f}°F)</div>
                 <div><strong>Hot days:</strong> {hex.hot_days} | <strong>Wx source:</strong> {hex.weather_source}</div>
-                {hex.population > 0 && (
-                  <div><strong>Population:</strong> {hex.population.toLocaleString()} | <strong>65+:</strong> {hex.elderly_65plus.toLocaleString()} ({hex.pct_elderly}%)</div>
-                )}
+                <div><strong>Population:</strong> {hex.population > 0 ? `${hex.population.toLocaleString()} | 65+: ${hex.elderly_65plus.toLocaleString()} (${hex.pct_elderly}%)` : 'Not Available'}</div>
                 <div><strong>911:</strong> {hex.dispatch_count} | <strong>311:</strong> {hex.service_count} | <strong>Social:</strong> {hex.social_count}</div>
                 {hex.dispatch_incidents?.length > 0 && (
                   <div><strong>911 details:</strong> {hex.dispatch_incidents.slice(0, 2).join('; ')}</div>

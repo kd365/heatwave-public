@@ -37,7 +37,6 @@ const ICONS = {
   ambulance: makeIcon('🚑'),
   medical:   makeIcon('🏥'),
   outreach:  makeIcon('🚐'),
-  staged:    makeIcon('📍'),
 }
 
 const ROLE_LINE_COLORS: Record<string, string> = {
@@ -151,7 +150,7 @@ export function AssetLayer({ assets, orders, activatedCoolingIds }: Props) {
           const [baseLat, baseLng] = cellToLatLng(order.to_hex)
           const lat = baseLat + dLat
           const lng = baseLng + dLng
-        const icon = order.role === 'stage' ? ICONS.staged : mobileIcon(assetType)
+        const icon = mobileIcon(assetType)
         const roleColor = order.role === 'stage'
           ? { bg: '#713f12', text: '#fef08a' }
           : { bg: '#7c2d12', text: '#fed7aa' }
