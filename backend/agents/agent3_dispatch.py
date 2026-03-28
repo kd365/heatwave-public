@@ -248,7 +248,7 @@ def _load_asset_inventory() -> str:
             # S3 fallback
             bucket = os.environ.get("DATA_BUCKET")
             s3 = boto3.client("s3")
-            obj = s3.get_object(Bucket=bucket, Key="raw/dallas_asset_inventory.json")
+            obj = s3.get_object(Bucket=bucket, Key="synthetic/dallas_asset_inventory.json")
             assets = json.loads(obj["Body"].read())
 
         # Summarize for Claude
