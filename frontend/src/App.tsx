@@ -91,12 +91,23 @@ function App() {
     enabled: !!activeRunId && runStatus?.status === 'COMPLETE',
   })
 
-  // Fetch all recent runs for observability history
+  // Fetch all recent runs for observability history + date cache lookup
   const { data: recentRuns = [] } = useQuery({
     queryKey: ['runs'],
     queryFn: fetchRuns,
     staleTime: 30_000,
   })
+
+  // When date changes, auto-load cached result if a COMPLETE run exists for that date
+  useEffect(() => {
+    if (status === 'RUNNING') return // don't switch while a run is active
+    const cached = recentRuns.find(
+      r => r.status === 'COMPLETE' && r.target_date === targetDate
+    )
+    if (cached) {
+      setActiveRunId(cached.run_id)
+    }
+  }, [targetDate, recentRuns]) // eslint-disable-line react-hooks/exhaustive-deps
 
   const hexEvents: HexEvent[] = useMemo(
     () => result?.hex_events?.hex_events ?? [],

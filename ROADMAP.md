@@ -61,7 +61,7 @@ System prompt: *"Analyze the threat map, consider critical zone count, asset ava
 - [X] 🔴 Monorepo structure: `/frontend`, `/backend`, `/infra`, `/data`, `/agents`, `.github/`
 - [X] 🔴 `.gitignore`
 - [X] 🔴 `.env.example` with all required environment variable keys
-- [ ] 🟡 Root `README.md` with setup instructions and architecture diagram
+- [X] 🟡 Root `README.md` with setup instructions and architecture diagram
 
 ### Local Dev Environment
 - [X] 🔴 Python venv + `requirements.txt` (h3, pulp, pytest, etc.)
@@ -139,8 +139,8 @@ System prompt: *"Analyze the threat map, consider critical zone count, asset ava
 - [X] 🔴 **Lambda function** (`heatwave-dev-backend`) — FastAPI/Mangum handler
 - [X] 🔴 **API Gateway** (HTTP API) — 5 routes wired
 - [X] 🔴 **DynamoDB table** for pipeline run state (keyed by `run_id`)
-- [ ] 🟡 **CloudWatch Log Groups** for agents + backend
-- [ ] 🟡 **CloudWatch Dashboard** (`HEATWAVE-Observability`)
+- [X] 🟡 **CloudWatch Log Groups** for agents + backend — `/aws/lambda/heatwave-dev-backend` (7-day retention), API Gateway logs
+- [X] 🟡 **CloudWatch Dashboard** (`HEATWAVE-Observability`) — 5 widgets: pipeline duration, tokens, per-agent duration, errors, recent completions
 - [X] 🔴 **S3 + CloudFront** for React static hosting — bucket `heatwave-dev-frontend-388691194728`, CF `E2DTZPXZ56DA7Z`, live at https://d1fkyokay3hahf.cloudfront.net
 
 ### Terraform Plan/Apply
@@ -228,7 +228,7 @@ Agent 1 uses a **hybrid deterministic + LLM approach** refined through integrati
 
 ### Implementation ✅
 - [X] 🔴 RAG query tool wired to Bedrock Knowledge Base (`KNOWLEDGE_BASE_ID` env var, graceful local fallback)
-- [X] 🔴 Deterministic threat scoring: weather 40% + dispatch 25% + 311 15% + social 10% + aggravating 10%
+- [X] 🔴 Deterministic threat scoring: weather 50% + dispatch 15% + service 5% + social 5% + aggravating 25% (nonlinear temp ramp, auto-derived factors)
 - [X] 🔴 Output schema: `ThreatMap` with risk levels, scores, justifications, and conflict notes
 - [X] 🟡 Unit test: CRITICAL score (hot + dispatch + vulnerable) — passing
 - [X] 🟡 Unit test: LOW score (mild weather, no incidents) — passing
@@ -303,7 +303,7 @@ Agent 1 uses a **hybrid deterministic + LLM approach** refined through integrati
 
 ### Controls
 - [X] 🔴 "Run Analysis" button → `POST /api/v1/analyze`, poll every 5s, update map on COMPLETE ✅
-- [ ] 🟡 Date/time range selector
+- [X] 🟡 Date selector — dropdown with Aug 4-27 dates, temperature context, emoji severity indicators
 
 ---
 
@@ -323,7 +323,7 @@ Agent 1 uses a **hybrid deterministic + LLM approach** refined through integrati
 - [X] 🔴 Apply guardrail to Agent 2 RAG output path
 - [X] 🔴 IAM audit: no `*` actions, least-privilege per role
 - [~] 🔴 GitHub Actions OIDC federation — BLOCKED: education account lacks `iam:CreateOpenIDConnectProvider`; using static key secrets instead
-- [ ] 🟡 S3 block public access on all buckets
+- [X] 🟡 S3 block public access on all buckets — enabled in Terraform (s3.tf, frontend.tf)
 - [ ] 🟡 Secrets Manager for API keys
 - [ ] 🟡 CloudTrail audit logging
 
@@ -353,8 +353,8 @@ Agent 1 uses a **hybrid deterministic + LLM approach** refined through integrati
 
 ### Remaining Work — Data Enrichment
 
-- [ ] 🔴 **Census/population data per hex** — pull Dallas census tract data (ACS 5-year estimates), assign population counts to each H3 hex. This directly impacts optimization: a MEDIUM hex with 50,000 residents should be prioritized over a MEDIUM hex with 2,000. Agent 2 should factor population density into risk scoring, and Agent 3 should weight dispatch orders by population at risk.
-- [ ] 🟡 **Vulnerable population overlay** — elderly (65+), unhoused count, disability rates per hex from census data. These are aggravating factors for Agent 2.
+- [X] 🔴 **Census/population data per hex** — ACS 5-year estimates mapped to 247 H3 hexes, 1.69M total population, elderly 65+ counts per hex. Agent 2 auto-derives vulnerable_population aggravating factor from elderly %.
+- [X] 🟡 **Vulnerable population overlay** — elderly 65+ and pct_elderly per hex from census data. Homeless encampment 311 reports also flagged as vulnerable population signal. Auto-derived in Agent 2 scoring formula.
 
 ### Remaining Work — Visualization Improvements
 
@@ -364,8 +364,8 @@ Agent 1 uses a **hybrid deterministic + LLM approach** refined through integrati
 
 ### Remaining Work — UI Polish
 
-- [ ] 🔴 **Text color contrast** — sidebar and panel text is dark grey on black background, hard to read. Change to light grey (#e0e0e0) or white.
-- [ ] 🔴 **Menu spacing** — Agent Pipeline and Observability panels are cramped on smaller screens. Add padding and ensure text doesn't overflow.
+- [X] 🔴 **Text color contrast** — sidebar and panel text updated to light grey (#e0e0e0) and white
+- [X] 🔴 **Menu spacing** — Agent Pipeline and Observability panels have proper padding and overflow handling
 - [ ] 🟡 **Responsive layout** — test at 1280px and 1920px widths, ensure panels don't overlap the map.
 
 ### Presentation Prep
@@ -390,8 +390,8 @@ Agent 1 uses a **hybrid deterministic + LLM approach** refined through integrati
 | **1** | Tue 3/24 | ✅ Data, H3 geocoding, optimization solver, 3 agents, FastAPI orchestrator, RAG S3 upload | ✅ Terraform: S3, IAM, DynamoDB, Bedrock KB, Lambda, API Gateway, AOSS index | Backend complete, infra provisioned, RAG live |
 | **2** | Wed 3/25 | RAG test queries, CI/CD workflows, integration test, deploy to Lambda | CI/CD workflows, CloudWatch dashboard | Pipeline tested end-to-end |
 | **3** | Thu 3/26 | ✅ Batch scoring (170/170 hexes), model split (Sonnet+Haiku), dispatch order capture, weather interpolation, frontend schema fixes | ✅ Frontend: hex grid, legend, agent panel, dispatch table, cooling centers, observability | Full pipeline E2E + working GUI |
-| **4** | Fri 3/27 | Frontend (together) — map, hex grid, panels | Frontend (together) — observability, controls | Working GUI with live pipeline |
-| **5** | Sat 3/28 AM | Integration testing, demo rehearsal | Security guardrails, final fixes | Demo-ready by noon |
+| **4** | Fri 3/27 | ✅ Threat scoring reweight, cancel feature, deploy fixes (data/ in Lambda), full 341-hex grid, backfill unscored hexes | ✅ PR reviews, merge + deploy | All 341 hexes scored, cancel button, CI/CD fully automated |
+| **5** | Sat 3/28 AM | README, demo walkthrough, roadmap update, demo rehearsal | Final fixes, presentation prep | Demo-ready by noon |
 | | Sat 3/28 4pm | 🎤 **PRESENT** | 🎤 **PRESENT** | |
 
 ---
@@ -402,9 +402,9 @@ Agent 1 uses a **hybrid deterministic + LLM approach** refined through integrati
 |---|---|---|
 | Automated CI/CD | [X] ✅ | `.github/workflows/` — CI gate (ruff+pytest+eslint+build), Lambda deploy, frontend deploy |
 | Infrastructure as Code | [X] ✅ | `/infra/` — S3, IAM (zero trust), DynamoDB, Lambda, API Gateway, Bedrock KB, OpenSearch |
-| Observability | [~] | CloudWatch JSON structured logging live; dashboard TBD |
+| Observability | [X] ✅ | CloudWatch EMF metrics, HEATWAVE-Observability dashboard, structured logging, frontend metrics panel |
 | Vector Integration (RAG) | [X] ✅ | Bedrock KB `OT8DYXUN9L`, 6 docs ingested, RAG live |
-| Security & Governance | [ ] | Bedrock Guardrails + IAM zero trust |
+| Security & Governance | [X] ✅ | Bedrock Guardrail (topic denial + grounding 0.75), IAM least-privilege (3 roles, zero wildcards) |
 
 > All five selected — exceeds the "pick three" minimum.
 
@@ -487,7 +487,8 @@ We never hardcode the selection. The system prompt tells Agent 3: *"Analyze the 
 - [X] PR #29 — Mobile units + cooling centers
 - [X] PR #30 — ROADMAP consolidation
 - [X] PR #31 — Phase 2 core infra (S3, IAM, DynamoDB, Bedrock KB, Lambda, API Gateway)
-- [ ] PR #32 — 3-agent pipeline + FastAPI orchestrator (in review)
+- [X] PR #32 — 3-agent pipeline + FastAPI orchestrator
+- [X] PRs #47-56 — Day selector, census, UHI, scoring fixes, cancellation, CI/CD deploy fixes
 
 ### Open Issues
 - [ ] #8 — Terraform root module & remote state → ✅ done (PR #24, #25)
