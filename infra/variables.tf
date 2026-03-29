@@ -19,7 +19,7 @@ variable "project" {
 variable "account_id" {
   description = "AWS account ID"
   type        = string
-  default     = "388691194728"
+  default     = "000018673740"
 }
 
 variable "github_org" {
@@ -67,5 +67,5 @@ variable "lambda_memory_mb" {
 variable "lambda_timeout_sec" {
   description = "Lambda function timeout in seconds"
   type        = number
-  default     = 300
+  default     = 900
 }

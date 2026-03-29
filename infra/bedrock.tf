@@ -150,7 +150,7 @@ resource "aws_opensearchserverless_access_policy" "kb" {
       Principal = [
         aws_iam_role.bedrock_kb.arn,
         aws_iam_role.bedrock_agent.arn,
-        "arn:aws:iam::${var.account_id}:user/Nick",
+        "arn:aws:iam::${var.account_id}:user/kathleen_dev",
       ]
     }
   ])
