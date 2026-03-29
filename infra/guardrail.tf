@@ -11,6 +11,7 @@
 
 resource "aws_bedrock_guardrail" "agent2" {
   name                      = "${local.prefix}-agent2-guardrail"
+  description               = "Guardrail for Agent 2 threat assessment — blocks ungrounded medical claims and clinical treatment advice"
   blocked_input_messaging   = "This request cannot be processed."
   blocked_outputs_messaging = "Response blocked: answer not grounded in source documents."
 

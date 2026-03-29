@@ -16,17 +16,16 @@ terraform {
     }
   }
 
-  backend "s3" {
-    bucket         = "heatwave-tf-state-388691194728"
-    key            = "heatwave/dev/terraform.tfstate"
-    region         = "us-east-1"
-    dynamodb_table = "heatwave-tf-locks"
-    encrypt        = true
+  # Using local state for personal deployment
+  # To use S3 remote state, bootstrap with infra/bootstrap/bootstrap.sh
+  backend "local" {
+    path = "terraform.tfstate"
   }
 }
 
 provider "aws" {
-  region = var.aws_region
+  region  = var.aws_region
+  profile = "cyber-risk"
 
   default_tags {
     tags = {

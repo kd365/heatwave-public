@@ -30,9 +30,9 @@ resource "aws_iam_openid_connect_provider" "github_actions" {
 # is not sufficient for the data plane OpenSearch REST API.
 # This policy lets the Nick IAM user create the heatwave-rag-index manually
 # before running terraform apply for the Knowledge Base.
-resource "aws_iam_user_policy" "nick_aoss" {
+resource "aws_iam_user_policy" "dev_aoss" {
   name = "aoss-dev-data-access"
-  user = "Nick"
+  user = "kathleen_dev"
 
   policy = jsonencode({
     Version = "2012-10-17"
@@ -150,15 +150,27 @@ data "aws_iam_policy_document" "lambda_exec_permissions" {
     ]
   }
 
+  # Retrieve from Knowledge Base (Agent 2 RAG queries)
+  statement {
+    sid     = "RetrieveFromKnowledgeBase"
+    effect  = "Allow"
+    actions = ["bedrock:Retrieve"]
+    resources = [
+      "arn:aws:bedrock:${var.aws_region}:${var.account_id}:knowledge-base/*",
+    ]
+  }
+
   # Direct model invocation (orchestration layer calls Claude directly)
   # Covers both foundation models and cross-region inference profiles
   statement {
     sid     = "InvokeBedrockModel"
     effect  = "Allow"
-    actions = ["bedrock:InvokeModel", "bedrock:InvokeModelWithResponseStream"]
+    actions = ["bedrock:InvokeModel", "bedrock:InvokeModelWithResponseStream", "bedrock:Converse", "bedrock:ApplyGuardrail"]
     resources = [
-      "arn:aws:bedrock:${var.aws_region}::foundation-model/*",
-      "arn:aws:bedrock:${var.aws_region}:${var.account_id}:inference-profile/*",
+      "arn:aws:bedrock:*::foundation-model/*",
+      "arn:aws:bedrock:*:${var.account_id}:inference-profile/*",
+      "arn:aws:bedrock:us:${var.account_id}:inference-profile/*",
+      "arn:aws:bedrock:${var.aws_region}:${var.account_id}:guardrail/*",
     ]
   }
 
@@ -193,9 +205,20 @@ data "aws_iam_policy_document" "lambda_exec_permissions" {
       "dynamodb:PutItem",
       "dynamodb:UpdateItem",
       "dynamodb:Query",
+      "dynamodb:Scan",
     ]
     resources = [
       "arn:aws:dynamodb:${var.aws_region}:${var.account_id}:table/${local.prefix}-pipeline-runs",
+    ]
+  }
+
+  # Lambda self-invoke (async pipeline — handler invokes itself with InvocationType=Event)
+  statement {
+    sid     = "SelfInvokeLambda"
+    effect  = "Allow"
+    actions = ["lambda:InvokeFunction"]
+    resources = [
+      "arn:aws:lambda:${var.aws_region}:${var.account_id}:function:${local.prefix}-backend",
     ]
   }
 
