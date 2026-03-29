@@ -13,7 +13,6 @@ jobs:
   deploy:
     name: Package & deploy Lambda
     runs-on: ubuntu-latest
-    environment: production
 
     steps:
       - uses: actions/checkout@v4
