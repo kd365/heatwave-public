@@ -183,6 +183,7 @@ data "aws_iam_policy_document" "lambda_exec_permissions" {
       "${aws_s3_bucket.data.arn}/raw/*",
       "${aws_s3_bucket.data.arn}/rag/*",
       "${aws_s3_bucket.data.arn}/synthetic/*",
+      "${aws_s3_bucket.data.arn}/results/*",
     ]
   }
 

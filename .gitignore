@@ -3,6 +3,9 @@
 # Stack: Python · FastAPI · React · Terraform · GitHub Actions
 # ============================================================
 
+# Local-only backups of S3/DynamoDB state (not for git)
+backup/
+
 # ---------------------------
 # Python
 # ---------------------------

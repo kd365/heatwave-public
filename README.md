@@ -34,6 +34,8 @@ HEATWAVE is a 3-agent AI pipeline that ingests chaotic, multi-source data during
               Triage     Assessment   Commander
 ```
 
+![Heatwave Architecture](docs/Heatwave%20Architecture.png)
+
 ### Agent 1: Spatial Triage
 - Ingests 10,000+ records across 4 data sources
 - Hybrid approach: deterministic Python for numeric thresholds, LLM for text judgment (911 narratives, social media sarcasm)
