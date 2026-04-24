@@ -106,6 +106,8 @@ function App() {
     )
     if (cached) {
       setActiveRunId(cached.run_id)
+    } else {
+      setActiveRunId(null)
     }
   }, [targetDate, recentRuns]) // eslint-disable-line react-hooks/exhaustive-deps
 

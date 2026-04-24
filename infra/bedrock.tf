@@ -180,7 +180,7 @@ resource "time_sleep" "aoss_active" {
 #        venv/bin/python3 infra/scripts/create_aoss_index.py
 
 resource "aws_bedrockagent_knowledge_base" "heatwave" {
-  name     = "${local.prefix}-kb"
+  name     = "${local.prefix}-kb-v2"
   role_arn = aws_iam_role.bedrock_kb.arn
 
   depends_on = [time_sleep.aoss_active]

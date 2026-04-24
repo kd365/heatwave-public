@@ -18,9 +18,17 @@ INDEX_NAME = "heatwave-rag-index"
 
 # Get the collection endpoint from Terraform output
 import subprocess
+from pathlib import Path
+
+# Works whether run from project root or infra/ directory
+script_dir = Path(__file__).resolve().parent
+infra_dir = script_dir.parent / "infra"
+if not (infra_dir / "terraform.tfstate").exists():
+    infra_dir = Path.cwd()  # fallback: assume we're already in infra/
+
 result = subprocess.run(
     ["terraform", "output", "-raw", "opensearch_collection_endpoint"],
-    capture_output=True, text=True, cwd="infra"
+    capture_output=True, text=True, cwd=str(infra_dir)
 )
 endpoint = result.stdout.strip().replace("https://", "")
 print(f"Collection endpoint: {endpoint}")
