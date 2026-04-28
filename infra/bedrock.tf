@@ -213,6 +213,10 @@ resource "aws_bedrockagent_data_source" "rag_docs" {
   knowledge_base_id = aws_bedrockagent_knowledge_base.heatwave.id
   name              = "rag-reference-docs"
 
+  # RETAIN so destroy doesn't try to drop vectors after the AOSS collection
+  # is already gone — that path leaves the DS stuck in DELETE_UNSUCCESSFUL.
+  data_deletion_policy = "RETAIN"
+
   data_source_configuration {
     type = "S3"
     s3_configuration {
